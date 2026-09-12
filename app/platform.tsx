@@ -343,7 +343,7 @@ function Content({ path }: { path: string }) {
         <div className="reading">
           <h2>Redactie</h2>
           <p>
-            Beurs Watcher is het beleggingsplatform van Daniël. De artikelen in
+            Beurs Watcher is het beleggingsplatform van Daniel. De artikelen in
             deze conceptversie zijn educatieve voorbeeldteksten. De markthub
             toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
             officiële TradingView-widgets, plus ECB-referentiekoersen,
@@ -360,7 +360,7 @@ function Content({ path }: { path: string }) {
               Instagram-profiel van Beurswatcher
             </Link>
             . De Reelspeler en het origineel op Instagram hebben elk een eigen
-            knop. Zolang Daniëls account nog niet is gekoppeld, tonen we de
+            knop. Zolang Daniels account nog niet is gekoppeld, tonen we de
             opgeslagen selectie. De status bij de Reels geeft aan of nieuwe
             video’s automatisch worden opgehaald.
           </p>
@@ -536,7 +536,7 @@ export default function Platform({ path }: { path: string }) {
           </div>
           <div>
             <h3>Beurs Watcher</h3>
-            <Link href="/over">Over Daniël</Link>
+            <Link href="/over">Over Daniel</Link>
             <Link href="/partners">Partners</Link>
             <Link href="/zakelijk-samenwerken">Zakelijk samenwerken</Link>
             <Link href="/contact">Contact</Link>

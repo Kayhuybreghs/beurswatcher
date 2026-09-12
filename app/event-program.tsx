@@ -23,7 +23,7 @@ export function EventProgram() {
           kennen.
         </p>
         <span className="concept-label">
-          Voorbeeldprogramma · nog af te stemmen door Daniël
+          Voorbeeldprogramma · nog af te stemmen door Daniel
         </span>
       </div>
       <ol>
@@ -86,7 +86,7 @@ export function OnlineEventConcept() {
           <span>Datum volgt · niet boekbaar</span>
         </div>
         <small>
-          Conceptvoorstel voor Daniël; dit is nog geen aangekondigd event.
+          Conceptvoorstel voor Daniel; dit is nog geen aangekondigd event.
         </small>
       </div>
       <Link className="textlink" href="/contact">

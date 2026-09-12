@@ -318,7 +318,7 @@ export function AboutPage() {
         <div>
           <span className="eyebrow">OVER MIJ / ACHTER BEURSWATCHER</span>
           <h1>
-            Daniël.
+            Daniel.
             <br />
             <em>
               De blik achter
@@ -347,7 +347,7 @@ export function AboutPage() {
           <span>BELEGGEN. VERMOGEN. JOUW TOEKOMST.</span>
           <BrandMark />
           <div>
-            <b>Daniël / Beurswatcher</b>
+            <b>Daniel / Beurswatcher</b>
             <span>Nieuwsgierig blijven. Verder kijken.</span>
           </div>
         </div>
@@ -387,7 +387,7 @@ export function AboutPage() {
         <div>
           <p>
             Een koers is snel gedeeld. Begrijpen wat erachter zit, vraagt meer
-            ruimte. Daarom komen de korte inzichten van Daniël hier samen met
+            ruimte. Daarom komen de korte inzichten van Daniel hier samen met
             uitleg en rekentools.
           </p>
           <p>

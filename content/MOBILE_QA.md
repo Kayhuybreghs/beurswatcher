@@ -14,7 +14,7 @@ Beurswatcher draait op http://localhost:5186/. Poorten 5173 en 5175 behoren tot 
 - 1440×1000: vaste visual schakelt bij scrollen achtereenvolgens tussen Begrijpen, Berekenen en Afwegen, ook na wijzigen van schermformaat.
 - Acht hoofdonderwerpen klappen open; doorklik naar ETF-hub werkt. Blogzoekopdracht pensioen geeft één passend artikel.
 - Markthub toont alle vijf ankermenu-items. Beide officiële widgets leveren echte gegevens in de browser; indexgrafiek is volledig zichtbaar. Home plaatst de mini-hub na eigen artikelen en Reels.
-- Reels-knop opent een dialoog op de eigen site. In deze browser gaf Instagram geen afspeelbare embed terug: de timeoutmelding, originele bronlink, passende dialoogbreedte en sluitknop zijn gecontroleerd. Automatisch ophalen en native hover/tap-weergave wachten op accounttoegang; werkelijk afspelen met Daniëls bestanden is nog niet te verifiëren.
+- Reels-knop opent een dialoog op de eigen site. In deze browser gaf Instagram geen afspeelbare embed terug: de timeoutmelding, originele bronlink, passende dialoogbreedte en sluitknop zijn gecontroleerd. Automatisch ophalen en native hover/tap-weergave wachten op accounttoegang; werkelijk afspelen met Daniels bestanden is nog niet te verifiëren.
 - API /api/instagram/reels geeft status waiting en zes opgeslagen echte Reels. Nieuwe Beginnen- en Vermogen-routes antwoorden met 200.
 - Geen browserconsolefouten tijdens de laatste controle van de productieversie.
 

@@ -94,7 +94,7 @@ function OfficialPlayer({ reel }: { reel: Reel }) {
           <output>
             Instagram geeft hier geen afspeelbare video terug. Open het
             origineel hieronder. De eigen videospeler wordt beschikbaar zodra
-            Daniëls account is gekoppeld.
+            Daniels account is gekoppeld.
           </output>
         </div>
       )}
@@ -361,7 +361,7 @@ export function ReelRail() {
     >
       <div className="social-intro">
         <Instagram size={24} />
-        <span className="eyebrow">DANIËL, IN JE FEED</span>
+        <span className="eyebrow">DANIEL, IN JE FEED</span>
         <h2>
           Even kijken.
           <br />
@@ -398,7 +398,7 @@ export function ReelRail() {
         </div>
         <small className="reels-connection-status">
           {status === 'waiting'
-            ? 'Automatische feed & voorvertoningen: wachten op Daniëls Instagram-koppeling.'
+            ? 'Automatische feed & voorvertoningen: wachten op Daniels Instagram-koppeling.'
             : status === 'unavailable'
               ? 'Koppeling tijdelijk niet bereikbaar. Je bekijkt de opgeslagen selectie.'
               : 'Automatisch opgehaald bij @beurswatcher. Voorvertoningen waar Instagram de video beschikbaar stelt.'}

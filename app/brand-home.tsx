@@ -58,7 +58,7 @@ export function BrandHero() {
         <div className="hero-signature">
           <BrandMark />
           <span>
-            Van Daniël. Voor nieuwsgierige beleggers.
+            Van Daniel. Voor nieuwsgierige beleggers.
             <small>Korte inzichten op social. Meer diepgang hier.</small>
           </span>
         </div>

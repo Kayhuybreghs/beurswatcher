@@ -14,7 +14,7 @@ Voor latere automatische synchronisatie kan dezelfde adapter worden gevoed vanui
 
 Productteksten, officiële bronnen en de controledatum staan in `app/partner-facts.ts`. Kosten verschillen per product en kunnen wijzigen. Controleer de gekoppelde officiële pagina’s bij iedere inhoudelijke update. Vul later uitsluitend de goedgekeurde affiliate-URL’s in `affiliateLinks` in, met dezelfde slug als de partner. De knop en commerciële vermelding passen zich hierop aan.
 
-Scalable gaat over zelf beleggen en periodieke inleg; Delta over portefeuilleoverzicht; Brand New Day over geblokkeerd pensioenbeleggen; Saxo over zakelijk beleggen; AMEX uitsluitend over reizen en werkelijk gebruikte kaartvoordelen. Persoonlijke ervaringen worden pas toegevoegd wanneer Daniël ze zelf aanlevert en goedkeurt.
+Scalable gaat over zelf beleggen en periodieke inleg; Delta over portefeuilleoverzicht; Brand New Day over geblokkeerd pensioenbeleggen; Saxo over zakelijk beleggen; AMEX uitsluitend over reizen en werkelijk gebruikte kaartvoordelen. Persoonlijke ervaringen worden pas toegevoegd wanneer Daniel ze zelf aanlevert en goedkeurt.
 
 ## Events
 
@@ -38,4 +38,4 @@ Nieuws staat in `app/market-editorial.ts`. Vul per verhaal een stabiele `eventId
 
 ECB-XML: https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml. Gebruikbeleid: https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.de.html. ECB-bron en peildatum zijn in beeld. Wisselkoersen worden server-side opgehaald via `/api/wisselkoersen` en één uur gecachet. Bij uitval blijft de laatst bekende snapshot met het juiste label zichtbaar. Een hogere datum wordt niet verzonnen bij storingen. `policyDates` verwijst naar de officiële ECB-beleidskalender en moet redactioneel worden bijgewerkt.
 
-Conceptprogramma’s voor Events staan in `app/event-program.tsx`; Daniël moet inhoud, timing en eventuele online bijeenkomst definitief vaststellen. Verwijder het conceptlabel pas na bevestiging.
+Conceptprogramma’s voor Events staan in `app/event-program.tsx`; Daniel moet inhoud, timing en eventuele online bijeenkomst definitief vaststellen. Verwijder het conceptlabel pas na bevestiging.

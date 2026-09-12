@@ -47,14 +47,14 @@ export function InstagramCTA({
     general: ['Dagelijks op Instagram.', 'Verder kijken doe je hier.'],
     market: [
       'De beurs stopt niet na dit overzicht.',
-      'Volg de korte updates van Daniël op Instagram.',
+      'Volg de korte updates van Daniel op Instagram.',
     ],
     article: [
       'Een inzicht voor nu. Meer voor morgen.',
       'Volg Beurswatcher voor korte uitleg en nieuwe geldvragen.',
     ],
     about: [
-      'Zie wat Daniël dagelijks deelt.',
+      'Zie wat Daniel dagelijks deelt.',
       'Van je eerste belegging tot opbouwen voor later.',
     ],
   }[context];
@@ -85,7 +85,7 @@ export function AboutBeurswatcher({ full = false }: { full?: boolean }) {
         <span className="about-card-tag">ACHTER DE VERREKIJKER</span>
         <BrandMark />
         <div>
-          <strong>Daniël / Beurswatcher</strong>
+          <strong>Daniel / Beurswatcher</strong>
           <span>Beleggen. Vermogen. Jouw toekomst.</span>
         </div>
         <Link href={instagramUrl} target="_blank" rel="noreferrer">
@@ -100,7 +100,7 @@ export function AboutBeurswatcher({ full = false }: { full?: boolean }) {
           naar <span>je eigen plan.</span>
         </Heading>
         <p>
-          Beurswatcher is het platform van Daniël voor een nieuwe generatie
+          Beurswatcher is het platform van Daniel voor een nieuwe generatie
           beleggers. Hij deelt praktische inzichten over beleggen, sparen, je
           portefeuille en opbouwen voor later.
         </p>
@@ -142,7 +142,7 @@ export function AboutBeurswatcher({ full = false }: { full?: boolean }) {
             target={full ? undefined : '_blank'}
             rel={full ? undefined : 'noreferrer'}
           >
-            {full ? 'Een vraag voor Daniël?' : 'Volg op Instagram'}{' '}
+            {full ? 'Een vraag voor Daniel?' : 'Volg op Instagram'}{' '}
             <ArrowUpRight size={19} />
           </Link>
         </div>

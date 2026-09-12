@@ -1,6 +1,6 @@
 # Beurswatcher
 
-Het platform van Daniël: uitleg over beleggen, artikelen, gratis rekentools, marktinformatie, partners en events. Gebouwd met Next.js App Router, React en Tailwind CSS.
+Het platform van Daniel: uitleg over beleggen, artikelen, gratis rekentools, marktinformatie, partners en events. Gebouwd met Next.js App Router, React en Tailwind CSS.
 
 ## Lokaal starten
 
@@ -38,9 +38,9 @@ Lokaal wordt `.data/beurswatcher.db` gebruikt. Deze database en eventuele eerder
 
 ## Instagram en marktdata
 
-- `INSTAGRAM_USER_ID` en `INSTAGRAM_ACCESS_TOKEN`: uitsluitend server-side instellen zodra Daniëls accounttoegang beschikbaar is. Tot die tijd blijft de beheerde Reel-selectie zichtbaar. Details en beperkingen: [koppelingen](content/INTEGRATIONS.md).
+- `INSTAGRAM_USER_ID` en `INSTAGRAM_ACCESS_TOKEN`: uitsluitend server-side instellen zodra Daniels accounttoegang beschikbaar is. Tot die tijd blijft de beheerde Reel-selectie zichtbaar. Details en beperkingen: [koppelingen](content/INTEGRATIONS.md).
 - De markthub gebruikt TradingView-widgets met bronvermelding. Wisselkoersen komen via de ECB. Gemarkeerde voorbeelddata blijft herkenbaar als voorbeeld; nieuws is een gedateerde redactionele selectie.
-- Affiliate-links en definitieve eventinformatie moeten nog door Daniël worden aangeleverd. De website presenteert voorbeeldprogramma’s als voorbeeld.
+- Affiliate-links en definitieve eventinformatie moeten nog door Daniel worden aangeleverd. De website presenteert voorbeeldprogramma’s als voorbeeld.
 
 ## Controleren
 

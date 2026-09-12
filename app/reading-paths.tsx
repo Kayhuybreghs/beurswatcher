@@ -125,7 +125,7 @@ const searchItems = [
     type: 'Platform',
   },
   {
-    title: 'Over Daniël en Beurswatcher',
+    title: 'Over Daniel en Beurswatcher',
     text: 'Van korte Instagram-inzichten naar je eigen plan.',
     href: '/over',
     type: 'Platform',

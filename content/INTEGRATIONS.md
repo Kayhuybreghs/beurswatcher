@@ -1,6 +1,6 @@
 # Instagram en marktdata — koppelingen
 
-## Instagram: wacht op toegang van Daniël
+## Instagram: wacht op toegang van Daniel
 
 Dezelfde ReelRail staat op Home en Over. De huidige selectie bestaat uit echte Reel-covers. De primaire knop opent de officiële Instagram-speler binnen Beurswatcher; de externe Instagram-link is afzonderlijk herkenbaar. Instagram kan de speler blokkeren wanneer inloggen nodig is, embeds uitstaan of de video niet beschikbaar is.
 
@@ -10,7 +10,7 @@ Zonder deze gegevens retourneert de API `waiting` en een opgeslagen selectie. Na
 
 Bij een beschikbare video-URL werkt de eigen speler: hover met muis speelt gedempt, verlaten pauzeert; tikken start met geluid, opnieuw tikken pauzeert; slechts één video tegelijk; buiten beeld en bij verlaten van de tab pauzeert de video. Voor verminderde beweging begint geen hover-preview. Als Instagram geen directe video aanbiedt (bijvoorbeeld vanwege gelicentieerde muziek), blijft de officiële embed beschikbaar. Er zijn nog geen afzonderlijke ondertitelbestanden aangeleverd.
 
-Nog vóór activering regelen: accounttoegang, token en mediarechten, ondertitels indien beschikbaar, en een plan voor tokenvernieuwing. Een long-lived token verloopt na 60 dagen; deze versie vernieuwt of bewaart tokens niet automatisch. Vernieuw veilig voor het verlopen of voeg daarvoor later beveiligde opslag en een refresh-job toe. De serverkoppling en eigen videospeler zijn nog niet met Daniëls echte toegang end-to-end getest.
+Nog vóór activering regelen: accounttoegang, token en mediarechten, ondertitels indien beschikbaar, en een plan voor tokenvernieuwing. Een long-lived token verloopt na 60 dagen; deze versie vernieuwt of bewaart tokens niet automatisch. Vernieuw veilig voor het verlopen of voeg daarvoor later beveiligde opslag en een refresh-job toe. De serverkoppling en eigen videospeler zijn nog niet met Daniels echte toegang end-to-end getest.
 
 Bronnen:
 - https://developers.facebook.com/documentation/instagram-platform/instagram-api-with-instagram-login
