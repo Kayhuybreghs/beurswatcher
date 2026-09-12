@@ -1,0 +1,398 @@
+/* One scroll-driven stage on every screen. No wheel/touch interception. */
+.scroll-story {
+  padding: 56px 0;
+}
+.scroll-story .path-heading {
+  display: block;
+  margin-bottom: 32px;
+}
+.scroll-story .path-heading h2 {
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  letter-spacing: -0.045em;
+  margin: 14px 0 18px;
+}
+.scroll-story .path-heading > p {
+  max-width: 38rem;
+}
+.story-track {
+  position: relative;
+}
+.story-marker {
+  position: absolute;
+  scroll-margin-top: var(--story-top, 88px);
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.story-pin {
+  border: 1px solid #cedae8;
+  background: #f6f8fc;
+  border-radius: 20px;
+  box-shadow: 0 16px 42px #0930600d;
+}
+.is-ready .story-pin {
+  position: sticky;
+  top: var(--story-top, 88px);
+}
+.story-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 8px;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.story-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: #607995;
+  border-radius: 10px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.story-nav a > span {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+.story-nav a[aria-current='step'] {
+  background: var(--ink);
+  color: #fff;
+}
+.story-nav a[aria-current='step'] > span {
+  color: var(--gold);
+  opacity: 1;
+}
+.story-nav a:focus-visible,
+.story-action:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.story-panels {
+  display: grid;
+  padding: 18px;
+  overflow: clip;
+}
+.story-panel {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  transform-origin: center center;
+}
+.is-ready .story-panel {
+  grid-area: 1 / 1;
+  will-change: transform, opacity;
+}
+.story-copy {
+  align-self: center;
+  min-width: 0;
+}
+.story-copy .section-kicker {
+  display: none;
+}
+.story-copy h3 {
+  font-size: clamp(1.4rem, 3vw, 2.65rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  margin: 0 0 10px;
+}
+.story-copy > p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 10px;
+  color: #607995;
+}
+.story-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 650;
+}
+.story-action svg {
+  flex-shrink: 0;
+}
+.story-visual {
+  align-self: stretch;
+  border-radius: 14px;
+  background: #e9f0f9;
+  min-width: 0;
+}
+.story-visual.path-stage-1 {
+  background: #fff4bd;
+}
+.story-visual.path-stage-2 {
+  background: var(--ink);
+  color: white;
+}
+.scroll-story .path-display {
+  min-height: 0;
+  padding: 20px;
+}
+.scroll-story .path-overline {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.025em;
+}
+.scroll-story .path-big-number {
+  font-size: clamp(2.35rem, 8vw, 4.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  margin: 10px 0;
+}
+.scroll-story .path-big-number small {
+  font-size: 1rem;
+  display: inline;
+}
+.scroll-story .path-display-heading {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+.scroll-story .path-goal-bars {
+  margin-top: 16px;
+  gap: 12px;
+}
+.scroll-story .path-goal-bars > span {
+  font-size: 0.875rem;
+  padding-bottom: 10px;
+}
+.scroll-story .path-assumptions {
+  margin-top: 12px;
+  gap: 6px;
+}
+.scroll-story .path-assumptions > span {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+}
+.scroll-story .path-fine {
+  font-size: 0.75rem !important;
+  line-height: 1.45;
+  margin: 12px 0 0;
+  max-width: none;
+}
+.scroll-story .path-display .chart,
+.scroll-story .path-display .chart svg {
+  height: 112px;
+  margin: 10px 0 0;
+}
+.scroll-story .path-display .chart-access {
+  display: none;
+}
+.scroll-story .cost-comparison {
+  margin-top: 16px;
+  gap: 14px;
+}
+.scroll-story .cost-comparison > span {
+  font-size: 0.875rem;
+}
+.scroll-story .cost-comparison strong {
+  grid-column: 2;
+  grid-row: 1;
+}
+.story-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 18px 12px;
+  font-size: 0.75rem;
+  color: #647c97;
+}
+.story-bottom > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.story-progress {
+  height: 4px;
+  margin: 0 16px;
+  background: #dbe4ef;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.story-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transform: scaleX(var(--story-progress, 0));
+  transform-origin: left;
+}
+@media (min-width: 700px) {
+  .story-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 40px;
+  }
+  .story-panels {
+    padding: 30px;
+  }
+  .story-copy .section-kicker {
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+  }
+  .story-copy > p {
+    line-height: 1.65;
+    margin-bottom: 18px;
+    max-width: 30rem;
+  }
+  .scroll-story .path-display {
+    padding: 28px;
+  }
+  .scroll-story .path-fine {
+    font-size: 0.8125rem !important;
+    line-height: 1.6;
+  }
+  .scroll-story .path-display .chart,
+  .scroll-story .path-display .chart svg {
+    height: 135px;
+  }
+  .story-bottom {
+    padding: 0 30px 16px;
+  }
+}
+@media (min-width: 1050px) and (min-height: 750px) {
+  .story-panels {
+    padding: 42px;
+  }
+  .story-panel {
+    gap: 64px;
+    min-height: 395px;
+  }
+  .story-copy h3 {
+    margin-bottom: 22px;
+  }
+  .story-action {
+    font-size: 1rem;
+  }
+  .scroll-story .path-display {
+    padding: 32px;
+  }
+  .scroll-story .path-display-heading {
+    font-size: 1rem;
+  }
+  .scroll-story .path-goal-bars {
+    margin-top: 26px;
+    gap: 22px;
+  }
+}
+@media (max-height: 740px) and (max-width: 699px) {
+  .story-nav {
+    padding: 5px;
+  }
+  .story-nav a {
+    min-height: 40px;
+    gap: 5px;
+  }
+  .story-panels {
+    padding: 12px;
+  }
+  .story-panel {
+    gap: 10px;
+  }
+  .story-copy h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+  }
+  .story-copy > p {
+    margin-bottom: 4px;
+  }
+  .scroll-story .path-display {
+    padding: 14px;
+  }
+  .scroll-story .path-display-heading {
+    display: none;
+  }
+  .scroll-story .path-big-number {
+    margin: 6px 0 10px;
+  }
+  .scroll-story .path-display .chart,
+  .scroll-story .path-display .chart svg {
+    height: 78px;
+    margin-top: 6px;
+  }
+  .scroll-story .path-fine {
+    margin-top: 9px;
+  }
+  .story-bottom {
+    padding: 0 12px 8px;
+  }
+}
+@media (max-height: 550px) and (min-width: 600px) {
+  .story-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 22px;
+  }
+  .story-panels {
+    padding: 12px 18px;
+  }
+  .story-nav {
+    padding: 4px;
+  }
+  .story-nav a {
+    min-height: 34px;
+  }
+  .story-copy .section-kicker,
+  .scroll-story .path-display-heading,
+  .scroll-story .path-assumptions {
+    display: none;
+  }
+  .story-copy h3 {
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+  .story-copy > p {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .story-action {
+    min-height: 32px;
+    font-size: 0.8125rem;
+  }
+  .scroll-story .path-display {
+    padding: 12px;
+  }
+  .scroll-story .path-big-number {
+    font-size: 2rem;
+    margin: 5px 0;
+  }
+  .scroll-story .path-fine {
+    font-size: 0.75rem !important;
+    line-height: 1.3;
+    margin-top: 8px;
+  }
+  .scroll-story .path-goal-bars,
+  .scroll-story .cost-comparison {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .scroll-story .path-display .chart,
+  .scroll-story .path-display .chart svg {
+    height: 68px;
+    margin: 4px 0 0;
+  }
+  .story-bottom {
+    padding: 0 18px 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .is-ready .story-panel {
+    transform: none !important;
+    will-change: auto;
+  }
+  .story-nav a {
+    transition: none;
+  }
+}
+
+.scroll-story .story-panel-2 .path-display-heading {
+  display: block;
+}

@@ -62,4 +62,3 @@ Met een lokale productiepreview op poort 5186: `node verify-routes.mjs`. Deze co
 - `content/`: redactionele afspraken, bronnen en integratie-informatie.
 
 API-sleutels, databases, tijdelijke telefoonlinks en lokale buildbestanden horen niet in versiebeheer. Bronvermeldingen en licenties van afbeeldingen, marktdata en externe embeds blijven behouden.
-

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {parseInstagramMedia} from './app/instagram-media.ts';
+const reel={id:'123',username:'beurswatcher',media_type:'VIDEO',permalink:'https://www.instagram.com/reel/abc123/',timestamp:'2026-09-12T10:00:00Z',thumbnail_url:'https://scontent.cdninstagram.com/cover.jpg',media_url:'https://video.cdninstagram.com/reel.mp4'};
+assert.equal(parseInstagramMedia({data:[reel]})[0].videoUrl,reel.media_url);
+assert.equal(parseInstagramMedia({data:[reel,reel]}).length,1);
+assert.equal(parseInstagramMedia({data:[{...reel,username:'other'}]}).length,0);
+assert.equal(parseInstagramMedia({data:[{...reel,permalink:'https://evil.example/reel/abc/'}]}).length,0);
+assert.equal(parseInstagramMedia({data:[{...reel,media_url:'https://cdninstagram.com.evil.example/video.mp4'}]})[0].videoUrl,undefined);
+assert.equal(parseInstagramMedia({data:[{...reel,media_url:undefined}]})[0].url,reel.permalink);
+assert.deepEqual(parseInstagramMedia({data:[null,'bad',{...reel,media_type:'IMAGE'},{...reel,timestamp:'bad'}]}),[]);
+assert.deepEqual(parseInstagramMedia(null),[]);
+console.log('Instagram account isolation, URL validation, deduplication and missing-video fallback passed.');

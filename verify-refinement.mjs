@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {parseFx,fxSnapshot} from './app/fx-data.ts';
+import {uniqueNews,newsItems} from './app/market-editorial.ts';
+const xml=`<Cube><Cube time='2026-09-09'>${Object.entries(fxSnapshot.rates).map(([currency,rate])=>`<Cube currency='${currency}' rate='${rate}'/>`).join('')}</Cube></Cube>`;
+assert.deepEqual(parseFx(xml),{...fxSnapshot,mode:'official'});
+assert.deepEqual(parseFx(xml.replaceAll("'",'"')).rates,fxSnapshot.rates);
+assert.throws(()=>parseFx(xml.replace('1.1652','0')));assert.throws(()=>parseFx(xml.replace("currency='GBP'","currency='ZZZ'")));assert.throws(()=>parseFx(xml.replace('2026-09-09','2026-02-30')));
+assert.equal(uniqueNews([...newsItems,{...newsItems[0],title:'Andere kop, hetzelfde nieuws',url:'https://another.example/story'}]).length,3);
+assert.equal(uniqueNews([...newsItems,{...newsItems[0],eventId:'other',url:newsItems[0].url+'?utm_source=test'}]).length,3);
+console.log('ECB parser, invalid rates/dates, missing currencies and duplicate-event/source filtering passed.');
