@@ -22,7 +22,7 @@ const routes = [
   ...articles.map((a) => 'artikelen/' + a.slug),
   ...toolItems.map((a) => 'tools/' + a.slug),
   ...partners.map((a) => 'partners/' + a.slug),
-  ...topics.map(([s]) => 'beleggen/' + s),
+  ...topics.map(([s]) => 'verdieping/' + s),
   ...['marktupdate', 'macro', 'earnings', 'indices'].map((s) => 'markt/' + s),
 ];
 // Known editorial routes are built once and served directly by the CDN.

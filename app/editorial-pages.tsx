@@ -72,7 +72,7 @@ export function ArticleArchive({
     <>
       <header className="journal-masthead">
         <div>
-          <span className="eyebrow">BEURSWATCHER / ARTIKELEN</span>
+          <span className="eyebrow">BEURSWATCHER / VERDIEPING</span>
           <h1>
             {search ? (
               'Waar ben je nieuwsgierig naar?'
@@ -84,13 +84,13 @@ export function ArticleArchive({
           </h1>
         </div>
         <p>
-          Meer achtergrond.
+          Eigen verhalen. Meer achtergrond.
           <br />
           Betere vragen. Je eigen afweging.
         </p>
       </header>
       {!search && !topic && <TopicDirectory />}
-      <section className="journal-library">
+      <section className="journal-library" id="blogs">
         <div className="journal-search">
           <h2>Alle artikelen.</h2>
           <label className="search-field">
@@ -196,10 +196,10 @@ export function InvestingHub({ sub }: { sub?: string }) {
     return (
       <>
         <header className="topic-masthead">
-          <Link className="textlink" href="/beleggen">
+          <Link className="textlink" href="/artikelen#onderwerpen">
             ← Alle onderwerpen
           </Link>
-          <span className="eyebrow">BELEGGEN / {topic[1].toUpperCase()}</span>
+          <span className="eyebrow">VERDIEPING / {topic[1].toUpperCase()}</span>
           <h1>
             {topic[1]}
             <span className="dot">.</span>
@@ -214,6 +214,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
             <a href="#verder">03 Verder kijken</a>
           </div>
         </header>
+        <TopicStories slug={sub!} />
         <section className="topic-lesson" id="begrijpen">
           <div>
             <span className="eyebrow">BEGIN HIER</span>
@@ -242,7 +243,6 @@ export function InvestingHub({ sub }: { sub?: string }) {
           </div>
           <KnowledgeFigure topic={topic[1]} />
         </section>
-        <TopicStories slug={sub!} />
         <div id="startpunt">
           <TopicBrief topic={topic[1]} />
         </div>
@@ -260,7 +260,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
               )
               .slice(0, 2)
               .map(([s, name]) => (
-                <Link href={'/beleggen/' + s} key={s}>
+                <Link href={'/verdieping/' + s} key={s}>
                   {name}
                   <ArrowUpRight size={20} />
                 </Link>
@@ -297,7 +297,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
             ['02', 'Wat koop ik eigenlijk?', 'etfs'],
             ['03', 'Hoe bouw ik aan later?', 'pensioen'],
           ].map(([n, h, s]) => (
-            <Link href={'/beleggen/' + s} key={s}>
+            <Link href={'/verdieping/' + s} key={s}>
               <span>{n}</span>
               <h2>{h}</h2>
               <ArrowUpRight size={21} />
@@ -322,7 +322,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
             Wereldwijd klinkt breed. Maar waar beleg je eigenlijk in? Ontdek de
             vragen achter het fonds.
           </p>
-          <Link className="button" href="/beleggen/etfs">
+          <Link className="button" href="/verdieping/etfs">
             Begin met ETF’s <ArrowRight size={18} />
           </Link>
         </div>

@@ -18,6 +18,7 @@ import {
   AccordionContent,
 } from '@/components/ui/accordion';
 import Link from './site-link';
+import { useState } from 'react';
 import { articles } from './data';
 export const topicGroups = [
   {
@@ -27,7 +28,7 @@ export const topicGroups = [
     icon: Compass,
     categories: ['Strategie'],
     links: [
-      ['Je eerste stappen', '/beleggen/beginnen'],
+      ['Je eerste stappen', '/verdieping/beginnen'],
       ['Een plan voor onrust', '/artikelen/een-plan-voor-onrust'],
       ['Reken met jouw inleg', '/tools/rendement'],
     ],
@@ -39,7 +40,7 @@ export const topicGroups = [
     icon: Layers,
     categories: ['ETF'],
     links: [
-      ['Alles over ETF’s', '/beleggen/etfs'],
+      ['Alles over ETF’s', '/verdieping/etfs'],
       ['Wereldwijde spreiding', '/artikelen/wereld-etf-basis'],
       ['ETF-kosten vergelijken', '/tools/etf-kosten'],
     ],
@@ -51,8 +52,8 @@ export const topicGroups = [
     icon: ChartNoAxesCombined,
     categories: ['Aandelen', 'Dividend'],
     links: [
-      ['Aandelen begrijpen', '/beleggen/aandelen'],
-      ['Dividend ontdekken', '/beleggen/dividend'],
+      ['Aandelen begrijpen', '/verdieping/aandelen'],
+      ['Dividend ontdekken', '/verdieping/dividend'],
       ['Dividend doorrekenen', '/tools/dividend'],
     ],
   },
@@ -63,8 +64,8 @@ export const topicGroups = [
     icon: Network,
     categories: ['Strategie', 'Portfolio'],
     links: [
-      ['Strategie & horizon', '/beleggen/strategie'],
-      ['Je portefeuille overzien', '/beleggen/portfolio'],
+      ['Strategie & horizon', '/verdieping/strategie'],
+      ['Je portefeuille overzien', '/verdieping/portfolio'],
       ['Ineens of gespreid beleggen', '/tools/lump-sum-dca'],
     ],
   },
@@ -75,7 +76,7 @@ export const topicGroups = [
     icon: Wallet,
     categories: ['Vermogen'],
     links: [
-      ['Sparen & vermogen', '/beleggen/vermogen'],
+      ['Sparen & vermogen', '/verdieping/vermogen'],
       ['Inflatie & koopkracht', '/tools/inflatie'],
       ['Je doelvermogen', '/tools/doelvermogen'],
       ['Box 3 indicatie', '/tools/box-3'],
@@ -88,7 +89,7 @@ export const topicGroups = [
     icon: Landmark,
     categories: ['Pensioen'],
     links: [
-      ['De onderdelen van pensioen', '/beleggen/pensioen'],
+      ['De onderdelen van pensioen', '/verdieping/pensioen'],
       ['Pensioen buiten de koers', '/artikelen/pensioen-buiten-de-koers'],
       ['Reken terug vanuit je doel', '/tools/doelvermogen'],
     ],
@@ -100,7 +101,7 @@ export const topicGroups = [
     icon: Building2,
     categories: ['Zakelijk'],
     links: [
-      ['Zakelijk beleggen', '/beleggen/zakelijk'],
+      ['Zakelijk beleggen', '/verdieping/zakelijk'],
       ['Reken met je horizon', '/tools/rendement'],
     ],
   },
@@ -111,7 +112,7 @@ export const topicGroups = [
     icon: Plane,
     categories: ['Reizen'],
     links: [
-      ['Reizen & rewards', '/beleggen/reizen'],
+      ['Reizen & rewards', '/verdieping/reizen'],
       ['Reisvoordelen afwegen', '/artikelen/reisvoordelen-afwegen'],
     ],
   },
@@ -165,7 +166,7 @@ export function TopicDirectory() {
                 </div>
                 <Link
                   className="directory-all"
-                  href={'/beleggen/' + group.slug}
+                  href={'/verdieping/' + group.slug}
                 >
                   Open het onderwerp <ArrowUpRight size={17} />
                 </Link>
@@ -178,20 +179,41 @@ export function TopicDirectory() {
   );
 }
 export function TopicStories({ slug }: { slug: string }) {
+  const [query, setQuery] = useState('');
   const group = topicGroups.find(
     (g) =>
       g.slug === slug ||
       (slug === 'dividend' && g.slug === 'aandelen') ||
       (slug === 'portfolio' && g.slug === 'strategie'),
   );
-  const matches = articles.filter((a) =>
-    group?.categories.includes(a.category),
+  const matches = articles.filter(
+    (a) =>
+      group?.categories.includes(a.category) &&
+      `${a.title} ${a.intro}`
+        .toLowerCase()
+        .includes(query.trim().toLowerCase()),
   );
-  if (!matches.length) return null;
+
   return (
     <section className="topic-story-collection">
       <span className="eyebrow">DIEPER IN DIT ONDERWERP</span>
-      <h2>Verder lezen.</h2>
+      <h2>Blogs over {group?.name.toLowerCase() || 'dit onderwerp'}.</h2>
+      <label className="topic-blog-search">
+        Zoek binnen dit onderwerp
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Een vraag of trefwoord…"
+        />
+      </label>
+      <p aria-live="polite">
+        {matches.length
+          ? `${matches.length} ${matches.length === 1 ? "artikel" : "artikelen"} · educatieve voorbeelden`
+          : query
+            ? 'Geen blogs gevonden. Probeer een ander trefwoord.'
+            : 'De eerste blogs binnen dit onderwerp volgen nog.'}
+      </p>
       <div>
         {matches.map((a) => (
           <Link key={a.slug} href={'/artikelen/' + a.slug}>

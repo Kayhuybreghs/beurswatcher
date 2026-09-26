@@ -18,6 +18,7 @@ import {
   KnowledgeFigure,
 } from './editorial-pages';
 import { articles } from './data';
+import { Navigation } from './navigation';
 import { SectionTitle, ArticleCard, Newsletter } from './widgets';
 import {
   MarketTicker,
@@ -37,21 +38,6 @@ import {
   NewsletterPage,
 } from './platform-pages';
 import { ArticleProgress, SiteSearch } from './reading-paths';
-const navItems = [
-  'Beleggen',
-  'Markt',
-  'Tools',
-  'Verdieping',
-  'Partners',
-  'Events',
-  'Over mij',
-];
-const navPath = (title: string) =>
-  title === 'Over mij'
-    ? 'over'
-    : title === 'Verdieping'
-      ? 'artikelen'
-      : title.toLowerCase();
 function Logo() {
   return <BrandLogo />;
 }
@@ -280,7 +266,7 @@ function Content({ path }: { path: string }) {
   if (!root) return <Home />;
   if (root === 'artikelen') return sub ? <Article slug={sub} /> : <Archive />;
   if (root === 'zoeken') return <SiteSearch />;
-  if (root === 'beleggen') return <Investing sub={sub} />;
+  if (root === 'verdieping') return <Investing sub={sub} />;
   if (root === 'partners') return <PartnerPage slug={sub} />;
   if (root === 'tools') return <ToolsExperience slug={sub} />;
   if (root === 'markt') return <MarketExperience sub={sub} />;
@@ -347,8 +333,8 @@ function Content({ path }: { path: string }) {
             deze conceptversie zijn educatieve voorbeeldteksten. De markthub
             toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
             officiële TradingView-widgets, plus ECB-referentiekoersen,
-            ECB-kalenderdata en een gedateerde nieuwsselectie van AP en Reuters.
-            De ticker, radarkaart en aparte macro- en earningsvoorbeelden
+            een geselecteerde macroplanning voor Nederland en de VS op basis van CBS, BLS en de Federal Reserve.
+            De ticker, radarkaart en aparte earningsvoorbeelden
             bevatten herkenbaar gemarkeerde demonstratiegegevens. Bij de
             marktweergaven staan bron, dekking en periode vermeld.
           </p>
@@ -448,17 +434,7 @@ export default function Platform({ path }: { path: string }) {
       >
         <Logo />
         <nav aria-label="Hoofdnavigatie">
-          {navItems.map((t) => (
-            <Link
-              key={t}
-              href={'/' + navPath(t)}
-              aria-current={
-                path.startsWith('/' + navPath(t)) ? 'page' : undefined
-              }
-            >
-              {t}
-            </Link>
-          ))}
+          <Navigation path={path} />
         </nav>
         <Link aria-label="Zoeken" href="/zoeken">
           <Search size={20} />
@@ -486,16 +462,9 @@ export default function Platform({ path }: { path: string }) {
           aria-label="Mobiele navigatie"
           style={{ top: menuTop, maxHeight: `calc(100dvh - ${menuTop}px)` }}
         >
-          {[...navItems, 'Contact', 'Nieuwsbrief'].map((t) => (
-            <Link
-              href={'/' + navPath(t)}
-              key={t}
-              onClick={() => setMobile(false)}
-            >
-              {t}
-              <ArrowUpRight size={19} />
-            </Link>
-          ))}
+          <Navigation path={path} mobile onNavigate={() => setMobile(false)} />
+          <Link href="/contact" onClick={() => setMobile(false)}>Contact</Link>
+          <Link href="/nieuwsbrief" onClick={() => setMobile(false)}>Nieuwsbrief</Link>
           <Link
             className="mobile-business"
             href="/zakelijk-samenwerken"
@@ -517,14 +486,14 @@ export default function Platform({ path }: { path: string }) {
           <div>
             <Logo />
             <p>
-              Investeren zonder ruis.
+              Het heft in eigen handen nemen.
               <br />
               Korte inzichten op Instagram. Meer verdieping hier.
             </p>
           </div>
           <div>
             <h3>Verdiepen</h3>
-            <Link href="/beleggen">Beleggen</Link>
+            <Link href="/artikelen#onderwerpen">Onderwerpen</Link>
             <Link href="/artikelen">Artikelen</Link>
             <Link href="/markt">Marktoverzicht</Link>
           </div>

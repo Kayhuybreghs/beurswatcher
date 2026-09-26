@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, ArrowUpRight, CalendarDays, Activity } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Activity } from 'lucide-react';
 import Link from './site-link';
-import { policyDates, policySource } from './market-editorial';
+import { MacroCalendar } from './macro-calendar';
 
 export function MarketWidget({
   kind = 'indices',
@@ -157,54 +157,7 @@ export function MarketWidget({
   );
 }
 export function UpcomingAgenda({ compact = false }: { compact?: boolean }) {
-  const [today, setToday] = useState('2026-09-12');
-  useEffect(() => {
-    const update = () => setToday(new Date().toISOString().slice(0, 10));
-    update();
-    const timer = setInterval(update, 60000);
-    return () => clearInterval(timer);
-  }, []);
-  const future = policyDates.filter((item) => item.date >= today);
-  return (
-    <section className="hub-agenda" id={compact ? undefined : 'agenda'}>
-      <div className="hub-block-heading">
-        <CalendarDays size={19} />
-        <span>OP DE AGENDA</span>
-      </div>
-      <h2>Wat komt eraan?</h2>
-      {future.length ? (
-        future.slice(0, compact ? 2 : 3).map((item) => (
-          <a
-            className="hub-agenda-item"
-            href={policySource}
-            key={item.date}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <time dateTime={item.date}>
-              <b>{item.date.slice(-2)}</b>
-              {new Intl.DateTimeFormat('nl-NL', { month: 'short' }).format(
-                new Date(item.date),
-              )}
-            </time>
-            <div>
-              <h3>Rentebesluit ECB</h3>
-              <span>{item.place} · persconferentie</span>
-            </div>
-            <ArrowUpRight size={17} />
-          </a>
-        ))
-      ) : (
-        <p>Bekijk nieuwe vergaderdata bij de ECB.</p>
-      )}
-      <p className="hub-agenda-note">
-        Beleidskalender · ECB. Afgelopen momenten verdwijnen uit dit overzicht.
-      </p>
-      <Link href="/markt#nieuws" className="textlink">
-        Lees ook de marktcontext <ArrowRight size={17} />
-      </Link>
-    </section>
-  );
+  return <section className="hub-agenda" id={compact ? undefined : 'agenda'}><MacroCalendar compact /></section>;
 }
 export function MarketMiniHub() {
   return (
@@ -237,7 +190,7 @@ export function MarketHubOverview() {
         <a href="#indices">Indices</a>
         <a href="#bewegingen">Bewegingen</a>
         <a href="#agenda">Agenda</a>
-        <a href="#nieuws">Nieuws & context</a>
+        <Link href="/artikelen">Eigen verdieping</Link>
         <a href="#valuta">Valuta</a>
       </nav>
       <div className="market-hub-grid">

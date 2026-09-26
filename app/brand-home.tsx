@@ -39,7 +39,7 @@ export function BrandHero() {
         <p>
           De beurs. Je geld. Jouw toekomst.
           <br />
-          Ontdek wat ertoe doet en reken zelf door wat bij jouw plannen past.
+          Neem het heft in eigen handen. Begrijp je keuzes en werk stap voor stap richting meer financiële vrijheid.
         </p>
         <div className="hero-actions">
           <Link className="button yellow" href="#verhalen">
@@ -58,7 +58,7 @@ export function BrandHero() {
         <div className="hero-signature">
           <BrandMark />
           <span>
-            Van Daniel. Voor nieuwsgierige beleggers.
+            Beurswatcher. Voor bewuste beleggers.
             <small>Korte inzichten op social. Meer diepgang hier.</small>
           </span>
         </div>
@@ -163,7 +163,7 @@ export function BrandHero() {
                   Breng de onderdelen samen voordat je een bedrag of product
                   kiest.
                 </p>
-                <Link className="radar-action" href="/beleggen/pensioen">
+                <Link className="radar-action" href="/verdieping/pensioen">
                   Krijg zicht op later <ArrowRight size={20} />
                 </Link>
               </>

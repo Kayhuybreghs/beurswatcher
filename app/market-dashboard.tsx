@@ -1,10 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { ArrowRight, ArrowUpRight, RefreshCw, Globe } from 'lucide-react';
+import { ArrowRight, RefreshCw, Globe } from 'lucide-react';
 import Link from './site-link';
 import { Newsletter, NumberField } from './widgets';
 import { MarketHubOverview } from './market-hub';
-import { newsItems, newsCheckedAt, uniqueNews } from './market-editorial';
 import { fxSnapshot, fxCurrencies, type FxData } from './fx-data';
 const date = (iso: string) =>
   new Intl.DateTimeFormat('nl-NL', {
@@ -42,7 +41,6 @@ export function MarketDashboard() {
       alive = false;
     };
   }, []);
-  const stories = uniqueNews(newsItems);
   return (
     <>
       <header className="market-masthead market-hub-masthead">
@@ -55,57 +53,12 @@ export function MarketDashboard() {
           </h1>
         </div>
         <p>
-          De verhalen, cijfers en momenten
+          De indices, bewegingen en momenten
           <br />
           die je helpen verder kijken.
         </p>
       </header>
       <MarketHubOverview />
-      <section className="market-news-desk" id="nieuws">
-        <div className="market-news-heading">
-          <span className="eyebrow">DE REDACTIONELE SELECTIE</span>
-          <span>{date(newsCheckedAt)} · geen live nieuwsfeed</span>
-        </div>
-        <div className="news-desk-grid">
-          {stories.map((n, i) => (
-            <article
-              className={'news-desk-story news-story-' + i}
-              key={n.eventId}
-            >
-              <div className="news-desk-category">
-                <span>{n.category}</span>
-                <span>0{i + 1}</span>
-              </div>
-              <h2>
-                <Link href={n.url} target="_blank" rel="noreferrer">
-                  {n.title}
-                </Link>
-              </h2>
-              <p>{n.summary}</p>
-              <div className="news-perspective">
-                <span>OM BIJ STIL TE STAAN</span>
-                <p>{n.context}</p>
-              </div>
-              <Link
-                href={n.url}
-                target="_blank"
-                rel="noreferrer"
-                className="news-source"
-              >
-                <span>
-                  {n.source}
-                  <time dateTime={n.publishedAt}>{date(n.publishedAt)}</time>
-                </span>
-                <ArrowUpRight size={20} />
-              </Link>
-            </article>
-          ))}
-        </div>
-        <small className="news-curation-note">
-          Eén verhaal per ontwikkeling. Eigen samenvattingen; lees het volledige
-          bericht bij de bron. De duiding is algemene context van Beurswatcher.
-        </small>
-      </section>
       <section className="fx-section" id="valuta">
         <div className="fx-intro">
           <Globe size={23} />

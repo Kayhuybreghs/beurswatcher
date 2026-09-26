@@ -36,7 +36,7 @@ export function NextSteps({
           <Link
             href={
               from === 'article'
-                ? '/beleggen/reizen'
+                ? '/verdieping/reizen'
                 : '/artikelen/reisvoordelen-afwegen'
             }
           >

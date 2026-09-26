@@ -45,7 +45,7 @@ export function parseInstagramMedia(payload: unknown): Reel[] {
             safeMediaUrl(item.thumbnail_url) ||
             known?.thumbnail ||
             '/beurswatcher-logo.jpeg',
-          title: known?.title || 'Een nieuw inzicht van Daniel',
+          title: known?.title || 'Een nieuw inzicht van Beurswatcher',
           publishedAt: item.timestamp,
           tags: known?.tags || [],
           videoUrl: safeMediaUrl(item.media_url),

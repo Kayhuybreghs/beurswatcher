@@ -1,6 +1,7 @@
 /* Local editorial images use explicit layout dimensions; no image optimization service is configured. */
 /* oxlint-disable next/no-img-element */
 'use client';
+import { MacroPage } from './macro-calendar';
 import Link from './site-link';
 import { ScenarioTool } from './scenario-tools';
 import { ToolCatalog } from './tool-catalog';
@@ -357,6 +358,7 @@ export function PartnersExperience({ slug }: { slug?: string }) {
 }
 export function MarketExperience({ sub }: { sub?: string }) {
   if (!sub) return <MarketHub />;
+  if (sub === 'macro') return <MacroPage />;
   const agenda = sub === 'macro' || sub === 'earnings';
   return (
     <>

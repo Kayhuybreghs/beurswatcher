@@ -1,4 +1,5 @@
 'use client';
+import { aboutParagraphs } from './about-copy';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -327,8 +328,7 @@ export function AboutPage() {
             </em>
           </h1>
           <p>
-            Ik maak met Beurswatcher ruimte voor de vragen achter je geld. Over
-            beleggen, vermogen en de keuzes voor later.
+            Ik ben Daniel Van Der Roest. Met Beurswatcher leg ik beleggen, vermogensgroei en financiële onderwerpen begrijpelijk en nuchter uit.
           </p>
           <div>
             <Link
@@ -377,24 +377,15 @@ export function AboutPage() {
           <ArrowUpRight size={19} />
         </Link>
       </section>
-      <section className="about-story">
+      <section className="about-story" id="verhaal">
         <span className="eyebrow">DE VRAAG ACHTER DE VERREKIJKER</span>
         <h2>
-          Wat betekent dit
+          Het heft in
           <br />
-          <em>voor jouw geld?</em>
+          <em>eigen handen.</em>
         </h2>
         <div>
-          <p>
-            Een koers is snel gedeeld. Begrijpen wat erachter zit, vraagt meer
-            ruimte. Daarom komen de korte inzichten van Daniel hier samen met
-            uitleg en rekentools.
-          </p>
-          <p>
-            Van je eerste belegging tot je portefeuille en pensioen:
-            Beurswatcher nodigt je uit om vragen te stellen, aannames te
-            onderzoeken en zelf verder te kijken.
-          </p>
+          {aboutParagraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
           <Link href="/tools" className="textlink">
             Onderzoek jouw scenario <ArrowRight size={18} />
           </Link>

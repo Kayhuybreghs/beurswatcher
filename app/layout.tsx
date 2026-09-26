@@ -6,6 +6,7 @@ import './platform.css';
 import './refinement.css';
 import './mobile-first.css';
 import './scroll-story.css';
+import './brand-direction.css';
 export const metadata: Metadata = {
   title: {
     default: 'Beurswatcher — Kijk verder. Kom verder.',

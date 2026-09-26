@@ -52,3 +52,7 @@ next-env.d.ts
 *.db
 *.db-*
 *.sqlite*
+
+# Local framework-generated agent guidance
+/AGENTS.md
+/CLAUDE.md
