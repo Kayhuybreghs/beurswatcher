@@ -18,6 +18,7 @@ import {
   KnowledgeFigure,
 } from './editorial-pages';
 import { articles } from './data';
+import { GuidePage } from './guide-pages';
 import { Navigation } from './navigation';
 import { SectionTitle, ArticleCard, Newsletter } from './widgets';
 import {
@@ -265,6 +266,7 @@ function Content({ path }: { path: string }) {
     sub = parts[1];
   if (!root) return <Home />;
   if (root === 'artikelen') return sub ? <Article slug={sub} /> : <Archive />;
+  if (root === 'uitleg') return <GuidePage slug={sub} />;
   if (root === 'zoeken') return <SiteSearch />;
   if (root === 'verdieping') return <Investing sub={sub} />;
   if (root === 'partners') return <PartnerPage slug={sub} />;
@@ -332,11 +334,12 @@ function Content({ path }: { path: string }) {
             Beurs Watcher is het beleggingsplatform van Daniel. De artikelen in
             deze conceptversie zijn educatieve voorbeeldteksten. De markthub
             toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
-            officiële TradingView-widgets, plus ECB-referentiekoersen,
-            een geselecteerde macroplanning voor Nederland en de VS op basis van CBS, BLS en de Federal Reserve.
-            De ticker, radarkaart en aparte earningsvoorbeelden
-            bevatten herkenbaar gemarkeerde demonstratiegegevens. Bij de
-            marktweergaven staan bron, dekking en periode vermeld.
+            officiële TradingView-widgets, plus ECB-referentiekoersen, een
+            geselecteerde macroplanning voor Nederland en de VS op basis van
+            CBS, BLS en de Federal Reserve. De ticker, radarkaart en aparte
+            earningsvoorbeelden bevatten herkenbaar gemarkeerde
+            demonstratiegegevens. Bij de marktweergaven staan bron, dekking en
+            periode vermeld.
           </p>
           <h2>Logo en Reels</h2>
           <p>
@@ -463,8 +466,12 @@ export default function Platform({ path }: { path: string }) {
           style={{ top: menuTop, maxHeight: `calc(100dvh - ${menuTop}px)` }}
         >
           <Navigation path={path} mobile onNavigate={() => setMobile(false)} />
-          <Link href="/contact" onClick={() => setMobile(false)}>Contact</Link>
-          <Link href="/nieuwsbrief" onClick={() => setMobile(false)}>Nieuwsbrief</Link>
+          <Link href="/contact" onClick={() => setMobile(false)}>
+            Contact
+          </Link>
+          <Link href="/nieuwsbrief" onClick={() => setMobile(false)}>
+            Nieuwsbrief
+          </Link>
           <Link
             className="mobile-business"
             href="/zakelijk-samenwerken"

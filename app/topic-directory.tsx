@@ -10,6 +10,8 @@ import {
   Landmark,
   Building2,
   Plane,
+  Globe,
+  ReceiptText,
 } from 'lucide-react';
 import {
   Accordion,
@@ -19,8 +21,32 @@ import {
 } from '@/components/ui/accordion';
 import Link from './site-link';
 import { useState } from 'react';
-import { articles } from './data';
+import { learningLibrary } from './learning-library';
 export const topicGroups = [
+  {
+    slug: 'markt-economie',
+    name: 'Markt & economie',
+    description: 'De betekenis achter cijfers, rente en actualiteit.',
+    icon: Globe,
+    categories: ['Markt', 'Macro'],
+    links: [
+      ['De economische basis', '/verdieping/markt-economie'],
+      ['De macroagenda', '/markt/macro'],
+      ['Koopkracht onderzoeken', '/tools/inflatie'],
+    ],
+  },
+  {
+    slug: 'belasting',
+    name: 'Belasting & vermogen',
+    description: 'Het juiste jaar, de juiste vraag en heldere beperkingen.',
+    icon: ReceiptText,
+    categories: [],
+    links: [
+      ['Belasting & vermogen begrijpen', '/verdieping/belasting'],
+      ['Box 3: wat berekent de tool?', '/uitleg/box-3-indicatie-2026'],
+      ['Box 3 indicatie maken', '/tools/box-3'],
+    ],
+  },
   {
     slug: 'beginnen',
     name: 'Beginnen met beleggen',
@@ -186,18 +212,22 @@ export function TopicStories({ slug }: { slug: string }) {
       (slug === 'dividend' && g.slug === 'aandelen') ||
       (slug === 'portfolio' && g.slug === 'strategie'),
   );
-  const matches = articles.filter(
+  const matches = learningLibrary.filter(
     (a) =>
-      group?.categories.includes(a.category) &&
+      (a.example
+        ? group?.categories.includes(a.category)
+        : a.topics.includes(slug)) &&
       `${a.title} ${a.intro}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
 
   return (
-    <section className="topic-story-collection">
+    <section className="topic-story-collection" id="onderwerp-blogs">
       <span className="eyebrow">DIEPER IN DIT ONDERWERP</span>
-      <h2>Blogs over {group?.name.toLowerCase() || 'dit onderwerp'}.</h2>
+      <h2>
+        Uitleg & blogs over {group?.name.toLowerCase() || 'dit onderwerp'}.
+      </h2>
       <label className="topic-blog-search">
         Zoek binnen dit onderwerp
         <input
@@ -209,15 +239,17 @@ export function TopicStories({ slug }: { slug: string }) {
       </label>
       <p aria-live="polite">
         {matches.length
-          ? `${matches.length} ${matches.length === 1 ? "artikel" : "artikelen"} · educatieve voorbeelden`
+          ? `${matches.length} ${matches.length === 1 ? 'artikel' : 'artikelen'}`
           : query
             ? 'Geen blogs gevonden. Probeer een ander trefwoord.'
             : 'De eerste blogs binnen dit onderwerp volgen nog.'}
       </p>
       <div>
         {matches.map((a) => (
-          <Link key={a.slug} href={'/artikelen/' + a.slug}>
-            <span>{a.read} MIN LEZEN</span>
+          <Link key={a.slug} href={a.href}>
+            <span>
+              {a.example ? 'VOORBEELDBLOG' : 'UITLEG'} · {a.read} MIN LEZEN
+            </span>
             <h3>{a.title}</h3>
             <p>{a.intro}</p>
             <ArrowUpRight size={20} />

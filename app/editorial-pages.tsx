@@ -10,8 +10,10 @@ import {
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
-import { articles, topics } from './data';
-import { TopicBrief } from './reading-paths';
+import { topics } from './data';
+import { learningLibrary } from './learning-library';
+import { topicContent } from './topic-content';
+import { guides } from './guide-data';
 import { Newsletter } from './widgets';
 import { TopicDirectory, TopicStories } from './topic-directory';
 export function KnowledgeFigure({ topic = 'ETF' }: { topic?: string }) {
@@ -61,7 +63,7 @@ export function ArticleArchive({
 }) {
   const [category, setCategory] = useState(topic || 'Alles'),
     [query, setQuery] = useState('');
-  const filtered = articles.filter(
+  const filtered = learningLibrary.filter(
     (a) =>
       (category === 'Alles' || a.category === category) &&
       `${a.title} ${a.intro} ${a.category}`
@@ -110,27 +112,25 @@ export function ArticleArchive({
           onValueChange={(v) => setCategory(String(v))}
         >
           <TabsList variant="line" aria-label="Filter artikelen">
-            {['Alles', ...new Set(articles.map((a) => a.category))].map((c) => (
-              <TabsTrigger key={c} value={c}>
-                {c}
-              </TabsTrigger>
-            ))}
+            {['Alles', ...new Set(learningLibrary.map((a) => a.category))].map(
+              (c) => (
+                <TabsTrigger key={c} value={c}>
+                  {c}
+                </TabsTrigger>
+              ),
+            )}
           </TabsList>
         </Tabs>
         <div className="journal-count">
           <span>
             {filtered.length} {filtered.length === 1 ? 'artikel' : 'artikelen'}
           </span>
-          <span>Educatieve voorbeelden · vorm en inhoud in ontwikkeling</span>
+          <span>Uitleg van Beurswatcher · voorbeeldblogs apart gemarkeerd</span>
         </div>
         {filtered.length ? (
           <div className="journal-grid">
             {filtered.map((a, i) => (
-              <Link
-                className="journal-story"
-                key={a.slug}
-                href={'/artikelen/' + a.slug}
-              >
+              <Link className="journal-story" key={a.slug} href={a.href}>
                 {'image' in a && a.image && (
                   <img
                     className="journal-story-image"
@@ -146,7 +146,9 @@ export function ArticleArchive({
                   />
                 )}
                 <div className="journal-story-meta">
-                  <span>{a.category}</span>
+                  <span>
+                    {a.category} · {a.example ? 'Voorbeeldblog' : 'Uitleg'}
+                  </span>
                   <span>{a.read} MIN LEZEN</span>
                 </div>
                 <h2>{a.title}</h2>
@@ -178,21 +180,10 @@ export function ArticleArchive({
     </>
   );
 }
-const topicCopy: Record<string, string> = {
-  Beginnen: 'De eerste vragen, vóór je eerste belegging.',
-  Vermogen: 'Van buffer tot doelbedrag. Geef je geld een bestemming.',
-  Aandelen: 'Begrijp het bedrijf achter de koers.',
-  ETF: 'Breed beleggen begint bij weten wat je koopt.',
-  Strategie: 'Maak een plan dat bij jouw horizon past.',
-  Dividend: 'Uitkeren of herbeleggen: onderzoek het verschil.',
-  Pensioen: 'Van later een concreet plan maken.',
-  Portfolio: 'Losse posities. Eén totaalbeeld.',
-  Zakelijk: 'Geef vrij bedrijfsvermogen een eigen horizon.',
-  Reizen: 'De waarde van voordelen begint bij jouw gebruik.',
-};
 export function InvestingHub({ sub }: { sub?: string }) {
   const topic = topics.find(([slug]) => slug === sub);
-  if (topic)
+  const content = sub ? topicContent[sub] : undefined;
+  if (topic && content)
     return (
       <>
         <header className="topic-masthead">
@@ -201,51 +192,80 @@ export function InvestingHub({ sub }: { sub?: string }) {
           </Link>
           <span className="eyebrow">VERDIEPING / {topic[1].toUpperCase()}</span>
           <h1>
-            {topic[1]}
+            {content.title}
             <span className="dot">.</span>
           </h1>
-          <p>
-            {topicCopy[topic[1]] ||
-              'Onderzoek de basis. Maak je eigen afweging.'}
-          </p>
+          <p>{content.summary}</p>
           <div className="topic-chapters">
-            <a href="#begrijpen">01 Begrijpen</a>
-            <a href="#startpunt">02 Zelf onderzoeken</a>
-            <a href="#verder">03 Verder kijken</a>
+            <a href="#begrijpen">01 De basis</a>
+            <a href="#onderwerp-blogs">02 Uitleg & blogs</a>
+            <a href="#onderwerp-vragen">03 Veelgestelde vragen</a>
           </div>
         </header>
-        <TopicStories slug={sub!} />
-        <section className="topic-lesson" id="begrijpen">
-          <div>
-            <span className="eyebrow">BEGIN HIER</span>
-            <h2>
-              {topic[1] === 'ETF'
-                ? 'Eén fonds. Meerdere vragen.'
-                : 'De basis van ' + topic[1].toLowerCase() + '.'}
-            </h2>
-            <p>
-              {topic[1] === 'ETF'
-                ? 'Een ETF volgt doorgaans een index. Dat maakt het mogelijk om via één fonds in meerdere bedrijven te beleggen. Hoe breed die spreiding echt is, zie je pas als je naar de inhoud kijkt.'
-                : topicCopy[topic[1]]}
-            </p>
-            {topic[1] === 'ETF' && (
-              <ul>
-                <li>Welke landen en sectoren zitten erin?</li>
-                <li>Hoeveel gewicht hebben de grootste bedrijven?</li>
-                <li>Welke kosten betaal je in én buiten het fonds?</li>
-              </ul>
-            )}
-            <span className="template-note">
-              {topic[1] === 'ETF'
-                ? 'Voorbeelduitwerking · ETF'
-                : 'Deze themapagina krijgt nog een verdere redactionele uitwerking.'}
-            </span>
+        <section className="topic-foundation" id="begrijpen">
+          <div className="topic-foundation-intro">
+            <span className="eyebrow">DE BASIS OP ORDE</span>
+            <h2>Begrijpen vóór je kiest.</h2>
+            <p>Van een eerste vraag naar een afweging die je kunt uitleggen.</p>
           </div>
-          <KnowledgeFigure topic={topic[1]} />
+          <div className="topic-foundation-chapters">
+            {content.sections.map(([h, p], i) => (
+              <section key={h}>
+                <span>0{i + 1}</span>
+                <div>
+                  <h3>{h}</h3>
+                  <p>{p}</p>
+                </div>
+              </section>
+            ))}
+          </div>
         </section>
-        <div id="startpunt">
-          <TopicBrief topic={topic[1]} />
-        </div>
+        <section className="topic-checklist">
+          <span className="eyebrow">MAAK HET JOUW VRAAG</span>
+          <h2>Vier dingen om bij stil te staan.</h2>
+          <ul>
+            {content.checklist.map((q) => (
+              <li key={q}>{q}</li>
+            ))}
+          </ul>
+        </section>
+        <TopicStories slug={sub!} />
+        {sub !== 'reizen' && (
+          <section className="topic-next-action" id="startpunt">
+            <span className="eyebrow">VAN UITLEG NAAR INZICHT</span>
+            <h2>Onderzoek je eigen scenario.</h2>
+            <p>
+              Begin met de uitleg en reken daarna met je eigen bedragen en
+              aannames.
+            </p>
+            <div>
+              <Link className="button" href={'/tools/' + content.tool}>
+                Open de rekentool <ArrowRight size={18} />
+              </Link>
+              <Link
+                className="textlink"
+                href={
+                  '/uitleg/' + guides.find((g) => g.tool === content.tool)!.slug
+                }
+              >
+                Lees eerst hoe het werkt <ArrowUpRight size={18} />
+              </Link>
+            </div>
+          </section>
+        )}
+        <section className="guide-faq topic-faq" id="onderwerp-vragen">
+          <span className="eyebrow">VEELGESTELDE VRAGEN</span>
+          <h2>Nog even dit.</h2>
+          {content.faq.map(([q, a]) => (
+            <details key={q}>
+              <summary>
+                {q}
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </section>
         <section className="topic-next-chapter" id="verder">
           <div>
             <span className="eyebrow">HET VOLGENDE HOOFDSTUK</span>

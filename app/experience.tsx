@@ -3,6 +3,7 @@
 'use client';
 import { MacroPage } from './macro-calendar';
 import Link from './site-link';
+import { ToolReading } from './guide-pages';
 import { ScenarioTool } from './scenario-tools';
 import { ToolCatalog } from './tool-catalog';
 import { PartnerPages } from './partner-pages';
@@ -314,6 +315,7 @@ export function ToolsExperience({ slug }: { slug?: string }) {
           <div className="workbench-shortcuts">
             <a href="#invoer">01 Invoer aanpassen</a>
             <a href="#uitkomst">02 Naar je uitkomst ↓</a>
+            <a href="#uitleg">03 Uitleg & veelgestelde vragen</a>
           </div>
         </div>
         {['inflatie', 'dividend', 'lump-sum-dca'].includes(slug!) ? (
@@ -342,6 +344,7 @@ export function ToolsExperience({ slug }: { slug?: string }) {
             Open een aansluitende rekentool <ArrowRight size={16} />
           </Link>
         </div>
+        <ToolReading tool={slug!} />
         <NextSteps topic={toolTopics[slug!]} />
         <Newsletter context="tools" variant="compact" />
       </div>

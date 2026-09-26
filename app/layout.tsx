@@ -7,7 +7,9 @@ import './refinement.css';
 import './mobile-first.css';
 import './scroll-story.css';
 import './brand-direction.css';
+import './learning.css';
 export const metadata: Metadata = {
+  metadataBase: new URL('https://beurswatcher.vercel.app'),
   title: {
     default: 'Beurswatcher — Kijk verder. Kom verder.',
     template: '%s | Beurs Watcher',

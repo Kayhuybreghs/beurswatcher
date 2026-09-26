@@ -304,6 +304,8 @@ export const partners = [
   },
 ];
 export const topics = [
+  ['markt-economie', 'Markt & economie'],
+  ['belasting', 'Belasting & vermogen'],
   ['beginnen', 'Beginnen'],
   ['vermogen', 'Vermogen'],
   ['aandelen', 'Aandelen'],

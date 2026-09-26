@@ -4,6 +4,7 @@ import { ArrowUpRight, ArrowRight, Search, BookOpen } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
 import { articles, toolItems, partners } from './data';
+import { guides } from './guide-data';
 import { journeys } from './journey-data';
 export function ArticleProgress() {
   const ref = useRef<HTMLDivElement>(null);
@@ -100,6 +101,12 @@ export function TopicBrief({ topic }: { topic: string }) {
   );
 }
 const searchItems = [
+  ...guides.map((g) => ({
+    title: g.title,
+    text: g.summary,
+    href: '/uitleg/' + g.slug,
+    type: 'Uitleg',
+  })),
   ...articles.map((a) => ({
     title: a.title,
     text: a.intro,
@@ -179,13 +186,18 @@ export function SiteSearch() {
         onValueChange={(v) => setKind(String(v))}
       >
         <TabsList aria-label="Filter zoekresultaten">
-          {['Alles', 'Artikelen', 'Tools', 'Samenwerkingen', 'Platform'].map(
-            (s) => (
-              <TabsTrigger key={s} value={s}>
-                {s}
-              </TabsTrigger>
-            ),
-          )}
+          {[
+            'Alles',
+            'Uitleg',
+            'Artikelen',
+            'Tools',
+            'Samenwerkingen',
+            'Platform',
+          ].map((s) => (
+            <TabsTrigger key={s} value={s}>
+              {s}
+            </TabsTrigger>
+          ))}
         </TabsList>
       </Tabs>
       <output className="search-count">

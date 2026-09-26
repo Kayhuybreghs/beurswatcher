@@ -78,7 +78,8 @@ export function Navigation({
         const id = `${mobile ? 'mobile' : 'desktop'}-${section.title.replaceAll(' ', '-')}`;
         const current =
           path.startsWith(section.href) ||
-          (section.title === 'Verdieping' && path.startsWith('/verdieping'));
+          (section.title === 'Verdieping' &&
+            (path.startsWith('/verdieping') || path.startsWith('/uitleg/')));
         return (
           <fieldset
             className="navigation-group"

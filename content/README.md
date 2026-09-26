@@ -8,7 +8,7 @@ Voeg een item toe met `id`, `url`, `thumbnail`, `title`, `publishedAt` (YYYY-MM-
 
 Gebruik alleen geverifieerde Reels van het officiële profiel. De adapter in `app/reel-data.ts` verwijdert dubbele of onvolledige items, sorteert nieuwste eerst en toont maximaal zes passende items. Tags sluiten aan bij de onderwerpen, zoals ETF, Strategie, Pensioen, Vermogen, Aandelen, Markt en Dividend. Een topic zonder passende Reel toont geen verzonnen inhoud. Een ontbrekend beeld krijgt een merkfallback.
 
-Voor latere automatische synchronisatie kan dezelfde adapter worden gevoed vanuit een CMS of geautoriseerde Instagram-integratie. Bewaar API-sleutels uitsluitend op de server. De zichtbare rail hoeft daarvoor niet te veranderen.
+Voor latere automatische synchronisatie kan dezelfde adapter worden gevoed vanuit een geautoriseerde Instagram-integratie. Kay beheert de configuratie; er komt geen CMS. Bewaar API-sleutels uitsluitend op de server. De zichtbare rail hoeft daarvoor niet te veranderen.
 
 ## Partners
 
@@ -22,7 +22,7 @@ Scalable gaat over zelf beleggen en periodieke inleg; Delta over portefeuilleove
 
 ## Indexkoersen: nog aan te sluiten
 
-`/api/markt`, de indexkoersen en de aparte macro-/earningspagina’s zijn expliciet voorbeelden. Het hoofdmarktoverzicht heeft inmiddels echte ECB-informatie zoals hieronder beschreven. Een echte feed vereist een geschikte databron, credentials en rechten voor openbare weergave. Het brononderzoek is geen actieve integratie.
+`/api/markt`, de indexkoersen en de earningspagina zijn expliciet voorbeelden. De macroagenda is een handmatig gecontroleerde selectie van officiële NL/VS-publicaties. Het hoofdmarktoverzicht heeft echte ECB-informatie zoals hieronder beschreven. Een echte indexfeed vereist een geschikte databron, credentials en rechten voor openbare weergave. Het brononderzoek is geen actieve integratie.
 
 - Twelve Data: [API-documentatie](https://twelvedata.com/docs/introduction/overview), [indexdekking](https://twelvedata.com/indices) en [commercieel gebruik](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage). Controleer het bedrijfsabonnement en afzonderlijke indexrechten.
 - EODHD: [economische gebeurtenissen](https://eodhd.com/financial-apis/economic-events-data-api), [earningskalender](https://eodhd.com/financial-apis/calendar-upcoming-earnings-ipos-and-splits) en [commerciële licentie](https://eodhd.com/commercial-pricing). Openbare weergave moet in de overeenkomst zijn gedekt.

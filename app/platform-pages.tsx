@@ -328,7 +328,9 @@ export function AboutPage() {
             </em>
           </h1>
           <p>
-            Ik ben Daniel Van Der Roest. Met Beurswatcher leg ik beleggen, vermogensgroei en financiële onderwerpen begrijpelijk en nuchter uit.
+            Ik ben Daniel Van Der Roest. Met Beurswatcher leg ik beleggen,
+            vermogensgroei en financiële onderwerpen begrijpelijk en nuchter
+            uit.
           </p>
           <div>
             <Link
@@ -378,14 +380,19 @@ export function AboutPage() {
         </Link>
       </section>
       <section className="about-story" id="verhaal">
-        <span className="eyebrow">DE VRAAG ACHTER DE VERREKIJKER</span>
-        <h2>
-          Het heft in
-          <br />
-          <em>eigen handen.</em>
-        </h2>
-        <div>
-          {aboutParagraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+        <div className="about-story-heading">
+          <span className="eyebrow">DE VRAAG ACHTER DE VERREKIJKER</span>
+          <h2>
+            Het heft in
+            <br />
+            <em>eigen handen.</em>
+          </h2>
+          <span className="about-story-rule" aria-hidden="true" />
+        </div>
+        <div className="about-story-copy">
+          {aboutParagraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
           <Link href="/tools" className="textlink">
             Onderzoek jouw scenario <ArrowRight size={18} />
           </Link>
