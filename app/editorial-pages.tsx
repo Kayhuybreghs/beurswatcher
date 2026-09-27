@@ -197,29 +197,78 @@ export function InvestingHub({ sub }: { sub?: string }) {
           </h1>
           <p>{content.summary}</p>
           <div className="topic-chapters">
-            <a href="#begrijpen">01 De basis</a>
-            <a href="#onderwerp-blogs">02 Uitleg & blogs</a>
-            <a href="#onderwerp-vragen">03 Veelgestelde vragen</a>
+            <a href="#begrijpen">01 Het onderwerp begrijpen</a>
+            {content.example && (
+              <a href="#praktijkvoorbeeld">02 Praktijkvoorbeeld</a>
+            )}
+            <a href="#onderwerp-blogs">Verder lezen</a>
+            <a href="#onderwerp-vragen">Veelgestelde vragen</a>
           </div>
         </header>
         <section className="topic-foundation" id="begrijpen">
           <div className="topic-foundation-intro">
-            <span className="eyebrow">DE BASIS OP ORDE</span>
-            <h2>Begrijpen vóór je kiest.</h2>
-            <p>Van een eerste vraag naar een afweging die je kunt uitleggen.</p>
+            <span className="eyebrow">DE VERDIEPING IN</span>
+            <h2>Van begrip naar afweging.</h2>
+            <p>Lees het hele verhaal of begin bij jouw vraag.</p>
+            <nav
+              className="topic-contents"
+              aria-label="Inhoud van dit onderwerp"
+            >
+              {content.sections.map(([heading], i) => (
+                <a key={heading} href={'#hoofdstuk-' + i}>
+                  <span>{String(i + 1).padStart(2, '0')}</span>
+                  {heading}
+                </a>
+              ))}
+            </nav>
           </div>
           <div className="topic-foundation-chapters">
             {content.sections.map(([h, p], i) => (
-              <section key={h}>
+              <section key={h} id={'hoofdstuk-' + i}>
                 <span>0{i + 1}</span>
                 <div>
                   <h3>{h}</h3>
-                  <p>{p}</p>
+                  {p.split('\n\n').map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
                 </div>
               </section>
             ))}
           </div>
         </section>
+        {content.example && (
+          <section className="topic-worked-example" id="praktijkvoorbeeld">
+            <span className="eyebrow">ZO WORDT HET CONCREET</span>
+            <h2>{content.example.title}</h2>
+            <p>{content.example.body}</p>
+            <dl>
+              {content.example.figures.map(([value, label]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <small>
+              Vereenvoudigd rekenvoorbeeld, geen voorspelling of persoonlijk
+              advies.
+            </small>
+          </section>
+        )}
+        {content.comparison && (
+          <section className="topic-distinction">
+            <span className="eyebrow">HET VERSCHIL BEGRIJPEN</span>
+            <h2>{content.comparison.title}</h2>
+            <dl>
+              {content.comparison.rows.map(([term, explanation]) => (
+                <div key={term}>
+                  <dt>{term}</dt>
+                  <dd>{explanation}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
         <section className="topic-checklist">
           <span className="eyebrow">MAAK HET JOUW VRAAG</span>
           <h2>Vier dingen om bij stil te staan.</h2>
@@ -266,6 +315,29 @@ export function InvestingHub({ sub }: { sub?: string }) {
             </details>
           ))}
         </section>
+        {content.sources && (
+          <aside
+            className="topic-sources"
+            aria-label="Bronnen bij dit onderwerp"
+          >
+            <h2>Zelf verder controleren.</h2>
+            <p>
+              Algemene uitleg van Beurswatcher. Onderstaande primaire bronnen
+              helpen je begrippen en voorwaarden te controleren. Regels en
+              producten kunnen wijzigen; voorbeelden zijn geen persoonlijke
+              aanbeveling.
+            </p>
+            <ul>
+              {content.sources.map(([label, url]) => (
+                <li key={url}>
+                  <a href={url} target="_blank" rel="noreferrer">
+                    {label} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
         <section className="topic-next-chapter" id="verder">
           <div>
             <span className="eyebrow">HET VOLGENDE HOOFDSTUK</span>

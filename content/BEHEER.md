@@ -6,6 +6,7 @@ De website heeft geen CMS, klantdashboard of publiceeromgeving. Kay verwerkt aan
 - `app/about-copy.ts`: de tekst uit Daniels aangeleverde Word-document.
 - `app/guide-data.ts`: 22 algemene uitlegpagina’s voor de negen calculators. Elk onderwerp heeft een eigen vraag, kort antwoord, uitleg, rekenvoorbeeld en FAQ. Controleer voorbeelden tegen de calculator bij modelwijzigingen.
 - `app/topic-content.ts`: de inhoudelijke basis, aandachtspunten en FAQ’s per hoofdonderwerp.
+- `app/topic-lessons.ts`: uitgebreide hoofdstukken, voorbeelden, begrippenvergelijkingen en primaire bronnen voor alle 12 onderwerpen. Houd voorbeelden fictief en onderscheid algemene uitleg van Daniels persoonlijke visie.
 - `app/learning-library.ts`: combineert algemene uitleg en herkenbaar gemarkeerde voorbeeldblogs voor zoeken en filteren.
 - `app/topic-directory.tsx`: onderwerpen, artikelcategorieën en bijbehorende tools.
 - `app/partner-facts.ts`: productinformatie (controleer de bestaande bestandsindeling bij wijzigingen); persoonlijke partnerteksten volgen na aanlevering.

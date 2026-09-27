@@ -26,7 +26,8 @@ export const topicGroups = [
   {
     slug: 'markt-economie',
     name: 'Markt & economie',
-    description: 'De betekenis achter cijfers, rente en actualiteit.',
+    description:
+      'Inflatie, rente en groei lezen — en begrijpen waarom de beurs reageert.',
     icon: Globe,
     categories: ['Markt', 'Macro'],
     links: [
@@ -38,7 +39,8 @@ export const topicGroups = [
   {
     slug: 'belasting',
     name: 'Belasting & vermogen',
-    description: 'Het juiste jaar, de juiste vraag en heldere beperkingen.',
+    description:
+      'Box 3, werkelijk rendement en het verschil met toeslagen en pensioen.',
     icon: ReceiptText,
     categories: [],
     links: [
@@ -50,7 +52,8 @@ export const topicGroups = [
   {
     slug: 'beginnen',
     name: 'Beginnen met beleggen',
-    description: 'Van je eerste vraag naar een eigen plan.',
+    description:
+      'Van buffer en beleggingsvormen naar spreiding, kosten en je eerste plan.',
     icon: Compass,
     categories: ['Strategie'],
     links: [
@@ -62,7 +65,8 @@ export const topicGroups = [
   {
     slug: 'etfs',
     name: 'ETF’s',
-    description: 'Wat je koopt, hoe je spreidt en wat het kost.',
+    description:
+      'De index, overlap, uitkeringen, valuta en kosten van een fonds begrijpen.',
     icon: Layers,
     categories: ['ETF'],
     links: [
@@ -74,7 +78,7 @@ export const topicGroups = [
   {
     slug: 'aandelen',
     name: 'Aandelen & dividend',
-    description: 'Het bedrijf, de waardering en de uitkering.',
+    description: 'Bedrijfsresultaten, waardering en dividend samen beoordelen.',
     icon: ChartNoAxesCombined,
     categories: ['Aandelen', 'Dividend'],
     links: [
@@ -86,7 +90,8 @@ export const topicGroups = [
   {
     slug: 'strategie',
     name: 'Strategie & portefeuille',
-    description: 'Losse keuzes laten samenwerken in één plan.',
+    description:
+      'Je verdeling kiezen, instappen, herbalanceren en omgaan met tegenvallers.',
     icon: Network,
     categories: ['Strategie', 'Portfolio'],
     links: [
@@ -98,7 +103,8 @@ export const topicGroups = [
   {
     slug: 'vermogen',
     name: 'Sparen & vermogen',
-    description: 'Je buffer, koopkracht en doelen voor later.',
+    description:
+      'Buffers, spaardoelen, inflatie en bescherming van je banktegoed.',
     icon: Wallet,
     categories: ['Vermogen'],
     links: [
@@ -111,7 +117,8 @@ export const topicGroups = [
   {
     slug: 'pensioen',
     name: 'Pensioen',
-    description: 'Breng je toekomst dichterbij, stap voor stap.',
+    description:
+      'AOW, werkgeverspensioen, lijfrente en eerder stoppen met werken.',
     icon: Landmark,
     categories: ['Pensioen'],
     links: [
@@ -123,7 +130,8 @@ export const topicGroups = [
   {
     slug: 'zakelijk',
     name: 'Zakelijk vermogen',
-    description: 'Vrij bedrijfsvermogen een eigen horizon geven.',
+    description:
+      'Van rekeningstand naar vrije kasruimte, reserves en een langere bestemming.',
     icon: Building2,
     categories: ['Zakelijk'],
     links: [
@@ -134,7 +142,8 @@ export const topicGroups = [
   {
     slug: 'reizen',
     name: 'Reizen & voordelen',
-    description: 'Voordelen afwegen vanuit wat jij gebruikt.',
+    description:
+      'De echte waarde van punten, bonussen en kaartvoordelen berekenen.',
     icon: Plane,
     categories: ['Reizen'],
     links: [

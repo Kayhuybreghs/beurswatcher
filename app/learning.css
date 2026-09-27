@@ -35,6 +35,164 @@
 .about-story-copy p {
   max-width: 65ch;
 }
+.about-story-copy strong {
+  font-weight: 650;
+  color: #103562;
+  text-decoration: underline;
+  text-decoration-color: #e2b80866;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.about-story-copy > p:last-of-type {
+  border-left: 3px solid #e2b808;
+  padding-left: 20px;
+}
+.topic-contents {
+  display: grid;
+  gap: 4px;
+  margin-top: 25px;
+}
+.topic-contents a {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid #d4deea;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.topic-contents a > span {
+  color: #7890a8;
+  font-size: 11px;
+}
+.topic-contents a:hover {
+  color: #507399;
+}
+.topic-foundation-chapters > section {
+  scroll-margin-top: 120px;
+}
+.topic-foundation-chapters p + p {
+  margin-top: 18px;
+}
+.topic-worked-example {
+  padding: clamp(24px, 4vw, 44px);
+  background: #fff3ba;
+  border-radius: 18px;
+  margin: 20px 0 42px;
+  scroll-margin-top: 110px;
+}
+.topic-worked-example h2,
+.topic-distinction h2 {
+  font-size: clamp(26px, 3vw, 39px);
+  line-height: 1.17;
+  letter-spacing: -0.03em;
+  margin: 14px 0 22px;
+}
+.topic-worked-example > p {
+  max-width: 78ch;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #344f6c;
+}
+.topic-worked-example dl {
+  display: grid;
+  gap: 18px;
+  margin: 30px 0 22px;
+}
+.topic-worked-example dl > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  border-top: 1px solid #cbb24f66;
+  padding: 20px 0 0;
+}
+.topic-worked-example dt {
+  font-size: 13px;
+  color: #53667a;
+}
+.topic-worked-example dd {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.topic-worked-example small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  max-width: 65ch;
+}
+.topic-distinction {
+  margin: 45px 0 55px;
+}
+.topic-distinction dl {
+  margin: 25px 0 0;
+  display: grid;
+  gap: 14px;
+}
+.topic-distinction dl > div {
+  padding: 25px;
+  background: #edf3f9;
+  border: 1px solid #d4dfeb;
+  border-radius: 14px;
+}
+.topic-distinction dt {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+.topic-distinction dd {
+  font-size: 15px;
+  color: #536d88;
+  line-height: 1.8;
+  margin: 0;
+}
+.topic-sources {
+  margin: 20px 0 45px;
+  padding: 28px 0;
+  border-top: 1px solid #d4dfeb;
+  max-width: 880px;
+}
+.topic-sources h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.topic-sources p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #536d88;
+}
+.topic-sources ul {
+  padding-left: 18px;
+  margin-top: 18px;
+}
+.topic-sources li {
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.topic-sources a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (min-width: 760px) {
+  .topic-worked-example dl,
+  .topic-distinction dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+  }
+}
+@media (max-width: 759px) {
+  .topic-foundation-chapters > section {
+    scroll-margin-top: 90px;
+  }
+  .topic-contents a {
+    padding: 14px 0;
+    font-size: 14px;
+  }
+}
 .guide-hero {
   padding: clamp(30px, 6vw, 75px) 0 28px;
   max-width: 1000px;

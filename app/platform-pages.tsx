@@ -1,5 +1,7 @@
 'use client';
 import { aboutParagraphs } from './about-copy';
+const aboutAccents =
+  /((?:begrijpelijke en nuchtere manier)|(?:verder dan alleen rendement)|(?:duidelijke uitleg waar je zelf iets mee kunt)|(?:zelf betere financiële keuzes)|(?:vermogensgroei voor de lange termijn))/g;
 import {
   ArrowRight,
   ArrowUpRight,
@@ -391,7 +393,13 @@ export function AboutPage() {
         </div>
         <div className="about-story-copy">
           {aboutParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph}>
+              {paragraph
+                .split(aboutAccents)
+                .map((part, i) =>
+                  i % 2 ? <strong key={i}>{part}</strong> : part,
+                )}
+            </p>
           ))}
           <Link href="/tools" className="textlink">
             Onderzoek jouw scenario <ArrowRight size={18} />
