@@ -202,7 +202,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
       [
         'Van macrofeit naar een vraag over je plan',
-        'Begin niet met de vraag welk aandeel je bij het volgende cijfer moet kopen. Onderzoek eerst welke aanname wordt geraakt: je koopkracht, de financieringslasten van een bedrijf of de tijd die je hebt om een doel te halen. Dat maakt het nieuws bruikbaar zonder dat ieder bericht een transactie wordt.\n\nBij een eigen analyse hoort een controleerbare redenering: dit is gepubliceerd, dit zou het kunnen betekenen, dit is nog onzeker. De macroagenda op Beurswatcher laat geselecteerde geplande momenten voor Nederland en de VS zien. Een geplande publicatie is nog geen uitslag en de agenda is geen complete automatische datastroom.',
+        'Begin niet met de vraag welk aandeel je bij het volgende cijfer moet kopen. Onderzoek eerst welke aanname wordt geraakt: je koopkracht, de financieringslasten van een bedrijf of de tijd die je hebt om een doel te halen. Dat maakt het nieuws bruikbaar zonder dat ieder bericht een transactie wordt.\n\nBij een eigen analyse hoort een controleerbare redenering: dit is gepubliceerd, dit zou het kunnen betekenen, dit is nog onzeker. De macroagenda op Beurswatcher laat geselecteerde geplande momenten voor Nederland en de VS zien. CBS- en BEA-momenten worden automatisch opgehaald; aanvullende BLS- en Fed-momenten zijn herkenbaar handmatig gecontroleerd. Een geplande publicatie is nog geen uitslag.',
       ],
     ],
     example: {

@@ -12,7 +12,7 @@
     "lint": "oxlint",
     "format": "oxfmt",
     "typecheck": "tsc --noEmit",
-    "test": "node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-refinement.mjs"
+    "test": "node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-refinement.mjs && node verify-macro.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

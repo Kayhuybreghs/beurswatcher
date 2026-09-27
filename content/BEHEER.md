@@ -10,7 +10,9 @@ De website heeft geen CMS, klantdashboard of publiceeromgeving. Kay verwerkt aan
 - `app/learning-library.ts`: combineert algemene uitleg en herkenbaar gemarkeerde voorbeeldblogs voor zoeken en filteren.
 - `app/topic-directory.tsx`: onderwerpen, artikelcategorieën en bijbehorende tools.
 - `app/partner-facts.ts`: productinformatie (controleer de bestaande bestandsindeling bij wijzigingen); persoonlijke partnerteksten volgen na aanlevering.
-- `app/macro-data.ts`: geselecteerde officiële macroplanning voor NL/VS. Controleer CBS, BLS en Fed bij updates, werk de controle-datum en zichtbare datum in `macro-calendar.tsx` bij. Datums met tijd bevatten een expliciete UTC-offset. Amerikaanse en Europese zomertijd wisselen op verschillende dagen.
+- `app/api/macro/route.ts`: gratis CBS OData-kalender (NL) en BEA JSON-releasekalender (VS), automatisch opgehaald en maximaal een uur in servergeheugen bewaard. Geen sleutel of abonnement. `app/macro-parsers.ts` selecteert alleen macropublicaties; geen artikelen worden geïmporteerd. `app/macro-snapshot.json` is de gedateerde noodkopie, bij bronuitval maximaal zeven dagen bruikbaar en zichtbaar als bewaarde planning.
+- `app/macro-data.ts`: aanvullende BLS/Fed-momenten blijven handmatig gecontroleerd en als zodanig gelabeld. Controleer die bronnen en werk `macroCheckedAt` bij. De API omvat geen live uitslagen, consensus, volledige Amerikaanse kalender of indexkoersen. Tijden worden naar Europe/Amsterdam omgerekend. Test met `node verify-macro.mjs https://beurswatcher.vercel.app`.
+- `app/topic-inline-links.ts`: maximaal twee handgekozen interne links per onderwerp; tekst en hoofdstuk zijn expliciet gekozen. `verify-learning.mjs` controleert de gerenderde links en bestemmingen.
 
 ## Redactionele richting
 

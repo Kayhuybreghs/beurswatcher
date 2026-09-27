@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { guides } from './app/guide-data.ts';
 import { topicContent } from './app/topic-content.ts';
+import { topicInlineLinks } from './app/topic-inline-links.ts';
 
 // Exercise the deployed routes and crosslinks, not only the source records.
 const base = process.argv[2] || 'http://127.0.0.1:5186';
@@ -62,6 +63,21 @@ for (const tool of toolSlugs) {
 }
 for (const [slug, content] of Object.entries(topicContent)) {
   const page = await html('/verdieping/' + slug);
+  const inline = [
+    ...page.matchAll(/<a[^>]*class="topic-inline-link"[^>]*>(.*?)<\/a>/gs),
+  ];
+  assert.equal(inline.length, 2, slug + ' exactly two links in the prose');
+  for (const link of topicInlineLinks[slug]) {
+    assert.ok(
+      inline.some(
+        ([anchor, label]) =>
+          anchor.includes('href="' + link.href + '"') &&
+          label === escape(link.text),
+      ),
+      slug + ' contextual link',
+    );
+    await html(link.href);
+  }
   assert.ok(page.includes(escape(content.title)), slug + ' content');
   assert.ok(page.includes('onderwerp-vragen'), slug + ' FAQ');
   for (const [heading] of content.sections)

@@ -335,8 +335,8 @@ function Content({ path }: { path: string }) {
             deze conceptversie zijn educatieve voorbeeldteksten. De markthub
             toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
             officiële TradingView-widgets, plus ECB-referentiekoersen, een
-            geselecteerde macroplanning voor Nederland en de VS op basis van
-            CBS, BLS en de Federal Reserve. De ticker, radarkaart en aparte
+            automatisch opgehaalde CBS- en BEA-planning, aangevuld met handmatig
+            gecontroleerde momenten van BLS en de Federal Reserve. De ticker, radarkaart en aparte
             earningsvoorbeelden bevatten herkenbaar gemarkeerde
             demonstratiegegevens. Bij de marktweergaven staan bron, dekking en
             periode vermeld.

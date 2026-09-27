@@ -589,3 +589,19 @@
     transform: none;
   }
 }
+.topic-foundation-chapters a.topic-inline-link {
+  color: #0d315f;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #cfac13;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.topic-foundation-chapters a.topic-inline-link:hover {
+  text-decoration-color: currentColor;
+}
+.topic-inline-link:focus-visible {
+  outline: 2px solid #0d315f;
+  outline-offset: 4px;
+  border-radius: 2px;
+}

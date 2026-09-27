@@ -1,3 +1,17 @@
+# Actieve gratis kalenderkoppeling — 27 september 2026
+
+De eerdere conclusie hieronder is achterhaald voor de geselecteerde CBS- en BEA-publicaties: beide officiële feeds zijn rechtstreeks getest met HTTP 200 en nu aangesloten via `/api/macro`.
+
+- Nederland: https://www.cbs.nl/odata/v1/Events — OData, filter op taal en publicatiedatum. Specificatie: https://www.cbs.nl/odata/swagger.html. Gebruik onder CC BY 4.0 met bronvermelding: https://www.cbs.nl/nl-nl/over-ons/website/copyright.
+- Verenigde Staten: https://apps.bea.gov/API/signup/release_dates.json — officiële JSON-releasekalender, gelinkt vanuit https://www.bea.gov/news/schedule. Nationale bbp-, PCE/inkomen/bestedingen- en handelsmomenten geselecteerd. Vrij hergebruik: https://www.bea.gov/help/faq/147.
+- Geen accounts, sleutels of betaalde API-abonnementen. De bestaande hostinglimieten blijven van toepassing.
+- CBS filtert andere onderwerpen en Caribisch Nederland uit. Eigen korte toelichtingen; geen externe nieuwsartikelen of gekopieerde samenvattingen.
+- BLS ICS gaf HTTP 403 in de directe test. Geen omzeiling toegepast. De bestaande BLS/Fed-selectie blijft apart zichtbaar als handmatig gecontroleerd. Deze combinatie is dus geen volledige automatische NL/VS-kalender.
+- Opvragen: één uur servercache, vijf minuten CDN-cache; ophalen op bezoek, geen betaalde cron. Bij een bronstoring wordt alleen die bron vervangen door een maximaal zeven dagen oude, expliciet gedateerde kopie. Daarna ontbreekt die bron met een foutmelding. Andere bronnen blijven werken.
+- Geen actuals, consensusverwachtingen of beurskoersen. Onbekende publicatietijden blijven onbekend. Tijden met offsets worden in Europe/Amsterdam getoond.
+
+## Eerder onderzoek (historisch; onderstaande conclusie niet meer actueel)
+
 # Economische kalender: gratis bronnen onderzocht
 
 Gecontroleerd op 27 september 2026. Onderzoek, geen aangesloten feed. De bestaande kalender blijft een handmatig gecontroleerde NL/VS-selectie.

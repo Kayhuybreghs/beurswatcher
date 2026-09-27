@@ -1,6 +1,6 @@
 'use client';
 /* oxlint-disable jsx-a11y/no-noninteractive-element-interactions -- The group catches Escape from its links/buttons and hover from pointer users; all actions are also available on the labelled button. */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import Link from './site-link';
 import { toolItems, partners } from './data';
@@ -71,8 +71,40 @@ export function Navigation({
   onNavigate?: () => void;
 }) {
   const [open, setOpen] = useState<string | null>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelTimer = () => {
+    if (timer.current) clearTimeout(timer.current);
+  };
+  const close = () => {
+    cancelTimer();
+    setOpen(null);
+  };
+  useEffect(() => {
+    const outside = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !root.current?.contains(event.target)
+      ) {
+        if (timer.current) clearTimeout(timer.current);
+        setOpen(null);
+      }
+    };
+    document.addEventListener('pointerdown', outside);
+    return () => {
+      document.removeEventListener('pointerdown', outside);
+      if (timer.current) clearTimeout(timer.current);
+    };
+  }, []);
+  const navigate = () => {
+    close();
+    onNavigate?.();
+  };
   return (
-    <div className={'navigation-groups' + (mobile ? ' navigation-mobile' : '')}>
+    <div
+      ref={root}
+      className={'navigation-groups' + (mobile ? ' navigation-mobile' : '')}
+    >
       {sections.map((section) => {
         const expanded = open === section.title;
         const id = `${mobile ? 'mobile' : 'desktop'}-${section.title.replaceAll(' ', '-')}`;
@@ -80,70 +112,125 @@ export function Navigation({
           path.startsWith(section.href) ||
           (section.title === 'Verdieping' &&
             (path.startsWith('/verdieping') || path.startsWith('/uitleg/')));
+        const [overview, ...links] = section.links;
         return (
           <fieldset
             className="navigation-group"
             aria-label={section.title}
             key={section.title}
-            onMouseEnter={(event) => {
+            onPointerEnter={(event) => {
               if (
                 !mobile &&
-                window.matchMedia('(hover: hover)').matches &&
+                event.pointerType === 'mouse' &&
                 event.buttons === 0
-              )
-                setOpen(section.title);
+              ) {
+                cancelTimer();
+                timer.current = setTimeout(() => setOpen(section.title), 130);
+              }
             }}
-            onMouseLeave={() => {
-              if (!mobile) setOpen(null);
+            onPointerLeave={(event) => {
+              if (!mobile && event.pointerType === 'mouse') {
+                cancelTimer();
+                timer.current = setTimeout(() => setOpen(null), 260);
+              }
             }}
+            onFocus={cancelTimer}
             onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget))
-                setOpen(null);
+              if (!event.currentTarget.contains(event.relatedTarget)) close();
             }}
             onKeyDown={(event) => {
+              const group = event.currentTarget;
+              const trigger = group.querySelector('button');
               if (event.key === 'Escape') {
-                setOpen(null);
-                event.currentTarget.querySelector('button')?.focus();
+                close();
+                trigger?.focus();
                 event.stopPropagation();
+                return;
+              }
+              if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+              event.preventDefault();
+              cancelTimer();
+              if (!expanded || event.target === trigger) {
+                setOpen(section.title);
+                requestAnimationFrame(() => {
+                  const targets = group.querySelectorAll<HTMLAnchorElement>(
+                    '.navigation-dropdown a',
+                  );
+                  (event.key === 'ArrowUp'
+                    ? targets[targets.length - 1]
+                    : targets[0]
+                  )?.focus();
+                });
+              } else {
+                const targets = Array.from(
+                  group.querySelectorAll<HTMLAnchorElement>(
+                    '.navigation-dropdown a',
+                  ),
+                );
+                const index = targets.indexOf(
+                  event.target as HTMLAnchorElement,
+                );
+                targets[
+                  (index +
+                    (event.key === 'ArrowDown' ? 1 : -1) +
+                    targets.length) %
+                    targets.length
+                ]?.focus();
               }
             }}
           >
             <div className="navigation-label">
-              <Link
-                href={section.href}
-                aria-current={current ? 'page' : undefined}
-                onClick={onNavigate}
-              >
-                {section.title}
-              </Link>
               <button
                 type="button"
+                className="navigation-trigger"
+                data-current={current || undefined}
                 aria-label={`${section.title} submenu`}
                 aria-expanded={expanded}
                 aria-controls={id}
-                onClick={() => setOpen(expanded ? null : section.title)}
+                onClick={() => {
+                  cancelTimer();
+                  setOpen(expanded ? null : section.title);
+                }}
               >
-                <ChevronDown size={14} />
+                <span>{section.title}</span>
+                <ChevronDown size={15} />
               </button>
             </div>
             {expanded && (
-              <div className="navigation-dropdown" id={id}>
+              <div
+                className={
+                  'navigation-dropdown' +
+                  (links.length > 5 ? ' navigation-wide' : '')
+                }
+                id={id}
+              >
                 <span className="eyebrow">
                   ONTDEK {section.title.toUpperCase()}
                 </span>
-                {section.links.map(([label, href]) => (
-                  <Link
-                    href={href}
-                    key={href}
-                    onClick={() => {
-                      setOpen(null);
-                      onNavigate?.();
-                    }}
-                  >
-                    {label}
-                    <ArrowUpRight size={15} />
-                  </Link>
-                ))}
+                <Link
+                  className="navigation-overview"
+                  href={overview[1]}
+                  onClick={navigate}
+                >
+                  <span>
+                    {overview[0]}
+                    <small>Bekijk het overzicht</small>
+                  </span>
+                  <ArrowUpRight size={19} />
+                </Link>
+                <div className="navigation-link-grid">
+                  {links.map(([label, href]) => (
+                    <Link
+                      href={href}
+                      key={href}
+                      onClick={navigate}
+                      aria-current={path === href ? 'page' : undefined}
+                    >
+                      <span>{label}</span>
+                      <ArrowUpRight size={14} />
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </fieldset>

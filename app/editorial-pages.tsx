@@ -13,6 +13,7 @@ import Link from './site-link';
 import { topics } from './data';
 import { learningLibrary } from './learning-library';
 import { topicContent } from './topic-content';
+import { linkedTopicText } from './topic-inline-links';
 import { guides } from './guide-data';
 import { Newsletter } from './widgets';
 import { TopicDirectory, TopicStories } from './topic-directory';
@@ -228,9 +229,23 @@ export function InvestingHub({ sub }: { sub?: string }) {
                 <span>0{i + 1}</span>
                 <div>
                   <h3>{h}</h3>
-                  {p.split('\n\n').map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
+                  {p.split('\n\n').map((paragraph) => {
+                    const parts = linkedTopicText(sub || '', i, paragraph);
+                    return (
+                      <p key={paragraph}>
+                        {parts.before}
+                        {parts.link && (
+                          <Link
+                            className="topic-inline-link"
+                            href={parts.link.href}
+                          >
+                            {parts.link.text}
+                          </Link>
+                        )}
+                        {parts.after}
+                      </p>
+                    );
+                  })}
                 </div>
               </section>
             ))}

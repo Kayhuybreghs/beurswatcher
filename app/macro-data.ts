@@ -9,11 +9,13 @@ export type MacroEvent = {
   source: string;
   url: string;
   explanation: string;
+  period?: string;
+  mode?: 'automatic' | 'manual' | 'snapshot';
 };
 const cbs = 'https://www.cbs.nl/nl-nl/publicatieplanning';
 const bls = 'https://www.bls.gov/schedule/2026/10_sched.htm';
 const fed = 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm';
-const explanations: Record<string, string> = {
+export const macroExplanations: Record<string, string> = {
   Inflatie:
     'Prijsontwikkeling helpt je koopkracht en de economische context begrijpen. Een inflatiecijfer is geen voorspelling van het rendement van je beleggingen.',
   Arbeidsmarkt:
@@ -80,22 +82,41 @@ export const macroEvents: MacroEvent[] = rows.map(
     source:
       country === 'NL' ? 'CBS' : topic === 'Rente' ? 'Federal Reserve' : 'BLS',
     url: country === 'NL' ? cbs : topic === 'Rente' ? fed : bls,
-    explanation: explanations[topic],
+    explanation: macroExplanations[topic],
   }),
 );
-export function selectMacroEvents({
-  country = 'all',
-  topic = 'all',
-  from = '',
-  until = '',
-} = {}) {
-  return macroEvents
+export function selectMacroEvents(
+  { country = 'all', topic = 'all', from = '', until = '' } = {},
+  rows = macroEvents,
+) {
+  return rows
     .filter(
       (e) =>
         (country === 'all' || e.country === country) &&
         (topic === 'all' || e.topic === topic) &&
-        (!from || e.at.slice(0, 10) >= from) &&
-        (!until || e.at.slice(0, 10) <= until),
+        (!from || macroDay(e.at) >= from) &&
+        (!until || macroDay(e.at) <= until),
     )
-    .sort((a, b) => a.at.localeCompare(b.at));
+    .sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
 }
+
+export function macroDay(at: string) {
+  return at.includes('T')
+    ? new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Amsterdam' }).format(
+        new Date(at),
+      )
+    : at;
+}
+
+export type MacroSourceState = {
+  name: string;
+  country: 'NL' | 'US';
+  mode: 'automatic' | 'snapshot' | 'unavailable' | 'manual';
+  checkedAt: string | null;
+  count: number;
+};
+export type MacroFeed = {
+  events: MacroEvent[];
+  sources: MacroSourceState[];
+  coverage: { from: string; until: string };
+};

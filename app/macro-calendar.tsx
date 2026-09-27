@@ -2,10 +2,38 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronDown } from 'lucide-react';
 import Link from './site-link';
-import { macroCheckedAt, selectMacroEvents } from './macro-data';
+import {
+  macroCheckedAt,
+  macroDay,
+  selectMacroEvents,
+  type MacroFeed,
+} from './macro-data';
 
 export function MacroCalendar({ compact = false }: { compact?: boolean }) {
   const [today, setToday] = useState(macroCheckedAt);
+  const [feed, setFeed] = useState<MacroFeed | null>(null);
+  const [feedError, setFeedError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/macro', { signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Calendar unavailable');
+        const data: MacroFeed = await response.json();
+        if (!Array.isArray(data.events) || !Array.isArray(data.sources))
+          throw new Error('Invalid calendar');
+        setFeedError(false);
+        setFeed(data);
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setFeedError(true);
+      });
+    const timer = setInterval(() => setAttempt((n) => n + 1), 3600000);
+    return () => {
+      controller.abort();
+      clearInterval(timer);
+    };
+  }, [attempt]);
   const [country, setCountry] = useState('all'),
     [topic, setTopic] = useState('all');
   const [from, setFrom] = useState(''),
@@ -24,7 +52,10 @@ export function MacroCalendar({ compact = false }: { compact?: boolean }) {
   const invalidRange = Boolean(until && until < (from || today));
   const events = invalidRange
     ? []
-    : selectMacroEvents({ country, topic, from: from || today, until });
+    : selectMacroEvents(
+        { country, topic, from: from || today, until },
+        feed?.events || [],
+      );
   return (
     <section className={'macro-calendar' + (compact ? ' macro-compact' : '')}>
       <div className="macro-title">
@@ -92,7 +123,11 @@ export function MacroCalendar({ compact = false }: { compact?: boolean }) {
         <p className="macro-count" aria-live="polite">
           {invalidRange
             ? 'De einddatum moet op of na de begindatum liggen.'
-            : `${events.length} geplande momenten · tijden in Nederland`}
+            : !feed
+              ? feedError
+                ? 'De agenda kon niet worden geladen.'
+                : 'Publicatiemomenten ophalen…'
+              : `${events.length} geplande momenten · tijden in Nederland`}
         </p>
       )}
       <div className="macro-events">
@@ -100,7 +135,7 @@ export function MacroCalendar({ compact = false }: { compact?: boolean }) {
           <details key={e.id} className="macro-event">
             <summary>
               <time dateTime={e.at}>
-                <b>{e.at.slice(8, 10)}</b>
+                <b>{macroDay(e.at).slice(8, 10)}</b>
                 {new Intl.DateTimeFormat('nl-NL', {
                   month: 'short',
                   timeZone: 'Europe/Amsterdam',
@@ -121,12 +156,18 @@ export function MacroCalendar({ compact = false }: { compact?: boolean }) {
                       }).format(new Date(e.at)) + ' uur'
                     : 'Tijd: zie bron'}{' '}
                   · {e.source}
+                  {e.mode === 'manual'
+                    ? ' · handmatig gecontroleerd'
+                    : e.mode === 'snapshot'
+                      ? ' · bewaarde planning'
+                      : ''}
                 </span>
               </span>
               <ChevronDown size={18} />
             </summary>
             <div className="macro-event-detail">
               <p>{e.explanation}</p>
+              {e.period && <p>Verslagperiode: {e.period}.</p>}
               <p>
                 Gepland publicatiemoment. De planning kan wijzigen; bekijk de
                 bron voor de laatste informatie en gepubliceerde cijfers.
@@ -138,22 +179,97 @@ export function MacroCalendar({ compact = false }: { compact?: boolean }) {
           </details>
         ))}
       </div>
-      {!events.length && !invalidRange && (
+      {feed && !events.length && !invalidRange && (
         <p className="macro-empty">
           Geen momenten in deze selectie. Kies een andere periode of bekijk de
           officiële bronkalenders hieronder.
         </p>
       )}
+      {feedError && (
+        <p className="macro-empty" aria-live="polite">
+          {feed
+            ? 'Vernieuwen is niet gelukt. De eerder opgehaalde planning blijft zichtbaar.'
+            : 'De bronverbinding is tijdelijk niet beschikbaar.'}{' '}
+          <button className="textlink" onClick={() => setAttempt((n) => n + 1)}>
+            Opnieuw proberen
+          </button>
+        </p>
+      )}
+      {!feed && !feedError && compact && (
+        <p className="macro-count" aria-live="polite">
+          Publicatiemomenten ophalen…
+        </p>
+      )}
       <p className="macro-source-note">
-        Handmatig geselecteerde planning · gecontroleerd op 26 september 2026.
-        Geen live uitslagen of verwachtingen.
+        Automatische selectie uit CBS (NL) en BEA (VS), elk uur gecontroleerd
+        bij bezoek. Aanvullende BLS- en Fed-momenten zijn handmatig
+        gecontroleerd. Geen uitslagen of marktverwachtingen.
       </p>
+      {feed && !compact && (
+        <details className="macro-feed-status">
+          <summary>Bronnen, actualiteit & dekking</summary>
+          <p>
+            De automatische agenda volgt Nederlandse macropublicaties en
+            Amerikaanse bbp-, PCE- en handelscijfers. CPI, banenrapporten en
+            Fed-vergaderingen in de aanvullende selectie worden nog handmatig
+            bijgehouden. Verre publicatiedata zijn soms nog niet beschikbaar en
+            kunnen wijzigen.
+          </p>
+          <ul>
+            {feed.sources.map((s) => (
+              <li key={s.name}>
+                <strong>{s.name}</strong> ·{' '}
+                {s.mode === 'automatic'
+                  ? 'Automatisch opgehaald'
+                  : s.mode === 'snapshot'
+                    ? 'Bron tijdelijk onbereikbaar · bewaarde planning'
+                    : s.mode === 'manual'
+                      ? 'Handmatig gecontroleerd'
+                      : 'Bron niet beschikbaar'}
+                {s.checkedAt && (
+                  <>
+                    {' '}
+                    ·{' '}
+                    {new Intl.DateTimeFormat('nl-NL', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                      timeZone: 'Europe/Amsterdam',
+                    }).format(new Date(s.checkedAt))}
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p>
+            Beschikbare zoekperiode: {feed.coverage.from} t/m{' '}
+            {feed.coverage.until}. CBS-gegevens gebruikt onder CC BY 4.0;
+            selectie en toelichting door Beurswatcher. De officiële bronnen
+            onderschrijven Beurswatcher niet.
+          </p>
+        </details>
+      )}
+      {feed?.sources.some(
+        (s) => s.mode === 'snapshot' || s.mode === 'unavailable',
+      ) && (
+        <p className="macro-empty" aria-live="polite">
+          Een bron is tijdelijk niet bereikbaar. Bewaarde gegevens zijn
+          herkenbaar gemarkeerd; de agenda kan onvolledig zijn.
+        </p>
+      )}
       {compact ? (
         <Link className="textlink" href="/markt/macro">
           Open de macro-agenda <ArrowRight size={16} />
         </Link>
       ) : (
         <div className="macro-sources">
+          <a
+            href="https://www.bea.gov/news/schedule"
+            target="_blank"
+            rel="noreferrer"
+          >
+            BEA ↗
+          </a>
           <a
             href="https://www.cbs.nl/nl-nl/publicatieplanning"
             target="_blank"

@@ -20,7 +20,7 @@
 
 ## Nog niet volledig operationeel
 
-- De NL/VS-macroagenda heeft werkende filters en uitleg, maar is een handmatig bijgehouden selectie, geen automatische Trading Economics-koppeling.
+- De NL/VS-macroagenda haalt Nederlandse CBS-publicatiemomenten en Amerikaanse BEA-publicatiemomenten automatisch op. CPI, banenrapporten en Fed-vergaderingen in de aanvullende selectie blijven handmatig gecontroleerd. Het is geen Trading Economics-koppeling en er zijn geen consensusverwachtingen of live uitslagen.
 - Voorbeeldkoersen blijven als voorbeeld gemarkeerd totdat een bruikbare marktdatafeed is aangesloten.
 - Bestaande voorbeeldblogs zijn als voorbeeld herkenbaar en uitgesloten van zoekmachine-indexering; ze wachten op Daniels eigen blogs.
 - Controleer nieuwsbrief- en contactopslag zodra de benodigde databaseconfiguratie is ingesteld. Een werkend formulierontwerp betekent nog geen actieve ontvangst.
