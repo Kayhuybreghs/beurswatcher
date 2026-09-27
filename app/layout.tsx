@@ -8,6 +8,7 @@ import './mobile-first.css';
 import './scroll-story.css';
 import './brand-direction.css';
 import './learning.css';
+import './site-credits.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://beurswatcher.vercel.app'),
   title: {

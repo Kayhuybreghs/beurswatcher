@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'partners',
     'events',
     'contact',
+    'achter-de-website',
     ...guides.map((g) => 'uitleg/' + g.slug),
     ...toolItems.map((t) => 'tools/' + t.slug),
     ...topics.map(([s]) => 'verdieping/' + s),

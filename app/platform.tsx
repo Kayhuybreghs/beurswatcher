@@ -31,6 +31,7 @@ import { NextSteps } from './journeys';
 import { useEditorialMotion } from './motion';
 import { BrandLogo, instagramUrl } from './brand';
 import { BrandHome } from './brand-home';
+import { WebsiteStory } from './website-story';
 import { ContactForm } from './contact-form';
 import {
   BusinessPage,
@@ -265,6 +266,7 @@ function Content({ path }: { path: string }) {
     root = parts[0],
     sub = parts[1];
   if (!root) return <Home />;
+  if (root === 'achter-de-website') return <WebsiteStory />;
   if (root === 'artikelen') return sub ? <Article slug={sub} /> : <Archive />;
   if (root === 'uitleg') return <GuidePage slug={sub} />;
   if (root === 'zoeken') return <SiteSearch />;
@@ -336,10 +338,10 @@ function Content({ path }: { path: string }) {
             toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
             officiële TradingView-widgets, plus ECB-referentiekoersen, een
             automatisch opgehaalde CBS- en BEA-planning, aangevuld met handmatig
-            gecontroleerde momenten van BLS en de Federal Reserve. De ticker, radarkaart en aparte
-            earningsvoorbeelden bevatten herkenbaar gemarkeerde
-            demonstratiegegevens. Bij de marktweergaven staan bron, dekking en
-            periode vermeld.
+            gecontroleerde momenten van BLS en de Federal Reserve. De ticker,
+            radarkaart en aparte earningsvoorbeelden bevatten herkenbaar
+            gemarkeerde demonstratiegegevens. Bij de marktweergaven staan bron,
+            dekking en periode vermeld.
           </p>
           <h2>Logo en Reels</h2>
           <p>
@@ -527,6 +529,10 @@ export default function Platform({ path }: { path: string }) {
           <span>Beleggen kent risico’s. Je kunt je inleg verliezen.</span>
           <Link href="/privacy">Privacy</Link>
           <Link href="/colofon">Colofon & bronnen</Link>
+          <Link className="site-creator-credit" href="/achter-de-website">
+            Van idee naar platform · <strong>Sitesnit</strong>
+            <ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
         </div>
       </footer>
     </>

@@ -20,6 +20,7 @@ const routes = [
   'zoeken',
   'privacy',
   'colofon',
+  'achter-de-website',
   'afmelden',
   '404',
   ...guides.map((g) => 'uitleg/' + g.slug),
@@ -41,6 +42,25 @@ export async function generateMetadata({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
+  if (slug.join('/') === 'achter-de-website') {
+    const title = 'Achter deze website — ontwerp en ontwikkeling door Sitesnit';
+    const description =
+      'Van eigen inzichten naar interactieve rekentools: ontdek hoe Sitesnit het Beurswatcher-platform ontwierp en bouwde. Bekijk de case en de mogelijkheden voor jouw website.';
+    const url = 'https://beurswatcher.vercel.app/achter-de-website';
+    return {
+      title,
+      description,
+      alternates: { canonical: url },
+      openGraph: {
+        title,
+        description,
+        url,
+        type: 'website',
+        locale: 'nl_NL',
+        siteName: 'Beurswatcher',
+      },
+    };
+  }
   const p = slug.join('/'),
     a = articles.find((a) => p === 'artikelen/' + a.slug),
     t = toolItems.find((t) => p === 'tools/' + t.slug);
