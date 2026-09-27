@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from './site-link';
 import {
   ArrowDown,
@@ -52,7 +53,13 @@ export function WebsiteStory() {
           <ArrowLeft size={15} /> Terug naar Beurswatcher
         </Link>
         <span className="maker-wordmark">
-          sitesnit<span>.</span>
+          <Image
+            src="/sitesnit/logo.png"
+            alt="Sitesnit"
+            width={52}
+            height={52}
+            unoptimized
+          />
         </span>
         <a className="maker-header-cta" href="#jouw-website">
           Jouw website <ArrowDown size={14} />
@@ -371,7 +378,13 @@ export function WebsiteStory() {
       </main>
       <div className="maker-end">
         <span className="maker-wordmark">
-          sitesnit<span>.</span>
+          <Image
+            src="/sitesnit/logo.png"
+            alt="Sitesnit"
+            width={52}
+            height={52}
+            unoptimized
+          />
         </span>
         <p>De maker achter Beurswatcher.</p>
         <Link href="/">

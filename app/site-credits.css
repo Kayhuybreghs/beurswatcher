@@ -1,10 +1,19 @@
+@font-face {
+  font-family: SitesnitManrope;
+  src: url('/sitesnit/manrope.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
 .maker-page {
-  --mk-ink: #112d46;
-  --mk-muted: #586976;
-  --mk-paper: #f6f5f0;
-  --mk-yellow: #f0cf43;
+  --mk-ink: #173e42;
+  --mk-muted: #5d6b66;
+  --mk-paper: #f8f6ef;
+  --mk-accent: #164bbd;
   background: var(--mk-paper);
   color: var(--mk-ink);
+  font-family: SitesnitManrope, Arial, sans-serif;
+  font-weight: 450;
 }
 .maker-page *,
 .maker-page *::before,
@@ -21,8 +30,14 @@
 .maker-page h2,
 .maker-page h3 {
   color: inherit;
+  font-family: SitesnitManrope, Arial, sans-serif;
+  font-weight: 800;
 }
+.maker-page h1 em,
+.maker-page h2 em,
 .maker-page em {
+  font-family: inherit;
+  font-weight: inherit;
   color: inherit;
   font-style: normal;
   font-size: inherit;
@@ -67,8 +82,9 @@
   display: none;
 }
 .maker-hero {
-  background: var(--mk-ink);
-  color: #fff;
+  overflow: clip;
+  background: var(--mk-paper);
+  color: var(--mk-ink);
   padding: 26px 5% 24px;
 }
 .maker-hero-top {
@@ -82,7 +98,7 @@
 }
 .maker-hero-top > span:last-child {
   display: none;
-  color: #c5d1d9;
+  color: var(--mk-muted);
 }
 .maker-hero-grid {
   display: grid;
@@ -94,10 +110,10 @@
   font-size: clamp(42px, 6.2vw, 91px);
   letter-spacing: -0.065em;
   line-height: 1.03;
-  font-weight: 700;
+  font-weight: 800;
 }
 .maker-page h1 em {
-  color: var(--mk-yellow);
+  color: var(--mk-accent);
 }
 .maker-hero-aside {
   max-width: 390px;
@@ -113,7 +129,7 @@
 .maker-hero-aside > p + p {
   font-size: 15px;
   line-height: 1.8;
-  color: #c9d6df;
+  color: var(--mk-muted);
 }
 .maker-inline {
   display: inline-flex;
@@ -131,13 +147,13 @@
   max-width: 1280px;
   margin: 38px auto 0;
   padding-top: 20px;
-  border-top: 1px solid #405669;
+  border-top: 1px solid #d6ddd1;
   font-size: 10px;
-  color: #bacbd8;
+  color: var(--mk-muted);
   line-height: 1.6;
 }
 .maker-hero-bottom strong {
-  color: #fff;
+  color: var(--mk-ink);
   font-weight: 400;
 }
 .maker-hero-bottom > span:last-child {
@@ -217,7 +233,7 @@
 }
 .maker-stage {
   min-width: 0;
-  background: #e4e8e5;
+  background: #b9d5ad;
   padding: 24px 18px 18px;
   display: flex;
   flex-direction: column;
@@ -471,7 +487,7 @@
 }
 .maker-next {
   padding: 48px 0;
-  background: #e8eddf;
+  background: #e9efe2;
   scroll-margin-top: 20px;
 }
 .maker-next-grid {
@@ -479,7 +495,7 @@
   gap: 38px;
 }
 .maker-page .maker-next h2 em {
-  color: #4c6355;
+  color: var(--mk-accent);
 }
 .maker-next-grid > div > p:not(.maker-kicker) {
   font-size: 15px;
@@ -515,13 +531,14 @@
   color: white;
   font-size: 13px;
   line-height: 1.5;
-  border-radius: 4px;
+  border-radius: 100px;
+  font-weight: 750;
 }
 .maker-primary svg {
   flex-shrink: 0;
 }
 .maker-primary:hover {
-  background: #23475c;
+  background: #245459;
 }
 .maker-link-note {
   display: block;
@@ -532,7 +549,7 @@
   color: #526557;
 }
 .maker-case-note {
-  background: #f7f7f0;
+  background: #f8f6ef;
   padding: 26px;
   border: 1px solid #c9d2c2;
   border-radius: 4px;
@@ -592,7 +609,7 @@
 .maker-page a:focus-visible,
 .maker-page button:focus-visible,
 .maker-page input:focus-visible {
-  outline: 3px solid #b48300;
+  outline: 3px solid #164bbd;
   outline-offset: 5px;
 }
 .maker-page a svg {
@@ -665,7 +682,7 @@ footer .site-creator-credit:focus-visible {
     display: block;
     font-size: 68px;
     line-height: 1;
-    color: var(--mk-yellow);
+    color: var(--mk-accent);
     margin-bottom: 26px;
   }
   .maker-hero-aside > p:first-of-type {
@@ -776,5 +793,74 @@ footer .site-creator-credit:focus-visible {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Sitesnit identity surrounds the Beurswatcher project examples. */
+.maker-wordmark {
+  display: inline-flex;
+  align-items: center;
+}
+.maker-wordmark img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.maker-page .maker-preview,
+.maker-page .maker-preview h3 {
+  font-family: Inter, Arial, sans-serif;
+}
+.maker-hero-top > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 750;
+}
+.maker-hero-top > span:first-child::before {
+  content: '';
+  width: 10px;
+  height: 15px;
+  flex-shrink: 0;
+  background: var(--mk-accent);
+  border-radius: 5px;
+  transform: rotate(-12deg);
+}
+.maker-switch button[aria-pressed='true']::after {
+  background: var(--mk-accent);
+}
+.maker-switch button[aria-pressed='true'] > svg,
+.maker-takeaway > svg {
+  color: var(--mk-accent);
+}
+.maker-hero-aside {
+  position: relative;
+  isolation: isolate;
+}
+.maker-hero-aside::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -16px -7px;
+  border-radius: 48% 52% 46% 54%;
+  background: #b9d5ad45;
+  transform: rotate(-8deg);
+}
+.maker-header-cta {
+  border: 1px solid #d7dcd3;
+  padding: 10px 16px;
+  border-radius: 5px;
+}
+.maker-end {
+  border-top: 1px solid #d7dcd3;
+}
+@media (min-width: 800px) {
+  .maker-wordmark img {
+    width: 52px;
+    height: 52px;
+  }
+  .maker-hero-aside::before {
+    inset: -26px -18px;
+    background: #b9d5ad70;
   }
 }
