@@ -266,7 +266,6 @@ function Content({ path }: { path: string }) {
     root = parts[0],
     sub = parts[1];
   if (!root) return <Home />;
-  if (root === 'achter-de-website') return <WebsiteStory />;
   if (root === 'artikelen') return sub ? <Article slug={sub} /> : <Archive />;
   if (root === 'uitleg') return <GuidePage slug={sub} />;
   if (root === 'zoeken') return <SiteSearch />;
@@ -427,6 +426,7 @@ export default function Platform({ path }: { path: string }) {
       removeEventListener('keydown', closeOnEscape);
     };
   }, [mobile]);
+  if (path === '/achter-de-website') return <WebsiteStory />;
   return (
     <>
       <Link className="skip" href="#inhoud">
