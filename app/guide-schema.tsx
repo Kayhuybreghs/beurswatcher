@@ -1,19 +1,23 @@
 import { guides } from './guide-data';
+import { siteUrl } from './site-config';
+import { JsonLd, publisher, websiteId } from './site-schema';
 export function GuideSchema({ slug }: { slug: string }) {
   const g = guides.find((g) => g.slug === slug);
   if (!g) return null;
-  const base = 'https://beurswatcher.vercel.app';
+  const base = siteUrl;
   const data = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'Article',
+        '@id': base + '/uitleg/' + g.slug + '#article',
         headline: g.title,
         description: g.summary,
         mainEntityOfPage: base + '/uitleg/' + g.slug,
         inLanguage: 'nl-NL',
-        author: { '@type': 'Organization', name: 'Beurswatcher', url: base },
-        publisher: { '@type': 'Organization', name: 'Beurswatcher', url: base },
+        isPartOf: { '@id': websiteId },
+        author: publisher,
+        publisher,
       },
       {
         '@type': 'BreadcrumbList',
@@ -33,12 +37,5 @@ export function GuideSchema({ slug }: { slug: string }) {
       },
     ],
   };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data).replace(/</g, '\\u003c'),
-      }}
-    />
-  );
+  return <JsonLd data={data} />;
 }

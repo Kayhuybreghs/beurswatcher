@@ -123,7 +123,7 @@ export const guides: Guide[] = [
     summary:
       'Meer inleg verhoogt je eigen bijdrage. Een langere looptijd geeft het bestaande geld langer de tijd om te groeien of te dalen. Vergelijk beide effecten los van elkaar.',
     problem:
-      'Je kunt een toekomstig doel beïnvloeden via tijd en inleg. Om te zien wat elk afzonderlijk doet, moet je vergelijkingen zorgvuldig opzetten.',
+      'Wat maakt meer verschil: langer beleggen of elke maand meer inleggen? Verander één van beide om de uitkomsten te kunnen vergelijken.',
     sections: [
       [
         'Maak eerst een basisscenario',
@@ -199,11 +199,11 @@ export const guides: Guide[] = [
     tool: 'etf-kosten',
     category: 'ETF',
     topics: ['etfs'],
-    title: 'TER en overige kosten: wat vergelijk je bij een ETF?',
+    title: 'Welke kosten betaal je bij een ETF?',
     summary:
       'Een jaarlijks fondspercentage is niet automatisch je volledige kostenplaatje. Maak onderscheid tussen doorlopende fondskosten, handelen en eventuele kosten van je rekening.',
     problem:
-      'Twee percentages naast elkaar zetten is eenvoudig. Begrijpen welke kosten erin zitten, vraagt een extra stap.',
+      'Het jaarlijkse kostenpercentage van een fonds omvat niet automatisch alle kosten die je betaalt. Wat reken je daarnaast mee?',
     sections: [
       [
         'Lees eerst het kostendocument',
@@ -219,7 +219,7 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Een vast bedrag in perspectief',
+      'Wat kost € 2 per aankoop?',
       'Een denkbeeldige ordervergoeding van € 2 is 2% van een aankoop van € 100 en 0,2% van € 1.000. Dit is een rekenvoorbeeld, geen tarief van een broker.',
     ],
     faq: [
@@ -281,9 +281,9 @@ export const guides: Guide[] = [
     topics: ['vermogen', 'beginnen'],
     title: '€ 100.000 opbouwen: hoeveel moet je per maand inleggen?',
     summary:
-      'Het benodigde maandbedrag volgt uit je doel, startkapitaal, horizon en gekozen rendement. Gebruik de doelvermogentool om terug te rekenen vanuit € 100.000 of je eigen doelbedrag.',
+      'Je benodigde maandinleg hangt af van het bedrag dat je al hebt, hoeveel tijd je hebt en het rendement waarmee je rekent. Bereken de inleg voor € 100.000 of een ander doelbedrag.',
     problem:
-      'Een rond doelbedrag motiveert, maar vertelt nog niet wat het vandaag van je budget vraagt.',
+      'Je wilt € 100.000 opbouwen. Hoeveel moet je dan iedere maand inleggen, en wat verandert er als je meer of minder tijd hebt?',
     sections: [
       [
         'Geef je doel een einddatum',
@@ -401,9 +401,9 @@ export const guides: Guide[] = [
     topics: ['beginnen', 'vermogen'],
     title: 'Rente op rente: hoe werkt samengestelde groei?',
     summary:
-      'Bij samengestelde groei telt eerder behaalde groei mee in de volgende periode. Het effect werkt alleen zo als opbrengsten in het vermogen blijven en het model de gekozen groei daadwerkelijk haalt.',
+      'Bij samengestelde groei bereken je rente of rendement ook over eerdere opbrengsten die blijven staan. De calculator gebruikt een vast percentage; bij beleggen is dat rendement niet gegarandeerd.',
     problem:
-      'Een percentage per jaar lijkt lineair, terwijl het bedrag waarop dat percentage werkt steeds verandert.',
+      'Vijf procent per jaar levert niet ieder jaar hetzelfde bedrag op. Als de opbrengst blijft staan, wordt het percentage daarna over een ander bedrag berekend.',
     sections: [
       [
         'Het bedrag verandert mee',
@@ -411,7 +411,7 @@ export const guides: Guide[] = [
       ],
       [
         'Een vaste rente is niet hetzelfde als beleggen',
-        'Een wiskundige groeifactor kan beide situaties illustreren. Bij beleggingen zijn de opbrengsten echter onzeker en kunnen negatieve jaren het resultaat verlagen.',
+        'Je kunt met hetzelfde rekenmodel een vaste rente of een aangenomen beleggingsrendement berekenen. Bij beleggingen zijn de opbrengsten onzeker en kunnen negatieve jaren het resultaat verlagen.',
       ],
       [
         'Inleg heeft een eigen timing',
@@ -481,7 +481,7 @@ export const guides: Guide[] = [
     topics: ['vermogen', 'pensioen', 'markt-economie'],
     title: 'Inflatie berekenen: wat blijft er van je koopkracht over?',
     summary:
-      'Je berekent toekomstige koopkracht door een vast bedrag te delen door de samengestelde inflatiefactor. De inflatietool drukt die koopkracht uit in euro’s van nu.',
+      'Als prijzen stijgen, kun je met hetzelfde bedrag minder kopen. De inflatietool berekent wat de koopkracht van je geld na een gekozen aantal jaren is, uitgedrukt in euro’s van nu.',
     problem:
       'Het bedrag op de rekening kan gelijk blijven terwijl je er minder goederen en diensten mee kunt kopen.',
     sections: [
@@ -494,7 +494,7 @@ export const guides: Guide[] = [
         'Voor meerdere jaren wordt de prijsstijging niet simpelweg opgeteld. Bij een vaste inflatie i en n jaren is de factor (1 + i)^n. De calculator gebruikt dit model.',
       ],
       [
-        'Vergelijk een paar horizonten',
+        'Vergelijk verschillende looptijden',
         'Zet dezelfde aanname naast vijf, tien en twintig jaar. De uitkomsten laten zien hoe gevoelig een langlopend doel voor prijsveranderingen is. Je eigen uitgavenpatroon kan afwijken van het gemiddelde.',
       ],
     ],
@@ -505,7 +505,7 @@ export const guides: Guide[] = [
     faq: [
       [
         'Voegt de tool spaarrente toe?',
-        'Nee. Deze tool isoleert inflatie bij een vast nominaal bedrag.',
+        'Nee. Deze tool berekent alleen het effect van inflatie. Het bedrag op de rekening blijft gelijk.',
       ],
       [
         'Is inflatie elk jaar gelijk?',
@@ -683,7 +683,7 @@ export const guides: Guide[] = [
     summary:
       'De tool maakt een vereenvoudigde indicatie met de uitgangspunten voor de voorlopige aanslag 2026. Het resultaat is geen definitieve aanslag of berekening van werkelijk rendement.',
     problem:
-      'Spaargeld en beleggingen worden in het forfaitaire model verschillend behandeld. Daardoor zegt alleen je totale vermogen onvoldoende over de uitkomst.',
+      'Voor spaargeld en beleggingen gebruikt de tool verschillende vaste rendementspercentages. Daarom hangt de uitkomst ook af van de verdeling van je vermogen.',
     sections: [
       [
         'Splits je invoer',
@@ -705,7 +705,7 @@ export const guides: Guide[] = [
     faq: [
       [
         'Berekent dit mijn werkelijke rendement?',
-        'Nee. De tool toont een forfaitaire indicatie.',
+        'Nee. De tool maakt een schatting met vaste rendementspercentages, niet met je werkelijk behaalde resultaat.',
       ],
       [
         'Kan ik de uitkomst overnemen in mijn aangifte?',
@@ -763,7 +763,7 @@ export const guides: Guide[] = [
     summary:
       'Bij ineens instappen doet het volledige bedrag direct mee. Bij gespreid instappen beleg je het beschikbare bedrag in delen; het resterende geld wacht buiten de markt.',
     problem:
-      'Je hebt al een bedrag klaarstaan, maar twijfelt over het moment van instappen. De timing beïnvloedt de route en de uitkomst.',
+      'Je hebt een bedrag beschikbaar. Wat verandert er als je het direct belegt of verspreid over meerdere maanden inlegt?',
     sections: [
       [
         'Maak onderscheid met maandelijkse besparingen',
@@ -771,11 +771,11 @@ export const guides: Guide[] = [
       ],
       [
         'Vergelijk hetzelfde koerspad',
-        'De tool laat beide methoden dezelfde marktbeweging volgen. Daardoor is zichtbaar wat de timing van inleg doet, zonder stiekem een andere markt voor elke methode te gebruiken.',
+        'Beide methoden volgen in de tool dezelfde koersbewegingen. Alleen het moment waarop je inlegt verschilt. Zo kun je de gevolgen daarvan vergelijken.',
       ],
       [
         'Bekijk ook het wachtende geld',
-        'Geld dat nog niet belegd is, mist zowel stijgingen als dalingen. In dit model kun je er spaarrente voor kiezen. Die ontvangen rente blijft apart als cash meetellen.',
+        'Geld dat nog niet belegd is, doet niet mee aan koersstijgingen of -dalingen. In dit model kun je er spaarrente voor kiezen. Die ontvangen rente blijft apart op de spaarrekening meetellen.',
       ],
     ],
     example: [
@@ -865,7 +865,7 @@ export const guides: Guide[] = [
     faq: [
       [
         'Verdwijnt uitgekeerd dividend uit de vergelijking?',
-        'Nee. Het telt mee als renteloos cashbedrag zolang je het niet uitgeeft.',
+        'Nee. Het telt mee als apart gehouden geld, zonder rente, zolang je het niet uitgeeft.',
       ],
       [
         'Is dividend gegarandeerd?',

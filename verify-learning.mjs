@@ -2,10 +2,11 @@ import assert from 'node:assert/strict';
 import { guides } from './app/guide-data.ts';
 import { topicContent } from './app/topic-content.ts';
 import { topicInlineLinks } from './app/topic-inline-links.ts';
+import { siteUrl } from './app/site-config.ts';
 
 // Exercise the deployed routes and crosslinks, not only the source records.
 const base = process.argv[2] || 'http://127.0.0.1:5186';
-const canonical = 'https://beurswatcher.vercel.app';
+const canonical = siteUrl;
 const escape = (s) =>
   s
     .replaceAll('&', '&amp;')
@@ -38,8 +39,8 @@ for (const g of guides) {
   const script = [
     ...page.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs),
   ].map((x) => JSON.parse(x[1]));
-  const graph = script.find((x) => x['@graph'])?.['@graph'];
-  assert.ok(graph, path + ' structured data');
+  const graph = script.flatMap((x) => x['@graph'] || [x]);
+  assert.ok(graph.length, path + ' structured data');
   assert.deepEqual(
     graph
       .find((x) => x['@type'] === 'FAQPage')

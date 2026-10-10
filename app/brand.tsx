@@ -4,16 +4,6 @@ import Link from './site-link';
 import { Camera as Instagram, ArrowUpRight } from 'lucide-react';
 
 export const instagramUrl = 'https://www.instagram.com/beurswatcher/';
-export const communityEvent = {
-  name: 'Beleggersborrel',
-  date: '14 oktober 2026',
-  time: '19.15–22.30',
-  venue: 'Winkel van Sinkel',
-  address: 'Oudegracht 158, Utrecht',
-  ticketUrl: 'https://weeztix.shop/95kumuq5',
-  ticket: '€ 20 + € 1 servicekosten',
-  checked: '8 september 2026',
-};
 export function BrandMark({ className = '' }: { className?: string }) {
   return (
     <span className={'brand-mark ' + className} aria-hidden="true">
@@ -44,18 +34,21 @@ export function InstagramCTA({
   context?: 'general' | 'market' | 'article' | 'about';
 }) {
   const copy = {
-    general: ['Dagelijks op Instagram.', 'Verder kijken doe je hier.'],
+    general: [
+      'Beurswatcher op Instagram.',
+      'Korte uitleg over beleggen en geldzaken.',
+    ],
     market: [
-      'De beurs stopt niet na dit overzicht.',
-      'Volg de korte inzichten van Beurswatcher op Instagram.',
+      'Ook uitleg op Instagram.',
+      'Bekijk korte video’s over de beurs, beleggen en vermogen.',
     ],
     article: [
-      'Een inzicht voor nu. Meer voor morgen.',
-      'Volg Beurswatcher voor korte uitleg en nieuwe geldvragen.',
+      'Liever een korte video?',
+      'Op Instagram legt Beurswatcher financiële begrippen en geldvragen uit.',
     ],
     about: [
-      'Zie wat Daniel dagelijks deelt.',
-      'Van je eerste belegging tot opbouwen voor later.',
+      'Bekijk Beurswatcher op Instagram.',
+      'Daniel deelt er uitleg over beleggen en geldzaken.',
     ],
   }[context];
   return (
@@ -95,37 +88,37 @@ export function AboutBeurswatcher({ full = false }: { full?: boolean }) {
       <div className="about-beurs-copy">
         <span className="section-kicker">DIT IS BEURSWATCHER</span>
         <Heading>
-          Van je dagelijkse feed
+          Uitleg over beleggen.
           <br />
-          naar <span>je eigen plan.</span>
+          <span>Tools om zelf te rekenen.</span>
         </Heading>
         <p>
-          Beurswatcher maakt beleggen en vermogensgroei begrijpelijk. Met eigen
-          uitleg, praktische tools en een nuchtere blik op jouw financiële toekomst.
+          Beurswatcher legt uit hoe beleggen, vermogen en pensioen werken. Met
+          artikelen en gratis rekentools kun je financiële begrippen leren en
+          bedragen vergelijken.
         </p>
         <p>
-          Het idee is eenvoudig: geldvragen begrijpelijk maken, zodat je zelf
-          verder kunt. Op Instagram krijg je de korte inzichten. Hier vind je de
-          ruimte om te begrijpen, te vergelijken en met jouw bedragen te
-          rekenen.
+          Het heft in eigen handen nemen begint met weten wat je doet. Op
+          Instagram vind je korte video’s. Hier lees je de uitgebreidere uitleg
+          en bereken je bijvoorbeeld hoeveel inleg nodig is voor een doelbedrag.
         </p>
         <div className="channel-compare">
           <div>
             <Instagram size={20} />
             <b>Op Instagram</b>
             <span>
-              Dagelijkse updates.
+              Korte video’s.
               <br />
-              Korte uitleg. Nieuwe vragen.
+              Uitleg over beleggen en geld.
             </span>
           </div>
           <div>
             <ArrowUpRight size={21} />
             <b>Hier op de website</b>
             <span>
-              Meer context. Gratis tools.
+              Artikelen en rekenvoorbeelden.
               <br />
-              Je volgende stap.
+              Gratis financiële tools.
             </span>
           </div>
         </div>

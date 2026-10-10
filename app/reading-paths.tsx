@@ -6,6 +6,7 @@ import Link from './site-link';
 import { articles, toolItems, partners } from './data';
 import { guides } from './guide-data';
 import { journeys } from './journey-data';
+import { topicContent } from './topic-content';
 export function ArticleProgress() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -42,15 +43,15 @@ export function ArticleProgress() {
 }
 const topicQuestions: Record<string, [string, string]> = {
   ETF: [
-    'Breed beleggen. Bewust kiezen.',
-    'Een fondsnaam vertelt niet alles. Onderzoek spreiding, kosten en hoe een ETF in jouw plan past.',
+    'Wat zit er in een ETF?',
+    'Lees welke index een fonds volgt, hoe het is gespreid en welke kosten je betaalt.',
   ],
   Pensioen: [
-    'Maak later een beetje concreter.',
+    'Uit welke onderdelen bestaat je pensioen?',
     'Begin bij je bestaande pensioen en je gewenste toekomst. Reken daarna terug naar wat je zelf kunt opbouwen.',
   ],
   Strategie: [
-    'Een plan voor alle beursdagen.',
+    'Welke regels gebruik je bij beleggen?',
     'Je horizon, je inleg en je reactie op een daling: maak de uitgangspunten zichtbaar voordat je een product kiest.',
   ],
   Aandelen: [
@@ -58,19 +59,19 @@ const topicQuestions: Record<string, [string, string]> = {
     'Onderzoek het verhaal, bekijk je aannames en houd oog voor de samenhang in je portefeuille.',
   ],
   Dividend: [
-    'Wat doet een uitkering voor jouw plan?',
+    'Wat gebeurt er met ontvangen dividend?',
     'Onderzoek koersgroei en dividend samen. Reken vervolgens het verschil tussen uitgeven en herbeleggen door.',
   ],
   Zakelijk: [
-    'Geef vrij vermogen een eigen horizon.',
+    'Welk bedrijfsvermogen is beschikbaar om te beleggen?',
     'Bedrijfsreserves en beleggingsvermogen hebben verschillende doelen. Maak dat onderscheid eerst.',
   ],
   Portfolio: [
-    'Van losse posities naar overzicht.',
+    'Hoe is je portefeuille verdeeld?',
     'Bekijk waar je beleggingen staan, hoe ze verdeeld zijn en welke concentraties je niet direct ziet.',
   ],
   Reizen: [
-    'De waarde zit in jouw gebruik.',
+    'Welke reisvoordelen gebruik je echt?',
     'Vergelijk kaartkosten met reisvoordelen die je werkelijk gebruikt. Lees de voorwaarden voordat je kiest.',
   ],
 };
@@ -80,13 +81,13 @@ export function TopicBrief({ topic }: { topic: string }) {
   return (
     <section className="topic-brief">
       <div>
-        <span className="eyebrow">JOUW STARTPUNT</span>
+        <span className="eyebrow">UITLEG EN TOOLS BIJ DIT ONDERWERP</span>
         <h2>{copy[0]}</h2>
         <p>{copy[1]}</p>
       </div>
       <div>
-        <Link href={'/artikelen/' + j.article}>
-          Begin met de uitleg <ArrowRight size={16} />
+        <Link href={'/verdieping/' + j.topic}>
+          Lees de uitleg: {topicContent[j.topic].title} <ArrowRight size={16} />
         </Link>
         {topic !== 'Reizen' && (
           <Link href={'/tools/' + j.tool}>
@@ -94,13 +95,19 @@ export function TopicBrief({ topic }: { topic: string }) {
           </Link>
         )}
         <Link href={'/partners/' + j.partner}>
-          Ontdek een passende dienst <ArrowUpRight size={16} />
+          Bekijk de aanbieder en voorwaarden <ArrowUpRight size={16} />
         </Link>
       </div>
     </section>
   );
 }
 const searchItems = [
+  ...Object.entries(topicContent).map(([slug, topic]) => ({
+    title: topic.title,
+    text: topic.summary,
+    href: '/verdieping/' + slug,
+    type: 'Onderwerpen',
+  })),
   ...guides.map((g) => ({
     title: g.title,
     text: g.summary,
@@ -111,7 +118,7 @@ const searchItems = [
     title: a.title,
     text: a.intro,
     href: '/artikelen/' + a.slug,
-    type: 'Artikelen',
+    type: 'Voorbeeldblogs',
   })),
   ...toolItems.map((t) => ({
     title: t.title,
@@ -123,17 +130,17 @@ const searchItems = [
     title: p.name,
     text: p.text,
     href: '/partners/' + p.slug,
-    type: 'Samenwerkingen',
+    type: 'Partners',
   })),
   {
-    title: 'Beleggersborrel Utrecht',
-    text: 'Een avond met andere beleggers op 14 oktober 2026.',
-    href: '/events/beleggersborrel-utrecht-2026',
+    title: 'Events van Beurswatcher',
+    text: 'Lees welke bijeenkomsten op de planning staan.',
+    href: '/events',
     type: 'Platform',
   },
   {
     title: 'Over Daniel en Beurswatcher',
-    text: 'Van korte Instagram-inzichten naar je eigen plan.',
+    text: 'Waarom Daniel Beurswatcher begon en wat je op de website kunt vinden.',
     href: '/over',
     type: 'Platform',
   },
@@ -145,7 +152,7 @@ const searchItems = [
   },
   {
     title: 'Marktoverzicht',
-    text: 'Koersen, macro, earnings en context. Voorbeeldweergave.',
+    text: 'Indices, stijgers en dalers en de macro-agenda voor Nederland en de Verenigde Staten.',
     href: '/markt',
     type: 'Platform',
   },
@@ -163,12 +170,8 @@ export function SiteSearch() {
   return (
     <>
       <section className="search-intro">
-        <span className="eyebrow">EEN VRAAG IS EEN GOED BEGIN</span>
-        <h1>
-          Waar wil je
-          <br />
-          verder in kijken?
-        </h1>
+        <span className="eyebrow">ZOEKEN OP BEURSWATCHER</span>
+        <h1>Zoek uitleg, tools en onderwerpen.</h1>
         <div className="search-field">
           <Search />
           <input
@@ -188,10 +191,11 @@ export function SiteSearch() {
         <TabsList aria-label="Filter zoekresultaten">
           {[
             'Alles',
+            'Onderwerpen',
             'Uitleg',
-            'Artikelen',
+            'Voorbeeldblogs',
             'Tools',
-            'Samenwerkingen',
+            'Partners',
             'Platform',
           ].map((s) => (
             <TabsTrigger key={s} value={s}>

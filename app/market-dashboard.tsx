@@ -47,23 +47,23 @@ export function MarketDashboard() {
         <div>
           <span className="eyebrow">BEURSWATCHER / MARKT</span>
           <h1>
-            Jouw blik op de markt.
+            Wat gebeurt er op de beurs?
             <br />
-            <em>Van beweging naar betekenis.</em>
+            <em>Bekijk de cijfers.</em>
           </h1>
         </div>
         <p>
-          De indices, bewegingen en momenten
-          <br />
-          die je helpen verder kijken.
+          Volg indices, bekijk Amerikaanse stijgers en dalers en controleer de
+          macro-agenda voor Nederland en de Verenigde Staten. Bron en peildatum
+          staan bij de gegevens.
         </p>
       </header>
       <MarketHubOverview />
       <section className="fx-section" id="valuta">
         <div className="fx-intro">
           <Globe size={23} />
-          <span className="eyebrow">DE EURO BUITEN DE EUROZONE</span>
-          <h2>Wat is je euro waard?</h2>
+          <span className="eyebrow">VALUTA OMREKENEN</span>
+          <h2>Hoeveel krijg je voor je euro’s?</h2>
           <p>
             Reken een bedrag om met de dagelijkse referentiekoersen van de
             Europese Centrale Bank.
@@ -82,7 +82,7 @@ export function MarketDashboard() {
                 ? 'Koersen controleren…'
                 : fx.mode === 'official'
                   ? 'Opgehaald bij de ECB'
-                  : 'Laatst beschikbare ECB-snapshot'}
+                  : 'Opgeslagen ECB-koersen'}
             </span>
             <time dateTime={fx.asOf}>Peildatum {date(fx.asOf)}</time>
           </div>
@@ -127,22 +127,22 @@ export function MarketDashboard() {
             >
               Europese Centrale Bank ↗
             </Link>
-            . Referentiekoersen zijn geen transactiekoersen; kosten en spreads
-            zijn niet meegerekend.
+            . Dit zijn referentiekoersen. Je bank of wisselkantoor kan een
+            andere koers gebruiken en kosten rekenen.
           </p>
         </div>
       </section>
       <section className="market-next">
         <div>
-          <span className="eyebrow">MAAK HET PERSOONLIJK CONCREET</span>
+          <span className="eyebrow">ZELF EEN SCENARIO BEREKENEN</span>
           <h2>
-            Wat verandert een ander
+            Wat kan je inleg
             <br />
-            rendement aan jouw plan?
+            over tien of twintig jaar waard zijn?
           </h2>
         </div>
         <Link className="button yellow" href="/tools/rendement">
-          Onderzoek je scenario <ArrowRight size={18} />
+          Open de rendementcalculator <ArrowRight size={18} />
         </Link>
       </section>
       <Newsletter context="market" variant="compact" />

@@ -11,6 +11,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 import { Chart, NumberField, eur } from './widgets';
 import { CompareResult } from './compare-result';
+import Link from './site-link';
 import { AnimatedNumber } from './motion';
 import { downloadRows } from './calculations';
 import {
@@ -57,7 +58,7 @@ export function ScenarioTool({ slug }: { slug: string }) {
     isInflation || isDividend ? `${i} jaar` : `${i} mnd`,
   );
   const explanation = isInflation
-    ? 'We delen het nominale bedrag door de samengestelde inflatiefactor. De koopkracht wordt uitgedrukt in euro’s van nu. Het bedrag ontvangt in dit model geen rente of rendement.'
+    ? 'De berekening laat zien hoeveel je later met dit bedrag kunt kopen, uitgedrukt in euro’s van nu. We rekenen elk jaar met het ingevulde inflatiepercentage. Het bedrag op de rekening blijft in dit model gelijk: er komt geen rente of rendement bij.'
     : isDividend
       ? 'Dividend wordt jaarlijks berekend over het vermogen aan het begin van het jaar. Koersgroei is exclusief dividend. Bij herbeleggen wordt de uitkering aan het einde van het jaar opnieuw ingelegd; zonder herbeleggen blijft ontvangen dividend als renteloos geld meetellen. Beide scenario’s hebben hetzelfde startbedrag.'
       : 'Het volledige bedrag is op dag één beschikbaar. Bij gespreid instappen beleg je gelijke delen aan het begin van iedere maand. Nog niet belegd geld ontvangt de gekozen spaarrente. Ontvangen spaarrente blijft op de spaarrekening staan, ook na de instapperiode. Beide routes volgen dezelfde koersreeks. De drie koerspaden eindigen bij dezelfde marktwaarde; de timing van een daling verschilt. De daling is een illustratief scenario van 25%, geen voorspelling.';
@@ -65,7 +66,7 @@ export function ScenarioTool({ slug }: { slug: string }) {
     <>
       <div className={'calculator scenario-app scenario-' + slug}>
         <div className="calc-inputs" id="invoer">
-          <h2>Maak het jouw scenario</h2>
+          <h2>Vul je bedragen en aannames in</h2>
           <NumberField
             label="Beschikbaar bedrag (€)"
             value={amount}
@@ -143,7 +144,7 @@ export function ScenarioTool({ slug }: { slug: string }) {
             </>
           )}
           <p className="input-note">
-            Verander één aanname en kijk wat er verschuift.
+            Pas één waarde aan om te zien hoeveel de uitkomst verandert.
           </p>
         </div>
         <div className="calc-result" id="uitkomst">
@@ -183,7 +184,7 @@ export function ScenarioTool({ slug }: { slug: string }) {
               onValueChange={(v) => setPath(v as MarketPath)}
               className="scenario-tabs"
             >
-              <TabsList aria-label="Kies een koerspad">
+              <TabsList aria-label="Kies een koersverloop">
                 <TabsTrigger value="steady">Gelijkmatig</TabsTrigger>
                 <TabsTrigger value="early-drop">Vroege daling</TabsTrigger>
                 <TabsTrigger value="late-drop">Late daling</TabsTrigger>
@@ -195,7 +196,7 @@ export function ScenarioTool({ slug }: { slug: string }) {
             <span>
               <i />
               {isInflation
-                ? 'Nominaal bedrag'
+                ? 'Bedrag op de rekening'
                 : isDividend
                   ? 'Herbeleggen'
                   : 'Ineens beleggen'}
@@ -286,19 +287,19 @@ export function ScenarioTool({ slug }: { slug: string }) {
               ])
             }
           >
-            Download jouw scenario <ArrowDown size={17} />
+            Download berekening <ArrowDown size={17} />
           </button>
         </div>
       </div>
       <div className="scenario-reading">
         <div>
-          <span className="eyebrow">WAT ZEGT DIT?</span>
+          <span className="eyebrow">ZO WERKT DE BEREKENING</span>
           <h2>
             {isInflation
               ? 'Hetzelfde bedrag koopt niet altijd hetzelfde.'
               : isDividend
-                ? 'Herbeleggen geeft uitkeringen meer tijd.'
-                : 'Het pad telt, niet alleen het eindpunt.'}
+                ? 'Wat verandert er als je dividend herbelegt?'
+                : 'Waarom maakt het aankoopmoment verschil?'}
           </h2>
         </div>
         <div>
@@ -308,9 +309,9 @@ export function ScenarioTool({ slug }: { slug: string }) {
             veranderen rendementen, inflatie en uitkeringen. Vergelijk aannames;
             de uitkomst is geen persoonlijk advies.
           </p>
-          <span className="textlink">
-            Van uitkomst naar afweging <ArrowRight size={17} />
-          </span>
+          <Link className="textlink" href="#uitleg">
+            Lees de uitleg bij deze tool <ArrowRight size={17} />
+          </Link>
         </div>
       </div>
     </>

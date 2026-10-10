@@ -23,7 +23,7 @@ const topicIntroductions: Record<
       'Welke periode en definitie horen bij het cijfer?',
       'Is dit een eerste schatting of een herziening?',
       'Wat is feit en wat is mijn interpretatie?',
-      'Welke vraag roept dit op voor mijn plan?',
+      'Wat betekent dit cijfer voor de bedrijven of markten die ik volg?',
     ],
   },
   belasting: {
@@ -41,7 +41,7 @@ const topicIntroductions: Record<
   beginnen: {
     title: 'Beginnen met beleggen',
     summary:
-      'Een goede start begint bij je doel, je beschikbare geld en de tijd die je hebt. Begrijp eerst je keuzes en maak daarna pas een berekening of productvergelijking.',
+      'Wat koop je als je belegt, hoeveel risico loop je en welk geld kun je missen? Lees over buffers, beleggingsvormen, spreiding en kosten voordat je een product kiest.',
     tool: 'rendement',
     checklist: [
       'Wat is het doel van dit geld?',
@@ -53,7 +53,7 @@ const topicIntroductions: Record<
   etfs: {
     title: 'ETF’s begrijpen',
     summary:
-      'Een ETF is een fonds dat op de beurs wordt verhandeld. Kijk verder dan de naam: de index, inhoud, kosten en risico’s bepalen wat je werkelijk onderzoekt.',
+      'Een ETF is een fonds dat op de beurs wordt verhandeld. Lees wat een index doet, hoe spreiding werkt en welke kosten en risico’s je moet controleren.',
     tool: 'etf-kosten',
     checklist: [
       'Welke index en welke markt volgt het fonds?',
@@ -65,7 +65,7 @@ const topicIntroductions: Record<
   aandelen: {
     title: 'Aandelen & bedrijven',
     summary:
-      'Een aandeel is meer dan een koersgrafiek. Begrijp hoe het bedrijf geld verdient, wat er kan veranderen en welke verwachtingen in de prijs kunnen zitten.',
+      'Met een aandeel bezit je een klein deel van een bedrijf. Lees hoe omzet, winst, schuld en verwachtingen helpen om het bedrijf en de aandelenkoers te beoordelen.',
     tool: 'rendement',
     checklist: [
       'Waar verdient het bedrijf geld mee?',
@@ -101,7 +101,7 @@ const topicIntroductions: Record<
   portfolio: {
     title: 'Je portefeuille in overzicht',
     summary:
-      'Losse posities vormen samen één vermogen. Kijk naar hun gezamenlijke blootstelling, kosten en rol in je plan, niet alleen naar de namen in je app.',
+      'Je portefeuille is het geheel van je beleggingen. Lees hoe je de verdeling over bedrijven, sectoren en landen controleert en overlap en kosten herkent.',
     tool: 'etf-kosten',
     checklist: [
       'Welke risico’s komen in meerdere posities terug?',
@@ -123,9 +123,9 @@ const topicIntroductions: Record<
     ],
   },
   pensioen: {
-    title: 'Pensioen & later',
+    title: 'Hoe bouw je pensioen op?',
     summary:
-      'Begin bij je verwachte inkomsten en uitgaven voor later. Een losse vermogensberekening helpt een doel onderzoeken, maar is geen complete pensioenplanning.',
+      'Lees hoe AOW, pensioen via je werkgever en aanvullende opbouw samenhangen. Een vermogensberekening kan een doelbedrag verkennen, maar vervangt geen volledige pensioenberekening.',
     tool: 'doelvermogen',
     checklist: [
       'Welke inkomsten verwacht ik en vanaf wanneer?',

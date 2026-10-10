@@ -1,7 +1,7 @@
 .navigation-groups {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 .navigation-group {
   position: relative;
@@ -16,7 +16,8 @@
   justify-content: space-between;
   gap: 7px;
   min-height: 44px;
-  padding: 10px 9px;
+  padding: 10px 5px;
+  min-width: 30px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -27,7 +28,25 @@
   cursor: pointer;
   position: relative;
 }
-.navigation-trigger[data-current]::after {
+.navigation-label {
+  display: flex;
+  align-items: center;
+}
+.site-header nav .navigation-hub,
+.navigation-hub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  border-radius: 8px;
+}
+.navigation-hub:hover {
+  background: #eaf0f7;
+}
+.navigation-hub[data-current]::after {
   content: '';
   position: absolute;
   left: 9px;
@@ -126,26 +145,190 @@
   display: none;
 }
 .navigation-trigger:focus-visible,
+.navigation-hub:focus-visible,
 .navigation-dropdown a:focus-visible,
 .macro-event summary:focus-visible {
   outline: 3px solid #dfb500;
   outline-offset: 2px;
 }
+
+/* Concrete copy retains the existing Beurswatcher visual language. */
+.watch-hero h1 {
+  font-size: clamp(36px, 4.5vw, 70px);
+  letter-spacing: -0.045em;
+}
+/* Compact article entrances: one row on desktop, short cards on mobile. */
+.home-topic-grid {
+  display: grid;
+  gap: 12px;
+}
+.home-topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  background: #fff;
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    background 0.2s;
+}
+.home-topic-number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #64809e;
+  font-size: 12px;
+}
+.home-topic-card h3 {
+  margin: 0;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+.home-topic-card > p {
+  margin: 0;
+  font-size: 15px;
+  color: #56718e;
+  line-height: 1.6;
+}
+.home-topic-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.home-topic-action svg {
+  flex-shrink: 0;
+}
+.home-topic-card:hover {
+  background: #f4f7fb;
+  border-color: #91a9c4;
+  transform: translateY(-3px);
+}
+.home-topic-card:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+@media (min-width: 760px) {
+  .home-topic-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-topic-card {
+    transition: none;
+  }
+  .home-topic-card:hover {
+    transform: none;
+  }
+}
+@media (max-width: 600px) {
+  .personal-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .personal-hero > div,
+  .fx-section > div {
+    min-width: 0;
+  }
+  .personal-hero h1 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .fx-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fx-status {
+    flex-wrap: wrap;
+  }
+  .fx-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fx-grid > div {
+    min-width: 0;
+  }
+  .fx-grid strong {
+    font-size: clamp(20px, 6vw, 28px);
+  }
+  .watch-hero h1 {
+    font-size: clamp(32px, 8.7vw, 46px);
+  }
+}
 .navigation-mobile {
   display: block;
   width: 100%;
+}
+.mobile-secondary-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 4px;
+}
+.mobile-nav .mobile-secondary-links a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 9px;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid #d4dfec;
+  border-radius: 12px;
+  background: #fff;
+  color: #123b66;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.mobile-secondary-links svg { flex-shrink: 0; color: #607e9d; }
+.mobile-nav .mobile-secondary-links a:hover,
+.mobile-nav .mobile-secondary-links a[aria-current='page'] {
+  background: #eaf1f9;
+  border-color: #95abc4;
+}
+.mobile-nav .mobile-secondary-links a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.mobile-nav .mobile-business {
+  align-items: center;
+  min-height: 50px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 650;
 }
 .navigation-mobile .navigation-group {
   border-bottom: 1px solid #d8e2ed;
 }
 .navigation-mobile .navigation-trigger {
-  width: 100%;
+  width: 52px;
+  flex-shrink: 0;
+  justify-content: center;
   min-height: 60px;
-  padding: 16px 8px;
+  padding: 16px;
   font-size: 20px;
   text-align: left;
 }
-.navigation-mobile .navigation-trigger[data-current]::after {
+.navigation-mobile .navigation-hub {
+  flex: 1;
+  min-height: 60px;
+  padding: 16px 8px;
+  font-size: 20px;
+}
+.navigation-mobile .navigation-hub[data-current]::after {
   right: auto;
   width: 28px;
 }
@@ -489,4 +672,66 @@
 .macro-feed-status summary:focus-visible {
   outline: 2px solid #0d315f;
   outline-offset: 4px;
+}
+
+/* The calendar fills the same two-column width as the market widgets. */
+.hub-agenda .macro-calendar {
+  width: 100%;
+  min-width: 0;
+}
+.mini-hub-heading > div > p {
+  margin: 12px 0 0;
+  color: #607995;
+  font-size: 16px;
+  line-height: 1.6;
+}
+@media (min-width: 900px) {
+  .hub-agenda .macro-compact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px 24px;
+  }
+  .hub-agenda .macro-title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .hub-agenda .macro-title h2 {
+    margin: 10px 0;
+  }
+  .hub-agenda .macro-title > p {
+    margin: 0;
+  }
+  .hub-agenda .macro-compact > .textlink {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+  .hub-agenda .macro-events {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    align-items: start;
+  }
+  .hub-agenda .macro-event {
+    border: 1px solid #d3dfed;
+    border-radius: 12px;
+    background: #f8faff;
+    padding: 0 14px;
+  }
+  .hub-agenda .macro-event summary {
+    align-items: flex-start;
+  }
+  .hub-agenda .macro-event summary > svg {
+    margin-top: 18px;
+  }
+  .hub-agenda .macro-source-note,
+  .hub-agenda .macro-empty,
+  .hub-agenda .macro-count {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+  .hub-agenda .macro-source-note {
+    font-size: 11px;
+  }
 }

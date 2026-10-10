@@ -8,6 +8,8 @@ import {
   ArrowRight,
   Search,
   Menu,
+  Mail,
+  MessageCircle,
   X,
   Check,
   Share2,
@@ -86,7 +88,7 @@ function Article({ slug }: { slug: string }) {
         <h1>{a.title}</h1>
         <p className="dek">{a.intro}</p>
         <div className="article-meta">
-          <span className="mini-logo">BW.</span>Beurs Watcher{' '}
+          <span className="mini-logo">BW.</span>Beurswatcher{' '}
           <span>{a.read} min lezen</span>
           <button
             className="textlink"
@@ -150,7 +152,7 @@ function Article({ slug }: { slug: string }) {
         </article>
       </div>
       <section className="section">
-        <SectionTitle eyebrow="VERDER KIJKEN" title="Meer perspectief" />
+        <SectionTitle eyebrow="ARTIKELEN" title="Lees ook deze uitleg" />
         <div className="three-grid">
           {articles
             .filter((b) => b.slug !== slug)
@@ -180,9 +182,9 @@ function Contact() {
   return (
     <>
       <PageIntro
-        eyebrow="IN GESPREK"
-        title="Een vraag of een ander perspectief?"
-        text="Voor redactionele vragen, suggesties en gastbijdragen."
+        eyebrow="CONTACT"
+        title="Een vraag over Beurswatcher?"
+        text="Stuur een vraag over een artikel of tool, meld een fout of stel een onderwerp voor."
       />
       <ContactForm />
       <Link href="/zakelijk-samenwerken" className="business-text-link">
@@ -246,9 +248,9 @@ function Missing() {
   return (
     <>
       <PageIntro
-        eyebrow="404 · EVEN UIT KOERS"
+        eyebrow="404 · PAGINA NIET GEVONDEN"
         title="Deze pagina bestaat niet"
-        text="We helpen je weer op weg naar een nieuw inzicht."
+        text="Controleer het adres of zoek naar een artikel, onderwerp of tool."
       />
       <div className="actions">
         <Link href="/" className="button">
@@ -266,6 +268,7 @@ function Content({ path }: { path: string }) {
     root = parts[0],
     sub = parts[1];
   if (!root) return <Home />;
+  if (root === 'achter-de-website') return <WebsiteStory />;
   if (root === 'artikelen') return sub ? <Article slug={sub} /> : <Archive />;
   if (root === 'uitleg') return <GuidePage slug={sub} />;
   if (root === 'zoeken') return <SiteSearch />;
@@ -274,7 +277,7 @@ function Content({ path }: { path: string }) {
   if (root === 'tools') return <ToolsExperience slug={sub} />;
   if (root === 'markt') return <MarketExperience sub={sub} />;
   if (root === 'nieuwsbrief') return <NewsletterPage />;
-  if (root === 'events') return <EventsHub slug={sub} />;
+  if (root === 'events') return <EventsHub />;
   if (root === 'over') return <AboutPage />;
   if (root === 'zakelijk-samenwerken') return <BusinessPage />;
   if (root === 'contact') return <Contact />;
@@ -311,13 +314,13 @@ function Content({ path }: { path: string }) {
             komen. De Instagram-speler wordt geladen als je een Reel op deze
             website opent. Deze externe diensten ontvangen dan onder meer je
             IP-adres en browsergegevens en hanteren hun eigen
-            privacyvoorwaarden. De private hosting kan gegevens voor toegang en
+            privacyvoorwaarden. De hosting kan gegevens voor toegang en
             beveiliging verwerken.
           </p>
           <p>
-            Dit is een besloten concept. De verantwoordelijke bedrijfsgegevens,
-            definitieve bewaartermijnen en contactinformatie moeten vóór
-            publieke ingebruikname worden aangevuld.
+            Deze privacyinformatie is nog niet compleet. De verantwoordelijke
+            bedrijfsgegevens en bewaartermijnen moeten nog worden toegevoegd.
+            Voor vragen over je gegevens kun je het contactformulier gebruiken.
           </p>
           <Link href="/contact" className="textlink">
             Privacyverzoek sturen <ArrowRight size={17} />
@@ -332,15 +335,18 @@ function Content({ path }: { path: string }) {
         <div className="reading">
           <h2>Redactie</h2>
           <p>
-            Beurs Watcher is het beleggingsplatform van Daniel. De artikelen in
-            deze conceptversie zijn educatieve voorbeeldteksten. De markthub
-            toont dagelijkse indexreeksen en Amerikaanse marktbewegingen via
-            officiële TradingView-widgets, plus ECB-referentiekoersen, een
-            automatisch opgehaalde CBS- en BEA-planning, aangevuld met handmatig
-            gecontroleerde momenten van BLS en de Federal Reserve. De ticker,
-            radarkaart en aparte earningsvoorbeelden bevatten herkenbaar
-            gemarkeerde demonstratiegegevens. Bij de marktweergaven staan bron,
-            dekking en periode vermeld.
+            Beurswatcher biedt algemene uitleg en gratis financiële rekentools.
+            De verdiepingspagina’s en tooluitleg zijn algemene informatieve
+            teksten, niet Daniels persoonlijke analyses. De blogs met het label
+            ‘redactioneel voorbeeld’ wachten nog op zijn inhoudelijke
+            beoordeling. Het verhaal op de pagina Over mij is door Daniel
+            aangeleverd. De markthub toont dagelijkse indexreeksen en
+            Amerikaanse marktbewegingen via officiële TradingView-widgets, plus
+            ECB-referentiekoersen, een automatisch opgehaalde CBS- en
+            BEA-planning, aangevuld met handmatig gecontroleerde momenten van
+            BLS en de Federal Reserve. De koersenbalk en de voorbeeldkoers in de
+            homepagekaart bevatten herkenbaar gemarkeerde voorbeeldgegevens. Bij
+            de marktweergaven staan bron, dekking en periode vermeld.
           </p>
           <h2>Logo en Reels</h2>
           <p>
@@ -426,7 +432,6 @@ export default function Platform({ path }: { path: string }) {
       removeEventListener('keydown', closeOnEscape);
     };
   }, [mobile]);
-  if (path === '/achter-de-website') return <WebsiteStory />;
   return (
     <>
       <Link className="skip" href="#inhoud">
@@ -444,8 +449,8 @@ export default function Platform({ path }: { path: string }) {
         <Link aria-label="Zoeken" href="/zoeken">
           <Search size={20} />
         </Link>
-        <Link className="button small" href="/nieuwsbrief">
-          Nieuwsbrief <ArrowUpRight size={16} />
+        <Link className="button small" href="/tools">
+          Gratis tools <ArrowUpRight size={16} />
         </Link>
         <button
           className="menu-button"
@@ -468,12 +473,24 @@ export default function Platform({ path }: { path: string }) {
           style={{ top: menuTop, maxHeight: `calc(100dvh - ${menuTop}px)` }}
         >
           <Navigation path={path} mobile onNavigate={() => setMobile(false)} />
-          <Link href="/contact" onClick={() => setMobile(false)}>
-            Contact
-          </Link>
-          <Link href="/nieuwsbrief" onClick={() => setMobile(false)}>
-            Nieuwsbrief
-          </Link>
+          <div className="mobile-secondary-links">
+            <Link
+              href="/contact"
+              aria-current={path === '/contact' ? 'page' : undefined}
+              onClick={() => setMobile(false)}
+            >
+              <MessageCircle size={18} aria-hidden="true" />
+              Contact
+            </Link>
+            <Link
+              href="/nieuwsbrief"
+              aria-current={path === '/nieuwsbrief' ? 'page' : undefined}
+              onClick={() => setMobile(false)}
+            >
+              <Mail size={18} aria-hidden="true" />
+              Nieuwsbrief
+            </Link>
+          </div>
           <Link
             className="mobile-business"
             href="/zakelijk-samenwerken"
@@ -497,7 +514,7 @@ export default function Platform({ path }: { path: string }) {
             <p>
               Het heft in eigen handen nemen.
               <br />
-              Korte inzichten op Instagram. Meer verdieping hier.
+              Uitleg over geld en gratis rekentools.
             </p>
           </div>
           <div>
@@ -510,11 +527,12 @@ export default function Platform({ path }: { path: string }) {
             <h3>Praktisch</h3>
             <Link href="/tools">Rekentools</Link>
             <Link href="/markt/macro">Macro-agenda</Link>
-            <Link href="/markt/earnings">Earnings</Link>
+            <Link href="/markt/earnings">Bedrijfscijfers (voorbeeld)</Link>
+            <Link href="/events">Events</Link>
           </div>
           <div>
-            <h3>Beurs Watcher</h3>
-            <Link href="/over">Over Daniel</Link>
+            <h3>Beurswatcher</h3>
+            <Link href="/over">Over mij</Link>
             <Link href="/partners">Partners</Link>
             <Link href="/zakelijk-samenwerken">Zakelijk samenwerken</Link>
             <Link href="/contact">Contact</Link>
@@ -525,12 +543,12 @@ export default function Platform({ path }: { path: string }) {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 Beurs Watcher</span>
+          <span>© 2026 Beurswatcher</span>
           <span>Beleggen kent risico’s. Je kunt je inleg verliezen.</span>
           <Link href="/privacy">Privacy</Link>
           <Link href="/colofon">Colofon & bronnen</Link>
           <Link className="site-creator-credit" href="/achter-de-website">
-            Van idee naar platform · <strong>Sitesnit</strong>
+            Website door <strong>Sitesnit</strong>
             <ArrowUpRight size={13} aria-hidden="true" />
           </Link>
         </div>

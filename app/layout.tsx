@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { homeDescription, homeTitle, siteUrl } from './seo';
+import { SiteSchema } from './site-schema';
 import './globals.css';
 import './redesign.css';
 import './brand.css';
@@ -10,20 +12,23 @@ import './brand-direction.css';
 import './learning.css';
 import './site-credits.css';
 export const metadata: Metadata = {
-  metadataBase: new URL('https://beurswatcher.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Beurswatcher — Kijk verder. Kom verder.',
-    template: '%s | Beurs Watcher',
+    default: homeTitle,
+    template: '%s | Beurswatcher',
   },
-  description:
-    'Het digitale thuis van Beurswatcher. Begrijp de beurs, onderzoek je geldvragen en reken aan je toekomst met gratis tools.',
+  description: homeDescription,
+  publisher: 'Beurswatcher',
 };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nl">
-      <body>{children}</body>
+      <body>
+        <SiteSchema />
+        {children}
+      </body>
     </html>
   );
 }

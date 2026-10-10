@@ -15,9 +15,9 @@ export const articles = [
   {
     slug: 'verder-dan-de-koers',
     category: 'Markt',
-    title: 'Een koers vertelt wat er gebeurt. Maar nog niet waarom.',
+    title: 'Waarom stijgt of daalt een aandeel?',
     intro:
-      'Over verwachtingen, bedrijfswinsten en het verhaal achter de cijfers.',
+      'Lees waarom een koers kan dalen terwijl de winst stijgt, en welke cijfers helpen om dat te begrijpen.',
     image: '/amsterdam.jpg',
     read: 6,
     sections: [
@@ -42,9 +42,9 @@ export const articles = [
   {
     slug: 'halfgeleiders-meer-dan-ai',
     category: 'Aandelen',
-    title: 'Halfgeleiders: kijk verder dan het AI-verhaal.',
+    title: 'Hoe beoordeel je een bedrijf in de chipsector?',
     intro:
-      'Van orderboek tot investeringscyclus. Wat de chipsector werkelijk aandrijft.',
+      'Lees wat orders, klantinvesteringen en voorraden vertellen over een chipbedrijf.',
     image: '/wafer.jpg',
     read: 5,
     sections: [
@@ -65,7 +65,7 @@ export const articles = [
   {
     slug: 'wereld-etf-basis',
     category: 'ETF',
-    title: 'Eén wereld-ETF. Een wereld aan verschillen.',
+    title: 'Wat zit er in een wereld-ETF?',
     intro:
       'Wat je eigenlijk koopt als je wereldwijd belegt, en welke details ertoe doen.',
     read: 5,
@@ -87,9 +87,9 @@ export const articles = [
   {
     slug: 'rente-en-waardering',
     category: 'Macro',
-    title: 'Waarom rente zoveel meer is dan een percentage.',
+    title: 'Hoe beïnvloedt de rente de waarde van aandelen?',
     intro:
-      'De verbinding tussen centrale banken, waarderingen en jouw portefeuille.',
+      'Lees hoe rente invloed heeft op bedrijfsschulden en de waarde die beleggers aan toekomstige inkomsten geven.',
     read: 4,
     sections: [
       [
@@ -111,7 +111,7 @@ export const articles = [
     category: 'Dividend',
     title: 'Dividend is geen gratis geld. Wat is het dan wel?',
     intro:
-      'Waarom de uitkering alleen nooit het hele beleggingsverhaal vertelt.',
+      'Lees hoe dividend, koersontwikkeling en herbeleggen samen je resultaat bepalen.',
     read: 4,
     sections: [
       [
@@ -133,11 +133,11 @@ export const articles = [
     category: 'Strategie',
     title: 'Maak je beleggingsplan als de beurs rustig is.',
     intro:
-      'Een helder proces helpt wanneer de headlines steeds harder klinken.',
+      'Leg vast waarom je belegt, hoeveel verlies je kunt dragen en wanneer je je verdeling opnieuw bekijkt.',
     read: 4,
     sections: [
       [
-        'Begin bij de bestemming',
+        'Wanneer heb je het geld nodig?',
         'Een beleggingshorizon geeft richting aan je keuzes. Geld dat binnenkort nodig is, vraagt een andere afweging dan geld dat lange tijd kan blijven staan. Houd een buffer buiten je beleggingsplan.',
       ],
       [
@@ -153,8 +153,9 @@ export const articles = [
   {
     slug: 'pensioen-buiten-de-koers',
     category: 'Pensioen',
-    title: 'Je pensioen begint met overzicht.',
-    intro: 'Breng eerst je bestaande opbouw, doelen en looptijd in kaart.',
+    title: 'Hoe vind je terug welk pensioen je al hebt opgebouwd?',
+    intro:
+      'Lees welke informatie in je pensioenoverzicht staat en waarom het startmoment en de voorwaarden ertoe doen.',
     read: 4,
     sections: [
       [
@@ -174,10 +175,9 @@ export const articles = [
   {
     slug: 'portefeuille-in-overzicht',
     category: 'Portfolio',
-    title:
-      'Je beleggingen staan verspreid. Je overzicht hoeft dat niet te zijn.',
+    title: 'Hoe breng je beleggingen op verschillende rekeningen samen?',
     intro:
-      'Breng posities, verdeling en aannames bij elkaar voordat je opnieuw kiest.',
+      'Zet je beleggingen bij elkaar om de verdeling over bedrijven, sectoren en regio’s te bekijken.',
     read: 4,
     image: '',
     sections: [
@@ -223,17 +223,17 @@ export const toolItems = [
   {
     slug: 'rendement',
     title: 'Rendement calculator',
-    text: 'Ontdek wat jouw inleg en horizon kunnen betekenen.',
+    text: 'Bereken je eindbedrag bij een gekozen inleg, looptijd en rendement.',
   },
   {
     slug: 'etf-kosten',
     title: 'ETF-kosten vergelijken',
-    text: 'Een klein kostenverschil. Een groot effect op lange termijn.',
+    text: 'Bereken hoeveel verschil jaarlijkse fondskosten maken voor je eindbedrag.',
   },
   {
     slug: 'doelvermogen',
     title: 'Doelvermogen calculator',
-    text: 'Van een bedrag voor later naar je maandelijkse inleg.',
+    text: 'Bereken de maandelijkse inleg voor een gekozen eindbedrag.',
   },
   {
     slug: 'aflossen-of-beleggen',
@@ -243,27 +243,27 @@ export const toolItems = [
   {
     slug: 'box-3',
     title: 'Box 3 calculator',
-    text: 'Een heldere indicatie van je vermogensbelasting in 2026.',
+    text: 'Schat je belasting in box 3 met de voorlopige percentages voor 2026.',
   },
   {
     slug: 'compound-interest',
     title: 'Samengestelde rente',
-    text: 'Zie het effect van rendement op rendement.',
+    text: 'Bereken hoe een startbedrag verandert als de opbrengst steeds blijft staan.',
   },
   {
     slug: 'inflatie',
     title: 'Inflatie & koopkracht',
-    text: 'Ontdek wat hetzelfde bedrag later nog kan kopen.',
+    text: 'Bereken wat prijsstijgingen betekenen voor de koopkracht van je geld.',
   },
   {
     slug: 'lump-sum-dca',
     title: 'Ineens of gespreid beleggen',
-    text: 'Vergelijk instapmomenten bij verschillende koerspaden.',
+    text: 'Vergelijk een bedrag ineens beleggen met in delen inleggen, bij stijgende en dalende koersen.',
   },
   {
     slug: 'dividend',
     title: 'Dividend herbeleggen',
-    text: 'Bekijk uitkeren en herbeleggen naast elkaar.',
+    text: 'Vergelijk dividend apart houden met opnieuw beleggen in een rekenvoorbeeld.',
   },
 ];
 export const partners = [
@@ -271,7 +271,7 @@ export const partners = [
     slug: 'scalable-capital',
     name: 'Scalable Capital',
     category: 'Broker',
-    text: 'Voor het onderzoeken van zelfstandig beleggen en periodiek investeren.',
+    text: 'Zelf aandelen en ETF’s kiezen en op vaste momenten geld inleggen.',
     url: 'https://nl.scalable.capital/',
   },
   {
@@ -285,21 +285,21 @@ export const partners = [
     slug: 'brand-new-day',
     name: 'Brand New Day',
     category: 'Pensioenbeleggen',
-    text: 'Verdiep je in aanvullende pensioenopbouw en de bijbehorende voorwaarden.',
+    text: 'Lees hoe aanvullend pensioenbeleggen werkt en welke kosten en voorwaarden gelden.',
     url: 'https://new.brandnewday.nl/',
   },
   {
     slug: 'saxo',
     name: 'Saxo',
     category: 'Broker',
-    text: 'Onderzoek de mogelijkheden voor actieve en zakelijke beleggers.',
+    text: 'Lees over beleggingsrekeningen voor particulieren en bedrijven.',
     url: 'https://www.home.saxo/nl-nl',
   },
   {
     slug: 'american-express',
     name: 'American Express',
-    category: 'Reizen & rewards',
-    text: 'Verdiep je in kaartvoorwaarden, kosten en reisvoordelen.',
+    category: 'Reizen & kaartvoordelen',
+    text: 'Vergelijk kaartkosten, reisvoordelen en de voorwaarden voor gebruik.',
     url: 'https://www.americanexpress.com/nl/',
   },
 ];

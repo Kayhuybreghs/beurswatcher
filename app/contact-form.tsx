@@ -38,13 +38,17 @@ export function ContactForm({ business = false }: { business?: boolean }) {
     >
       <div className="form-heading">
         <span className="eyebrow">
-          {business ? 'LATEN WE KENNISMAKEN' : 'IN GESPREK'}
+          {business ? 'ZAKELIJK VOORSTEL' : 'CONTACTFORMULIER'}
         </span>
-        <h2>{business ? 'Wat heb je in gedachten?' : 'Vertel het ons.'}</h2>
+        <h2>
+          {business
+            ? 'Wat wil je voorstellen?'
+            : 'Stuur je vraag of suggestie.'}
+        </h2>
         <p>
           {business
             ? 'Een eerste idee is genoeg. Vertel over je merk, je doelgroep en wat je wilt bereiken.'
-            : 'Een vraag, suggestie of ander perspectief is welkom.'}
+            : 'Gaat je vraag over een artikel of tool? Vermeld de titel of het adres van de pagina.'}
         </p>
       </div>
       <div className="form-pair">

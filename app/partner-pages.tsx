@@ -6,7 +6,7 @@ import {
   ArrowLeft,
   Check,
   Minus,
-  ShieldCheck,
+  Info,
   Compass,
 } from 'lucide-react';
 import Link from './site-link';
@@ -49,14 +49,14 @@ export function PartnerVisual({ slug }: { slug: string }) {
           <span>
             Je eigen opbouw <ArrowUpRight />
           </span>
-          <b>Later begint nu.</b>
+          <b>Onderdelen van je pensioen.</b>
         </div>
       ) : slug === 'american-express' ? (
         <div className="travel-visual">
           <Compass size={58} />
           <span>JOUW VOLGENDE REIS</span>
           <b>Voordeel × gebruik</b>
-          <span>AFWEGEN BEGINT BIJ JE PLANNEN</span>
+          <span>VERGELIJK VOORDELEN EN KAARTKOSTEN</span>
         </div>
       ) : (
         <div className="plan-visual">
@@ -70,7 +70,9 @@ export function PartnerVisual({ slug }: { slug: string }) {
             ))}
           </div>
           <b>
-            {slug === 'saxo' ? 'Een eigen horizon.' : 'Elke maand een stap.'}
+            {slug === 'saxo'
+              ? 'Geld voor de lange termijn.'
+              : 'Periodiek geld inleggen.'}
           </b>
         </div>
       )}
@@ -86,7 +88,7 @@ export function PartnerPages({ slug }: { slug?: string }) {
     return (
       <>
         <Link href="/partners" className="back-link">
-          <ArrowLeft size={17} /> Alle samenwerkingen
+          <ArrowLeft size={17} /> Alle aanbieders
         </Link>
         <section className="service-hero">
           <div>
@@ -96,9 +98,11 @@ export function PartnerPages({ slug }: { slug?: string }) {
             <h1>{f.headline}</h1>
             <p>{f.description}</p>
             <Link className="button" href="#jouw-afweging">
-              Past dit bij jou? <ArrowRight size={18} />
+              Bekijk functies en kosten <ArrowRight size={18} />
             </Link>
-            <span className="service-label">Commerciële samenwerking</span>
+            <span className="service-label">
+              {url ? 'Commerciële link' : 'Productinformatie'}
+            </span>
           </div>
           <PartnerVisual slug={partner.slug} />
         </section>
@@ -113,8 +117,8 @@ export function PartnerPages({ slug }: { slug?: string }) {
         </div>
         <section className="service-detail" id="jouw-afweging">
           <div>
-            <span className="eyebrow">DE PRAKTISCHE WAARDE</span>
-            <h2>Wat heb je eraan?</h2>
+            <span className="eyebrow">FUNCTIES EN GEBRUIK</span>
+            <h2>Wat kun je met {partner.name}?</h2>
             <div className="service-benefits">
               {f.benefits.map((b, i) => (
                 <div key={b}>
@@ -137,9 +141,9 @@ export function PartnerPages({ slug }: { slug?: string }) {
             </div>
           </div>
           <aside className="service-decision">
-            <ShieldCheck size={25} />
+            <Info size={25} />
             <span className="eyebrow">KOSTEN EN VOORWAARDEN</span>
-            <h3>Wat neem je mee in je keuze?</h3>
+            <h3>Welke kosten betaal je?</h3>
             <p>{f.cost}</p>
             <Link
               href={url || f.source}
@@ -164,10 +168,9 @@ export function PartnerPages({ slug }: { slug?: string }) {
               Gecontroleerd op 9 september 2026. Tarieven kunnen veranderen.
             </small>
             <p className="disclosure">
-              Beurswatcher werkt commercieel samen met {partner.name}.{' '}
               {url
-                ? 'Bij een aanmelding via deze link kan Beurswatcher een vergoeding ontvangen.'
-                : 'Deze link leidt naar de officiële productinformatie.'}
+                ? 'Bij een aanmelding via deze commerciële link kan Beurswatcher een vergoeding ontvangen.'
+                : `De links verwijzen naar officiële productinformatie van ${partner.name}.`}
             </p>
           </aside>
         </section>

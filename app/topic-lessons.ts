@@ -115,7 +115,7 @@ export const topicLessons: Record<string, TopicLesson> = {
     sections: [
       [
         'Kijk naar het geheel achter de losse posities',
-        'Een portefeuille is de combinatie van je beleggingen. Om die te begrijpen, kijk je verder dan het aantal regels in je app. Een fonds kan veel bedrijven bevatten, terwijl verschillende fondsen juist dezelfde grootste posities delen.\n\nMaak een overzicht van de waarde per positie en bereken het percentage van het totaal. Bekijk vervolgens de onderliggende landen, sectoren, valuta en soorten beleggingen. Zo ontdek je of je werkelijk verschillende bronnen van risico hebt of vooral dezelfde blootstelling in meerdere verpakkingen.',
+        'Een portefeuille is de combinatie van je beleggingen. Iedere afzonderlijke belegging daarin heet een positie. Alleen het aantal beleggingen tellen zegt weinig over je spreiding. Een fonds kan veel bedrijven bevatten, terwijl verschillende fondsen juist dezelfde grootste posities delen.\n\nNoteer de waarde van iedere belegging en bereken welk percentage van het totaal die vormt. Bekijk daarna de landen, sectoren, valuta en soorten beleggingen in de fondsen. Zo zie je of je je geld werkelijk spreidt of via verschillende fondsen grotendeels in dezelfde bedrijven belegt.',
       ],
       [
         'Geef iedere positie een aantoonbare rol',
@@ -201,7 +201,7 @@ export const topicLessons: Record<string, TopicLesson> = {
         'Een stijging ten opzichte van vorige maand is een andere vergelijking dan een stijging ten opzichte van dezelfde maand vorig jaar. Een jaarcijfer kan afnemen doordat een uitzonderlijk hoge maand uit de vergelijking valt. De nieuwste maand hoeft dan niet ineens goedkoop te zijn geworden.\n\nSeizoenscorrectie probeert terugkerende patronen, zoals vakanties of jaarlijkse prijsmomenten, uit een reeks te halen. Vergelijk daarom dezelfde maatstaf en noteer welke definitie je gebruikt. Voor Nederland zijn CBS-publicaties een vertrekpunt; bij Amerikaanse inflatie en arbeidsmarktgegevens is dat onder meer het BLS.',
       ],
       [
-        'Van macrofeit naar een vraag over je plan',
+        'Wat betekent een economisch cijfer voor je beleggingen?',
         'Begin niet met de vraag welk aandeel je bij het volgende cijfer moet kopen. Onderzoek eerst welke aanname wordt geraakt: je koopkracht, de financieringslasten van een bedrijf of de tijd die je hebt om een doel te halen. Dat maakt het nieuws bruikbaar zonder dat ieder bericht een transactie wordt.\n\nBij een eigen analyse hoort een controleerbare redenering: dit is gepubliceerd, dit zou het kunnen betekenen, dit is nog onzeker. De macroagenda op Beurswatcher laat geselecteerde geplande momenten voor Nederland en de VS zien. CBS- en BEA-momenten worden automatisch opgehaald; aanvullende BLS- en Fed-momenten zijn herkenbaar handmatig gecontroleerd. Een geplande publicatie is nog geen uitslag.',
       ],
     ],
@@ -344,7 +344,7 @@ export const topicLessons: Record<string, TopicLesson> = {
         'Je kunt vooraf bepalen hoeveel je inlegt, welke kosten je accepteert en wanneer je je plan evalueert. Het toekomstige rendement kun je niet vastzetten door een percentage in een calculator te kiezen. Maak daarom ook een scenario met minder groei en een scenario waarin je tijdelijk minder kunt inleggen.\n\nBij kleine aankopen verdienen vaste kosten extra aandacht. € 2 kosten op € 50 inleg is 4% van dat bedrag; op € 500 is het 0,4%. Dat zegt niet welke aanbieder je moet kiezen, maar maakt duidelijk waarom de kostenstructuur bij je manier van inleggen moet passen.',
       ],
       [
-        'Van eerste aankoop naar een onderhoudbaar plan',
+        'Leg vast wat je koopt en wanneer je opnieuw kijkt',
         'Schrijf vóór een aankoop op wat je koopt, waarom het in je plan past en welke risico’s je begrijpt. Lees de productinformatie en de tarieven van de aanbieder. Controleer bij de toezichthouder of de aanbieder de benodigde vergunning heeft; toezicht garandeert geen rendement.\n\nSpreek daarna met jezelf af wanneer je opnieuw kijkt. Een verandering in je inkomen, doel of noodzakelijke uitgaven is een goede reden om je plan te heroverwegen. Een rood dagcijfer alleen geeft nog geen antwoord op de vraag of je oorspronkelijke reden veranderd is.',
       ],
     ],
@@ -401,7 +401,7 @@ export const topicLessons: Record<string, TopicLesson> = {
     sections: [
       [
         'De ETF is de verpakking, de inhoud bepaalt je risico',
-        'Een ETF bundelt beleggingen in een fonds waarvan je participaties op de beurs kunt verhandelen. Veel ETF’s volgen een index, maar er bestaan ook actief beheerde ETF’s. Een index legt volgens bepaalde regels vast welke beleggingen meetellen en hoe zwaar ze wegen.\n\nEen wereldwijd klinkende naam zegt niet dat ieder land vertegenwoordigd is. Een fonds kan ontwikkelde markten volgen en opkomende markten uitsluiten. Ook kleine ondernemingen kunnen ontbreken. Bekijk daarom de indexbeschrijving, landenverdeling en grootste posities voordat je twee fondsen als hetzelfde beschouwt.',
+        'Een ETF bundelt beleggingen in een fonds waarvan je delen op de beurs kunt kopen en verkopen. Veel ETF’s volgen een index, maar er bestaan ook actief beheerde ETF’s. Een index legt volgens bepaalde regels vast welke beleggingen meetellen en hoe zwaar ze wegen.\n\nEen wereldwijd klinkende naam zegt niet dat ieder land vertegenwoordigd is. Een fonds kan ontwikkelde markten volgen en opkomende markten uitsluiten. Ook kleine ondernemingen kunnen ontbreken. Bekijk daarom de indexbeschrijving, landenverdeling en grootste beleggingen voordat je twee fondsen als hetzelfde beschouwt.',
       ],
       [
         'Waarom honderden posities toch geconcentreerd kunnen zijn',
@@ -465,7 +465,7 @@ export const topicLessons: Record<string, TopicLesson> = {
   aandelen: {
     sections: [
       [
-        'Van aandeelhouder naar bedrijfsmodel',
+        'Hoe verdient het bedrijf zijn geld?',
         'Een aandeel vertegenwoordigt een belang in een onderneming. Je belegt daarmee in toekomstige bedrijfsresultaten tegen de prijs die je vandaag betaalt. Begin dus bij hoe het bedrijf geld verdient: wie zijn de klanten, waarvoor betalen zij en waarom kiezen zij voor dit bedrijf?\n\nEen eenmalige verkoop, terugkerend abonnement en omzet uit grondstoffen reageren anders op de economie. Onderzoek afhankelijkheid van grote klanten, leveranciers en vergunningen. Een herkenbaar merk is een nuttig startpunt, maar vertelt nog niet hoe winstgevend de onderneming is of hoe sterk haar positie blijft.',
       ],
       [
@@ -536,7 +536,7 @@ export const topicLessons: Record<string, TopicLesson> = {
   strategie: {
     sections: [
       [
-        'Maak van een ambitie een uitvoerbaar plan',
+        'Leg je doel, looptijd en inleg vast',
         '“Vermogen opbouwen” geeft richting, maar nog geen beslisregels. Een bruikbaar plan benoemt doel, tijd, inleg, gewenste beschikbaarheid en hoeveel onzekerheid je kunt dragen. Je financiële draagkracht en je gevoel bij schommelingen zijn niet altijd hetzelfde.\n\nIemand met een stabiel inkomen kan technisch ruimte hebben voor verlies en er toch slecht van slapen. Andersom kan iemand zich comfortabel voelen met risico terwijl het geld binnenkort nodig is. De verdeling moet passen bij beide kanten. Kies geen risiconiveau alleen omdat een calculator dan het gewenste eindbedrag laat zien.',
       ],
       [
@@ -751,7 +751,7 @@ export const topicLessons: Record<string, TopicLesson> = {
     sections: [
       [
         'Een hoog banksaldo is niet automatisch vrij vermogen',
-        'Op een zakelijke rekening kan geld staan dat nog nodig is voor belastingen, leveranciers, salarissen of een toekomstige investering. Een saldo is een momentopname. Om te bepalen wat langer beschikbaar is, heb je zicht nodig op wanneer ontvangsten en betalingen plaatsvinden.\n\nMaak een liquiditeitsbegroting per maand en neem ook rustige perioden mee. Een onderneming kan winstgevend zijn en toch tijdelijk geld tekortkomen doordat klanten later betalen. Beleggen met geld dat je nodig hebt om de bedrijfsvoering draaiende te houden, kan dat probleem juist vergroten.',
+        'Op een zakelijke rekening kan geld staan dat nog nodig is voor belastingen, leveranciers, salarissen of een toekomstige investering. Een saldo is een momentopname. Om te bepalen wat langer beschikbaar is, heb je zicht nodig op wanneer ontvangsten en betalingen plaatsvinden.\n\nMaak per maand een overzicht van het geld dat naar verwachting binnenkomt en uitgaat. Zo’n overzicht heet een liquiditeitsbegroting. Neem ook rustige perioden mee. Een onderneming kan winstgevend zijn en toch tijdelijk geld tekortkomen doordat klanten later betalen. Beleggen met geld dat je nodig hebt voor de gewone bedrijfsuitgaven kan dat probleem vergroten.',
       ],
       [
         'Winst en kasruimte beantwoorden verschillende vragen',
@@ -771,7 +771,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
     ],
     example: {
-      title: 'Van rekeningstand naar mogelijke ruimte',
+      title: 'Hoeveel blijft er over na reserves en betalingen?',
       body: 'Een fictieve onderneming heeft € 80.000 op de rekening. Daarvan is € 20.000 nodig voor belastingen, € 25.000 voor geplande betalingen en € 15.000 voor een bedrijfsbuffer. Er resteert € 20.000 om verder te onderzoeken. Dat is nog geen automatisch belegbaar bedrag: toekomstige kasstromen en tegenvallers moeten ook zijn bekeken.',
       figures: [
         ['€ 80.000', 'rekeningstand'],
@@ -838,7 +838,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
       [
         'Vergelijk het eerste jaar met de jaren erna',
-        'Maak twee overzichten: een startjaar met een eventuele bonus en een normaal vervolgjaar. Noteer per voordeel de voorwaarden, je verwachte gebruik en een conservatieve waarde. Trek de totale kosten af en vergelijk met een eenvoudiger alternatief.\n\nBeurswatcher maakt commerciële samenwerkingen zichtbaar. Een partnerlink bepaalt niet of een product voor jou past. Op deze onderwerp­pagina leer je de vergelijking maken; op een partnerpagina horen de specifieke productkenmerken en gecontroleerde voorwaarden. Persoonlijke ervaringen worden alleen toegevoegd als Daniel ze zelf aanlevert.',
+        'Maak twee overzichten: het eerste jaar met een eventuele bonus en een normaal jaar daarna. Noteer per voordeel de voorwaarden, je verwachte gebruik en wat je er zelf voor zou betalen. Trek de totale kosten af en vergelijk met een eenvoudiger alternatief.\n\nInformatie over commerciële samenwerkingen vind je bij de betreffende links. Op de partnerpagina’s lees je over functies, kosten en voorwaarden van de aanbieders. Gebruik die informatie voor je vergelijking en controleer de actuele voorwaarden bij de aanbieder voordat je een kaart aanvraagt.',
       ],
     ],
     example: {
@@ -851,7 +851,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
     },
     comparison: {
-      title: 'Van geadverteerd naar werkelijk voordeel',
+      title: 'Welke voordelen tellen mee in je vergelijking?',
       rows: [
         [
           'Welkomstbonus',

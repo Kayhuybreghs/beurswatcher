@@ -10,13 +10,28 @@ import {
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
-import { topics } from './data';
+import { topics, toolItems } from './data';
 import { learningLibrary } from './learning-library';
 import { topicContent } from './topic-content';
 import { linkedTopicText } from './topic-inline-links';
 import { guides } from './guide-data';
 import { Newsletter } from './widgets';
 import { TopicDirectory, TopicStories } from './topic-directory';
+
+const relatedTopics: Record<string, string[]> = {
+  'markt-economie': ['vermogen', 'aandelen'],
+  belasting: ['vermogen', 'pensioen'],
+  beginnen: ['etfs', 'strategie'],
+  etfs: ['portfolio', 'dividend'],
+  aandelen: ['dividend', 'portfolio'],
+  dividend: ['aandelen', 'etfs'],
+  strategie: ['portfolio', 'beginnen'],
+  portfolio: ['strategie', 'etfs'],
+  vermogen: ['belasting', 'pensioen'],
+  pensioen: ['belasting', 'vermogen'],
+  zakelijk: ['belasting', 'strategie'],
+  reizen: ['vermogen', 'beginnen'],
+};
 export function KnowledgeFigure({ topic = 'ETF' }: { topic?: string }) {
   return (
     <div
@@ -24,21 +39,21 @@ export function KnowledgeFigure({ topic = 'ETF' }: { topic?: string }) {
       aria-label={
         topic === 'ETF'
           ? 'Schematische illustratie: één ETF kan verschillende bedrijven, sectoren en regio’s bevatten. De verdeling hangt af van de gekozen index.'
-          : 'Een beleggingsplan verbindt je doel, horizon, spreiding en kosten.'
+          : 'Vier uitgangspunten voor beleggen: je doel, looptijd, risico en afspraken.'
       }
     >
       <div className="knowledge-figure-top">
         <span>
           {topic === 'ETF'
-            ? 'WAT ZIT ER IN JE MANDJE?'
-            : 'MAAK HET GROTERE PLAATJE ZICHTBAAR'}
+            ? 'WAT ZIT ER IN EEN ETF?'
+            : 'WAT LEG JE VAST VOORDAT JE BELEGT?'}
         </span>
         <Layers size={19} />
       </div>
       <div className="knowledge-tiles" aria-hidden="true">
         {(topic === 'ETF'
           ? ['Bedrijven', 'Sectoren', 'Regio’s', 'Jouw ETF']
-          : ['Je doel', 'Je horizon', 'Je risico', 'Je plan']
+          : ['Je doel', 'Je looptijd', 'Je risico', 'Je afspraken']
         ).map((x, i) => (
           <div key={x} className={'knowledge-tile tile-' + i}>
             <span>0{i + 1}</span>
@@ -50,7 +65,7 @@ export function KnowledgeFigure({ topic = 'ETF' }: { topic?: string }) {
       <p>
         {topic === 'ETF'
           ? 'De index bepaalt de inhoud. De naam vertelt niet alles.'
-          : 'Eerst begrijpen. Dan een keuze maken.'}
+          : 'Leg vast waarvoor je belegt, hoelang en wat je doet bij een daling.'}
       </p>
     </div>
   );
@@ -78,7 +93,7 @@ export function ArticleArchive({
           <span className="eyebrow">BEURSWATCHER / VERDIEPING</span>
           <h1>
             {search ? (
-              'Waar ben je nieuwsgierig naar?'
+              'Zoek financiële uitleg.'
             ) : (
               <>
                 De verdieping<span>.</span>
@@ -87,9 +102,8 @@ export function ArticleArchive({
           </h1>
         </div>
         <p>
-          Eigen verhalen. Meer achtergrond.
-          <br />
-          Betere vragen. Je eigen afweging.
+          Lees hoe beleggen, vermogen en pensioen werken. Kies een onderwerp
+          voor de basisuitleg of zoek hieronder een artikel.
         </p>
       </header>
       {!search && !topic && <TopicDirectory />}
@@ -126,7 +140,7 @@ export function ArticleArchive({
           <span>
             {filtered.length} {filtered.length === 1 ? 'artikel' : 'artikelen'}
           </span>
-          <span>Uitleg van Beurswatcher · voorbeeldblogs apart gemarkeerd</span>
+          <span>Algemene uitleg · voorbeeldblogs herken je aan het label</span>
         </div>
         {filtered.length ? (
           <div className="journal-grid">
@@ -164,7 +178,8 @@ export function ArticleArchive({
         ) : (
           <div className="empty">
             <BookOpen />
-            <h2>Hier hebben we nog geen verhaal over.</h2>
+            <h2>Geen artikelen gevonden.</h2>
+            <p>Probeer een ander zoekwoord of verwijder het onderwerpfilter.</p>
             <button
               className="button"
               onClick={() => {
@@ -184,6 +199,7 @@ export function ArticleArchive({
 export function InvestingHub({ sub }: { sub?: string }) {
   const topic = topics.find(([slug]) => slug === sub);
   const content = sub ? topicContent[sub] : undefined;
+  const tool = toolItems.find((item) => item.slug === content?.tool);
   if (topic && content)
     return (
       <>
@@ -202,15 +218,15 @@ export function InvestingHub({ sub }: { sub?: string }) {
             {content.example && (
               <a href="#praktijkvoorbeeld">02 Praktijkvoorbeeld</a>
             )}
-            <a href="#onderwerp-blogs">Verder lezen</a>
+            <a href="#onderwerp-blogs">Artikelen bij dit onderwerp</a>
             <a href="#onderwerp-vragen">Veelgestelde vragen</a>
           </div>
         </header>
         <section className="topic-foundation" id="begrijpen">
           <div className="topic-foundation-intro">
-            <span className="eyebrow">DE VERDIEPING IN</span>
-            <h2>Van begrip naar afweging.</h2>
-            <p>Lees het hele verhaal of begin bij jouw vraag.</p>
+            <span className="eyebrow">UITLEG PER ONDERDEEL</span>
+            <h2>Wat moet je hierover weten?</h2>
+            <p>Lees de uitleg van boven naar beneden of kies een onderdeel.</p>
             <nav
               className="topic-contents"
               aria-label="Inhoud van dit onderwerp"
@@ -253,7 +269,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
         </section>
         {content.example && (
           <section className="topic-worked-example" id="praktijkvoorbeeld">
-            <span className="eyebrow">ZO WORDT HET CONCREET</span>
+            <span className="eyebrow">PRAKTIJKVOORBEELD</span>
             <h2>{content.example.title}</h2>
             <p>{content.example.body}</p>
             <dl>
@@ -285,8 +301,8 @@ export function InvestingHub({ sub }: { sub?: string }) {
           </section>
         )}
         <section className="topic-checklist">
-          <span className="eyebrow">MAAK HET JOUW VRAAG</span>
-          <h2>Vier dingen om bij stil te staan.</h2>
+          <span className="eyebrow">CONTROLEER JE AANNAMES</span>
+          <h2>Vier vragen om jezelf te stellen.</h2>
           <ul>
             {content.checklist.map((q) => (
               <li key={q}>{q}</li>
@@ -296,15 +312,15 @@ export function InvestingHub({ sub }: { sub?: string }) {
         <TopicStories slug={sub!} />
         {sub !== 'reizen' && (
           <section className="topic-next-action" id="startpunt">
-            <span className="eyebrow">VAN UITLEG NAAR INZICHT</span>
-            <h2>Onderzoek je eigen scenario.</h2>
+            <span className="eyebrow">BIJPASSENDE REKENTOOL</span>
+            <h2>{tool?.title}.</h2>
             <p>
-              Begin met de uitleg en reken daarna met je eigen bedragen en
-              aannames.
+              Vul je eigen bedragen in en vergelijk de uitkomsten. De uitleg bij
+              de tool beschrijft de aannames en beperkingen.
             </p>
             <div>
               <Link className="button" href={'/tools/' + content.tool}>
-                Open de rekentool <ArrowRight size={18} />
+                Open {tool?.title.toLowerCase()} <ArrowRight size={18} />
               </Link>
               <Link
                 className="textlink"
@@ -312,14 +328,14 @@ export function InvestingHub({ sub }: { sub?: string }) {
                   '/uitleg/' + guides.find((g) => g.tool === content.tool)!.slug
                 }
               >
-                Lees eerst hoe het werkt <ArrowUpRight size={18} />
+                Lees de uitleg bij deze berekening <ArrowUpRight size={18} />
               </Link>
             </div>
           </section>
         )}
         <section className="guide-faq topic-faq" id="onderwerp-vragen">
           <span className="eyebrow">VEELGESTELDE VRAGEN</span>
-          <h2>Nog even dit.</h2>
+          <h2>Vragen over {topic[1].toLowerCase()}.</h2>
           {content.faq.map(([q, a]) => (
             <details key={q}>
               <summary>
@@ -335,7 +351,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
             className="topic-sources"
             aria-label="Bronnen bij dit onderwerp"
           >
-            <h2>Zelf verder controleren.</h2>
+            <h2>Bronnen bij deze uitleg.</h2>
             <p>
               Algemene uitleg van Beurswatcher. Onderstaande primaire bronnen
               helpen je begrippen en voorwaarden te controleren. Regels en
@@ -355,16 +371,12 @@ export function InvestingHub({ sub }: { sub?: string }) {
         )}
         <section className="topic-next-chapter" id="verder">
           <div>
-            <span className="eyebrow">HET VOLGENDE HOOFDSTUK</span>
-            <h2>Je plan hangt samen.</h2>
+            <span className="eyebrow">GERELATEERDE ONDERWERPEN</span>
+            <h2>Lees ook deze uitleg.</h2>
           </div>
           <div>
             {topics
-              .filter(
-                ([s]) =>
-                  s !== sub &&
-                  ['strategie', 'portfolio', 'pensioen'].includes(s),
-              )
+              .filter(([s]) => relatedTopics[sub!]?.includes(s))
               .slice(0, 2)
               .map(([s, name]) => (
                 <Link href={'/verdieping/' + s} key={s}>
@@ -381,26 +393,24 @@ export function InvestingHub({ sub }: { sub?: string }) {
     <>
       <section className="learn-hero">
         <div>
-          <span className="eyebrow">BEURSWATCHER / BELEGGEN</span>
+          <span className="eyebrow">BEURSWATCHER / VERDIEPING</span>
           <h1>
-            Je hoeft niet
+            Leer hoe beleggen werkt.
             <br />
-            alles te weten.
-            <br />
-            <em>Begin bij één vraag.</em>
+            <em>Begin bij de basis.</em>
           </h1>
           <p>
-            Een goed begin, een sterker plan of meer grip op je portefeuille.
-            Kies waar jij verder wilt kijken.
+            Lees over beleggingsvormen, risico, kosten en pensioen. Kies het
+            onderwerp dat aansluit bij je vraag.
           </p>
           <Link href="#kies-onderwerp" className="button yellow">
-            Vind jouw startpunt <ArrowRight size={18} />
+            Bekijk alle onderwerpen <ArrowRight size={18} />
           </Link>
         </div>
         <div className="learn-compass">
           <span>WAT WIL JIJ BEGRIJPEN?</span>
           {[
-            ['01', 'Hoe begin ik?', 'strategie'],
+            ['01', 'Hoe begin ik met beleggen?', 'beginnen'],
             ['02', 'Wat koop ik eigenlijk?', 'etfs'],
             ['03', 'Hoe bouw ik aan later?', 'pensioen'],
           ].map(([n, h, s]) => (
@@ -410,7 +420,9 @@ export function InvestingHub({ sub }: { sub?: string }) {
               <ArrowUpRight size={21} />
             </Link>
           ))}
-          <small>Van de eerste vraag naar een bewuste keuze.</small>
+          <small>
+            Algemene uitleg, met voorbeelden en veelgestelde vragen.
+          </small>
         </div>
       </section>
       <div id="kies-onderwerp">
@@ -421,16 +433,16 @@ export function InvestingHub({ sub }: { sub?: string }) {
         <div>
           <span className="eyebrow">ÉÉN ONDERWERP UITGELICHT</span>
           <h2>
-            Je ETF verdient
+            Wat zit er
             <br />
-            een tweede blik.
+            in een ETF?
           </h2>
           <p>
-            Wereldwijd klinkt breed. Maar waar beleg je eigenlijk in? Ontdek de
-            vragen achter het fonds.
+            De index bepaalt in welke bedrijven een ETF belegt. Lees hoe je
+            spreiding, overlap en fondskosten kunt beoordelen.
           </p>
           <Link className="button" href="/verdieping/etfs">
-            Begin met ETF’s <ArrowRight size={18} />
+            Lees de uitleg over ETF’s <ArrowRight size={18} />
           </Link>
         </div>
       </section>

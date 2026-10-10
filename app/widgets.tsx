@@ -762,29 +762,29 @@ export function Newsletter({
 }) {
   const content: Record<string, [string, string, string]> = {
     general: [
-      'DE WEEK ZONDER RUIS',
-      'Een beter perspectief. Elke week.',
-      'Marktcontext, nieuwe analyses en handige tools voor jouw volgende stap.',
+      'NIEUWSBRIEF IN VOORBEREIDING',
+      'Artikelen en tools straks per e-mail.',
+      'Meld je aan voor de toekomstige nieuwsbrief over beleggen en geldzaken. Er worden nu nog geen e-mails verstuurd.',
     ],
     market: [
-      'DE BEURSWEEK VOOR JE UIT',
-      'Weet wat er aankomt.',
-      'Macrodata, opvallende earnings en de ontwikkelingen die de komende beursweek kunnen bepalen.',
+      'NIEUWSBRIEF IN VOORBEREIDING',
+      'Meer uitleg over de economie.',
+      'De toekomstige nieuwsbrief bevat uitleg en artikelen van Beurswatcher. Je kunt je alvast aanmelden; de verzending is nog niet gestart.',
     ],
     tools: [
-      'BLIJF JE KEUZES ONDERZOEKEN',
-      'Meer grip op je aannames.',
-      'Nieuwe rekentools en verdiepende uitleg om je beleggingsplan aan te scherpen.',
+      'NIEUWSBRIEF IN VOORBEREIDING',
+      'Uitleg bij financiële berekeningen.',
+      'Meld je aan voor toekomstige artikelen en tooluitleg per e-mail. Er worden nu nog geen e-mails verstuurd.',
     ],
     education: [
-      'BLIJF JE VERDIEPEN',
-      'Een inzicht verder.',
-      'Artikelen die verder gaan dan de koers. Van spreiding en kosten tot je lange termijn.',
+      'NIEUWSBRIEF IN VOORBEREIDING',
+      'Artikelen over beleggen en geldzaken.',
+      'Meld je alvast aan voor de toekomstige nieuwsbrief van Beurswatcher. De verzending is nog niet gestart.',
     ],
     events: [
-      'ALS EERSTE OP DE HOOGTE',
-      'Blijf ook buiten je feed betrokken.',
-      'Ontvang nieuwe inzichten en hoor over toekomstige bijeenkomsten van Beurswatcher.',
+      'NIEUWSBRIEF IN VOORBEREIDING',
+      'Nieuws van Beurswatcher per e-mail.',
+      'Je kunt je alvast aanmelden voor de toekomstige nieuwsbrief. Er worden nu nog geen e-mails verstuurd.',
     ],
   };
   const copy = content[context] || content.general;
@@ -1028,7 +1028,7 @@ export function Calculator({ slug }: { slug: string }) {
     <>
       <div className="calculator">
         <div className="calc-inputs" id="invoer">
-          <h2>Jouw uitgangspunten</h2>
+          <h2>Vul je bedragen en aannames in</h2>
           {box ? (
             <>
               <NumberField
@@ -1254,13 +1254,13 @@ export function Calculator({ slug }: { slug: string }) {
         ) : (
           <>
             <p>
-              Het model rekent met een constant effectief jaarrendement. Voor
-              maandelijkse inleg wordt dit omgerekend naar een maandrendement;
-              de inleg vindt aan het einde van iedere maand plaats. De
-              hoofduitkomst is nominaal. De aparte koopkrachtuitkomst corrigeert
-              voor jouw gekozen inflatie. Kosten en belastingen zijn niet
-              verwerkt, behalve de expliciet ingevulde belastingdruk in de
-              vergelijking met aflossen.
+              De berekening gebruikt elk jaar hetzelfde rendementspercentage.
+              Voor maandelijkse inleg rekenen we dit om naar een
+              maandpercentage. Je inleg telt mee aan het einde van iedere maand.
+              De hoofduitkomst is het berekende geldbedrag. De aparte
+              koopkrachtuitkomst laat zien wat dat bedrag waard is na de gekozen
+              inflatie. Kosten en belastingen zijn niet verwerkt, behalve de
+              ingevulde belastingdruk in de vergelijking met aflossen.
             </p>
             {compare ? (
               <p>
@@ -1269,9 +1269,10 @@ export function Calculator({ slug }: { slug: string }) {
                 een vereenvoudigd vermogensscenario, geen
                 hypotheekaflossingsschema. Boeterente, renteaftrek, resterende
                 schuld en beschikbaarheid van geld zijn niet meegenomen. De
-                ingevulde belastingdruk is een eenvoudige jaarlijkse
-                rendementsaftrek, geen fiscale berekening. De lagere en hogere
-                scenario’s zijn gevoeligheidsanalyses, geen kansen of garanties.
+                ingevulde belastingdruk wordt ieder jaar van het
+                rendementspercentage afgetrokken. Dat is geen persoonlijke
+                belastingberekening. De lagere en hogere scenario’s laten zien
+                wat een ander rendement doet, niet hoe waarschijnlijk het is.
                 Beleggen kent koersrisico; aflossen vermindert je schuld.
               </p>
             ) : (
@@ -1284,8 +1285,9 @@ export function Calculator({ slug }: { slug: string }) {
           </>
         )}
         <p>
-          <Link href="/artikelen/een-plan-voor-onrust" className="textlink">
-            Verder lezen: maak een plan voor onrust <ArrowRight size={16} />
+          <Link href="/verdieping/strategie" className="textlink">
+            Lees over risico, spreiding en je portefeuille{' '}
+            <ArrowRight size={16} />
           </Link>
         </p>
       </div>

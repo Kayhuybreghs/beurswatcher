@@ -5,7 +5,7 @@ import {
   ArrowUpRight,
   Plus,
   Minus,
-  ShieldCheck,
+  Info,
 } from 'lucide-react';
 import Link from './site-link';
 import { partners } from './data';
@@ -115,22 +115,23 @@ export function PartnerOverview() {
     <>
       <section className="partner-directory-hero">
         <div>
-          <span className="eyebrow">PARTNERS / DE MATCH MET JOUW PLAN</span>
+          <span className="eyebrow">PARTNERS / DIENSTEN UITGELEGD</span>
           <h1>
-            Een dienst is pas goed
+            Vergelijk diensten,
             <br />
-            <em>als je er iets aan hebt.</em>
+            <em>functies en kosten.</em>
           </h1>
           <p>
-            Vijf verschillende diensten. Ontdek wat ze doen, voor wie ze bedoeld
-            zijn en waar je op let.
+            Van beleggen en pensioen tot je portefeuille bijhouden en
+            reisvoordelen. Lees wat deze vijf aanbieders doen, wat het kost en
+            welke voorwaarden je moet controleren.
           </p>
         </div>
         <span className="partner-disclosure">
-          <ShieldCheck size={20} />
-          Commerciële samenwerkingen.
+          <Info size={20} />
+          Gebaseerd op productinformatie.
           <br />
-          Met de context erbij.
+          Controleer tarieven bij de aanbieder.
         </span>
       </section>
       <div className="partner-quicklook">
@@ -145,15 +146,15 @@ export function PartnerOverview() {
       </div>
       <section className="partner-walkthrough">
         <aside>
-          <span className="eyebrow">STAP VOOR STAP</span>
+          <span className="eyebrow">PER AANBIEDER</span>
           <h2>
-            Wat past bij
+            Wat kun je ermee
             <br />
-            jouw vraag?
+            en wat kost het?
           </h2>
           <p>
-            Scroll door de diensten of open zelf een bedrijf. De belangrijkste
-            informatie staat meteen bij elkaar.
+            Kies een aanbieder om functies, kosten en beperkingen te bekijken.
+            Op de detailpagina vind je de bronnen en meer uitleg.
           </p>
           <div className="partner-step-nav">
             {partners.map((p, i) => (
@@ -211,13 +212,13 @@ export function PartnerOverview() {
                       ))}
                     </ul>
                     <p>
-                      <b>Past bij:</b> {partnerDetails[p.slug].fit}
+                      <b>Interessant als:</b> {partnerDetails[p.slug].fit}
                     </p>
                     <p className="partner-cost-note">
-                      <b>Neem mee:</b> {f.cost}
+                      <b>Kosten:</b> {f.cost}
                     </p>
                     <Link className="button" href={'/partners/' + p.slug}>
-                      Bekijk de volledige afweging <ArrowUpRight size={17} />
+                      Lees meer over {p.name} <ArrowUpRight size={17} />
                     </Link>
                   </div>
                 </div>
@@ -229,7 +230,7 @@ export function PartnerOverview() {
       <section className="business-invite">
         <div>
           <span className="eyebrow">VOOR MERKEN EN BEDRIJVEN</span>
-          <h2>Ook iets waardevols toe te voegen?</h2>
+          <h2>Een samenwerking bespreken?</h2>
         </div>
         <Link href="/zakelijk-samenwerken" className="button yellow">
           Samenwerken met Beurswatcher <ArrowUpRight size={18} />

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { guides } from './guide-data';
 import { toolItems, topics, partners } from './data';
+import { siteUrl } from './site-config';
 export default function sitemap(): MetadataRoute.Sitemap {
   // Educational example articles await Daniel's own editorial content.
   const routes = [
@@ -19,7 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...topics.map(([s]) => 'verdieping/' + s),
     ...partners.map((p) => 'partners/' + p.slug),
   ];
-  return routes.map((path) => ({
-    url: 'https://beurswatcher.vercel.app/' + path,
+  // No invented modification dates: a deploy is not an editorial update.
+  return [...new Set(routes)].map((path) => ({
+    url: siteUrl + '/' + path,
   }));
 }

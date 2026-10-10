@@ -4,19 +4,17 @@ import {
   ArrowRight,
   ArrowUpRight,
   ArrowDown,
-  Camera as Instagram,
   Target,
   MoveUpRight,
 } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
-import { Chart, eur, Newsletter, ArticleCard } from './widgets';
-import { futureValue, markets, articles } from './data';
+import { Chart, eur, Newsletter } from './widgets';
+import { futureValue, markets } from './data';
 import { requiredMonthly, netOfFees } from './calculations';
 import { demoSeries } from './market-data';
-import { BrandMark, instagramUrl, AboutBeurswatcher } from './brand';
+import { BrandMark, AboutBeurswatcher } from './brand';
 import { AnimatedNumber } from './motion';
-import { EventTeaser } from './brand-events';
 import { ToolShelf } from './experience';
 import { ReelRail } from './reels';
 import { MarketMiniHub } from './market-hub';
@@ -29,37 +27,31 @@ export function BrandHero() {
       <div className="hero-orbit" aria-hidden="true" />
       <div className="watch-hero-copy">
         <span className="brand-kicker">
-          <span /> Voor de nieuwe generatie beleggers
+          <span /> Uitleg over geld. Gratis rekentools.
         </span>
         <h1>
-          Kijk verder.
+          Beleggen begrijpen.
           <br />
-          <span>Kom verder.</span>
+          <span>Zelf rekenen.</span>
         </h1>
         <p>
-          De beurs. Je geld. Jouw toekomst.
-          <br />
-          Neem het heft in eigen handen. Begrijp je keuzes en werk stap voor stap richting meer financiële vrijheid.
+          Lees hoe beleggen, pensioen en vermogen werken. Bereken zelf wat
+          inleg, rendement en kosten betekenen voor je geld. Gratis en zonder
+          account.
         </p>
         <div className="hero-actions">
-          <Link className="button yellow" href="#verhalen">
-            Ontdek de verhalen <ArrowDown size={19} />
+          <Link className="button yellow" href="/artikelen">
+            Lees de artikelen <ArrowRight size={19} />
           </Link>
-          <Link
-            href={instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="hero-instagram"
-          >
-            <Instagram size={19} /> Dagelijks op Instagram{' '}
-            <ArrowUpRight size={16} />
+          <Link href="/tools" className="hero-instagram">
+            Gebruik de gratis tools <ArrowRight size={16} />
           </Link>
         </div>
         <div className="hero-signature">
           <BrandMark />
           <span>
-            Beurswatcher. Voor bewuste beleggers.
-            <small>Korte inzichten op social. Meer diepgang hier.</small>
+            Het heft in eigen handen nemen.
+            <small>Met begrijpelijke uitleg en berekeningen.</small>
           </span>
         </div>
       </div>
@@ -68,13 +60,13 @@ export function BrandHero() {
         <div className="radar-board">
           <div className="radar-top">
             <span>
-              <i /> OP JOUW RADAR
+              <i /> WAT KUN JE HIER DOEN?
             </span>
             <MoveUpRight size={25} />
           </div>
           <Tabs value={focus} onValueChange={(v) => setFocus(String(v))}>
             <TabsList>
-              {['De beurs', 'Vermogen', 'Later'].map((v) => (
+              {['De beurs', 'Vermogen', 'Pensioen'].map((v) => (
                 <TabsTrigger key={v} value={v}>
                   {v}
                 </TabsTrigger>
@@ -84,14 +76,16 @@ export function BrandHero() {
           <div className="radar-content" key={focus}>
             {focus === 'Vermogen' ? (
               <>
-                <span className="radar-label">JE EERSTE</span>
+                <span className="radar-label">
+                  REKENVOORBEELD / EEN DOEL VAN
+                </span>
                 <strong className="radar-number">
                   € 100.000<span>→</span>
                 </strong>
                 <h2>
-                  Een groot doel.
+                  Hoeveel moet je
                   <br />
-                  Een concreet maandbedrag.
+                  per maand beleggen?
                 </h2>
                 <div className="radar-growth">
                   <Chart
@@ -109,7 +103,7 @@ export function BrandHero() {
                   Zonder kosten of belasting.
                 </p>
                 <Link className="radar-action" href="/tools/doelvermogen">
-                  Wat vraagt jouw doel? <ArrowRight size={20} />
+                  Bereken je maandelijkse inleg <ArrowRight size={20} />
                 </Link>
               </>
             ) : focus === 'De beurs' ? (
@@ -120,9 +114,9 @@ export function BrandHero() {
                   <small>+0,42%</small>
                 </strong>
                 <h2>
-                  De beweging zien.
+                  Bekijk indices,
                   <br />
-                  Het verhaal begrijpen.
+                  stijgers en dalers.
                 </h2>
                 <div className="radar-growth">
                   <Chart mini values={demoSeries('AEX', '1D')} />
@@ -131,22 +125,24 @@ export function BrandHero() {
                   Illustratieve gegevens. Geen live koersen.
                 </p>
                 <Link className="radar-action" href="/markt">
-                  Open je marktoverzicht <ArrowRight size={20} />
+                  Bekijk de marktinformatie <ArrowRight size={20} />
                 </Link>
               </>
             ) : (
               <>
-                <span className="radar-label">JOUW TOEKOMST</span>
+                <span className="radar-label">
+                  HOE IS JE PENSIOEN OPGEBOUWD?
+                </span>
                 <strong className="radar-number">
-                  Later
+                  3 delen
                   <span>
                     <Target size={40} />
                   </span>
                 </strong>
                 <h2>
-                  Begint met een
+                  AOW, je werkgever
                   <br />
-                  goed beeld van nu.
+                  en eigen aanvulling.
                 </h2>
                 <div className="pension-stack">
                   <span>
@@ -160,26 +156,26 @@ export function BrandHero() {
                   </span>
                 </div>
                 <p className="radar-note">
-                  Breng de onderdelen samen voordat je een bedrag of product
-                  kiest.
+                  Lees hoe deze onderdelen verschillen en waar je jouw
+                  opgebouwde pensioen kunt terugvinden.
                 </p>
                 <Link className="radar-action" href="/verdieping/pensioen">
-                  Krijg zicht op later <ArrowRight size={20} />
+                  Lees de uitleg over pensioen <ArrowRight size={20} />
                 </Link>
               </>
             )}
           </div>
         </div>
         <span className="radar-sticker">
-          ZELF ONDERZOEKEN
+          GRATIS TOOLS
           <br />
-          <b>begint hier ↗</b>
+          <b>zonder account ↗</b>
         </span>
       </div>
       <div className="hero-bottom">
-        <span>BEURSBEWEGING → INZICHT → JOUW VOLGENDE STAP</span>
+        <span>BELEGGEN · VERMOGEN · PENSIOEN · GELDZAKEN</span>
         <span>
-          Scroll om verder te kijken <ArrowDown size={15} />
+          Hieronder: uitleg en tools <ArrowDown size={15} />
         </span>
       </div>
     </section>
@@ -189,23 +185,23 @@ export function BrandHero() {
 const pathChapters = [
   {
     tag: '01 / BEGRIJPEN',
-    title: 'Je ziet een bedrag. Je krijgt een vraag.',
-    copy: 'Je eerste € 100.000 klinkt concreet. Maar hoeveel moet je eigenlijk inleggen, en hoeveel tijd wil je jezelf geven?',
-    action: 'Begin met een beleggingsplan',
-    href: '/artikelen/een-plan-voor-onrust',
+    title: 'Hoeveel moet je beleggen voor € 100.000?',
+    copy: 'Dit voorbeeld begint met € 10.000 en rekent twintig jaar door. Je uitkomst hangt af van inleg, looptijd en rendement. Rendement is onzeker.',
+    action: 'Lees hoe deze berekening werkt',
+    href: '/uitleg/honderdduizend-euro-opbouwen',
   },
   {
-    tag: '02 / ZELF ONDERZOEKEN',
-    title: 'Maak het jouw berekening.',
-    copy: 'Een doel krijgt betekenis als je de aannames kent. Pas startkapitaal, tijd en rendement aan en ontdek wat er verandert.',
-    action: 'Reken jouw doelvermogen door',
+    tag: '02 / BEREKENEN',
+    title: 'Wat vraagt dat per maand?',
+    copy: 'Bij 6% rendement per jaar is ongeveer € 150 per maand nodig. Vul in de tool je eigen bedragen en looptijd in en vergelijk de uitkomst.',
+    action: 'Bereken je maandelijkse inleg',
     href: '/tools/doelvermogen',
   },
   {
-    tag: '03 / BEWUST KIEZEN',
-    title: 'Dan pas: wat past bij je plan?',
-    copy: 'Een broker of andere dienst komt na je afwegingen. Onderzoek kosten, mogelijkheden en voorwaarden vanuit jouw manier van beleggen.',
-    action: 'Onderzoek wat kosten veranderen',
+    tag: '03 / KOSTEN VERGELIJKEN',
+    title: 'Wat houd je over na fondskosten?',
+    copy: 'Bij 1% jaarlijkse fondskosten houd je minder over dan bij 0,15%. Vergelijk het verschil bij dezelfde inleg en hetzelfde brutorendement.',
+    action: 'Vergelijk jaarlijkse fondskosten',
     href: '/tools/etf-kosten',
   },
 ];
@@ -299,13 +295,20 @@ export function WatchPath() {
   const [ready, setReady] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const pin = useRef<HTMLDivElement>(null);
-  const geometry = useRef({ unit: 600, top: 88 });
+  const geometry = useRef({ unit: 400, top: 88, active: false });
   const reduced = useRef(false);
   const stage = Math.min(2, Math.round(position));
 
   const goTo = (index: number, smooth = true) => {
     const area = track.current;
     if (!area) return;
+    if (!geometry.current.active) {
+      document.getElementById('plan-stap-' + index)?.scrollIntoView({
+        behavior: smooth && !reduced.current ? 'smooth' : 'instant',
+        block: 'start',
+      });
+      return;
+    }
     window.scrollTo({
       top:
         area.getBoundingClientRect().top +
@@ -322,42 +325,87 @@ export function WatchPath() {
     if (!area || !panel) return;
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     reduced.current = preference.matches;
-    setReady(true);
     let frame = 0;
-    const measure = () => {
+    const render = () => {
       frame = 0;
-      const header = document.querySelector('.site-header');
-      const top = (header?.getBoundingClientRect().height || 76) + 12;
-      const height = panel.getBoundingClientRect().height;
-      const unit = Math.max(420, window.innerHeight * 0.85, height * 0.7);
-      geometry.current = { unit, top };
-      area.style.setProperty('--story-unit', `${unit}px`);
-      area.style.height = `${height + unit * 2.6}px`;
+      const { unit, top, active } = geometry.current;
+      if (!active) {
+        panel.querySelectorAll<HTMLElement>('.story-panel').forEach((item) => {
+          const enter = reduced.current
+            ? 1
+            : Math.max(
+                0,
+                Math.min(
+                  1,
+                  (window.innerHeight - item.getBoundingClientRect().top) /
+                    (window.innerHeight * 0.45),
+                ),
+              );
+          item.style.setProperty('--story-enter', String(enter));
+        });
+        return;
+      }
       const raw = Math.max(
         0,
-        Math.min(2.6, (top - area.getBoundingClientRect().top) / unit),
+        Math.min(2, (top - area.getBoundingClientRect().top) / unit),
       );
       const step = Math.min(2, Math.floor(raw));
-      const fraction =
-        step < 2 ? Math.max(0, Math.min(1, (raw - step - 0.6) / 0.4)) : 0;
+      const fraction = Math.max(0, Math.min(1, (raw - step - 0.06) / 0.88));
       const blend = fraction * fraction * (3 - 2 * fraction);
-      // A short viewport or enlarged text gets reading space within every step.
-      // The page still scrolls normally; there is no nested scroll area or touch lock.
-      const overflow = Math.max(0, height + top + 12 - window.innerHeight);
-      const readingOffset =
-        overflow * Math.min(1, (raw - step) / 0.55) * (1 - blend);
-      area.style.setProperty('--story-top', `${top - readingOffset}px`);
-      setPosition(
-        reduced.current ? Math.min(2, Math.round(raw)) : step + blend,
-      );
-      area.style.setProperty('--story-progress', String(Math.min(1, raw / 2)));
+      setPosition(step + blend);
+      area.style.setProperty('--story-progress', String(raw / 2));
     };
     const update = () => {
-      if (!frame) frame = requestAnimationFrame(measure);
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+    const measure = () => {
+      const header = document.querySelector('.site-header');
+      const top = (header?.getBoundingClientRect().height || 76) + 12;
+      const panels = panel.querySelector<HTMLElement>('.story-panels')!;
+      const panelStyle = getComputedStyle(panels);
+      const height =
+        Math.max(
+          ...Array.from(panels.children, (child) => {
+            const item = child as HTMLElement;
+            const style = getComputedStyle(item);
+            let height =
+              item.offsetHeight -
+              parseFloat(style.paddingTop) -
+              parseFloat(style.borderTopWidth);
+            // The flowing fallback adds separators and a mobile step label.
+            // Exclude those when deciding whether the pinned layout fits.
+            if (window.innerWidth < 700) {
+              const label = item.querySelector<HTMLElement>('.section-kicker')!;
+              const labelStyle = getComputedStyle(label);
+              if (labelStyle.display !== 'none')
+                height -=
+                  label.offsetHeight +
+                  parseFloat(labelStyle.marginTop) +
+                  parseFloat(labelStyle.marginBottom);
+            }
+            return height;
+          }),
+        ) +
+        parseFloat(panelStyle.paddingTop) +
+        parseFloat(panelStyle.paddingBottom) +
+        panel.querySelector<HTMLElement>('.story-nav')!.offsetHeight +
+        panel.querySelector<HTMLElement>('.story-bottom')!.offsetHeight +
+        6;
+      const available = window.innerHeight - top - 16;
+      // Short screens and enlarged text stay in normal document flow. No content
+      // is hidden below a sticky frame, and reduced motion shows every step.
+      const active = !reduced.current && height <= available;
+      const unit = Math.max(280, Math.min(520, available * 0.7));
+      geometry.current = { unit, top, active };
+      setReady(active);
+      area.style.setProperty('--story-unit', `${unit}px`);
+      area.style.setProperty('--story-top', `${top}px`);
+      area.style.height = active ? `${height + unit * 2}px` : '';
+      update();
     };
     const motionChanged = () => {
       reduced.current = preference.matches;
-      update();
+      measure();
     };
     const onHash = () => {
       const match = location.hash.match(/^#plan-stap-([0-2])$/);
@@ -366,14 +414,16 @@ export function WatchPath() {
         goTo(Number(match[1]), false);
       }
     };
-    const resize = new ResizeObserver(update);
-    resize.observe(panel);
+    const resize = new ResizeObserver(measure);
+    panel
+      .querySelectorAll('.story-panel')
+      .forEach((item) => resize.observe(item));
     const header = document.querySelector('.site-header');
     if (header) resize.observe(header);
-    update();
+    measure();
     const initial = requestAnimationFrame(onHash);
     addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
+    addEventListener('resize', measure);
     addEventListener('hashchange', onHash);
     preference.addEventListener('change', motionChanged);
     return () => {
@@ -381,7 +431,7 @@ export function WatchPath() {
       cancelAnimationFrame(initial);
       resize.disconnect();
       removeEventListener('scroll', update);
-      removeEventListener('resize', update);
+      removeEventListener('resize', measure);
       removeEventListener('hashchange', onHash);
       preference.removeEventListener('change', motionChanged);
     };
@@ -393,39 +443,38 @@ export function WatchPath() {
       id="startpunt"
     >
       <div className="path-heading">
-        <span className="section-kicker">
-          VAN EEN INZICHT NAAR IETS VAN JOU
-        </span>
+        <span className="section-kicker">EEN BEREKENING IN DRIE STAPPEN</span>
         <h2>
-          Niet alleen scrollen.
+          Een doel van € 100.000.
           <br />
-          <span>Er iets mee doen.</span>
+          <span>Wat vraagt dat van je inleg?</span>
         </h2>
         <p>
-          Zo brengt Beurswatcher je van een goede vraag naar een doordachte
-          volgende stap.
+          Bekijk hoe startkapitaal, maandelijkse inleg en fondskosten samen de
+          uitkomst bepalen. Dit is een rekenvoorbeeld, geen voorspelling.
         </p>
       </div>
       <div className="story-track" ref={track}>
-        {pathChapters.map((chapter, index) => (
-          <span
-            key={chapter.tag}
-            id={'plan-stap-' + index}
-            className="story-marker"
-            style={{ top: `calc(var(--story-unit, 85svh) * ${index})` }}
-            aria-hidden="true"
-          />
-        ))}
+        {ready &&
+          pathChapters.map((chapter, index) => (
+            <span
+              key={chapter.tag}
+              id={'plan-stap-' + index}
+              className="story-marker"
+              style={{ top: `calc(var(--story-unit, 85svh) * ${index})` }}
+              aria-hidden="true"
+            />
+          ))}
         <div className="story-pin" ref={pin}>
           <nav
             className="story-nav"
-            aria-label="Van inzicht naar je eigen plan"
+            aria-label="Rekenvoorbeeld: doel, inleg en kosten"
           >
             {pathChapters.map((chapter, index) => (
               <a
                 key={chapter.tag}
                 href={'#plan-stap-' + index}
-                aria-current={stage === index ? 'step' : undefined}
+                aria-current={ready && stage === index ? 'step' : undefined}
                 onClick={(event) => {
                   event.preventDefault();
                   history.replaceState(null, '', '#plan-stap-' + index);
@@ -433,7 +482,7 @@ export function WatchPath() {
                 }}
               >
                 <span>0{index + 1}</span>
-                {['Begrijpen', 'Berekenen', 'Afwegen'][index]}
+                {['Je doel', 'Je inleg', 'De kosten'][index]}
               </a>
             ))}
           </nav>
@@ -443,15 +492,17 @@ export function WatchPath() {
               return (
                 <article
                   className={'story-panel story-panel-' + index}
+                  id={ready ? undefined : 'plan-stap-' + index}
                   key={chapter.tag}
                   aria-hidden={ready && stage !== index}
                   inert={ready && stage !== index}
                   style={
                     ready
                       ? {
-                          opacity: Math.max(0, 1 - distance),
-                          transform: `translateY(${(index - position) * 36}px) scale(${1 - Math.min(1, distance) * 0.025})`,
-                          visibility: distance >= 1 ? 'hidden' : 'visible',
+                          // Panels travel side by side: copy never cross-fades
+                          // over other copy, and movement follows the scroll.
+                          transform: `translateX(${(index - position) * 105}%)`,
+                          visibility: distance < 1 ? 'visible' : 'hidden',
                         }
                       : undefined
                   }
@@ -475,9 +526,9 @@ export function WatchPath() {
           <div className="story-bottom">
             <span>
               <ArrowDown size={15} />
-              Scroll om verder te kijken
+              Scroll door de berekening
             </span>
-            <span>0{stage + 1} / 03</span>
+            <span>{ready ? `0${stage + 1} / 03` : '3 stappen'}</span>
           </div>
           <div className="story-progress" aria-hidden="true">
             <span />
@@ -488,81 +539,96 @@ export function WatchPath() {
   );
 }
 
+const homeReading = [
+  {
+    category: 'BEGINNEN MET BELEGGEN',
+    title: 'Beginnen met beleggen',
+    text: 'Wat moet je weten over je buffer, spreiding en risico voordat je begint?',
+    href: '/verdieping/beginnen',
+    action: 'Lees de basis van beleggen',
+  },
+  {
+    category: 'ETF’S & KOSTEN',
+    title: 'Wat kosten ETF’s?',
+    text: 'Lees welke kosten meetellen en wat het verschil tussen 0,15% en 1% kan betekenen.',
+    href: '/uitleg/etf-kosten-lange-termijn',
+    action: 'Lees de uitleg over ETF-kosten',
+  },
+  {
+    category: 'PENSIOEN',
+    title: 'Hoe werkt je pensioen?',
+    text: 'AOW, pensioen via je werk en een eigen aanvulling. Wat is het verschil?',
+    href: '/verdieping/pensioen',
+    action: 'Lees de uitleg over pensioen',
+  },
+];
+
 export function BrandHome() {
   return (
     <>
       <BrandHero />
       <div className="brand-track">
-        <span>De beurs begrijpen</span>
+        <span>Beleggen uitgelegd</span>
         <i>✳</i>
-        <span>Je vermogen opbouwen</span>
+        <span>Inleg berekenen</span>
         <i>✳</i>
-        <span>Je eigen plan maken</span>
+        <span>Kosten vergelijken</span>
         <i>✳</i>
-        <span>Verder kijken</span>
+        <span>Pensioen begrijpen</span>
       </div>
-      <WatchPath />
-      <AboutBeurswatcher />
+      <section className="brand-insights home-reading" id="verhalen">
+        <div className="brand-section-head">
+          <div>
+            <span className="section-kicker">ARTIKELEN & UITLEG</span>
+            <h2>Waar wil je meer over weten?</h2>
+          </div>
+          <Link href="/artikelen" className="textlink">
+            Alle onderwerpen en artikelen <ArrowRight size={19} />
+          </Link>
+        </div>
+        <div className="home-topic-grid">
+          {homeReading.map((item, index) => (
+            <Link key={item.href} className="home-topic-card" href={item.href}>
+              <span className="home-topic-number">
+                0{index + 1} <ArrowUpRight size={19} />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <span className="home-topic-action">
+                {item.action} <ArrowRight size={18} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
       <section className="question-tools">
         <div className="brand-section-head">
           <div>
-            <span className="section-kicker">
-              GOEDE VRAGEN VERDIENEN EEN REKENTOOL
-            </span>
+            <span className="section-kicker">GRATIS TOOLS</span>
             <h2>
-              Wat als je het
+              Bereken je inleg.
               <br />
-              <span>zelf doorrekent?</span>
+              <span>Vergelijk de uitkomsten.</span>
             </h2>
           </div>
           <p>
-            Verander een aanname. Zie wat het doet.
+            Pas bedragen, looptijd en rendement aan.
             <br />
             Altijd gratis en zonder account.
           </p>
         </div>
         <ToolShelf limit={3} />
         <Link className="all-tools-link" href="/tools">
-          Ook aflossen, samengestelde rente of Box 3 onderzoeken?{' '}
+          Ook rekenen aan inflatie, dividend of Box 3?{' '}
           <span>
             Bekijk alle 9 tools <ArrowRight size={19} />
           </span>
         </Link>
       </section>
-      <section className="brand-insights" id="verhalen">
-        <div className="brand-section-head">
-          <div>
-            <span className="section-kicker">
-              ACHTER HET CIJFER ZIT EEN VERHAAL
-            </span>
-            <h2>Even verder kijken.</h2>
-          </div>
-          <Link href="/artikelen" className="textlink">
-            Alle inzichten <ArrowUpRight size={19} />
-          </Link>
-        </div>
-        <div className="insight-mosaic">
-          <div className="insight-feature">
-            <ArticleCard article={articles[1]} />
-          </div>
-          <div className="insight-color">
-            <span>HET ZIT IN DE DETAILS</span>
-            <ArticleCard article={articles[2]} compact />
-            <Link className="insight-tool-link" href="/tools/etf-kosten">
-              En wat doen kosten over 20 jaar? <ArrowRight size={19} />
-            </Link>
-          </div>
-          <div className="insight-short">
-            <ArticleCard article={articles[6]} compact />
-            <Link className="insight-tool-link" href="/tools/doelvermogen">
-              Reken je eigen doel door <ArrowRight size={19} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <WatchPath />
+      <AboutBeurswatcher />
       <ReelRail />
       <MarketMiniHub />
-      <EventTeaser />
       <Newsletter />
     </>
   );

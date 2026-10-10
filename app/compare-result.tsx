@@ -59,14 +59,15 @@ export function CompareResult({
             className="textlink"
             onClick={() => setSaved({ value, assumptions })}
           >
-            <RotateCcw size={13} /> Huidig scenario als basis nemen
+            <RotateCcw size={13} /> Vergelijk met de huidige uitkomst
           </button>
         </>
       ) : (
         <>
           <p>
-            Bewaar deze uitkomst. Pas daarna bijvoorbeeld je looptijd of inleg
-            aan en zie het verschil.
+            Bewaar deze uitkomst en pas daarna je invoer aan. Je ziet beide
+            bedragen en het verschil naast elkaar. De vergelijking blijft
+            bewaard totdat je de pagina verlaat of opnieuw laadt.
           </p>
           <button
             className="comparison-save"

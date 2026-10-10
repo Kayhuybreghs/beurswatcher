@@ -8,19 +8,26 @@ import { topicGroups } from './topic-directory';
 
 const sections = [
   {
+    title: 'Home',
+    href: '/',
+    description: 'Uitleg en gratis rekentools',
+    links: [['Home', '/']],
+  },
+  {
     title: 'Markt',
     href: '/markt',
+    description: 'Indices, stijgers, dalers en de macro-agenda',
     links: [
       ['Marktoverzicht', '/markt'],
       ['Macro-agenda · NL & VS', '/markt/macro'],
       ['Indices', '/markt#indices'],
-      ['Koersbewegingen', '/markt#bewegingen'],
-      ['Eigen verdieping', '/artikelen'],
+      ['Stijgers en dalers', '/markt#bewegingen'],
     ],
   },
   {
     title: 'Tools',
     href: '/tools',
+    description: 'Bereken en vergelijk financiële scenario’s',
     links: [
       ['Alle rekentools', '/tools'],
       ...toolItems.map((t) => [t.title, '/tools/' + t.slug]),
@@ -29,30 +36,31 @@ const sections = [
   {
     title: 'Verdieping',
     href: '/artikelen',
+    description: 'Uitleg over beleggen, pensioen en geldzaken',
     links: [
-      ['Alle blogs & onderwerpen', '/artikelen'],
+      ['Alle onderwerpen en artikelen', '/artikelen'],
       ...topicGroups.map((t) => [t.name, '/verdieping/' + t.slug]),
     ],
   },
   {
     title: 'Partners',
     href: '/partners',
+    description: 'Lees wat de verschillende diensten doen',
     links: [
-      ['Alle partners vergelijken', '/partners'],
+      ['Alle partners bekijken', '/partners'],
       ...partners.map((p) => [p.name, '/partners/' + p.slug]),
     ],
   },
   {
     title: 'Events',
     href: '/events',
-    links: [
-      ['Aankomende events', '/events'],
-      ['Beleggersborrel Utrecht', '/events/beleggersborrel-utrecht-2026'],
-    ],
+    description: 'Aankondigingen van bijeenkomsten',
+    links: [['Events', '/events']],
   },
   {
     title: 'Over mij',
     href: '/over',
+    description: 'Het verhaal achter Beurswatcher',
     links: [
       ['Achter Beurswatcher', '/over'],
       ['Het verhaal van Daniel', '/over#verhaal'],
@@ -109,10 +117,13 @@ export function Navigation({
         const expanded = open === section.title;
         const id = `${mobile ? 'mobile' : 'desktop'}-${section.title.replaceAll(' ', '-')}`;
         const current =
-          path.startsWith(section.href) ||
+          (section.href === '/'
+            ? path === '/'
+            : path.startsWith(section.href)) ||
           (section.title === 'Verdieping' &&
             (path.startsWith('/verdieping') || path.startsWith('/uitleg/')));
         const [overview, ...links] = section.links;
+        const hasSubmenu = links.length > 0;
         return (
           <fieldset
             className="navigation-group"
@@ -120,6 +131,7 @@ export function Navigation({
             key={section.title}
             onPointerEnter={(event) => {
               if (
+                hasSubmenu &&
                 !mobile &&
                 event.pointerType === 'mouse' &&
                 event.buttons === 0
@@ -141,16 +153,23 @@ export function Navigation({
             onKeyDown={(event) => {
               const group = event.currentTarget;
               const trigger = group.querySelector('button');
+              if (!trigger) return;
               if (event.key === 'Escape') {
+                if (!expanded) return;
+                event.preventDefault();
                 close();
-                trigger?.focus();
+                trigger.focus();
                 event.stopPropagation();
                 return;
               }
               if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
               event.preventDefault();
               cancelTimer();
-              if (!expanded || event.target === trigger) {
+              if (
+                !expanded ||
+                event.target === trigger ||
+                event.target === group.querySelector('.navigation-hub')
+              ) {
                 setOpen(section.title);
                 requestAnimationFrame(() => {
                   const targets = group.querySelectorAll<HTMLAnchorElement>(
@@ -180,23 +199,32 @@ export function Navigation({
             }}
           >
             <div className="navigation-label">
-              <button
-                type="button"
-                className="navigation-trigger"
+              <Link
+                className="navigation-hub"
+                href={section.href}
                 data-current={current || undefined}
-                aria-label={`${section.title} submenu`}
-                aria-expanded={expanded}
-                aria-controls={id}
-                onClick={() => {
-                  cancelTimer();
-                  setOpen(expanded ? null : section.title);
-                }}
+                aria-current={path === section.href ? 'page' : undefined}
+                onClick={navigate}
               >
-                <span>{section.title}</span>
-                <ChevronDown size={15} />
-              </button>
+                {section.title}
+              </Link>
+              {hasSubmenu && (
+                <button
+                  type="button"
+                  className="navigation-trigger"
+                  aria-label={`${section.title} submenu`}
+                  aria-expanded={expanded}
+                  aria-controls={id}
+                  onClick={() => {
+                    cancelTimer();
+                    setOpen(expanded ? null : section.title);
+                  }}
+                >
+                  <ChevronDown size={15} />
+                </button>
+              )}
             </div>
-            {expanded && (
+            {hasSubmenu && expanded && (
               <div
                 className={
                   'navigation-dropdown' +
@@ -204,9 +232,7 @@ export function Navigation({
                 }
                 id={id}
               >
-                <span className="eyebrow">
-                  ONTDEK {section.title.toUpperCase()}
-                </span>
+                <span className="eyebrow">{section.title.toUpperCase()}</span>
                 <Link
                   className="navigation-overview"
                   href={overview[1]}
@@ -214,7 +240,7 @@ export function Navigation({
                 >
                   <span>
                     {overview[0]}
-                    <small>Bekijk het overzicht</small>
+                    <small>{section.description}</small>
                   </span>
                   <ArrowUpRight size={19} />
                 </Link>

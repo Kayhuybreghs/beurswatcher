@@ -5,32 +5,21 @@ const aboutAccents =
 import {
   ArrowRight,
   ArrowUpRight,
-  ArrowLeft,
   Users,
   Camera,
   Mail,
   BookOpen,
   Sparkles,
-  MapPin,
-  Clock3,
   Layers,
   Radio,
 } from 'lucide-react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from '@/components/ui/accordion';
 import Link from './site-link';
-import { BrandMark, communityEvent, instagramUrl } from './brand';
-import { EventProgram, OnlineEventConcept } from './event-program';
+import { BrandMark, instagramUrl } from './brand';
 import { MarketDashboard } from './market-dashboard';
 import { BrandEvents } from './brand-events';
 import { ContactForm } from './contact-form';
 import { ReelRail } from './reels';
 import { Newsletter } from './widgets';
-export const eventSlug = 'beleggersborrel-utrecht-2026';
 export function BusinessPage() {
   return (
     <>
@@ -38,15 +27,14 @@ export function BusinessPage() {
         <div>
           <span className="eyebrow">BEURSWATCHER × JOUW MERK</span>
           <h1>
-            Bereik begint
+            Samenwerken met
             <br />
-            bij aandacht.
-            <br />
-            <em>Impact bij inhoud.</em>
+            <em>Beurswatcher.</em>
           </h1>
           <p>
-            Voor merken die iets waardevols toevoegen aan de wereld van
-            beleggen, vermogen en financiële keuzes.
+            Wil je als bedrijf uitleg geven over een financiële dienst of een
+            onderwerp rond beleggen, vermogen of pensioen? Bespreek je voorstel
+            met Beurswatcher.
           </p>
           <Link href="#samenwerking-bespreken" className="button yellow">
             Samenwerking bespreken <ArrowUpRight size={18} />
@@ -66,20 +54,20 @@ export function BusinessPage() {
           <span className="orbit-label orbit-events">
             <Users /> Ontmoetingen
           </span>
-          <span className="orbit-caption">EEN VERHAAL DAT VERDER GAAT</span>
+          <span className="orbit-caption">UITLEG VIA SOCIAL EN DE WEBSITE</span>
         </div>
       </section>
       <section className="business-audience">
         <span className="eyebrow">DE COMMUNITY</span>
         <h2>
-          Nieuwsgierig naar de beurs.
+          Voor lezers met vragen
           <br />
-          Bewust bezig met later.
+          over beleggen en geld.
         </h2>
         <p>
-          Beurswatcher richt zich op een nieuwe generatie beleggers. Mensen die
-          geldvragen willen begrijpen, hun eigen scenario’s onderzoeken en
-          afwegen welke keuzes bij hen passen.
+          Bezoekers lezen hier over beleggen, vermogen en pensioen. Met de
+          gratis tools rekenen zij zelf uit wat bijvoorbeeld inleg, looptijd en
+          kosten voor een financieel scenario betekenen.
         </p>
         <div>
           <span>Beleggen</span>
@@ -91,34 +79,34 @@ export function BusinessPage() {
       <section className="collab-formats">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">VORM VOLGT INHOUD</span>
-            <h2>Meer dan één contactmoment.</h2>
+            <span className="eyebrow">MOGELIJKE VORMEN</span>
+            <h2>Waarover kunnen we samenwerken?</h2>
           </div>
-          <p>Van een eerste vraag in de feed tot verdieping op de website.</p>
+          <p>Inhoud, vorm en publicatie spreken we per voorstel af.</p>
         </div>
         {[
           [
             '01',
             'Reels & social',
-            'Maak een onderwerp begrijpelijk met korte content die past bij de herkenbare stijl van Beurswatcher.',
+            'Korte video’s die een financieel begrip of de werking van een dienst uitleggen.',
             Camera,
           ],
           [
             '02',
             'Verdieping & tools',
-            'Verbind een relevant verhaal aan uitleg, een rekentool of een transparante partnerpagina.',
+            'Een informatieartikel of rekenvoorbeeld waarmee lezers een onderwerp beter kunnen begrijpen.',
             BookOpen,
           ],
           [
             '03',
-            'Events & ontmoeting',
-            'Verken hoe jouw expertise kan bijdragen aan een bijeenkomst of inhoudelijk gesprek.',
+            'Productuitleg',
+            'Uitleg over functies, kosten en beperkingen van een dienst, met herkenbare vermelding van de samenwerking.',
             Users,
           ],
           [
             '04',
             'Campagnes & maatwerk',
-            'Breng meerdere kanalen samen rond een onderwerp, met heldere afspraken over inhoud en samenwerking.',
+            'Een combinatie van publicaties op de website en Instagram, met vooraf afgesproken inhoud en planning.',
             Sparkles,
           ],
         ].map(([n, title, copy, Icon]) => {
@@ -135,16 +123,19 @@ export function BusinessPage() {
       </section>
       <section className="collab-process">
         <h2>
-          Eerst de match.
+          Zo bespreken we
           <br />
-          Dan het voorstel.
+          een samenwerking.
         </h2>
         <div>
           {[
-            ['Kennismaken', 'Wie wil je bereiken en wat voeg je toe?'],
             [
-              'Samen scherpstellen',
-              'We verkennen onderwerp, vorm en een passende plek.',
+              'Je voorstel',
+              'Welke dienst of welk onderwerp wil je toelichten, en voor welke lezers?',
+            ],
+            [
+              'Inhoud afstemmen',
+              'We bespreken welke uitleg nodig is en waar die op de website of Instagram past.',
             ],
             [
               'Heldere afspraken',
@@ -163,18 +154,18 @@ export function BusinessPage() {
       </section>
       <div className="business-contact">
         <div>
-          <span className="eyebrow">EEN GOED BEGIN</span>
+          <span className="eyebrow">EEN VOORSTEL INDIENEN</span>
           <h2>
-            Vertel ons
+            Beschrijf je bedrijf
             <br />
-            jouw idee.
+            en je voorstel.
           </h2>
           <p>
-            Een financiële dienst, fintech, app, event of relevant merk: we
-            beginnen bij wat de community eraan heeft.
+            Vermeld welk onderwerp je wilt uitleggen, voor wie het bedoeld is en
+            aan welke vorm je denkt.
           </p>
           <Link className="textlink" href="/partners">
-            Bekijk de huidige samenwerkingen <ArrowRight size={17} />
+            Bekijk de informatie over aanbieders <ArrowRight size={17} />
           </Link>
         </div>
         <ContactForm business />
@@ -182,137 +173,8 @@ export function BusinessPage() {
     </>
   );
 }
-export function EventsHub({ slug }: { slug?: string }) {
-  if (slug)
-    return (
-      <>
-        <Link className="back-link" href="/events">
-          <ArrowLeft size={17} /> Alle events
-        </Link>
-        <BrandEvents>
-          <EventProgram />
-          <section className="event-depth">
-            <div>
-              <span className="eyebrow">VOOR WIE?</span>
-              <h2>
-                Voor beleggers
-                <br />
-                met vragen.
-              </h2>
-              <p>
-                Kom voor nieuwe perspectieven, een gesprek over beleggen en
-                kennismaking met andere beleggers. Je neemt je eigen ervaring en
-                nieuwsgierigheid mee.
-              </p>
-              <div className="event-organizer">
-                <BrandMark />
-                <span>
-                  Een bijeenkomst gedeeld door
-                  <br />
-                  <b>Beurswatcher</b>
-                </span>
-              </div>
-            </div>
-            <div>
-              <span className="eyebrow">HANDIG OM TE WETEN</span>
-              <Accordion>
-                {[
-                  [
-                    'Wat staat er op het programma?',
-                    'Een ontmoeting met andere beleggers, een spreker van een grote broker en ruimte voor gesprek. Bekijk de ticketpagina voor de laatste programma-informatie.',
-                  ],
-                  [
-                    'Wat is inbegrepen?',
-                    'De officiële beschrijving noemt drankjes en borrelhapjes. Controleer de ticketvoorwaarden voor de precieze invulling.',
-                  ],
-                  [
-                    'Waar koop ik een ticket?',
-                    `Tickets worden aangeboden via de officiële Weeztix-pagina. De vermelde prijs is ${communityEvent.ticket}. Beschikbaarheid en voorwaarden vind je bij de ticketaanbieder.`,
-                  ],
-                  [
-                    'Waar en wanneer is het?',
-                    `${communityEvent.date}, ${communityEvent.time}. ${communityEvent.venue}, ${communityEvent.address}.`,
-                  ],
-                ].map(([q, a]) => (
-                  <AccordionItem key={q}>
-                    <AccordionTrigger>{q}</AccordionTrigger>
-                    <AccordionContent>{a}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-              <Link
-                className="button yellow"
-                href={communityEvent.ticketUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Bekijk de ticketpagina <ArrowUpRight size={18} />
-              </Link>
-            </div>
-          </section>
-        </BrandEvents>
-      </>
-    );
-  return (
-    <>
-      <header className="events-masthead">
-        <div>
-          <span className="eyebrow">BEURSWATCHER / EVENTS</span>
-          <h1>
-            Uit je feed.
-            <br />
-            <em>In goed gezelschap.</em>
-          </h1>
-        </div>
-        <p>
-          Ontmoet andere beleggers. Stel je vragen.
-          <br />
-          Kijk samen een stukje verder.
-        </p>
-      </header>
-      <section className="event-listing">
-        <div className="section-heading">
-          <h2>Op de agenda.</h2>
-          <span>Beurswatcher brengt beleggers samen</span>
-        </div>
-        <Link className="event-list-card" href={'/events/' + eventSlug}>
-          <div className="event-list-date">
-            <span>OKT</span>
-            <b>14</b>
-            <span>2026</span>
-          </div>
-          <div>
-            <span className="eyebrow">BELEGGERSBORREL / UTRECHT</span>
-            <h2>Een avond met andere perspectieven.</h2>
-            <p>
-              Een spreker, beleggers, drankjes en borrelhapjes. Ruimte voor jouw
-              vragen.
-            </p>
-            <div className="event-inline-facts">
-              <span>
-                <MapPin size={16} />
-                Winkel van Sinkel
-              </span>
-              <span>
-                <Clock3 size={16} />
-                {communityEvent.time}
-              </span>
-            </div>
-          </div>
-          <div className="event-list-action">
-            <span>{communityEvent.ticket}</span>
-            <b>
-              Bekijk het event <ArrowUpRight size={19} />
-            </b>
-            <small>Beschikbaarheid via Weeztix</small>
-          </div>
-        </Link>
-      </section>
-      <EventProgram />
-      <OnlineEventConcept />
-      <Newsletter context="events" variant="compact" />
-    </>
-  );
+export function EventsHub() {
+  return <BrandEvents />;
 }
 export function AboutPage() {
   return (
@@ -324,26 +186,22 @@ export function AboutPage() {
             Daniel.
             <br />
             <em>
-              De blik achter
+              De maker van
               <br />
-              de verrekijker.
+              Beurswatcher.
             </em>
           </h1>
           <p>
-            Ik ben Daniel Van Der Roest. Met Beurswatcher leg ik beleggen,
+            Ik ben Daniel van der Roest. Met Beurswatcher leg ik beleggen,
             vermogensgroei en financiële onderwerpen begrijpelijk en nuchter
             uit.
           </p>
           <div>
-            <Link
-              href="#daniel-in-je-feed"
-
-              className="button yellow"
-            >
-              Bekijk mijn verhalen <ArrowUpRight size={18} />
+            <Link href="#verhaal" className="button yellow">
+              Lees mijn verhaal <ArrowUpRight size={18} />
             </Link>
             <Link href="/contact" className="textlink">
-              Stel je vraag <ArrowRight size={17} />
+              Neem contact op <ArrowRight size={17} />
             </Link>
           </div>
         </div>
@@ -352,7 +210,7 @@ export function AboutPage() {
           <BrandMark />
           <div>
             <b>Daniel / Beurswatcher</b>
-            <span>Nieuwsgierig blijven. Verder kijken.</span>
+            <span>Het heft in eigen handen nemen.</span>
           </div>
         </div>
       </section>
@@ -360,30 +218,28 @@ export function AboutPage() {
         <Link href={instagramUrl} target="_blank" rel="noreferrer">
           <Camera />
           <span>01 / INSTAGRAM</span>
-          <h3>De eerste vraag.</h3>
-          <p>Korte verhalen die beleggen en geldkeuzes dichtbij brengen.</p>
+          <h3>Korte uitleg op Instagram.</h3>
+          <p>Video’s over beleggen, vermogen en geldzaken.</p>
           <ArrowUpRight size={19} />
         </Link>
         <Link href="/tools">
           <Layers />
-          <span>02 / DE WEBSITE</span>
-          <h3>Jouw eigen inzicht.</h3>
-          <p>Meer context, rekentools en ruimte om aannames te onderzoeken.</p>
+          <span>02 / GRATIS TOOLS</span>
+          <h3>Zelf bedragen berekenen.</h3>
+          <p>Bereken wat inleg, looptijd, rendement en kosten veranderen.</p>
           <ArrowUpRight size={19} />
         </Link>
-        <Link href="/events">
-          <Users />
-          <span>03 / ONTMOETINGEN</span>
-          <h3>Het goede gesprek.</h3>
-          <p>
-            Nieuwe perspectieven van mensen die met dezelfde vragen rondlopen.
-          </p>
+        <Link href="/artikelen">
+          <BookOpen />
+          <span>03 / VERDIEPING</span>
+          <h3>Lees de uitleg per onderwerp.</h3>
+          <p>Artikelen over onder meer ETF’s, pensioen, spreiding en kosten.</p>
           <ArrowUpRight size={19} />
         </Link>
       </section>
       <section className="about-story" id="verhaal">
         <div className="about-story-heading">
-          <span className="eyebrow">DE VRAAG ACHTER DE VERREKIJKER</span>
+          <span className="eyebrow">WAAROM IK BEURSWATCHER BEGON</span>
           <h2>
             Het heft in
             <br />
@@ -402,7 +258,7 @@ export function AboutPage() {
             </p>
           ))}
           <Link href="/tools" className="textlink">
-            Onderzoek jouw scenario <ArrowRight size={18} />
+            Bekijk de gratis rekentools <ArrowRight size={18} />
           </Link>
         </div>
       </section>
@@ -410,18 +266,18 @@ export function AboutPage() {
         {[
           [
             '01',
-            'Begrijp het verhaal',
-            'De context achter een bedrag is minstens zo interessant als het bedrag zelf.',
+            'Lees de uitleg',
+            'Lees hoe financiële begrippen werken, met voorbeelden en uitleg over risico’s.',
           ],
           [
             '02',
-            'Maak het concreet',
-            'Reken met je eigen aannames. Kijk hoe een andere horizon of inleg het beeld verandert.',
+            'Bereken je scenario',
+            'Vul bedragen en een looptijd in. Vergelijk wat een andere inleg of ander rendement doet.',
           ],
           [
             '03',
-            'Blijf afwegen',
-            'Een dienst is pas relevant als je begrijpt waarvoor die bedoeld is en wat de voorwaarden zijn.',
+            'Vergelijk kosten en voorwaarden',
+            'Lees wat een dienst biedt, welke kosten je betaalt en welke beperkingen gelden.',
           ],
         ].map(([n, h, p]) => (
           <article key={n}>
@@ -435,21 +291,20 @@ export function AboutPage() {
       <section className="about-transparency">
         <BrandMark />
         <div>
-          <span className="eyebrow">OPEN OVER SAMENWERKEN</span>
-          <h2>Ook de samenwerking hoort bij het verhaal.</h2>
+          <span className="eyebrow">UITLEG OVER AANBIEDERS</span>
+          <h2>Wat doen de diensten onder Partners?</h2>
           <p>
-            Beurswatcher werkt met commerciële partners. Je ziet bij de
-            betreffende inhoud en links wanneer een samenwerking speelt. De
-            context, kosten en aandachtspunten helpen je zelf afwegen.
+            Op de partnerpagina’s lees je welke functies een dienst biedt en
+            welke kosten en voorwaarden gelden. De bronnen staan erbij. Een
+            commerciële link herken je aan een vermelding bij de link.
           </p>
           <Link href="/partners" className="textlink">
-            Bekijk de samenwerkingen <ArrowRight size={17} />
+            Bekijk de aanbieders en hun diensten <ArrowRight size={17} />
           </Link>
         </div>
       </section>
       <Link className="business-text-link" href="/zakelijk-samenwerken">
-        Als merk iets toevoegen? Ontdek zakelijk samenwerken{' '}
-        <ArrowUpRight size={18} />
+        Voor bedrijven: samenwerken met Beurswatcher <ArrowUpRight size={18} />
       </Link>
     </>
   );
@@ -459,25 +314,26 @@ export function NewsletterPage() {
     <>
       <section className="newsletter-hero-v3">
         <div>
-          <span className="eyebrow">EEN MOMENT VOOR HET GROTERE PLAATJE</span>
+          <span className="eyebrow">BEURSWATCHER / NIEUWSBRIEF</span>
           <h1>
-            De beursweek.
+            De nieuwsbrief.
             <br />
-            <em>Zonder de ruis.</em>
+            <em>Nog niet gestart.</em>
           </h1>
           <p>
-            De belangrijkste onderwerpen, de week vooruit en nieuwe manieren om
-            je eigen geldvragen te onderzoeken.
+            Je kunt je e-mailadres achterlaten voor de toekomstige nieuwsbrief
+            van Beurswatcher. Er worden nu nog geen nieuwsbrieven verstuurd. Een
+            startdatum is nog niet bekend.
           </p>
           <Link href="#weekbrief" className="button yellow">
-            Zet mij op de lijst <ArrowRight size={18} />
+            Aanmelden voor de toekomstige nieuwsbrief <ArrowRight size={18} />
           </Link>
           <div className="newsletter-channel">
             <Camera size={18} />
-            Dagelijks op Instagram.
+            Uitleg op Instagram.
             <span />
             <Mail size={18} />
-            Overzicht in je inbox.
+            Nieuwsbrief in voorbereiding.
           </div>
         </div>
         <div className="letter-preview">
@@ -486,27 +342,27 @@ export function NewsletterPage() {
             <span>
               BEURSWATCHER
               <br />
-              DE WEEKBRIEF
+              DE NIEUWSBRIEF
             </span>
             <Mail />
           </div>
-          <span className="eyebrow">ZO IS DE BRIEF OPGEBOUWD</span>
+          <span className="eyebrow">BEOOGDE ONDERWERPEN</span>
           <h2>
-            Even uitzoomen.
+            Artikelen en tools,
             <br />
-            Dan weer vooruit.
+            bij elkaar in je inbox.
           </h2>
           {[
-            ['01', 'Dit doet ertoe', 'De ontwikkeling achter de koers.'],
+            ['01', 'Artikelen', 'Uitleg over beleggen, vermogen en pensioen.'],
             [
               '02',
-              'De week op de radar',
-              'Macro, earnings en relevante momenten.',
+              'Marktinformatie',
+              'Economische cijfers en toelichting op beursbewegingen.',
             ],
             [
               '03',
-              'Zelf verder kijken',
-              'Nieuwe uitleg, tools en Beurswatcher-content.',
+              'Gratis tools',
+              'Berekeningen en uitleg over de gebruikte aannames.',
             ],
           ].map(([n, h, p]) => (
             <div className="letter-row" key={n}>
@@ -522,24 +378,24 @@ export function NewsletterPage() {
       <div id="weekbrief" className="newsletter-signup">
         <Newsletter />
         <p className="signup-note">
-          Je meldt je aan voor de toekomstige weekbrief. E-mailverzending is nog
-          niet gestart. Je aanmelding kun je verwijderen via je persoonlijke
+          Je meldt je aan voor de toekomstige nieuwsbrief. E-mailverzending is
+          nog niet gestart. Je aanmelding kun je verwijderen via je persoonlijke
           afmeldlink.
         </p>
       </div>
       <section className="newsletter-meanwhile">
-        <h2>Tot die tijd al verder kijken?</h2>
+        <h2>Deze onderdelen kun je nu al gebruiken.</h2>
         <Link href="/markt">
           <Radio />
           Open het marktoverzicht <ArrowRight />
         </Link>
         <Link href="/tools">
           <Layers />
-          Onderzoek je eigen scenario <ArrowRight />
+          Bekijk de gratis tools <ArrowRight />
         </Link>
         <Link href={instagramUrl} target="_blank" rel="noreferrer">
           <Camera />
-          Bekijk de dagelijkse content <ArrowUpRight />
+          Bekijk Beurswatcher op Instagram <ArrowUpRight />
         </Link>
       </section>
     </>

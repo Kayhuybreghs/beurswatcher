@@ -3,6 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Activity } from 'lucide-react';
 import Link from './site-link';
 import { MacroCalendar } from './macro-calendar';
+import {
+  loadTradingViewOverview,
+  indexReferenceSymbols,
+} from './tradingview-overview';
 
 export function MarketWidget({
   kind = 'indices',
@@ -11,102 +15,92 @@ export function MarketWidget({
   kind?: 'indices' | 'movers';
   compact?: boolean;
 }) {
-  const host = useRef<HTMLDivElement>(null),
-    [state, setState] = useState('loading');
+  const host = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<'loading' | 'embedded' | 'error'>(
+    'loading',
+  );
+  const [attempt, setAttempt] = useState(0);
+
   useEffect(() => {
     const element = host.current;
     if (!element) return;
-    let script: HTMLScriptElement | undefined,
-      timer: ReturnType<typeof setTimeout> | undefined,
-      alive = true,
-      loaded = false;
-    const watchedFrames = new Set<HTMLIFrameElement>();
-    const frameLoaded = () => {
-      if (alive) {
-        loaded = true;
-        setState('ready');
+    let alive = true;
+    let started = false;
+    const widget = document.createElement('tv-market-overview');
+    widget.setAttribute('theme', 'light');
+    widget.setAttribute('transparent', '');
+    widget.setAttribute('time-frame', '12M');
+    widget.setAttribute('item-size', 'compact');
+    widget.setAttribute('chart-size', 'compact');
+    widget.setAttribute(
+      'aria-label',
+      kind === 'indices'
+        ? 'Indicatieve indexprijzen en koersgrafiek van TradingView'
+        : 'Amerikaanse stijgers, dalers en actieve aandelen van TradingView',
+    );
+    if (kind === 'indices') {
+      widget.setAttribute('mode', 'custom');
+      widget.setAttribute(
+        'symbol-sectors',
+        JSON.stringify([
+          {
+            sectionName: 'Indexreferenties (CFD)',
+            symbols: indexReferenceSymbols,
+          },
+        ]),
+      );
+    } else {
+      widget.setAttribute('mode', 'market-movers');
+      widget.setAttribute('exchange', 'US');
+      widget.setAttribute('assets-type', 'stocks');
+    }
+
+    const mount = async () => {
+      if (started) return;
+      started = true;
+      try {
+        await loadTradingViewOverview();
+        if (!alive) return;
+        element.appendChild(widget);
+        // The provider now owns its loading/error UI. Script registration does
+        // not prove that a symbol has data, and is never labelled as live/ready.
+        setState('embedded');
+      } catch {
+        if (alive) setState('error');
       }
     };
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
-        observer.disconnect();
-        script = document.createElement('script');
-        script.async = true;
-        script.src =
-          kind === 'indices'
-            ? 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js'
-            : 'https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js';
-        const common = {
-          colorTheme: 'light',
-          locale: 'nl',
-          width: '100%',
-          height: '100%',
-          isTransparent: true,
-        };
-        script.textContent = JSON.stringify(
-          kind === 'indices'
-            ? {
-                ...common,
-                symbols: [
-                  ['S&P 500 · dagslot', 'FRED:SP500|1D'],
-                  ['Nasdaq 100 · dagslot', 'FRED:NDQ100|1D'],
-                ],
-                chartOnly: false,
-                autosize: true,
-                showVolume: false,
-                hideDateRanges: false,
-                hideMarketStatus: false,
-                changeMode: 'price-and-percent',
-                chartType: 'area',
-                dateRanges: ['1m|1D', '12m|1D', '60m|1W'],
-                lineWidth: 2,
-              }
-            : {
-                ...common,
-                exchange: 'US',
-                showChart: false,
-                dateRange: '12M',
-                showSymbolLogo: true,
-                showFloatingTooltip: false,
-              },
-        );
-        script.onerror = () => {
-          if (alive) setState('error');
-        };
-        element.appendChild(script);
-        timer = setTimeout(() => {
-          if (alive && !loaded) setState('error');
-        }, 15000);
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          void mount();
+        }
       },
       { rootMargin: '300px' },
     );
-    const mutation = new MutationObserver(() => {
-      element.querySelectorAll('iframe').forEach((frame) => {
-        if (watchedFrames.has(frame)) return;
-        watchedFrames.add(frame);
-        frame.addEventListener('load', frameLoaded, { once: true });
-      });
-    });
-    mutation.observe(element, { childList: true, subtree: true });
     observer.observe(element);
     return () => {
       alive = false;
       observer.disconnect();
-      mutation.disconnect();
-      clearTimeout(timer);
-      script?.remove();
-      watchedFrames.forEach((frame) =>
-        frame.removeEventListener('load', frameLoaded),
-      );
-      element.querySelectorAll('iframe').forEach((frame) => frame.remove());
+      widget.remove();
     };
-  }, [kind]);
+  }, [kind, attempt]);
+
+  const source =
+    kind === 'indices'
+      ? 'https://www.tradingview.com/markets/indices/'
+      : 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/';
+
   return (
-    <div className={'market-widget ' + (compact ? 'is-compact' : '')}>
+    <div
+      className={'market-widget ' + (compact ? 'is-compact' : '')}
+      data-feed-state={state}
+    >
       <div className="market-widget-title">
         <span>
-          {kind === 'indices' ? 'INDICES / DAGGEGEVENS' : 'BEWEGINGEN / VS'}
+          {kind === 'indices'
+            ? 'INDICES / INDICATIEVE PRIJZEN'
+            : 'STIJGERS & DALERS / VS'}
         </span>
         {kind === 'indices' ? (
           <Activity size={18} />
@@ -114,65 +108,84 @@ export function MarketWidget({
           <ArrowUpRight size={18} />
         )}
       </div>
-      <div
-        ref={host}
-        className="tradingview-widget-container"
-        style={{ height: compact ? 300 : 360, width: '100%' }}
-      >
-        <div
-          className="tradingview-widget-container__widget"
-          style={{ height: 'calc(100% - 28px)', width: '100%' }}
-        />
-        <div className="tradingview-widget-copyright">
-          <a
-            href={
-              kind === 'indices'
-                ? 'https://www.tradingview.com/markets/indices/'
-                : 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/'
-            }
-            rel="noopener nofollow"
-            target="_blank"
-          >
-            <span className="blue-text">
-              {kind === 'indices' ? 'Indices' : 'Market movers'}
-            </span>
-          </a>{' '}
-          by TradingView
-        </div>
-      </div>
-      {state === 'loading' && (
-        <output className="widget-status">Marktgegevens laden…</output>
-      )}
-      {state === 'error' && (
-        <output className="widget-status">
-          De gegevens zijn hier niet bereikbaar. Open de bron via de link.
-        </output>
-      )}
       <p className="widget-data-note">
         {kind === 'indices'
-          ? 'S&P 500 en Nasdaq 100: dagelijkse FRED-reeksen via TradingView. Kies 1 maand, 1 jaar of 5 jaar.'
-          : 'Stijgers, dalers en actieve aandelen op de Amerikaanse markt. Vertraging en dekking verschillen per beurs.'}
+          ? 'S&P 500, Nasdaq 100 en Dow Jones volgen via CFD-referentieprijzen van FOREX.com. Deze kunnen afwijken van de officiële indexstand.'
+          : 'Amerikaanse aandelen · vertraagde koersgegevens. Active = actief verhandeld, Gainers = stijgers, Losers = dalers.'}
       </p>
+      <div
+        ref={host}
+        className="market-widget-embed"
+        style={{
+          height: kind === 'movers' ? (compact ? 380 : 420) : 360,
+          width: '100%',
+          minWidth: 0,
+        }}
+      />
+      {state === 'loading' && (
+        <output className="widget-status">Externe marktweergave laden…</output>
+      )}
+      {state === 'error' && (
+        <div className="widget-status">
+          <output>
+            De marktweergave kon niet laden. Probeer opnieuw of bekijk de bron.
+          </output>
+          <button
+            type="button"
+            className="textlink"
+            onClick={() => {
+              setState('loading');
+              setAttempt((value) => value + 1);
+            }}
+          >
+            Opnieuw laden <ArrowRight size={16} />
+          </button>
+        </div>
+      )}
+      <noscript>
+        <p className="widget-status">
+          JavaScript is nodig voor de grafiek. Je kunt de marktgegevens ook bij
+          de bron bekijken.
+        </p>
+      </noscript>
+      <p className="widget-data-note">
+        {kind === 'indices'
+          ? 'SPX500 = S&P 500 · NAS100 = Nasdaq 100 · US30 = Dow Jones. Kies een regel en periode om de grafiek te bekijken.'
+          : 'Kies een tab en aandeel. Scroll binnen de lijst voor alle vijf getoonde aandelen. Een D bij de koers betekent vertraagde data.'}{' '}
+        De beschikbaarheid en actualiteit worden bepaald door de databron.
+      </p>
+      <a
+        className="source-link"
+        href={source}
+        rel="noopener nofollow"
+        target="_blank"
+      >
+        {kind === 'indices'
+          ? 'Indexoverzicht op TradingView'
+          : 'Alle Amerikaanse stijgers op TradingView'}{' '}
+        <ArrowUpRight size={14} />
+      </a>
     </div>
   );
 }
 export function UpcomingAgenda({ compact = false }: { compact?: boolean }) {
-  return <section className="hub-agenda" id={compact ? undefined : 'agenda'}><MacroCalendar compact /></section>;
+  return (
+    <section className="hub-agenda" id={compact ? undefined : 'agenda'}>
+      <MacroCalendar compact />
+    </section>
+  );
 }
 export function MarketMiniHub() {
   return (
     <section className="market-mini-hub" data-reveal>
       <div className="mini-hub-heading">
         <div>
-          <span className="eyebrow">EVEN UITZOOMEN / DE MARKT</span>
-          <h2>
-            De wereld achter
-            <br />
-            <em>je portefeuille.</em>
-          </h2>
+          <span className="eyebrow">MARKTINFORMATIE</span>
+          <h2>Indices, stijgers en dalers.</h2>
+          <p>En de macro-agenda voor Nederland en de Verenigde Staten.</p>
         </div>
         <Link href="/markt" className="button">
-          Open de markthub <ArrowRight size={18} />
+          Bekijk alle marktinformatie <ArrowRight size={18} />
         </Link>
       </div>
       <div className="mini-hub-grid">
@@ -188,9 +201,8 @@ export function MarketHubOverview() {
     <>
       <nav className="market-hub-nav" aria-label="Onderdelen van de markthub">
         <a href="#indices">Indices</a>
-        <a href="#bewegingen">Bewegingen</a>
-        <a href="#agenda">Agenda</a>
-        <Link href="/artikelen">Eigen verdieping</Link>
+        <a href="#bewegingen">Stijgers en dalers</a>
+        <a href="#agenda">Macro-agenda</a>
         <a href="#valuta">Valuta</a>
       </nav>
       <div className="market-hub-grid">
@@ -203,13 +215,13 @@ export function MarketHubOverview() {
         <UpcomingAgenda />
       </div>
       <div className="market-context-strip">
-        <span>DAGELIJKS PERSPECTIEF</span>
+        <span>WAT BETEKENEN DE CIJFERS?</span>
         <p>
-          Een beweging is een beginpunt. Kijk ook naar de periode, het bedrijf
-          en je eigen horizon.
+          Een koersstijging zegt op zichzelf weinig over de oorzaak. Lees hoe
+          rente, inflatie en economische groei de beurs kunnen beïnvloeden.
         </p>
-        <Link href="/artikelen/verder-dan-de-koers">
-          Begrijp wat een koers vertelt <ArrowRight size={17} />
+        <Link href="/verdieping/markt-economie">
+          Lees over markt en economie <ArrowRight size={17} />
         </Link>
       </div>
     </>

@@ -34,7 +34,6 @@ import {
 } from './widgets';
 import { AnimatedNumber } from './motion';
 import { NextSteps } from './journeys';
-import { toolTopics } from './journey-data';
 import { marketNotice } from './market-data';
 import { requiredMonthly, netOfFees, downloadRows } from './calculations';
 export function MarketTicker() {
@@ -96,7 +95,7 @@ export function ToolShelf({ limit }: { limit?: number }) {
           <p>{t.text}</p>
           <ToolVisual slug={t.slug} active={active === t.slug} />
           <span className="shelf-action">
-            Onderzoek jouw scenario <ArrowRight size={16} />
+            Open de calculator <ArrowRight size={16} />
           </span>
         </Link>
       ))}
@@ -131,9 +130,9 @@ function ExtendedCalculator({ slug }: { slug: string }) {
     <>
       <div className="calculator">
         <div className="calc-inputs" id="invoer">
-          <h2>Jouw uitgangspunten</h2>
+          <h2>Vul je bedragen en aannames in</h2>
           <p className="input-guide">
-            Pas een bedrag aan. Je uitkomst rekent direct mee.
+            Na elke wijziging wordt de uitkomst opnieuw berekend.
           </p>
           <NumberField
             label="Startkapitaal (€)"
@@ -202,7 +201,7 @@ function ExtendedCalculator({ slug }: { slug: string }) {
         </div>
         <div className="calc-result" id="uitkomst">
           <p className="eyebrow">
-            {costs ? 'HET EFFECT VAN KOSTEN' : 'JOUW DOEL, TERUGGEREKEND'}
+            {costs ? 'VERSCHIL DOOR FONDSKOSTEN' : 'BENODIGDE MAANDINLEG'}
           </p>
           <strong className="result-number">
             <AnimatedNumber value={result} format={eur} />
@@ -282,11 +281,11 @@ function ExtendedCalculator({ slug }: { slug: string }) {
         </div>
       </div>
       <div className="methodology reading">
-        <h2>Zo lezen we dit scenario</h2>
+        <h2>Zo werkt deze berekening</h2>
         <p>
           {costs
-            ? 'We houden het brutorendement gelijk. Jaarlijkse fondskosten worden multiplicatief van het vermogen afgetrokken; dat netto jaarrendement rekenen we om naar maandrente. Een klein kostenverschil telt elk jaar opnieuw mee. Transactiekosten, belastingen en andere productverschillen zijn niet verwerkt.'
-            : 'We berekenen hoeveel inleg aan het einde van iedere maand nodig is om het gekozen eindbedrag te bereiken. Als het startkapitaal bij dit rendement al voldoende is, wordt de benodigde inleg nul. Het doel is een nominaal bedrag: toekomstige inflatie, belastingen en kosten zijn niet verwerkt.'}
+            ? 'Beide scenario’s gebruiken hetzelfde rendement vóór kosten. Daarin verwerken we het gekozen jaarlijkse kostenpercentage. Het rendement na kosten rekenen we om naar een maandpercentage. Een kostenverschil werkt zo ieder jaar opnieuw door. Transactiekosten, belastingen en andere productverschillen zijn niet verwerkt.'
+            : 'We berekenen hoeveel inleg aan het einde van iedere maand nodig is om het gekozen eindbedrag te bereiken. Als je startbedrag binnen deze aannames al tot je doelbedrag groeit, is de benodigde inleg nul. Het doel is een bedrag in toekomstige euro’s. Inflatie, belastingen en kosten zijn niet verwerkt.'}
         </p>
         <p>
           Een constant rendement maakt scenario’s vergelijkbaar. De
@@ -299,6 +298,17 @@ function ExtendedCalculator({ slug }: { slug: string }) {
 }
 export function ToolsExperience({ slug }: { slug?: string }) {
   const t = toolItems.find((t) => t.slug === slug);
+  const relatedSlug =
+    slug === 'inflatie'
+      ? 'rendement'
+      : slug === 'etf-kosten'
+        ? 'lump-sum-dca'
+        : slug === 'doelvermogen'
+          ? 'inflatie'
+          : slug === 'dividend'
+            ? 'etf-kosten'
+            : 'doelvermogen';
+  const relatedTool = toolItems.find((item) => item.slug === relatedSlug)!;
   if (t)
     return (
       <div className="tool-workspace">
@@ -326,26 +336,12 @@ export function ToolsExperience({ slug }: { slug?: string }) {
           <Calculator slug={slug!} />
         )}
         <div className="tools-related">
-          <p>Een andere kant van je scenario onderzoeken?</p>
-          <Link
-            href={
-              '/tools/' +
-              (slug === 'inflatie'
-                ? 'rendement'
-                : slug === 'etf-kosten'
-                  ? 'lump-sum-dca'
-                  : slug === 'doelvermogen'
-                    ? 'inflatie'
-                    : slug === 'dividend'
-                      ? 'etf-kosten'
-                      : 'doelvermogen')
-            }
-          >
-            Open een aansluitende rekentool <ArrowRight size={16} />
+          <p>{relatedTool.text}</p>
+          <Link href={'/tools/' + relatedSlug}>
+            Open {relatedTool.title.toLowerCase()} <ArrowRight size={16} />
           </Link>
         </div>
         <ToolReading tool={slug!} />
-        <NextSteps topic={toolTopics[slug!]} />
         <Newsletter context="tools" variant="compact" />
       </div>
     );
@@ -367,13 +363,13 @@ export function MarketExperience({ sub }: { sub?: string }) {
     <>
       <div className="market-heading">
         <div>
-          <p className="eyebrow">BEURS WATCHER / MARKT</p>
+          <p className="eyebrow">BEURSWATCHER / MARKT</p>
           <h1>
             {sub === 'macro'
-              ? 'De week vooruit.'
+              ? 'Macro-agenda.'
               : sub === 'earnings'
-                ? 'Achter de resultaten.'
-                : 'De beurs in perspectief.'}
+                ? 'Bedrijfsresultaten: voorbeeldagenda.'
+                : 'Beursindices.'}
           </h1>
         </div>
         <span className="data-status">{marketNotice}</span>
@@ -383,8 +379,7 @@ export function MarketExperience({ sub }: { sub?: string }) {
           ['', 'Overzicht'],
           ['indices', 'Indices'],
           ['macro', 'Macro-agenda'],
-          ['earnings', 'Earnings'],
-          ['marktupdate', 'Marktupdate'],
+          ['earnings', 'Bedrijfscijfers (voorbeeld)'],
         ].map(([s, n]) => (
           <Link
             key={s}
@@ -404,7 +399,7 @@ export function MarketExperience({ sub }: { sub?: string }) {
             <p>
               {sub === 'macro'
                 ? 'Een cijfer komt nooit alleen. Bekijk de vorige waarde en de verwachting voordat je een koersreactie interpreteert.'
-                : 'Kijk naast de winst per aandeel ook naar de vooruitzichten, marges en kasstroom.'}
+                : 'Deze agenda toont voorbeeldgegevens, geen actuele publicatiedata. Bij echte bedrijfsresultaten zijn naast winst ook omzet, marges, kasstroom en verwachtingen relevant.'}
             </p>
           </div>
           <Calendar kind={sub} full />

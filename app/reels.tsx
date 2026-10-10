@@ -93,8 +93,8 @@ function OfficialPlayer({ reel }: { reel: Reel }) {
           <img src={reel.thumbnail} alt="" width={360} height={640} />
           <output>
             Instagram geeft hier geen afspeelbare video terug. Open het
-            origineel hieronder. De eigen videospeler wordt beschikbaar zodra
-            het Beurswatcher-account is gekoppeld.
+            origineel hieronder. Voor afspelen in de eigen videospeler zijn een
+            werkende accountkoppeling en een beschikbaar videobestand nodig.
           </output>
         </div>
       )}
@@ -361,15 +361,15 @@ export function ReelRail() {
     >
       <div className="social-intro">
         <Instagram size={24} />
-        <span className="eyebrow">BEURSWATCHER, IN JE FEED</span>
+        <span className="eyebrow">KORTE VIDEO’S OVER BELEGGEN EN GELD</span>
         <h2>
-          Even kijken.
+          Beurswatcher
           <br />
-          <em>Verder denken.</em>
+          <em>op Instagram.</em>
         </h2>
         <p>
-          Korte verhalen. Goede vragen. Bekijk de Reels hier en verdiep je
-          daarna verder.
+          Bekijk korte video’s over beleggen en geldzaken. Voor uitgebreidere
+          uitleg kun je de artikelen op deze website lezen.
         </p>
         <p className="reel-interaction-help">
           {status === 'connected'
@@ -377,7 +377,7 @@ export function ReelRail() {
             : 'Tik op ‘Bekijk hier’ voor de Instagram-speler op deze website.'}
         </p>
         <Link href="/artikelen" className="textlink">
-          Verder met de verdieping <ArrowRight size={18} />
+          Bekijk de onderwerpen en artikelen <ArrowRight size={18} />
         </Link>
         <div className="social-controls">
           <button
@@ -394,7 +394,7 @@ export function ReelRail() {
           >
             <ArrowRight size={18} />
           </button>
-          <span>SWIPE & ONTDEK</span>
+          <span>MEER VIDEO’S →</span>
         </div>
         <small className="reels-connection-status">
           {status === 'waiting'

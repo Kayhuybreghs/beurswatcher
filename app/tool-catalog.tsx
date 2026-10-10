@@ -26,26 +26,27 @@ export function ToolCatalog() {
       <section className="workshop-hero">
         <div className="workshop-copy">
           <span className="eyebrow">
-            <SlidersHorizontal size={16} /> JOUW GELD. JOUW AANNAMES.
+            <SlidersHorizontal size={16} /> GRATIS FINANCIËLE REKENTOOLS
           </span>
           <h1>
-            Kleine wijziging.
+            Wat levert je inleg op?
             <br />
-            <em>Groot verschil.</em>
+            <em>Reken het zelf uit.</em>
           </h1>
           <p>
-            Meer tijd, minder kosten of een andere inleg. Ontdek wat het doet
-            met jouw geld.
+            Bereken mogelijke vermogensgroei, vergelijk kosten of onderzoek
+            hoeveel je per maand moet inleggen. Jij kiest de bedragen en
+            aannames.
           </p>
           <Link href="#rekentools" className="button yellow">
-            Vind jouw rekentool <ArrowRight size={18} />
+            Bekijk alle rekentools <ArrowRight size={18} />
           </Link>
           <span className="workshop-note">
             9 tools · Gratis · Zonder account
           </span>
         </div>
         <div className="workshop-demo">
-          <span className="eyebrow">VOEL WAT TIJD DOET</span>
+          <span className="eyebrow">HOEVEEL VERSCHIL MAAKT DE LOOPTIJD?</span>
           <p>€ 250 per maand, vanaf nul</p>
           <strong>
             <AnimatedNumber
@@ -87,16 +88,17 @@ export function ToolCatalog() {
             </TabsList>
           </Tabs>
           <small>
-            Rekenvoorbeeld bij 6% rendement. Zonder kosten of belasting.
+            Rekenvoorbeeld bij 6% rendement. Zonder kosten, inflatie of
+            belasting. Rendement is onzeker.
           </small>
         </div>
       </section>
       <div className="catalog-heading" id="rekentools">
         <div>
-          <span className="eyebrow">DE WERKBANK</span>
-          <h2>Wat wil je weten?</h2>
+          <span className="eyebrow">KIES JE BEREKENING</span>
+          <h2>Wat wil je berekenen?</h2>
         </div>
-        <span>Wijs een tool aan en ontdek het idee.</span>
+        <span>Open een tool en vul je eigen bedragen in.</span>
       </div>
       <Tabs
         className="catalog-filters"
@@ -140,8 +142,8 @@ export function ToolCatalog() {
           ))}
       </div>
       <p className="catalog-note">
-        Elke visual is een rekenvoorbeeld. In de tool kies je je eigen bedragen
-        en aannames.
+        De afbeeldingen tonen rekenvoorbeelden. Elke tool legt uit welke
+        aannames en beperkingen bij de uitkomst horen.
       </p>
     </>
   );

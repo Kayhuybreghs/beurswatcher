@@ -12,7 +12,7 @@ export const partnerFacts: Record<
   }
 > = {
   'scalable-capital': {
-    headline: 'Geef je vaste inleg een vaste plek.',
+    headline: 'Zelf beleggen bij Scalable Capital.',
     description:
       'Scalable Capital is een broker waarmee je zelf aandelen en ETF’s kiest. Met een beleggingsplan kun je periodiek inleggen.',
     benefits: [
@@ -27,17 +27,17 @@ export const partnerFacts: Record<
     steps: [
       'Kies je belegging',
       'Bepaal je vaste inleg',
-      'Blijf je plan volgen',
+      'Controleer kosten en voorwaarden',
     ],
   },
   delta: {
-    headline: 'Al je posities. Eén helder beeld.',
+    headline: 'Je beleggingen bijhouden met Delta.',
     description:
-      'Delta is een portfoliotracker. Je brengt beleggingen samen in een overzicht, via ondersteunde koppelingen of handmatige transacties. Je belegt je geld niet bij Delta.',
+      'Delta is een app om je beleggingen bij te houden. Je brengt ze samen in één overzicht door rekeningen te koppelen of transacties zelf in te voeren. Niet iedere rekening kan worden gekoppeld. Je belegt je geld niet bij Delta.',
     benefits: [
       'Verschillende soorten beleggingen in één overzicht.',
       'Handmatige transacties voor posities zonder automatische koppeling.',
-      'Meer inzicht in ontwikkeling en verdeling van je portefeuille.',
+      'Bekijk hoe de waarde en verdeling van je beleggingen veranderen.',
     ],
     less: 'Je zoekt een broker om orders te plaatsen of verwacht dat iedere rekening automatisch kan worden gekoppeld.',
     cost: 'Een gratis basisversie met maximaal tien beleggingen. Extra functies via betaalde abonnementen; prijzen verschillen per locatie.',
@@ -46,7 +46,7 @@ export const partnerFacts: Record<
     steps: ['Breng posities samen', 'Bekijk de verdeling', 'Volg het totaal'],
   },
   'brand-new-day': {
-    headline: 'Geef je toekomstige zelf meer ruimte.',
+    headline: 'Pensioenbeleggen bij Brand New Day.',
     description:
       'Met de pensioenrekening-beleggen van Brand New Day kun je aanvullend pensioen opbouwen in beleggingsfondsen. De rekening is fiscaal geblokkeerd: dit is geld voor later.',
     benefits: [
@@ -60,32 +60,32 @@ export const partnerFacts: Record<
     source:
       'https://new.brandnewday.nl/de-spelregels-en-voordelen-van-de-pensioenrekening/',
     steps: [
-      'Breng later in beeld',
+      'Bekijk je bestaande pensioen',
       'Controleer je fiscale ruimte',
       'Onderzoek pensioenbeleggen',
     ],
   },
   saxo: {
-    headline: 'Bedrijfsvermogen verdient een eigen plan.',
+    headline: 'Zakelijk beleggen bij Saxo.',
     description:
       'Saxo biedt zelfstandig beleggen en zakelijke beleggingsrekeningen. Onderzoek eerst welk geld je onderneming kan missen en welke rekening bij de rechtsvorm past.',
     benefits: [
       'Een afzonderlijke rekening voor zakelijk beleggen.',
       'Periodiek beleggen met AutoInvest waar beschikbaar.',
-      'Rapportage en inzicht in transacties en posities.',
+      'Overzichten van je aankopen, verkopen en beleggingen.',
     ],
     less: 'Het geld is nodig voor belastingen, vaste lasten of andere bedrijfsreserves. Complexe producten zijn niet voor iedere belegger passend.',
     cost: 'Tarieven hangen af van rekeningniveau en product. Zakelijke klantonderzoekkosten kunnen gelden, afhankelijk van de bedrijfsstructuur. Bekijk de volledige actuele tarieflijst.',
     costSource: 'https://www.home.saxo/nl-nl/rates-and-conditions/',
     source: 'https://www.home.saxo/nl-nl/accounts/corporate',
     steps: [
-      'Reserveer je liquiditeit',
-      'Bepaal je horizon',
+      'Bepaal welke reserves nodig zijn',
+      'Bepaal hoelang je geld kunt missen',
       'Vergelijk rekening en kosten',
     ],
   },
   'american-express': {
-    headline: 'Reisvoordelen die je ook echt gebruikt.',
+    headline: 'Reisvoordelen van American Express.',
     description:
       'American Express biedt betaalkaarten met kaartafhankelijke reisvoordelen, punten en verzekeringen. De waarde hangt af van je gebruik, acceptatie en de voorwaarden.',
     benefits: [
@@ -105,5 +105,6 @@ export const partnerFacts: Record<
     ],
   },
 };
-// Add supplied affiliate URLs here only after they have been confirmed.
+// Commercial relationships with the listed providers have not been confirmed.
+// Add supplied affiliate URLs only after Daniel confirms the relationship and link.
 export const affiliateLinks: Record<string, string> = {};

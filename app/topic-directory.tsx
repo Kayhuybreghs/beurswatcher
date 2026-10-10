@@ -27,7 +27,7 @@ export const topicGroups = [
     slug: 'markt-economie',
     name: 'Markt & economie',
     description:
-      'Inflatie, rente en groei lezen — en begrijpen waarom de beurs reageert.',
+      'Wat inflatie, rente en economische groei betekenen voor de beurs.',
     icon: Globe,
     categories: ['Markt', 'Macro'],
     links: [
@@ -53,13 +53,13 @@ export const topicGroups = [
     slug: 'beginnen',
     name: 'Beginnen met beleggen',
     description:
-      'Van buffer en beleggingsvormen naar spreiding, kosten en je eerste plan.',
+      'Wat je koopt, welk geld je kunt missen en hoe spreiding en kosten werken.',
     icon: Compass,
     categories: ['Strategie'],
     links: [
-      ['Je eerste stappen', '/verdieping/beginnen'],
-      ['Een plan voor onrust', '/artikelen/een-plan-voor-onrust'],
-      ['Reken met jouw inleg', '/tools/rendement'],
+      ['Beginnen met beleggen: de basis', '/verdieping/beginnen'],
+      ['Risico en beleggingsstrategie', '/verdieping/strategie'],
+      ['Bereken mogelijke vermogensgroei', '/tools/rendement'],
     ],
   },
   {
@@ -71,7 +71,10 @@ export const topicGroups = [
     categories: ['ETF'],
     links: [
       ['Alles over ETF’s', '/verdieping/etfs'],
-      ['Wereldwijde spreiding', '/artikelen/wereld-etf-basis'],
+      [
+        'Wat doen fondskosten op lange termijn?',
+        '/uitleg/etf-kosten-lange-termijn',
+      ],
       ['ETF-kosten vergelijken', '/tools/etf-kosten'],
     ],
   },
@@ -83,7 +86,7 @@ export const topicGroups = [
     categories: ['Aandelen', 'Dividend'],
     links: [
       ['Aandelen begrijpen', '/verdieping/aandelen'],
-      ['Dividend ontdekken', '/verdieping/dividend'],
+      ['Hoe werkt dividend?', '/verdieping/dividend'],
       ['Dividend doorrekenen', '/tools/dividend'],
     ],
   },
@@ -96,7 +99,7 @@ export const topicGroups = [
     categories: ['Strategie', 'Portfolio'],
     links: [
       ['Strategie & horizon', '/verdieping/strategie'],
-      ['Je portefeuille overzien', '/verdieping/portfolio'],
+      ['Spreiding en overlap in je portefeuille', '/verdieping/portfolio'],
       ['Ineens of gespreid beleggen', '/tools/lump-sum-dca'],
     ],
   },
@@ -110,7 +113,7 @@ export const topicGroups = [
     links: [
       ['Sparen & vermogen', '/verdieping/vermogen'],
       ['Inflatie & koopkracht', '/tools/inflatie'],
-      ['Je doelvermogen', '/tools/doelvermogen'],
+      ['Maandinleg voor een doelbedrag berekenen', '/tools/doelvermogen'],
       ['Box 3 indicatie', '/tools/box-3'],
     ],
   },
@@ -123,20 +126,20 @@ export const topicGroups = [
     categories: ['Pensioen'],
     links: [
       ['De onderdelen van pensioen', '/verdieping/pensioen'],
-      ['Pensioen buiten de koers', '/artikelen/pensioen-buiten-de-koers'],
-      ['Reken terug vanuit je doel', '/tools/doelvermogen'],
+      ['Sparen en vermogen opbouwen', '/verdieping/vermogen'],
+      ['Maandinleg voor een doelbedrag berekenen', '/tools/doelvermogen'],
     ],
   },
   {
     slug: 'zakelijk',
     name: 'Zakelijk vermogen',
     description:
-      'Van rekeningstand naar vrije kasruimte, reserves en een langere bestemming.',
+      'Welk geld je bedrijf nodig heeft en wat je met reserves kunt doen.',
     icon: Building2,
     categories: ['Zakelijk'],
     links: [
       ['Zakelijk beleggen', '/verdieping/zakelijk'],
-      ['Reken met je horizon', '/tools/rendement'],
+      ['Bereken mogelijke vermogensgroei', '/tools/rendement'],
     ],
   },
   {
@@ -147,8 +150,11 @@ export const topicGroups = [
     icon: Plane,
     categories: ['Reizen'],
     links: [
-      ['Reizen & rewards', '/verdieping/reizen'],
-      ['Reisvoordelen afwegen', '/artikelen/reisvoordelen-afwegen'],
+      ['Reiskaarten, punten en voorwaarden', '/verdieping/reizen'],
+      [
+        'American Express: kosten en mogelijkheden',
+        '/partners/american-express',
+      ],
     ],
   },
 ];
@@ -190,7 +196,7 @@ export function TopicDirectory() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="topic-directory-expanded">
-                <p>Jouw startpunten binnen {group.name.toLowerCase()}.</p>
+                <p>Uitleg en hulpmiddelen over {group.name.toLowerCase()}.</p>
                 <div>
                   {group.links.map(([label, href]) => (
                     <Link key={href} href={href}>
@@ -203,7 +209,8 @@ export function TopicDirectory() {
                   className="directory-all"
                   href={'/verdieping/' + group.slug}
                 >
-                  Open het onderwerp <ArrowUpRight size={17} />
+                  Lees over {group.name.toLowerCase()}{' '}
+                  <ArrowUpRight size={17} />
                 </Link>
               </div>
             </AccordionContent>

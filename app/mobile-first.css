@@ -696,6 +696,31 @@
   text-align: center;
   pointer-events: none;
 }
+.market-widget[data-feed-state='error'] .widget-status {
+  pointer-events: auto;
+  background: #f4f7fb;
+  border-radius: 12px;
+  padding: 20px;
+}
+.market-widget[data-feed-state='error'] .widget-status .textlink {
+  justify-content: center;
+  margin: 12px auto 0;
+}
+.market-widget-embed {
+  margin-top: 16px;
+}
+.market-widget > .source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 14px 8px 0;
+  font-size: 12px;
+}
+.market-widget-embed > tv-market-overview {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 .hub-agenda {
   border-radius: 14px;
   padding: 24px;
@@ -819,15 +844,7 @@
     grid-column: 1/-1;
   }
   .hub-agenda {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 24px;
-  }
-  .hub-agenda .hub-block-heading,
-  .hub-agenda > h2,
-  .hub-agenda > p,
-  .hub-agenda > .textlink {
-    grid-column: 1/-1;
+    display: block;
   }
   .market-hub-masthead {
     display: flex;
@@ -839,18 +856,6 @@
   }
 }
 @media (min-width: 1250px) {
-  .market-hub-grid,
-  .mini-hub-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(
-        265px,
-        0.85fr
-      );
-  }
-  .market-hub-grid > .hub-agenda,
-  .mini-hub-grid > .hub-agenda {
-    grid-column: auto;
-    display: block;
-  }
   .market-context-strip {
     grid-template-columns: 150px 1fr auto;
     align-items: center;

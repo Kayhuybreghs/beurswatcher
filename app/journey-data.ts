@@ -1,5 +1,6 @@
 export type Journey = {
   article: string;
+  topic: string;
   tool: string;
   partner: string;
   question: string;
@@ -8,14 +9,16 @@ export type Journey = {
 export const journeys: Record<string, Journey> = {
   Portfolio: {
     article: 'portefeuille-in-overzicht',
+    topic: 'portfolio',
     tool: 'rendement',
     partner: 'delta',
-    question: 'Hoe past een losse positie in jouw totaalbeeld?',
+    question: 'Hoe is je portefeuille verdeeld?',
     reason:
       'Breng posities samen en onderzoek de verdeling van je portefeuille.',
   },
   Reizen: {
     article: 'reisvoordelen-afwegen',
+    topic: 'reizen',
     tool: 'inflatie',
     partner: 'american-express',
     question: 'Welke reisvoordelen gebruik je echt?',
@@ -23,6 +26,7 @@ export const journeys: Record<string, Journey> = {
   },
   ETF: {
     article: 'wereld-etf-basis',
+    topic: 'etfs',
     tool: 'etf-kosten',
     partner: 'scalable-capital',
     question: 'Wat kosten je beleggingen over 20 jaar?',
@@ -31,6 +35,7 @@ export const journeys: Record<string, Journey> = {
   },
   Aandelen: {
     article: 'halfgeleiders-meer-dan-ai',
+    topic: 'aandelen',
     tool: 'rendement',
     partner: 'delta',
     question: 'Wat betekent een ander groeiscenario?',
@@ -39,27 +44,31 @@ export const journeys: Record<string, Journey> = {
   },
   Markt: {
     article: 'verder-dan-de-koers',
+    topic: 'markt-economie',
     tool: 'rendement',
     partner: 'delta',
-    question: 'Van koersbeweging naar jouw lange termijn.',
+    question: 'Waarom reageert de beurs op economische cijfers?',
     reason: 'Bekijk hoe je je portefeuille als geheel kunt blijven volgen.',
   },
   Macro: {
     article: 'rente-en-waardering',
+    topic: 'markt-economie',
     tool: 'aflossen-of-beleggen',
     partner: 'scalable-capital',
-    question: 'Wat verandert een andere rente?',
+    question: 'Wat betekent een rentewijziging voor beleggers?',
     reason: 'Onderzoek welke broker past als je zelf wilt beleggen.',
   },
   Strategie: {
     article: 'een-plan-voor-onrust',
+    topic: 'strategie',
     tool: 'doelvermogen',
     partner: 'scalable-capital',
-    question: 'Van een goed voornemen naar een concreet doel.',
+    question: 'Hoeveel wil je inleggen en voor hoelang?',
     reason: 'Een vaste inleg vraagt om een dienst die past bij je aanpak.',
   },
   Dividend: {
     article: 'dividend-is-geen-gratis-geld',
+    topic: 'dividend',
     tool: 'dividend',
     partner: 'delta',
     question: 'Wat gebeurt er als je rendement herbelegt?',
@@ -68,6 +77,7 @@ export const journeys: Record<string, Journey> = {
   },
   Pensioen: {
     article: 'pensioen-buiten-de-koers',
+    topic: 'pensioen',
     tool: 'doelvermogen',
     partner: 'brand-new-day',
     question: 'Welk vermogen wil je later opbouwen?',
@@ -76,9 +86,10 @@ export const journeys: Record<string, Journey> = {
   },
   Zakelijk: {
     article: 'een-plan-voor-onrust',
+    topic: 'zakelijk',
     tool: 'rendement',
     partner: 'saxo',
-    question: 'Hoe lang kan jouw geld aan het werk?',
+    question: 'Welk bedrijfsvermogen kun je langere tijd missen?',
     reason:
       'Bekijk welke mogelijkheden en voorwaarden gelden voor zakelijk beleggen.',
   },
@@ -108,7 +119,8 @@ export const partnerDetails: Record<
   'scalable-capital': {
     intent: 'Periodiek beleggen',
     fit: 'Je wilt zelfstandig beleggen en onderzoeken hoe een vaste inleg in jouw aanpak past.',
-    angle: 'Eerst je beleggingsplan. Dan de broker die daarbij past.',
+    angle:
+      'Vergelijk de broker op aanbod, handelskosten en periodiek inleggen.',
     consider: [
       'Een vaste routine voor je inleg',
       'Het aanbod van aandelen en ETF’s',
@@ -121,9 +133,10 @@ export const partnerDetails: Record<
     topic: 'ETF',
   },
   delta: {
-    intent: 'Portfolio-inzicht',
+    intent: 'Portefeuille bijhouden',
     fit: 'Je houdt beleggingen op verschillende plekken bij en wilt de samenhang blijven zien.',
-    angle: 'Een losse koers is interessant. Het totaalbeeld is nuttiger.',
+    angle:
+      'Beleggingen van verschillende rekeningen in één overzicht bijhouden.',
     consider: [
       'Overzicht van meerdere posities',
       'Ontwikkeling van je portefeuille',
@@ -138,7 +151,8 @@ export const partnerDetails: Record<
   'brand-new-day': {
     intent: 'Pensioen opbouwen',
     fit: 'Je wilt onderzoeken hoe je aanvullend vermogen voor later kunt opbouwen.',
-    angle: 'Begin bij later. Werk terug naar wat vandaag nodig is.',
+    angle:
+      'Onderzoek de kosten en voorwaarden voor aanvullende pensioenopbouw.',
     consider: [
       'De bestaande pensioenopbouw meenemen',
       'Een lange beleggingshorizon',

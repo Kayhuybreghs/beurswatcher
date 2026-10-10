@@ -1,17 +1,17 @@
 import { ArrowRight, ArrowUpRight, BookOpen, Calculator } from 'lucide-react';
 import Link from './site-link';
 import { guides, guideSources } from './guide-data';
-import { toolItems } from './data';
+import { toolItems, topics } from './data';
 
 export function ToolReading({ tool }: { tool: string }) {
   const items = guides.filter((g) => g.tool === tool);
   return (
     <section className="tool-reading" id="uitleg">
-      <span className="eyebrow">BEGRIJP JE BEREKENING</span>
+      <span className="eyebrow">UITLEG BIJ DEZE TOOL</span>
       <h2>De uitleg achter de uitkomst.</h2>
       <p>
-        Van jouw vraag naar de aannames, voorbeelden en antwoorden die je verder
-        helpen.
+        Lees hoe deze berekening werkt, welke aannames meetellen en wat de
+        uitkomst wel en niet zegt.
       </p>
       <div className="guide-card-grid">
         {items.map((g) => (
@@ -54,7 +54,7 @@ export function GuidePage({ slug }: { slug: string }) {
         <span className="eyebrow">HET KORTE ANTWOORD</span>
         <p>{g.summary}</p>
         <Link className="button yellow" href={'/tools/' + g.tool}>
-          Reken het zelf door <ArrowRight size={18} />
+          Open {tool.title.toLowerCase()} <ArrowRight size={18} />
         </Link>
       </section>
       <div className="guide-layout">
@@ -68,7 +68,7 @@ export function GuidePage({ slug }: { slug: string }) {
           <a href="#voorbeeld">Rekenvoorbeeld</a>
           <a href="#vragen">Veelgestelde vragen</a>
           <Link href={'/tools/' + g.tool}>
-            <Calculator size={18} /> Open de calculator
+            <Calculator size={18} /> {tool.title}
           </Link>
         </aside>
         <article className="guide-reading">
@@ -90,7 +90,7 @@ export function GuidePage({ slug }: { slug: string }) {
           </section>
           <section className="guide-calculator">
             <Calculator size={24} />
-            <h2>Nu jouw bedragen.</h2>
+            <h2>Bereken het met je eigen bedragen.</h2>
             <p>
               Gebruik de {tool.title.toLowerCase()} om je eigen aannames te
               vergelijken. Bij de tool lees je precies wat de berekening wel en
@@ -102,7 +102,7 @@ export function GuidePage({ slug }: { slug: string }) {
           </section>
           <section className="guide-faq" id="vragen">
             <span className="eyebrow">VEELGESTELDE VRAGEN</span>
-            <h2>Dit wil je ook weten.</h2>
+            <h2>Veelgestelde vragen.</h2>
             {g.faq.map(([q, a]) => (
               <details key={q}>
                 <summary>
@@ -130,8 +130,8 @@ export function GuidePage({ slug }: { slug: string }) {
         </article>
       </div>
       <section className="guide-related">
-        <span className="eyebrow">VERDER VERDIEPEN</span>
-        <h2>De volgende vraag.</h2>
+        <span className="eyebrow">GERELATEERDE UITLEG</span>
+        <h2>Meer over deze berekening.</h2>
         <div className="guide-card-grid">
           {related.map((r) => (
             <Link
@@ -147,7 +147,9 @@ export function GuidePage({ slug }: { slug: string }) {
           ))}
         </div>
         <Link className="textlink" href={'/verdieping/' + g.topics[0]}>
-          Bekijk het hele onderwerp <ArrowRight size={17} />
+          Lees over{' '}
+          {topics.find(([slug]) => slug === g.topics[0])?.[1].toLowerCase()}{' '}
+          <ArrowRight size={17} />
         </Link>
       </section>
     </>
