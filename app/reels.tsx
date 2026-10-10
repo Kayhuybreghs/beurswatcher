@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/dialog';
 import Link from './site-link';
 import { BrandMark, instagramUrl } from './brand';
-import { reels, selectReels, type Reel } from './reel-data';
+import type { Reel } from './reel-data';
 
 type InstagramWindow = Window & { instgrm?: { Embeds: { process(): void } } };
 let embedScript: Promise<void> | undefined;
@@ -290,7 +290,9 @@ function ReelCard({
   );
 }
 export function ReelRail() {
-  const [items, setItems] = useState(() => selectReels(reels)),
+  // The protected editor owns selection/order. Do not flash old static cards
+  // before its saved choices arrive, or re-sort a deliberate manual selection.
+  const [items, setItems] = useState<Reel[]>([]),
     [status, setStatus] = useState('waiting'),
     [active, setActive] = useState<string | null>(null),
     [opened, setOpened] = useState<Reel | null>(null),
@@ -310,7 +312,7 @@ export function ReelRail() {
         })
         .then((data) => {
           if (alive && Array.isArray(data.items)) {
-            setItems(selectReels(data.items));
+            setItems(data.items.slice(0, 6));
             setStatus(data.status);
           }
         })
@@ -343,6 +345,7 @@ export function ReelRail() {
       el.removeEventListener('scroll', update);
     };
   }, [items]);
+  if (!items.length) return null;
   function move(d: number) {
     const el = rail.current;
     if (el)

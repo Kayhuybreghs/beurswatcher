@@ -38,7 +38,7 @@ Lokaal wordt `.data/beurswatcher.db` gebruikt. Deze database en eventuele eerder
 
 ## Instagram en marktdata
 
-- `INSTAGRAM_USER_ID` en `INSTAGRAM_ACCESS_TOKEN`: uitsluitend server-side instellen zodra Daniels accounttoegang beschikbaar is. Tot die tijd blijft de beheerde Reel-selectie zichtbaar. Details en beperkingen: [koppelingen](content/INTEGRATIONS.md).
+- Instagram: `/beheer/instagram` is afgeschermd met een toegangscode. Daniel kan de Reel-selectie, volgorde en kaarttitels aanpassen en de verbinding controleren. Nieuwe Reels automatisch ophalen vereist nog de eenmalige Meta-configuratie en zijn toestemming. Voorbereiding en resterende echte accounttest: [Instagram beheren](content/INSTAGRAM-KOPPELEN.md).
 - De markthub gebruikt TradingView-widgets met bronvermelding. Wisselkoersen komen via de ECB. Gemarkeerde voorbeelddata blijft herkenbaar als voorbeeld; nieuws is een gedateerde redactionele selectie.
 - Affiliate-links en definitieve eventinformatie moeten nog door Daniel worden aangeleverd. De website presenteert voorbeeldprogramma’s als voorbeeld.
 

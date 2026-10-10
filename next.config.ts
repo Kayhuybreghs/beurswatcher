@@ -3,6 +3,42 @@ import { canonicalDomainRedirects } from './app/site-config.ts';
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: '/beheer/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+          { key: 'Cache-Control', value: 'private, no-store' },
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+          },
+        ],
+      },
+      {
+        source: '/koppelen/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+          },
+        ],
+      },
+      {
+        source: '/api/instagram/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       ...canonicalDomainRedirects(),
