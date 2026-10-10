@@ -3,7 +3,10 @@ import {
   openToken,
   sealToken,
 } from './instagram-security.ts';
-import { getInstagramStore } from './instagram-store.ts';
+import {
+  getInstagramStore,
+  instagramDatabaseConfig,
+} from './instagram-store.ts';
 import {
   refreshInstagramToken,
   InstagramProviderError,
@@ -16,12 +19,7 @@ export function instagramRuntimeConfig() {
   const config = readInstagramConfig();
   if (!process.env.CRON_SECRET || process.env.CRON_SECRET.length < 32)
     throw new Error('Instagram setup incomplete');
-  if (
-    process.env.VERCEL &&
-    (!process.env.TURSO_DATABASE_URL?.startsWith('libsql://') ||
-      !process.env.TURSO_AUTH_TOKEN)
-  )
-    throw new Error('Instagram setup incomplete');
+  instagramDatabaseConfig();
   return config;
 }
 

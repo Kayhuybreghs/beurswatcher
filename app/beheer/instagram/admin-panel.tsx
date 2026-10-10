@@ -334,7 +334,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
       const response = await fetch('/api/instagram/admin/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ code: code.trim() }),
         cache: 'no-store',
         signal: AbortSignal.timeout(15000),
       });

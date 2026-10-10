@@ -30,6 +30,8 @@ De beheerpagina kan vóór de Meta-koppeling al de bestaande echte Reel-selectie
 | `CRON_SECRET` | Onafhankelijk willekeurig geheim, minimaal 32 tekens |
 | `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` | Bestaande productiedatabase met schrijfrechten |
 
+Voor Instagram wordt bij een lege primaire database-URL het volledige beheerde paar `storage_TURSO_DATABASE_URL` / `storage_TURSO_AUTH_TOKEN` gebruikt. De URL van de ene configuratie wordt niet gemengd met het token van de andere.
+
 Bewaar geen geheimen in Git, screenshots of clientcode. Geef Preview geen productiedatabase. Wijzig een gebruikte tokenversleutelingssleutel niet zonder migratie.
 
 6. Daniel opent de beheerpagina, klikt op Instagram verbinden, meldt zich aan bij @beurswatcher en geeft toestemming. Na terugkeer controleert de website het echte account en de media. “Verbonden” berust op een geslaagde controle, niet alleen op aanwezige instellingen.

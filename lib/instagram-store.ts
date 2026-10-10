@@ -24,6 +24,24 @@ export function instagramStorageIssue(error: unknown): string {
   return 'STORAGE_UNAVAILABLE';
 }
 
+export function instagramDatabaseConfig(env: NodeJS.ProcessEnv = process.env) {
+  const primaryUrl = env.TURSO_DATABASE_URL?.trim();
+  // Resolve a complete integration pair; never mix credentials from two databases.
+  const url = primaryUrl || env.storage_TURSO_DATABASE_URL?.trim() || undefined;
+  const authToken =
+    (primaryUrl
+      ? env.TURSO_AUTH_TOKEN
+      : env.storage_TURSO_AUTH_TOKEN
+    )?.trim() || undefined;
+  if (env.VERCEL) {
+    if (!url) throw new InstagramStorageError('MISSING_DATABASE_URL');
+    if (!url.startsWith('libsql://'))
+      throw new InstagramStorageError('INVALID_DATABASE_URL_SCHEME');
+    if (!authToken) throw new InstagramStorageError('MISSING_DATABASE_TOKEN');
+  }
+  return { url, authToken };
+}
+
 export type InstagramEditorialSettings = {
   mode: 'automatic' | 'manual';
   selectedIds: string[];
@@ -376,19 +394,12 @@ export function createInstagramStore(client: Client) {
 let store: ReturnType<typeof createInstagramStore> | undefined;
 export function getInstagramStore() {
   if (store) return store;
-  const url = process.env.TURSO_DATABASE_URL;
-  if (process.env.VERCEL) {
-    if (!url) throw new InstagramStorageError('MISSING_DATABASE_URL');
-    if (!url.startsWith('libsql://'))
-      throw new InstagramStorageError('INVALID_DATABASE_URL_SCHEME');
-    if (!process.env.TURSO_AUTH_TOKEN)
-      throw new InstagramStorageError('MISSING_DATABASE_TOKEN');
-  }
+  const { url, authToken } = instagramDatabaseConfig();
   if (!url) mkdirSync('.data', { recursive: true });
   store = createInstagramStore(
     createClient({
       url: url || 'file:.data/instagram.db',
-      authToken: process.env.TURSO_AUTH_TOKEN,
+      authToken,
     }),
   );
   return store;

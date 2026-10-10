@@ -345,7 +345,7 @@ export function ReelRail() {
       el.removeEventListener('scroll', update);
     };
   }, [items]);
-  if (!items.length) return null;
+  if (!items.length) return <div id="daniel-in-je-feed" aria-hidden="true" />;
   function move(d: number) {
     const el = rail.current;
     if (el)

@@ -7,7 +7,11 @@ import {
   instagramAuthorizeUrl,
   refreshInstagramToken,
 } from './lib/instagram-provider.ts';
-import { createInstagramStore } from './lib/instagram-store.ts';
+import {
+  createInstagramStore,
+  instagramDatabaseConfig,
+  instagramStorageIssue,
+} from './lib/instagram-store.ts';
 
 // Local unit tests only: no real credentials, Meta calls, or persistent databases.
 const DAY = 86400000;
@@ -25,6 +29,93 @@ const config = {
   redirectUri: 'https://beurswatcher.example/api/instagram/callback',
   username: 'beurswatcher',
 };
+
+test('database resolution supports the complete storage integration pair and trims whitespace', () => {
+  assert.deepEqual(
+    instagramDatabaseConfig({
+      VERCEL: '1',
+      TURSO_DATABASE_URL: '  ',
+      TURSO_AUTH_TOKEN: 'unused-primary-token',
+      storage_TURSO_DATABASE_URL: '  libsql://namespace.example.turso.io\n',
+      storage_TURSO_AUTH_TOKEN: '  namespace-token\n',
+    }),
+    {
+      url: 'libsql://namespace.example.turso.io',
+      authToken: 'namespace-token',
+    },
+  );
+});
+
+test('a nonempty primary database URL keeps priority with its matching token', () => {
+  assert.deepEqual(
+    instagramDatabaseConfig({
+      VERCEL: '1',
+      TURSO_DATABASE_URL: '  libsql://primary.example.turso.io ',
+      TURSO_AUTH_TOKEN: ' primary-token ',
+      storage_TURSO_DATABASE_URL: 'libsql://namespace.example.turso.io',
+      storage_TURSO_AUTH_TOKEN: 'namespace-token',
+    }),
+    { url: 'libsql://primary.example.turso.io', authToken: 'primary-token' },
+  );
+});
+
+test('an incomplete or invalid primary database never silently switches integrations', () => {
+  const namespace = {
+    VERCEL: '1',
+    storage_TURSO_DATABASE_URL: 'libsql://namespace.example.turso.io',
+    storage_TURSO_AUTH_TOKEN: 'namespace-token',
+  };
+  assert.throws(
+    () =>
+      instagramDatabaseConfig({
+        ...namespace,
+        TURSO_DATABASE_URL: 'libsql://primary.example.turso.io',
+        TURSO_AUTH_TOKEN: ' ',
+      }),
+    (error) => instagramStorageIssue(error) === 'MISSING_DATABASE_TOKEN',
+  );
+  assert.throws(
+    () =>
+      instagramDatabaseConfig({
+        ...namespace,
+        TURSO_DATABASE_URL: 'file:.data/forbidden.db',
+        TURSO_AUTH_TOKEN: 'primary-token',
+      }),
+    (error) => instagramStorageIssue(error) === 'INVALID_DATABASE_URL_SCHEME',
+  );
+});
+
+test('a namespaced URL cannot borrow a primary token; missing production configuration stays explicit', () => {
+  assert.throws(
+    () =>
+      instagramDatabaseConfig({
+        VERCEL: '1',
+        TURSO_AUTH_TOKEN: 'wrong-pair-token',
+        storage_TURSO_DATABASE_URL: 'libsql://namespace.example.turso.io',
+      }),
+    (error) => instagramStorageIssue(error) === 'MISSING_DATABASE_TOKEN',
+  );
+  assert.throws(
+    () =>
+      instagramDatabaseConfig({
+        VERCEL: '1',
+        TURSO_AUTH_TOKEN: 'unpaired-token',
+        storage_TURSO_AUTH_TOKEN: 'other-unpaired-token',
+      }),
+    (error) => instagramStorageIssue(error) === 'MISSING_DATABASE_URL',
+  );
+});
+
+test('local missing database settings preserve the local SQLite fallback', () => {
+  assert.deepEqual(instagramDatabaseConfig({}), {
+    url: undefined,
+    authToken: undefined,
+  });
+  assert.deepEqual(
+    instagramDatabaseConfig({ TURSO_DATABASE_URL: ' file::memory: ' }),
+    { url: 'file::memory:', authToken: undefined },
+  );
+});
 
 const shortResponse = (extra = {}) => ({
   access_token: SHORT_TOKEN,
@@ -50,7 +141,10 @@ async function withFetch(responses, exercise) {
   const remaining = [...responses];
   const calls = [];
   globalThis.fetch = async (input, init) => {
-    calls.push({ url: new URL(String(input)), init });
+    calls.push({
+      url: new URL(input instanceof Request ? input.url : input),
+      init,
+    });
     const response = remaining.shift();
     if (!response) throw new Error('Unexpected additional mocked request');
     if (response.networkError) throw new Error(response.networkError);
