@@ -3,6 +3,27 @@ import { mkdirSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import type { Reel } from '../app/reel-data.ts';
 
+export class InstagramStorageError extends Error {
+  readonly code: string;
+  constructor(code: string) {
+    super('Instagram storage unavailable');
+    this.code = /^[A-Z_]{1,64}$/.test(code) ? code : 'STORAGE_UNAVAILABLE';
+  }
+}
+
+export function instagramStorageIssue(error: unknown): string {
+  if (error instanceof InstagramStorageError) return error.code;
+  if (
+    error &&
+    typeof error === 'object' &&
+    'code' in error &&
+    typeof error.code === 'string' &&
+    /^[A-Z_]{1,64}$/.test(error.code)
+  )
+    return error.code;
+  return 'STORAGE_UNAVAILABLE';
+}
+
 export type InstagramEditorialSettings = {
   mode: 'automatic' | 'manual';
   selectedIds: string[];
@@ -83,9 +104,10 @@ export function createInstagramStore(client: Client) {
         ],
         'write',
       )
-      .catch(() => {
+      .catch((error: unknown) => {
         initialized = undefined;
-        throw new Error('Instagram storage unavailable');
+        // Preserve only a bounded provider error code, never URLs/tokens or SQL.
+        throw new InstagramStorageError(instagramStorageIssue(error));
       });
     await initialized;
   }
@@ -355,11 +377,13 @@ let store: ReturnType<typeof createInstagramStore> | undefined;
 export function getInstagramStore() {
   if (store) return store;
   const url = process.env.TURSO_DATABASE_URL;
-  if (
-    process.env.VERCEL &&
-    (!url?.startsWith('libsql://') || !process.env.TURSO_AUTH_TOKEN)
-  )
-    throw new Error('Instagram storage unavailable');
+  if (process.env.VERCEL) {
+    if (!url) throw new InstagramStorageError('MISSING_DATABASE_URL');
+    if (!url.startsWith('libsql://'))
+      throw new InstagramStorageError('INVALID_DATABASE_URL_SCHEME');
+    if (!process.env.TURSO_AUTH_TOKEN)
+      throw new InstagramStorageError('MISSING_DATABASE_TOKEN');
+  }
   if (!url) mkdirSync('.data', { recursive: true });
   store = createInstagramStore(
     createClient({

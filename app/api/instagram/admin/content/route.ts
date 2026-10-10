@@ -7,6 +7,7 @@ import {
   InstagramAdminDataError,
   unavailableInstagramAdminSnapshot,
 } from '../../../../../lib/instagram-admin-data.ts';
+import { instagramStorageIssue } from '../../../../../lib/instagram-store.ts';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -43,8 +44,14 @@ export async function GET(request: Request) {
   if (!authenticated(request)) return reply({ error: 'unauthorized' }, 401);
   try {
     return reply(await instagramAdminData().get());
-  } catch {
-    return reply(unavailableInstagramAdminSnapshot(), 503);
+  } catch (error) {
+    return reply(
+      {
+        ...unavailableInstagramAdminSnapshot(),
+        storageIssue: instagramStorageIssue(error),
+      },
+      503,
+    );
   }
 }
 
