@@ -31,12 +31,14 @@ export async function POST(request: Request) {
         403,
       );
     }
-    const config = instagramRuntimeConfig();
+    const config = await instagramRuntimeConfig();
     // An authenticated owner needs no invitation URL. The fresh nonce is still
     // consumed atomically by the shared callback to prevent replay.
     const flow = createFlow(
       config.connectSecret,
       randomBytes(32).toString('base64url'),
+      Date.now(),
+      config.setupRevision,
     );
     const response = json({ url: instagramAuthorizeUrl(config, flow.state) });
     response.cookies.set(INSTAGRAM_FLOW_COOKIE, flow.cookie, {
@@ -51,7 +53,7 @@ export async function POST(request: Request) {
     return json(
       {
         error:
-          'Ik rond de technische koppeling nog af. Je kunt hier alvast je selectie en teksten aanpassen.',
+          'Stel eerst de Instagram-appgegevens in via de eenmalige instellingen. Je selectie en teksten blijven bewaard.',
       },
       503,
     );

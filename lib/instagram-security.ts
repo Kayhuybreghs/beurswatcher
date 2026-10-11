@@ -237,8 +237,11 @@ export function createFlow(
   secret: string,
   inviteNonce: string,
   now = Date.now(),
+  setupRevision?: string,
 ): { state: string; cookie: string } {
   if (!validNonce(inviteNonce)) throw configurationError();
+  if (setupRevision !== undefined && !/^[a-f0-9-]{36}$/.test(setupRevision))
+    throw configurationError();
   const nonce = randomBytes(32).toString('base64url');
   return {
     state: nonce,
@@ -249,6 +252,7 @@ export function createFlow(
         nonce,
         issuedAt: now,
         expiresAt: now + FLOW_TTL,
+        ...(setupRevision === undefined ? {} : { setupRevision }),
       },
       secret,
     ),
@@ -260,17 +264,26 @@ export function verifyFlow(
   cookie: string,
   secret: string,
   now = Date.now(),
-): { inviteNonce: string; nonce: string } | null {
+): { inviteNonce: string; nonce: string; setupRevision?: string } | null {
   if (!validNonce(state)) return null;
   const payload = verify(cookie, secret, 'flow', FLOW_TTL, now);
   if (
     !payload ||
     !validNonce(payload.nonce) ||
-    !validNonce(payload.inviteNonce)
+    !validNonce(payload.inviteNonce) ||
+    (payload.setupRevision !== undefined &&
+      (typeof payload.setupRevision !== 'string' ||
+        !/^[a-f0-9-]{36}$/.test(payload.setupRevision)))
   )
     return null;
   return timingSafeEqual(Buffer.from(state), Buffer.from(payload.nonce))
-    ? { inviteNonce: payload.inviteNonce, nonce: payload.nonce }
+    ? {
+        inviteNonce: payload.inviteNonce,
+        nonce: payload.nonce,
+        ...(payload.setupRevision === undefined
+          ? {}
+          : { setupRevision: payload.setupRevision as string }),
+      }
     : null;
 }
 

@@ -4,7 +4,7 @@
 
 De vaste, afgeschermde ingang is **https://www.beurswatcher.nl/beheer/instagram**, met een afzonderlijke toegangscode. De teksten spreken vanuit de websitebouwer: “ik” en “mij”.
 
-Daniel kan de verbinding controleren, automatisch de nieuwste zes Reels tonen of zelf maximaal zes kiezen, zijn selectie ordenen en de kaarttitels aanpassen. Wijzigingen gelden pas na opslaan. Een lege handmatige selectie verbergt de Reel-sectie. De oorspronkelijke Instagram-posts veranderen niet; dit is geen algemeen CMS.
+Daniel kan op deze pagina de eenmalige Meta-inrichting doorlopen, de verbinding controleren, automatisch de nieuwste zes Reels tonen of zelf maximaal zes kiezen, zijn selectie ordenen en de kaarttitels aanpassen. Wijzigingen gelden pas na opslaan. Een lege handmatige selectie verbergt de Reel-sectie. De oorspronkelijke Instagram-posts veranderen niet; dit is geen algemeen CMS.
 
 **Het juiste account is @beurswatcher**, Daniels profiel met circa 44.000 volgers bij controle op 10 oktober 2026. Het andere account @beurswatchers wordt niet gekoppeld.
 
@@ -16,25 +16,30 @@ De beheerpagina kan vóór de Meta-koppeling al de bestaande echte Reel-selectie
 2. Voeg @beurswatcher toe aan de toegestane accounts. Laat Daniel indien nodig eerst de uitnodiging als app-tester accepteren. Voor eigen/beheerde accounts met de juiste approl beschrijft Meta Standard Access; voor andere accounts kan App Review nodig zijn.
 3. Registreer exact `https://www.beurswatcher.nl/api/instagram/callback` als OAuth redirect URI. De enige scope is `instagram_business_basic`; geen publicatierecht of privéberichten.
 4. Configureer de vereiste appgegevens eerlijk, waaronder `https://www.beurswatcher.nl/privacy`. Beschrijf hoe toestemming kan worden ingetrokken en opgeslagen accountgegevens op verzoek verwijderd kunnen worden.
-5. Configureer ontbrekende servervariabelen uitsluitend in **Beurswatcher → Vercel → Production**, en deploy opnieuw.
+5. Open **https://www.beurswatcher.nl/beheer/instagram** en doorloop het stappenplan. Het bevat kopieerknoppen voor de callback- en privacy-URL. Vul de **Instagram App ID** en **Instagram App Secret** daar in. Gebruik niet het Instagram-wachtwoord of de algemene Facebook App ID. Het geheim wordt versleuteld in de bestaande database opgeslagen en nooit teruggestuurd naar de browser. Daniel heeft hiervoor geen Vercel-toegang nodig; opnieuw publiceren is niet nodig.
+6. Klik op **Instagram verbinden**, meld je aan bij @beurswatcher en geef toestemming. Na terugkeer controleert de website het echte account en de media. Opgeslagen appgegevens zijn nog geen geslaagde koppeling: “Verbonden” berust op een echte accountcontrole.
+
+De website kan geen Meta-account of Meta-app namens Daniel aanmaken, Meta-formulieren overslaan of goedkeuring garanderen. Eventuele approllen, testeruitnodigingen en controles worden op Meta zelf afgehandeld. Een reeds actieve verbinding kan niet via het instellingenformulier naar een andere app worden omgezet. Vervanging van opgeslagen appgegevens vóór activering vraagt expliciete bevestiging.
+
+### Serverbasis voor de websitebeheerder
+
+Deze bestaande serverconfiguratie blijft nodig. De twee Meta-appgegevens kunnen dus via de beheerpagina worden toegevoegd. Een volledig omgevingspaar heeft voorrang en maakt het formulier alleen-lezen; een onvolledig omgevingspaar moet eerst door de beheerder worden hersteld.
 
 | Variabele | Inhoud |
 | --- | --- |
 | `BEURSWATCHER_SITE_URL` | `https://www.beurswatcher.nl` |
 | `INSTAGRAM_ADMIN_CODE_HASH` | Gezouten scrypt-hash van de toegangscode |
 | `INSTAGRAM_ADMIN_SESSION_SECRET` | Onafhankelijk willekeurig sessiegeheim, minimaal 43 tekens |
-| `INSTAGRAM_APP_ID`, `INSTAGRAM_APP_SECRET` | Instagram App ID en geheim uit Meta |
+| `INSTAGRAM_APP_ID`, `INSTAGRAM_APP_SECRET` | Optioneel alternatief voor het beveiligde formulier; altijd als volledig paar |
 | `INSTAGRAM_USERNAME` | `beurswatcher` |
-| `INSTAGRAM_CONNECT_SECRET` | Onafhankelijk willekeurig geheim, minimaal 43 tekens |
-| `INSTAGRAM_TOKEN_ENCRYPTION_KEY` | Onafhankelijke 32 willekeurige bytes, standaard base64 |
+| `INSTAGRAM_CONNECT_SECRET` | Optionele expliciete sleutel, minimaal 43 tekens; anders apart afgeleid van het admin-sessiegeheim |
+| `INSTAGRAM_TOKEN_ENCRYPTION_KEY` | Optionele expliciete sleutel van 32 bytes in standaard base64; anders apart afgeleid van het admin-sessiegeheim |
 | `CRON_SECRET` | Onafhankelijk willekeurig geheim, minimaal 32 tekens |
 | `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN` | Bestaande productiedatabase met schrijfrechten |
 
 Voor Instagram wordt bij een lege primaire database-URL het volledige beheerde paar `storage_TURSO_DATABASE_URL` / `storage_TURSO_AUTH_TOKEN` gebruikt. De URL van de ene configuratie wordt niet gemengd met het token van de andere.
 
-Bewaar geen geheimen in Git, screenshots of clientcode. Geef Preview geen productiedatabase. Wijzig een gebruikte tokenversleutelingssleutel niet zonder migratie.
-
-6. Daniel opent de beheerpagina, klikt op Instagram verbinden, meldt zich aan bij @beurswatcher en geeft toestemming. Na terugkeer controleert de website het echte account en de media. “Verbonden” berust op een geslaagde controle, niet alleen op aanwezige instellingen.
+Bewaar geen geheimen in Git, screenshots of clientcode. Geef Preview geen productiedatabase. Het admin-sessiegeheim dient als hoofdsleutel voor afzonderlijk afgeleide sleutels voor appopslag, OAuth-state en tokenopslag. Bestaande expliciete OAuth- en tokensleutels blijven voor die doelen gelden. **Wijzig het admin-sessiegeheim of een gebruikte versleutelingssleutel niet zonder migratie:** anders kunnen opgeslagen appgegevens en tokens onleesbaar worden. Alleen de toegangscode wijzigen kan via een nieuwe codehash; daarvoor hoeft de hoofdsleutel niet te veranderen.
 
 ## Toegangscode en overdracht
 
@@ -47,7 +52,9 @@ Controleer de echte productie-login vóór overdracht. Deel code en link privé.
 
 De code zelf staat niet in de database of browseropslag. De sessie gebruikt een HttpOnly-cookie, Secure op HTTPS, SameSite=Lax en een looptijd van dertig dagen. Uitloggen verwijdert de cookie op dat apparaat. Inlogpogingen worden duurzaam beperkt; rauwe IP-adressen worden niet opgeslagen.
 
-De oudere eenmalige `/koppelen/instagram`-uitnodiging blijft als technische terugvalmogelijkheid bestaan. De vaste beheerpagina is de normale ingang.
+De oudere eenmalige `/koppelen/instagram`-uitnodiging blijft beschikbaar voor bestaande expliciete omgevingsconfiguratie. De oude uitnodigingsscripts lezen geen appgegevens uit de database. Gebruik voor de nieuwe zelfservice-inrichting altijd de vaste beheerpagina.
+
+Zijn appgegevens door een gewijzigde hoofdsleutel onleesbaar geworden terwijl een verbinding actief staat, dan blijft vervangen geblokkeerd. De websitebeheerder moet de oorspronkelijke sleutel herstellen of een gecontroleerde migratie uitvoeren. Dit kan Daniel niet oplossen door nogmaals op verbinden te klikken.
 
 ## Werking en grenzen
 
@@ -64,7 +71,7 @@ De oudere eenmalige `/koppelen/instagram`-uitnodiging blijft als technische teru
 
 ## Oplevercontroles
 
-Controleer authenticatie, ongeldige codes, no-store/noindex, selectie/volgorde/titels, bewust lege selectie, conflicterende saves, accountisolatie, tokenopslag, typecheck/lint/build en de pagina op desktop en telefoon.
+Controleer authenticatie, ongeldige codes, no-store/noindex, selectie/volgorde/titels, bewust lege selectie, conflicterende saves, accountisolatie, tokenopslag, typecheck/lint/build en de pagina op desktop en telefoon. Controleer voor appinrichting ook versleutelde opslag, geen teruggestuurd appgeheim, bescherming tegen aanvragen van een andere site, de bevestiging voor vervangen, gelijktijdige wijzigingen en een OAuth-callback voor inmiddels vervangen instellingen. Test met fictieve appgegevens uitsluitend in een geïsoleerde lokale database; sla deze nooit op in productie.
 
 Vóór echte Instagram-activering: Daniel autoriseert het echte account; controleer recente Reels en hover/tap-weergave. Controleer verkeerde accountkeuze, weigering, OAuth-hergebruik en de echte Vercel-taak. Echte tokenvernieuwing kan pas vanaf 24 uur na tokenuitgifte getest worden. Gesimuleerde tests zijn daarvan geen bewijs.
 

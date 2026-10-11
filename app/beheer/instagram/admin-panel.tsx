@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { BrandMark } from '../../brand';
 import type { Reel } from '../../reel-data';
+import SetupPanel from './setup-panel';
 import styles from './admin.module.css';
 
 type Settings = {
@@ -49,6 +50,8 @@ type Operation =
   | 'check'
   | 'save'
   | 'connect'
+  | 'setup-check'
+  | 'setup-save'
   | 'reload'
   | null;
 type Feedback = { kind: 'error' | 'success' | 'info'; text: string } | null;
@@ -400,6 +403,52 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
       setFeedback({
         kind: 'error',
         text: 'De selectie kon niet worden geladen. Probeer het opnieuw.',
+      });
+    } finally {
+      finish();
+    }
+  }
+
+  async function checkSetup() {
+    if (!begin('setup-check')) return;
+    try {
+      // Read only setup status. Do not reload editable settings or clear a
+      // conflict, including when the session has expired during editing.
+      const response = await fetch('/api/instagram/admin/content', {
+        method: 'GET',
+        credentials: 'same-origin',
+        cache: 'no-store',
+        signal: AbortSignal.timeout(20000),
+      });
+      if (response.status === 401) {
+        setFeedback({
+          kind: 'error',
+          text: 'Je sessie is verlopen. Je wijzigingen staan hier nog. Kopieer eventuele nieuwe titels en noteer je selectie voordat je opnieuw inlogt.',
+        });
+        return;
+      }
+      const data: unknown = await response.json();
+      if (!response.ok || !isContent(data))
+        throw new Error('Setup check unavailable');
+      setContent((current) =>
+        current
+          ? {
+              ...current,
+              configured: data.configured,
+              connection: data.connection,
+            }
+          : current,
+      );
+      setFeedback({
+        kind: 'info',
+        text: data.configured
+          ? 'De instellingen zijn beschikbaar. Je kunt het verbinden nu starten en daarna toestemming geven in Instagram.'
+          : 'Instagram verbinden is nog niet beschikbaar. De verbinding met Meta moet eerst worden ingesteld. Je selectie en titels zijn niet veranderd.',
+      });
+    } catch {
+      setFeedback({
+        kind: 'error',
+        text: 'De instellingen konden niet worden gecontroleerd. Probeer het later opnieuw. Je selectie en titels zijn niet veranderd.',
       });
     } finally {
       finish();
@@ -803,25 +852,29 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                 >
                   <div>
                     <span
-                      className={`${styles.statusBadge} ${connected ? styles.connected : styles.waiting}`}
+                      className={`${styles.statusBadge} ${content.configured && connected ? styles.connected : styles.waiting}`}
                     >
                       <span />
-                      {connected
-                        ? 'Instagram verbonden'
-                        : connectionStatus === 'needs-reconnect'
-                          ? 'Opnieuw verbinden nodig'
-                          : connectionStatus === 'unavailable'
-                            ? 'Verbinding controleren'
-                            : 'Nog niet verbonden'}
+                      {!content.configured
+                        ? 'Koppeling nog niet ingesteld'
+                        : connected
+                          ? 'Instagram verbonden'
+                          : connectionStatus === 'needs-reconnect'
+                            ? 'Opnieuw verbinden nodig'
+                            : connectionStatus === 'unavailable'
+                              ? 'Verbinding controleren'
+                              : 'Nog niet verbonden'}
                     </span>
                     <h2 id="connection-heading">
-                      {connected
-                        ? 'Je account is gekoppeld.'
-                        : 'Verbind Instagram één keer.'}
+                      {!content.configured
+                        ? 'Stel je Instagram-koppeling in.'
+                        : connected
+                          ? 'Je account is gekoppeld.'
+                          : 'Verbind Instagram één keer.'}
                     </h2>
                     <p>
                       {!content.configured
-                        ? 'Ik rond de technische koppeling nog af. Je kunt hier alvast je selectie en teksten aanpassen.'
+                        ? 'Volg hieronder de vier stappen om je Meta-app in te stellen en @beurswatcher te verbinden. Je kunt intussen ook je Reel-selectie en titels aanpassen.'
                         : content.connection.message ||
                           (connected
                             ? 'De website kan nieuwe Reels van @beurswatcher ophalen.'
@@ -838,51 +891,84 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                     </div>
                   </div>
                   <div className={styles.connectionActions}>
-                    <button
-                      type="button"
-                      className={styles.primaryButton}
-                      disabled={!content.configured || !!operation || unsaved}
-                      onClick={() => void connect()}
-                      aria-busy={operation === 'connect'}
-                    >
-                      {operation === 'connect' ? (
-                        <LoaderCircle
-                          className={styles.spinner}
-                          size={18}
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Camera size={18} aria-hidden="true" />
-                      )}
-                      {operation === 'connect'
-                        ? 'Instagram openen…'
-                        : connected
-                          ? 'Account opnieuw verbinden'
-                          : 'Instagram verbinden'}
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.secondaryButton}
-                      disabled={!!operation || !content.configured}
-                      onClick={() => void checkNow()}
-                      aria-busy={operation === 'check'}
-                    >
-                      <RefreshCw
-                        size={16}
-                        className={operation === 'check' ? styles.spinner : ''}
-                        aria-hidden="true"
-                      />
-                      {operation === 'check'
-                        ? 'Verbinding controleren…'
-                        : 'Verbinding controleren'}
-                    </button>
-                    <p>
-                      {unsaved
-                        ? 'Sla je wijzigingen eerst op voordat je Instagram opent.'
-                        : 'Alleen toegang tot je profiel en video’s. Geen toegang tot je privéberichten.'}
-                    </p>
+                    {!content.configured ? (
+                      <>
+                        <a
+                          href="#instagram-setup"
+                          className={styles.primaryButton}
+                        >
+                          Begin met instellen
+                          <ArrowDown size={16} aria-hidden="true" />
+                        </a>
+                        <p>
+                          Je selectie en titels blijven behouden, ook als je
+                          wijzigingen nog niet hebt opgeslagen.
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          className={styles.primaryButton}
+                          disabled={
+                            !content.configured || !!operation || unsaved
+                          }
+                          onClick={() => void connect()}
+                          aria-busy={operation === 'connect'}
+                        >
+                          {operation === 'connect' ? (
+                            <LoaderCircle
+                              className={styles.spinner}
+                              size={18}
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <Camera size={18} aria-hidden="true" />
+                          )}
+                          {operation === 'connect'
+                            ? 'Instagram openen…'
+                            : connected
+                              ? 'Account opnieuw verbinden'
+                              : 'Instagram verbinden'}
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.secondaryButton}
+                          disabled={!!operation || !content.configured}
+                          onClick={() => void checkNow()}
+                          aria-busy={operation === 'check'}
+                        >
+                          <RefreshCw
+                            size={16}
+                            className={
+                              operation === 'check' ? styles.spinner : ''
+                            }
+                            aria-hidden="true"
+                          />
+                          {operation === 'check'
+                            ? 'Verbinding controleren…'
+                            : 'Verbinding controleren'}
+                        </button>
+                        <p>
+                          {unsaved
+                            ? 'Sla je wijzigingen eerst op voordat je Instagram opent.'
+                            : 'Alleen toegang tot je profiel en video’s. Geen toegang tot je privéberichten.'}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </section>
+
+                <SetupPanel
+                  configured={content.configured}
+                  connected={connected}
+                  busy={!!operation}
+                  hasUnsavedChanges={unsaved}
+                  onStartSave={() => begin('setup-save')}
+                  onFinishSave={finish}
+                  onCheck={checkSetup}
+                  onConnect={connect}
+                />
 
                 <section
                   className={styles.selectionSection}

@@ -308,6 +308,24 @@ function Content({ path }: { path: string }) {
             of dien een verwijderverzoek in via het contactformulier. Deel je
             afmeldlink niet met anderen.
           </p>
+          <h2 id="instagram">Instagram-koppeling</h2>
+          <p>
+            De eigenaar van het Instagram-account kan via de afgeschermde
+            beheerpagina toestemming geven om profielgegevens en eigen Reels op
+            te halen. De koppeling vraagt geen toegang tot privéberichten en kan
+            geen berichten plaatsen. We bewaren het accountnummer, de
+            gebruikersnaam, gegevens van de Reels en de selectie en titels voor
+            deze website. Appgeheimen en toegangstokens worden versleuteld
+            opgeslagen en zijn niet openbaar opvraagbaar.
+          </p>
+          <p>
+            Je kunt de toestemming bij Instagram intrekken. Wil je ook de
+            koppeling en opgeslagen accountgegevens laten verwijderen? Dien dan
+            een verzoek in via het contactformulier en vermeld de
+            gebruikersnaam. Stuur geen wachtwoord of appgeheim mee. Intrekken
+            van toestemming verwijdert niet vanzelf de eerder opgeslagen
+            selectie op deze website.
+          </p>
           <h2>Cookies en externe diensten</h2>
           <p>
             De marktweergaven worden geladen bij TradingView wanneer ze in beeld

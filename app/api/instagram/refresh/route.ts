@@ -1,5 +1,8 @@
 import { timingSafeEqual } from 'node:crypto';
-import { maintainInstagramConnection } from '../../../../lib/instagram-connection';
+import {
+  maintainInstagramConnection,
+  instagramRuntimeConfig,
+} from '../../../../lib/instagram-connection';
 import {
   instagramAdminData,
   InstagramAdminDataError,
@@ -22,7 +25,9 @@ export async function GET(request: Request) {
       { error: 'Unauthorized' },
       { status: 401, headers: { 'Cache-Control': 'no-store' } },
     );
-  if (!process.env.INSTAGRAM_APP_ID || !process.env.INSTAGRAM_APP_SECRET) {
+  try {
+    await instagramRuntimeConfig();
+  } catch {
     return Response.json(
       { status: 'waiting-for-setup' },
       {

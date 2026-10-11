@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     : '/koppelen/instagram';
   let config;
   try {
-    config = instagramRuntimeConfig();
+    config = await instagramRuntimeConfig();
   } catch {
     return NextResponse.redirect(new URL(destination, siteUrl));
   }
@@ -62,7 +62,8 @@ export async function GET(request: NextRequest) {
     params.getAll('state').length === 1
       ? verifyFlow(state, cookie, config.connectSecret)
       : null;
-  if (!flow) return done('expired');
+  if (!flow || flow.setupRevision !== config.setupRevision)
+    return done('expired');
   try {
     const store = getInstagramStore();
     if (
@@ -87,6 +88,7 @@ export async function GET(request: NextRequest) {
       },
       hashSecret(flow.inviteNonce),
       now,
+      config.setupRevision,
     );
     return done('connected');
   } catch {

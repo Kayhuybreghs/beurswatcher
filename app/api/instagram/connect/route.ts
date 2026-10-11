@@ -27,7 +27,7 @@ const failure = (error: string, status: number) =>
 
 export async function POST(request: Request) {
   try {
-    const config = instagramRuntimeConfig();
+    const config = await instagramRuntimeConfig();
     if (
       request.headers.get('origin') !== config.origin ||
       !request.headers.get('content-type')?.startsWith('application/json')
@@ -48,7 +48,12 @@ export async function POST(request: Request) {
     if (!invite) return failure('expired', 403);
     if (await getInstagramStore().inviteUsed(hashSecret(invite.nonce)))
       return failure('expired', 403);
-    const flow = createFlow(config.connectSecret, invite.nonce);
+    const flow = createFlow(
+      config.connectSecret,
+      invite.nonce,
+      Date.now(),
+      config.setupRevision,
+    );
     const response = NextResponse.json(
       { url: instagramAuthorizeUrl(config, flow.state) },
       {

@@ -65,6 +65,11 @@ export type InstagramConnection = {
   revision: string;
   lease: string;
 };
+export type InstagramAppSetup = {
+  appId: string;
+  secret: string;
+  revision: string;
+};
 function storedText(value: unknown): string {
   if (typeof value !== 'string')
     throw new Error('Invalid Instagram storage record');
@@ -88,6 +93,26 @@ function connection(row?: Row): InstagramConnection | null {
 // Factory accepts an isolated SQLite client in tests. Production uses the existing Turso database.
 export function createInstagramStore(client: Client) {
   let initialized: Promise<unknown> | undefined;
+  let writes: Promise<unknown> = Promise.resolve();
+  // Local SQLite has one connection. Queue interactive writes here; the database
+  // transaction still provides the cross-instance guard in production.
+  function write<T>(
+    action: (tx: Awaited<ReturnType<Client['transaction']>>) => Promise<T>,
+  ): Promise<T> {
+    const result = writes.then(async () => {
+      const tx = await client.transaction('write');
+      try {
+        const value = await action(tx);
+        await tx.commit();
+        return value;
+      } finally {
+        if (!tx.closed) await tx.rollback();
+        tx.close();
+      }
+    });
+    writes = result.catch(() => undefined);
+    return result;
+  }
   async function ready() {
     initialized ??= client
       .batch(
@@ -99,6 +124,9 @@ export function createInstagramStore(client: Client) {
         last_attempt INTEGER NOT NULL DEFAULT 0)`,
           'CREATE TABLE IF NOT EXISTS instagram_used_invites (nonce_hash TEXT PRIMARY KEY, expires_at INTEGER NOT NULL)',
           'CREATE TABLE IF NOT EXISTS instagram_used_flows (nonce_hash TEXT PRIMARY KEY, expires_at INTEGER NOT NULL)',
+          `CREATE TABLE IF NOT EXISTS instagram_app_setup (
+            id INTEGER PRIMARY KEY CHECK(id = 1), app_id TEXT NOT NULL,
+            secret TEXT NOT NULL, revision TEXT NOT NULL)`,
           `CREATE TABLE IF NOT EXISTS instagram_editorial (
             id INTEGER PRIMARY KEY CHECK(id = 1), settings TEXT NOT NULL, revision TEXT NOT NULL)`,
           {
@@ -130,8 +158,63 @@ export function createInstagramStore(client: Client) {
     await initialized;
   }
   return {
+    async setup(): Promise<InstagramAppSetup | null> {
+      await ready();
+      await writes;
+      const row = (
+        await client.execute('SELECT * FROM instagram_app_setup WHERE id=1')
+      ).rows[0];
+      return row
+        ? {
+            appId: storedText(row.app_id),
+            secret: storedText(row.secret),
+            revision: storedText(row.revision),
+          }
+        : null;
+    },
+    async saveSetup(
+      appId: string,
+      secret: string,
+      expectedRevision: string | null,
+      now = Date.now(),
+    ) {
+      await ready();
+      return write(async (tx) => {
+        const active =
+          (
+            await tx.execute({
+              sql: "SELECT 1 FROM instagram_connection WHERE id=1 AND status='connected' AND expires_at>?",
+              args: [now],
+            })
+          ).rows.length > 0;
+        if (active) return { error: 'active-connection' as const };
+        const row = (
+          await tx.execute(
+            'SELECT revision FROM instagram_app_setup WHERE id=1',
+          )
+        ).rows[0];
+        if ((row ? storedText(row.revision) : null) !== expectedRevision)
+          return { error: 'conflict' as const };
+        const revision = randomUUID();
+        await tx.execute({
+          sql: `INSERT INTO instagram_app_setup VALUES (1,?,?,?) ON CONFLICT(id)
+            DO UPDATE SET app_id=excluded.app_id,secret=excluded.secret,revision=excluded.revision`,
+          args: [appId, secret, revision],
+        });
+        // Replacing app credentials invalidates old token/refresh work, even when already expired.
+        await tx.execute({
+          sql: "UPDATE instagram_connection SET status='needs-reconnect',revision=?,lease=NULL,lease_until=0 WHERE id=1",
+          args: [randomUUID()],
+        });
+        await tx.execute(
+          "UPDATE instagram_health SET status='waiting',credential_key='',last_attempt=0,check_lease=NULL WHERE id=1",
+        );
+        return { revision };
+      });
+    },
     async get() {
       await ready();
+      await writes;
       return connection(
         (
           await client.execute(
@@ -166,11 +249,21 @@ export function createInstagramStore(client: Client) {
       record: Omit<InstagramConnection, 'status' | 'revision' | 'lease'>,
       inviteHash: string,
       now = Date.now(),
+      setupRevision?: string,
     ) {
       await ready();
-      // One transaction: an invitation can connect only once, including across Vercel instances.
-      await client.batch(
-        [
+      return write(async (tx) => {
+        if (setupRevision !== undefined) {
+          const row = (
+            await tx.execute(
+              'SELECT revision FROM instagram_app_setup WHERE id=1',
+            )
+          ).rows[0];
+          if (!row || row.revision !== setupRevision)
+            throw new Error('Instagram setup changed');
+        }
+        // One transaction: an invitation can connect only once, including across Vercel instances.
+        await tx.batch([
           {
             sql: 'INSERT INTO instagram_used_invites VALUES (?, ?)',
             args: [inviteHash, now + 8 * 86400000],
@@ -194,9 +287,8 @@ export function createInstagramStore(client: Client) {
             sql: "UPDATE instagram_health SET status='waiting',checked_at=NULL,credential_key='',last_attempt=0,check_lease=NULL WHERE id=1",
             args: [],
           },
-        ],
-        'write',
-      );
+        ]);
+      });
     },
     async claimRefresh(now = Date.now()) {
       await ready();

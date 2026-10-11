@@ -7,7 +7,7 @@ import { verifyNotice } from './instagram-security';
 
 export async function getConnectionPageState() {
   try {
-    const config = instagramRuntimeConfig();
+    const config = await instagramRuntimeConfig();
     const notice = (await cookies()).get(INSTAGRAM_NOTICE_COOKIE)?.value;
     return {
       configured: true,

@@ -164,16 +164,16 @@ export function unavailableInstagramAdminSnapshot(
 export function createInstagramAdminData(dependencies: {
   store: Store;
   credentials: () => Promise<Credentials | null>;
-  configured: () => boolean;
+  configured: () => boolean | Promise<boolean>;
   fetcher?: typeof fetch;
   now?: () => number;
 }) {
   const { store } = dependencies;
   const now = dependencies.now ?? Date.now;
   const fetcher = dependencies.fetcher ?? fetch;
-  const configured = () => {
+  const configured = async () => {
     try {
-      return dependencies.configured();
+      return await dependencies.configured();
     } catch {
       return false;
     }
@@ -223,7 +223,7 @@ export function createInstagramAdminData(dependencies: {
     };
   }
   type Context = Awaited<ReturnType<typeof context>>;
-  function snapshot(ctx: Context): InstagramAdminSnapshot {
+  async function snapshot(ctx: Context): Promise<InstagramAdminSnapshot> {
     const availableIds = new Set(ctx.catalogue.map((item) => item.id));
     // Historical overrides must not make the next edit fail validation after a Reel ages out.
     const settings = {
@@ -238,7 +238,7 @@ export function createInstagramAdminData(dependencies: {
       ),
     };
     return {
-      configured: configured(),
+      configured: await configured(),
       connection: {
         status: ctx.status,
         checkedAt:
@@ -450,8 +450,8 @@ export function instagramAdminData() {
   return createInstagramAdminData({
     store: getInstagramStore(),
     credentials: instagramCredentials,
-    configured: () => {
-      instagramRuntimeConfig();
+    configured: async () => {
+      await instagramRuntimeConfig();
       return true;
     },
   });

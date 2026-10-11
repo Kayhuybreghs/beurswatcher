@@ -238,9 +238,12 @@ export function verifyAdminSession(
 }
 
 /** Read only the signed cookie; no Meta credentials or account connection are required. */
-export function readAdminSession(request: Request): boolean {
+export function readAdminSession(
+  request: Request,
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
   try {
-    const config = getAdminConfig();
+    const config = getAdminConfig(env);
     const header = request.headers.get('cookie') || '';
     if (header.length > 16384) return false;
     const matches = header
