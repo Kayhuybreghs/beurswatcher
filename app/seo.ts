@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { articles, partners, toolItems, topics } from './data';
 import { guides } from './guide-data';
 import { topicContent } from './topic-content';
+import { partnerFacts } from './partner-facts';
 import { siteUrl } from './site-config';
 
 export { siteUrl };
@@ -111,7 +112,7 @@ export function metadataForPage(path: string): Metadata {
     topic?.title ||
     article?.title ||
     tool?.title ||
-    (partner && `${partner.name}: aanbod en aandachtspunten`) ||
+    (partner && partnerFacts[partner.slug].headline.replace(/\.$/, '')) ||
     'Pagina niet gevonden';
   const description =
     pageCopy[path]?.description ||
@@ -120,8 +121,7 @@ export function metadataForPage(path: string): Metadata {
     article?.intro ||
     (tool &&
       `${tool.text} Pas de invoer aan en vergelijk de uitkomsten. Lees ook de rekenaannames en beperkingen.`) ||
-    (partner &&
-      `${partner.text} Lees wat ${partner.name} aanbiedt en welke kosten en voorwaarden je vooraf kunt controleren.`) ||
+    (partner && partnerFacts[partner.slug].description) ||
     'Deze pagina bestaat niet. Bekijk de artikelen en rekentools van Beurswatcher.';
   const noindex =
     Boolean(article) ||

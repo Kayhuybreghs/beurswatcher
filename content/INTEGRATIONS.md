@@ -23,13 +23,12 @@ Bronnen:
 
 ## Gratis marktdata
 
-De markthub en mini-hub op Home gebruiken officiële TradingView-widgets, met intacte bronvermelding. S&P 500 en Nasdaq 100 staan als dagelijkse FRED-indexreeksen getoond, conform het officiële widgetvoorbeeld; dit zijn geen CFD's. De gebruiker kan maand-, jaar- en meerjarige perioden kiezen. De aparte bewegingenwidget toont Amerikaanse aandelen. Coverage en vertraging verschillen per beurs. Er worden geen widgetgegevens gescrapet of in een eigen API herverdeeld.
+De markthub en mini-hub op Home gebruiken officiële TradingView-widgets, met intacte bronvermelding. De huidige configuratie in `app/tradingview-overview.ts` gebruikt FOREX.com CFD-referentieprijzen voor S&P 500, Nasdaq 100 en Dow Jones. Deze kunnen afwijken van de officiële indexstanden; het zijn geen FRED-dagkoersen. De aparte bewegingenwidget toont Amerikaanse stijgers, dalers en actieve aandelen. Dekking, beschikbaarheid en vertraging hangen van de bron af. Er worden geen widgetgegevens gescrapet of in een eigen API herverdeeld.
 
-ECB-koersen blijven via de eigen server-API beschikbaar. De beleidskalender filtert verlopen data en verwijst naar de ECB. Nieuws is nog steeds een afzonderlijk gedateerde redactionele selectie, geen automatische nieuwsfeed. De ticker, eerdere homepage-radarkaart en oude markt-subpagina's kunnen expliciet gemarkeerde voorbeelddata bevatten. AEX-cijfers zijn niet toegevoegd als echte data: de widgets geven geen gegarandeerde AEX-dekking.
+ECB-koersen blijven via de eigen server-API beschikbaar. De beleidskalender filtert verlopen data en verwijst naar de ECB. Externe nieuwsartikelen en de nieuwsaggregator zijn verwijderd; de markthub toont marktgegevens en publicatieplanning. Algemene uitleg en eigen blogs staan onder Verdieping, met herkenbare labels voor bestaande voorbeeldblogs. De ticker, eerdere homepage-radarkaart en oude markt-subpagina's kunnen expliciet gemarkeerde voorbeelddata bevatten. AEX-cijfers zijn niet toegevoegd als echte data: de widgets geven geen gegarandeerde AEX-dekking.
 
 Bronnen:
-- https://www.tradingview.com/widget-docs/widgets/charts/symbol-overview/demos/indices-overview/
-- https://www.tradingview.com/widget-docs/widgets/watchlists/hotlists/
+- https://www.tradingview.com/widget-docs/
 - https://www.tradingview.com/widget-docs/faq/data/
 - https://www.tradingview.com/policies/
 - https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html

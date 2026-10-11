@@ -391,6 +391,27 @@ function Content({ path }: { path: string }) {
             brengt risico’s met zich mee; de inhoud is geen persoonlijk
             beleggingsadvies.
           </p>
+          <h2>Samenwerkingen en commerciële links</h2>
+          <p>
+            De teksten over Scalable Capital, Delta, Brand New Day, Saxo en
+            American Express zijn gebaseerd op de door Daniel aangeleverde
+            samenwerkingsteksten. Productinformatie is gecontroleerd bij de
+            aanbieder; de controledatum en bronnen staan per pagina vermeld.
+            Rente, tarieven, beschikbaarheid en voorwaarden kunnen daarna
+            wijzigen.
+          </p>
+          <p>
+            Links met het label ‘Commerciële link’ zijn affiliate- of
+            verwijzingslinks. Beurswatcher kan daarvoor een vergoeding
+            ontvangen. Samenwerkingen worden bij de betreffende uitleg vermeld.
+            Een genoemde aanbieder of een rekenvoorbeeld is geen persoonlijke
+            aanbeveling om een product te kopen of een rekening te openen.
+          </p>
+          <p>
+            De informatie houdt geen rekening met jouw volledige persoonlijke
+            situatie. Voor persoonlijk financieel of fiscaal advies kun je een
+            daarvoor bevoegde deskundige raadplegen.
+          </p>
         </div>
       </>
     );
@@ -544,7 +565,10 @@ export default function Platform({ path }: { path: string }) {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Beurswatcher</span>
-          <span>Beleggen kent risico’s. Je kunt je inleg verliezen.</span>
+          <span>
+            Algemene informatie, geen persoonlijk advies. Beleggen kent
+            risico’s; je kunt je inleg verliezen.
+          </span>
           <Link href="/privacy">Privacy</Link>
           <Link href="/colofon">Colofon & bronnen</Link>
           <Link className="site-creator-credit" href="/achter-de-website">

@@ -117,7 +117,7 @@ export const partnerDetails: Record<
   }
 > = {
   'scalable-capital': {
-    intent: 'Periodiek beleggen',
+    intent: 'Beleggen & rente',
     fit: 'Je wilt zelfstandig beleggen en onderzoeken hoe een vaste inleg in jouw aanpak past.',
     angle:
       'Vergelijk de broker op aanbod, handelskosten en periodiek inleggen.',
@@ -165,8 +165,8 @@ export const partnerDetails: Record<
     topic: 'Pensioen',
   },
   saxo: {
-    intent: 'Zakelijk & zelfstandig beleggen',
-    fit: 'Je onderzoekt mogelijkheden voor je onderneming of wilt zelfstandig beleggen.',
+    intent: 'België & zakelijk Nederland',
+    fit: 'Je wilt de Belgische brokerdienst of een zakelijke rekening voor je Nederlandse onderneming onderzoeken.',
     angle: 'Wat heeft je onderneming nodig voordat geld belegd kan worden?',
     consider: [
       'Liquiditeit en beleggingshorizon',

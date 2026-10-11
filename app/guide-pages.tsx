@@ -116,8 +116,9 @@ export function GuidePage({ slug }: { slug: string }) {
           <div className="guide-source">
             <p>
               Deze uitleg beschrijft algemene begrippen en de werking van de
-              Beurswatcher-tool. Je persoonlijke situatie kan afwijken. Beleggen
-              brengt risico’s mee.
+              Beurswatcher-tool. Het is geen persoonlijk financieel advies. Je
+              persoonlijke situatie kan afwijken. Bij beleggen kun je je inleg
+              verliezen.
             </p>
             <a
               href={guideSources[g.source][1]}

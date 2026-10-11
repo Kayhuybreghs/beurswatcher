@@ -9,12 +9,14 @@ export const partnerFacts: Record<
     costSource: string;
     source: string;
     steps: string[];
+    checkedAt: string;
   }
 > = {
   'scalable-capital': {
-    headline: 'Zelf beleggen bij Scalable Capital.',
+    checkedAt: '11 oktober 2026',
+    headline: 'Beleggingsplannen, een wereld-ETF en rente bij Scalable.',
     description:
-      'Scalable Capital is een broker waarmee je zelf aandelen en ETF’s kiest. Met een beleggingsplan kun je periodiek inleggen.',
+      'Lees hoe je periodiek belegt, hoe de Scalable wereld-ETF is opgebouwd en wat het Overnight account doet met geld dat je niet belegt. Met de kosten, voorwaarden en risico’s erbij.',
     benefits: [
       'Beleggingsplannen vanaf € 1.',
       'Geen uitvoeringskosten voor beleggingsplannen; productkosten en spreads kunnen wel gelden.',
@@ -31,9 +33,10 @@ export const partnerFacts: Record<
     ],
   },
   delta: {
+    checkedAt: '11 oktober 2026',
     headline: 'Je beleggingen bijhouden met Delta.',
     description:
-      'Delta is een app om je beleggingen bij te houden. Je brengt ze samen in één overzicht door rekeningen te koppelen of transacties zelf in te voeren. Niet iedere rekening kan worden gekoppeld. Je belegt je geld niet bij Delta.',
+      'Breng beleggingen van verschillende rekeningen samen, volg je portefeuille en bekijk het overzicht via een iPhone-widget. Lees wat Delta wel en niet kan koppelen.',
     benefits: [
       'Verschillende soorten beleggingen in één overzicht.',
       'Handmatige transacties voor posities zonder automatische koppeling.',
@@ -46,9 +49,10 @@ export const partnerFacts: Record<
     steps: ['Breng posities samen', 'Bekijk de verdeling', 'Volg het totaal'],
   },
   'brand-new-day': {
-    headline: 'Pensioenbeleggen bij Brand New Day.',
+    checkedAt: '11 oktober 2026',
+    headline: 'Pensioen opbouwen bij Brand New Day.',
     description:
-      'Met de pensioenrekening-beleggen van Brand New Day kun je aanvullend pensioen opbouwen in beleggingsfondsen. De rekening is fiscaal geblokkeerd: dit is geld voor later.',
+      'Lees over pensioenbeleggen, pensioensparen en je fiscale inlegruimte. Wat kun je aftrekken, welke kosten betaal je en wanneer kun je het geld gebruiken?',
     benefits: [
       'Kiezen uit modelportefeuilles of zelf fondsen kiezen.',
       'Inleggen voor aanvullend pensioen.',
@@ -66,11 +70,13 @@ export const partnerFacts: Record<
     ],
   },
   saxo: {
-    headline: 'Zakelijk beleggen bij Saxo.',
+    checkedAt: '11 oktober 2026',
+    headline: 'Zelf beleggen bij Saxo: België en zakelijk Nederland.',
     description:
-      'Saxo biedt zelfstandig beleggen en zakelijke beleggingsrekeningen. Onderzoek eerst welk geld je onderneming kan missen en welke rekening bij de rechtsvorm past.',
+      'Wat regelt Saxo voor Belgische beleggers en hoe werkt een zakelijke rekening in Nederland? Bekijk de mogelijkheden apart: per land en rekening gelden andere voorwaarden.',
     benefits: [
-      'Een afzonderlijke rekening voor zakelijk beleggen.',
+      'Belgische beurstaks automatisch afgehandeld bij Saxo België.',
+      'Een afzonderlijke rekening voor zakelijk beleggen in Nederland.',
       'Periodiek beleggen met AutoInvest waar beschikbaar.',
       'Overzichten van je aankopen, verkopen en beleggingen.',
     ],
@@ -85,9 +91,10 @@ export const partnerFacts: Record<
     ],
   },
   'american-express': {
+    checkedAt: '11 oktober 2026',
     headline: 'Reisvoordelen van American Express.',
     description:
-      'American Express biedt betaalkaarten met kaartafhankelijke reisvoordelen, punten en verzekeringen. De waarde hangt af van je gebruik, acceptatie en de voorwaarden.',
+      'Lees hoe punten sparen, loungetoegang en Privium werken. Vergelijk de kosten en voorwaarden van de kaarten met de voordelen die je daadwerkelijk gebruikt.',
     benefits: [
       'Membership Rewards bij de Gold Card.',
       'Reisvoorzieningen en verzekeringen afhankelijk van de kaart.',
@@ -105,6 +112,3 @@ export const partnerFacts: Record<
     ],
   },
 };
-// Commercial relationships with the listed providers have not been confirmed.
-// Add supplied affiliate URLs only after Daniel confirms the relationship and link.
-export const affiliateLinks: Record<string, string> = {};

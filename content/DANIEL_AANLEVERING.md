@@ -1,29 +1,36 @@
 # Aanlevering en controle voor Daniel
 
-## Verwerkt in de website
+Bijgewerkt op 11 oktober 2026. Deze lijst beschrijft ontvangen materiaal en resterende inhoudelijke bevestigingen. Verwerking in de repository bewijst niet dat die versie al openbaar staat.
 
-- Beurswatcher als merkstem; persoonlijke achtergrond op Over mij, met de aangeleverde tekst en een meebewegende kop.
-- Motto: het heft in eigen handen nemen. Geen belofte van financiële vrijheid of rendement.
-- Beleggen uit het hoofdmenu; onderwerpkennis samengebracht onder Verdieping. Oude links verwijzen door.
-- Dropdowns, onderwerpblokken, zoeken, algemene uitleg en links naar de bijbehorende tools.
-- 22 uitlegpagina’s voor negen tools, met teruglinks, rekenvoorbeelden en veelgestelde vragen.
-- Geen externe nieuwsartikelen of nieuwsaggregator. Bronvermeldingen bij educatie en marktgegevens blijven zichtbaar.
-- Geen CMS: Kay verwerkt en publiceert de inhoud via code en GitHub.
+## Ontvangen en verwerkt
+
+- De tekst voor Over mij en de redactionele richting: Beurswatcher spreekt vanuit het merk, legt begrijpelijk uit en biedt gratis rekentools. Daniel wordt zonder trema geschreven.
+- Het motto “het heft in eigen handen nemen”, zonder belofte van rendement of financiële vrijheid.
+- Partnercopy voor Scalable Capital, Delta, Brand New Day, Saxo en American Express. Deze teksten zijn uitgewerkt met actuele productbronnen en korte, relevante risico- en voorwaardenvermeldingen.
+- Tien Scalable-links, twee Brand New Day-links, de Saxo-verwijzingslink en de American Express Platinum-uitnodigingslink. De oorspronkelijke trackingparameters staan ongewijzigd in app/partner-links.ts. Er is geen Delta-affiliate-URL aangeleverd; daarvoor worden gewone officiële productlinks gebruikt.
+- Twee Google Drive-gidsen: American Express en pensioenbeleggen. Ze zijn beoordeeld; hieronder staat waarom ze verschillend worden behandeld. De oorspronkelijke Drive-bestanden zijn niet aangepast.
+- Het eerder aangekondigde event is vervallen. De eventpagina blijft bestaan voor toekomstige, bevestigde bijeenkomsten; er wordt geen actief event of ticketaanbod verzonnen.
+
+De partnercopy en aangeleverde links ontbreken dus niet meer. Er zijn geen losse partnerbanners ontvangen en het aangeleverde Word-document bevat geen afbeeldingen.
 
 ## Nog nodig van Daniel
 
-1. **Eigen blogs:** de eerste drie onderwerpen, per onderwerp de kernvraag, eigen invalshoek/conclusie en bronnen. Welke actualiteit wil je zelf uitleggen, en wat moet de lezer erna begrijpen? Algemene uitleg staat al; persoonlijke conclusies worden niet verzonnen.
-2. **Eigen aanpak:** welke persoonlijke voorbeelden of lessen mogen gepubliceerd worden? Lever alleen details aan die je openbaar wilt maken, met relevante aannames, periode en risico’s. Er worden geen posities of ervaringen aan je toegeschreven zonder input.
-3. **Partners:** definitieve teksten per bedrijf, feitelijk gebruik/ervaring, voor wie de dienst past, beperkingen, goedgekeurde links en eventuele vergoeding/affiliate-afspraken.
-4. **Events:** bevestig de inhoud en timing van de conceptprogramma’s en eventuele toekomstige online bijeenkomsten. De bestaande Beleggersborrel verwijst al naar een officiële ticketpagina; nieuwe data, prijzen en capaciteit alleen toevoegen wanneer bevestigd.
-5. **Instagram:** toegang voor een officiële koppeling of originele video’s plus toestemming om deze te gebruiken. Automatisch bijgewerkte, afspeelbare eigen Reels wachten hierop.
+1. **Eigen blogs en analyses:** de eerste onderwerpen, kernvraag, eigen invalshoek of conclusie en bronnen. De uitleg bij beginnen met beleggen, ETF’s, vermogen en pensioen is algemene redactionele informatie. Die is niet gebaseerd op Daniels eigen portefeuille, onderzoek of persoonlijke analyse. Voorbeeldblogs blijven voorbeelden totdat goedgekeurde eigen teksten zijn aangeleverd.
+2. **Persoonlijke voorbeelden:** welke ervaringen, posities of lessen mogen openbaar worden genoemd? Vermeld periode, aannames en beperkingen. Alleen ontvangen persoonlijke ervaringen worden aan Daniel toegeschreven, zoals zijn voorkeur voor de Delta-widget.
+3. **Commerciële afspraken per partner:** bevestig hoe de samenwerking en eventuele beloning precies werken, welke bezoekersvoordelen aantoonbaar gelden en of de aanbieder de link en uiting toestaat. Een trackinglink bevestigt niet de betalingsgrondslag. Bij beleggingen vraagt een beloning voor aangebrachte klanten afzonderlijke aandacht; zie [partnerpublicatie](PARTNER_PUBLICATIE.md).
+4. **Saxo-bestemming:** de link opent bij controle de algemene Nederlandse rekeningopeningspagina. Bevestig voor welke rekeningtypen en eventuele aanbieding de samenwerking geldt. Een Belgische aanmeldroute is niet bevestigd; de TOB-uitleg verwijst afzonderlijk naar Saxo België.
+5. **Gecorrigeerde pensioengids:** pas de mededeling over nu 10% ineens opnemen aan. Volgens actuele overheidsinformatie is het nieuwe keuzerecht pas voorzien vanaf 1 januari 2029, met voorwaarden. De huidige PDF wordt niet als download aangeboden totdat deze inhoudelijk is gecorrigeerd.
+6. **Bijgewerkte American Express-gids:** verwijder of actualiseer de actie die op 31 augustus 2026 afliep en controleer bedragen en kaartvoordelen. De oude gids kan alleen als achtergronddocument worden aangeboden met een direct zichtbare melding dat de actie is verlopen. De bonus wordt niet als actueel voordeel beloofd.
+7. **Beeldmateriaal, indien gewenst:** lever bedoelde banners in bruikbare resolutie aan, met toestemming voor websitegebruik. Er worden geen ontbrekende partnerbeelden of klantquotes verzonnen.
+8. **Nieuwe events:** pas bij een bevestigde bijeenkomst datum, locatie, programma, prijs en aanmelding aanleveren. Het geannuleerde event hoeft niet opnieuw bevestigd te worden.
+9. **Instagram:** de aparte, afgeschermde beheerpagina is voorbereid; automatische nieuwe Reels vereisen nog Meta-configuratie en toestemming voor het echte account. De actuele instructies staan in [Instagram beheren](INSTAGRAM-KOPPELEN.md). Dit is geen algemeen CMS.
 
-## Nog niet volledig operationeel
+## Inhoud en koppelingen
 
-- De NL/VS-macroagenda haalt Nederlandse CBS-publicatiemomenten en Amerikaanse BEA-publicatiemomenten automatisch op. CPI, banenrapporten en Fed-vergaderingen in de aanvullende selectie blijven handmatig gecontroleerd. Het is geen Trading Economics-koppeling en er zijn geen consensusverwachtingen of live uitslagen.
-- Voorbeeldkoersen blijven als voorbeeld gemarkeerd totdat een bruikbare marktdatafeed is aangesloten.
-- Bestaande voorbeeldblogs zijn als voorbeeld herkenbaar en uitgesloten van zoekmachine-indexering; ze wachten op Daniels eigen blogs.
-- Controleer nieuwsbrief- en contactopslag zodra de benodigde databaseconfiguratie is ingesteld. Een werkend formulierontwerp betekent nog geen actieve ontvangst.
-- Partnerteksten, events en Reels hebben de hierboven genoemde aanlevering nodig.
+- Onderwerpen, algemene uitleg, zoeken, interne links en uitlegpagina’s bij tools vormen de inhoudelijke basis. Kay beheert en publiceert gewone websitecontent via de repository.
+- Er is geen externe nieuwsaggregator. Officiële bronnen bij uitleg en marktgegevens blijven zichtbaar.
+- De macroagenda combineert automatisch opgehaalde CBS- en BEA-planning met handmatig gecontroleerde BLS/Fed-momenten. Dit is geen volledige kalender met live uitslagen of consensusverwachtingen.
+- De marktweergave gebruikt externe TradingView-widgets. De indexreferenties zijn herkenbare CFD-referentieprijzen, niet officiële indexstanden. De oude /api/markt-voorbeeldadapter is geen live feed.
+- Contact- en nieuwsbriefendpoints slaan gegevens in de database op. Werkende opslag bewijst niet dat automatisch e-mail wordt verzonden; dat moet afzonderlijk worden gecontroleerd.
 
-Deze lijst onderscheidt opgeleverde vormgeving en algemene inhoud van persoonlijke inhoud en koppelingen. Er wordt niet beweerd dat alle publicatie- en integratiewerk is afgerond.
+**Geen sitemap indienen.** Dat blijft wachten op een uitdrukkelijke opdracht van Kay. Zie [beheer](BEHEER.md) en het [partnerpublicatiedossier](PARTNER_PUBLICATIE.md) voor controles en voorwaarden.

@@ -1,58 +1,71 @@
 # Beheer door Kay
 
-De website heeft geen CMS, klantdashboard of publiceeromgeving. Kay verwerkt aangeleverde teksten in de repository en publiceert via GitHub/Vercel. Daniel levert inhoud en feedback aan; beheer en plaatsing blijven een dienst van Kay.
+Bijgewerkt op 11 oktober 2026. Kay verwerkt gewone websitecontent in de repository en publiceert via GitHub/Vercel. Daniel levert inhoud en feedback aan. De aparte, afgeschermde Instagram-beheerpagina is beperkt tot de Reel-selectie en koppeling; er is geen algemeen CMS voor artikelen of pagina’s.
 
-- `app/data.ts`: eigen artikelen en basisgegevens. De huidige artikelen zijn educatieve voorbeelden; vervang deze door goedgekeurde eigen blogs en pas het voorbeeldlabel pas dan aan.
-- `app/about-copy.ts`: de tekst uit Daniels aangeleverde Word-document.
-- `app/guide-data.ts`: 22 algemene uitlegpagina’s voor de negen calculators. Elk onderwerp heeft een eigen vraag, kort antwoord, uitleg, rekenvoorbeeld en FAQ. Controleer voorbeelden tegen de calculator bij modelwijzigingen.
-- `app/topic-content.ts`: de inhoudelijke basis, aandachtspunten en FAQ’s per hoofdonderwerp.
-- `app/topic-lessons.ts`: uitgebreide hoofdstukken, voorbeelden, begrippenvergelijkingen en primaire bronnen voor alle 12 onderwerpen. Houd voorbeelden fictief en onderscheid algemene uitleg van Daniels persoonlijke visie.
-- `app/learning-library.ts`: combineert algemene uitleg en herkenbaar gemarkeerde voorbeeldblogs voor zoeken en filteren.
-- `app/topic-directory.tsx`: onderwerpen, artikelcategorieën en bijbehorende tools.
-- `app/partner-facts.ts`: productinformatie (controleer de bestaande bestandsindeling bij wijzigingen); persoonlijke partnerteksten volgen na aanlevering.
-- `app/api/macro/route.ts`: gratis CBS OData-kalender (NL) en BEA JSON-releasekalender (VS), automatisch opgehaald en maximaal een uur in servergeheugen bewaard. Geen sleutel of abonnement. `app/macro-parsers.ts` selecteert alleen macropublicaties; geen artikelen worden geïmporteerd. `app/macro-snapshot.json` is de gedateerde noodkopie, bij bronuitval maximaal zeven dagen bruikbaar en zichtbaar als bewaarde planning.
-- `app/macro-data.ts`: aanvullende BLS/Fed-momenten blijven handmatig gecontroleerd en als zodanig gelabeld. Controleer die bronnen en werk `macroCheckedAt` bij. De API omvat geen live uitslagen, consensus, volledige Amerikaanse kalender of indexkoersen. Tijden worden naar Europe/Amsterdam omgerekend. Test met `node verify-macro.mjs https://beurswatcher.vercel.app`.
-- `app/topic-inline-links.ts`: maximaal twee handgekozen interne links per onderwerp; tekst en hoofdstuk zijn expliciet gekozen. `verify-learning.mjs` controleert de gerenderde links en bestemmingen.
+## Inhoudsbestanden
+
+- app/data.ts: artikelen en basisgegevens. Voorbeeldartikelen pas als eigen blogs presenteren nadat Daniel ze inhoudelijk heeft aangeleverd of goedgekeurd.
+- app/about-copy.ts: de aangeleverde tekst voor Over mij.
+- app/guide-data.ts: algemene uitleg bij calculators, met vragen, voorbeelden en FAQ’s. Controleer voorbeelden opnieuw wanneer een rekenmodel verandert.
+- app/topic-content.ts en app/topic-lessons.ts: algemene hoofdstukken, aandachtspunten, voorbeelden en bronnen per onderwerp. Dit zijn geen eigen analyses of persoonlijke beleggingsgegevens van Daniel.
+- app/learning-library.ts en app/topic-directory.tsx: samenhang tussen onderwerpen, uitleg, herkenbare voorbeeldblogs en tools.
+- app/topic-inline-links.ts: maximaal twee inhoudelijk gekozen interne links per onderwerp. verify-learning.mjs controleert de gerenderde links en bestemmingen.
+- app/partner-editorial.ts: uitgewerkte ontvangen partnercopy, met bronnen, controledatum, kanttekeningen en gidsverwijzingen.
+- app/partner-facts.ts: compacte partnerinformatie. Houd die gelijk aan de langere producttekst.
+- app/partner-links.ts: exact ontvangen trackinglinks en gids-URL’s. Wijzig trackingparameters niet om zelf een andere product- of landbestemming te construeren.
+- app/partner-pages.tsx en app/partner-overview.tsx: de weergave van partnerinformatie. Ontvangen materiaal, correcties en te bevestigen afspraken staan in [PARTNER_PUBLICATIE.md](PARTNER_PUBLICATIE.md).
+- app/brand-events.tsx: de lege eventagenda. Het eerder aangekondigde event is geannuleerd; de pagina blijft beschikbaar voor toekomstige bevestigde bijeenkomsten.
 
 ## Redactionele richting
 
-Beurswatcher spreekt vanuit het merk. Persoonlijke achtergrond staat op Over mij. Het uitgangspunt is het heft in eigen handen nemen: begrijpen, zelf onderzoeken en bewuste financiële keuzes maken. Geen rendementsgaranties.
+Beurswatcher legt uit wat een bezoeker kan lezen, leren, berekenen of vergelijken. Schrijf nuchter, toegankelijk en concreet, met korte zinnen die hun betekenis behouden. Persoonlijke achtergrond en ontvangen persoonlijke ervaringen mogen aan Daniel worden toegeschreven; verzin geen ervaringen, resultaten of aanbevelingen.
 
-Geen externe nieuwsartikelen, nieuwsaggregator of automatisch overgenomen samenvattingen. De markthub bevat marktdata, koersbewegingen en de macroagenda. Externe links zijn uitsluitend achtergrondbronnen en noodzakelijke product-/sociallinks. Verdieping bestaat uit eigen uitleg en blogs van Beurswatcher.
+Geen externe nieuwsartikelen, nieuwsaggregator of automatisch overgenomen samenvattingen. De markthub geeft marktgegevens en publicatieplanning. Externe links dienen als bron, productinformatie of herkenbare sociale/commerciële bestemming.
 
-## Zoekmachines en voorbeeldblogs
+Algemene educatie is geen persoonlijk financieel advies. Een disclaimer corrigeert geen ongefundeerde belofte. Zet korte relevante risico- en voorwaardeninformatie bij de inhoud, zonder dezelfde lange tekst overal te herhalen. Onderscheid beleggen, sparen, geblokkeerd pensioenvermogen en betaalkaartvoordelen. Benoem een bekende commerciële relatie herkenbaar; verzin de beloning of het bezoekersvoordeel niet.
 
-De uitlegpagina’s hebben unieke titels, beschrijvingen, canonieke links en Article/FAQ/Breadcrumb-gegevens die overeenkomen met de zichtbare inhoud. `app/sitemap.ts` neemt uitleg, tools en onderwerp­pagina’s mee. De bestaande voorbeeldblogs hebben `noindex` en staan niet in de sitemap. Bij vervanging door goedgekeurde blogs: pas zowel het voorbeeldlabel in de bibliotheek en artikelpagina als de metadata en sitemap aan. Algemene uitleg is niet gepresenteerd als een persoonlijke visie of goedgekeurde tekst van Daniel.
+## Marktweergaven en macroplanning
 
-`app/site-config.ts` beheert het publieke domein voor alle canonieke links, Open Graph-URL’s, de sitemap, robots.txt en gestructureerde gegevens, inclusief de makerpagina. De buildinstelling `BEURSWATCHER_SITE_URL` accepteert alleen `https://beurswatcher.vercel.app` en `https://www.beurswatcher.nl`. Zonder instelling blijft de huidige Vercel-URL gelden. Gebruik geen lokale of tijdelijke preview-URL als canonical.
+app/market-hub.tsx en app/tradingview-overview.ts gebruiken TradingView. De huidige indexreferenties zijn FOREX.com CFD-prijzen voor S&P 500, Nasdaq 100 en Dow Jones. De zichtbare tekst vermeldt dat deze kunnen afwijken van officiële indexstanden. Vertraagde Amerikaanse aandelenbewegingen staan apart. Een geladen script bewijst niet dat ieder instrument data heeft; controleer de echte widget in de browser. Geen scraping of herverdeling via een eigen API.
 
-## Voorbereiding eigen domein
+app/api/markt/route.ts retourneert nog demoFeed uit app/market-data.ts. Deze adapter blijft voorbeelddata; verwar hem niet met de externe weergaven. Controleer oude markt-subpagina’s op voorbeeldlabels voordat ze anders worden gepresenteerd.
 
-Doel: `https://www.beurswatcher.nl`, met behoud van de bestaande paginapaden. Op 8 oktober 2026 gaven `beurswatcher.nl` en `www.beurswatcher.nl` bij onze DNS-controle geen adres terug (NXDOMAIN). HTTPS was niet bereikbaar. Dit zegt niet of het domein beschikbaar is of wie de eigenaar is. Registratie, eigendom, DNS en koppeling aan het Vercel-project zijn nog niet bevestigd.
+app/api/macro/route.ts haalt kosteloos CBS OData-planning (NL) en de BEA JSON-releasekalender (VS) op, zonder sleutel of abonnement. De selecties komen uit app/macro-parsers.ts; er worden geen nieuwsartikelen geïmporteerd. Succesvolle gecombineerde resultaten worden maximaal één uur in procesgeheugen bewaard; bij bronproblemen wordt eerder opnieuw geprobeerd. Dit is ophalen op aanvraag, geen garantie op een zelfstandig elk uur draaiend proces.
 
-De domeinwissel staat daarom **niet aan**. Ook zijn geen DNS-records, Vercel-instellingen of publieke websites gewijzigd.
+app/macro-snapshot.json is de gedateerde noodkopie. Een bruikbare kopie wordt als bewaarde planning getoond; de herstelcode begrenst de bruikbaarheid op zeven dagen. Niet-beschikbare bronnen krijgen geen verzonnen actuele planning.
 
-Bij de latere, goedgekeurde overstap:
+Alleen de Amerikaanse selectie uit app/macro-data.ts wordt als aanvullende handmatige BLS/Fed-planning gebruikt. Controleer de bronnen en werk macroCheckedAt alleen bij na een echte controle. De huidige waarde is 26 september 2026 en bewijst niet dat nadien niets is gewijzigd. Er zijn geen consensusverwachtingen, live uitslagen of gegarandeerd volledige dekking. Tijden worden in Europe/Amsterdam weergegeven. Trading Economics is een externe kalender, geen aangesloten API.
 
-1. Bevestig het domeineigendom en koppel zowel `www.beurswatcher.nl` als `beurswatcher.nl` aan hetzelfde Beurswatcher-project. Gebruik de actuele DNS-instructies die Vercel voor dat project toont; verzin geen IP-adres of CNAME.
-2. Controleer dat de nieuwe host daadwerkelijk deze website serveert en een geldig HTTPS-certificaat heeft. Test ook een tool, een onderwerp en een uitlegpagina rechtstreeks.
-3. Zet pas dan `BEURSWATCHER_SITE_URL=https://www.beurswatcher.nl` in de productie-buildomgeving en bouw opnieuw. Canonicals, Open Graph, sitemap en schema nemen gezamenlijk die waarde over. Alleen een runtimevariabele wijzigen werkt niet voor reeds statisch opgebouwde pagina’s.
-4. De nieuwe build stuurt verzoeken met host `beurswatcher.vercel.app` of `beurswatcher.nl` met HTTP 308 naar hetzelfde pad op `www.beurswatcher.nl`. Queryparameters blijven behouden. Lokale previews, andere deploymenthosts en de `www`-host zelf krijgen deze redirect niet. Oude paginapad-aliases blijven eveneens werken. Vermijd een tegengestelde domeinredirect in Vercel; dat veroorzaakt een lus.
-5. Controleer de live HTTP-statussen, redirects, canonicals, robots.txt, sitemap en gestructureerde gegevens. De bestaande `noindex` voor voorbeeldblogs, zoeken en de voorbeeldagenda blijft bewust behouden. Draai `verify-learning.mjs` met dezelfde domeininstelling als de gecontroleerde build.
-6. Verifieer de oude en nieuwe site in Search Console, dien de nieuwe sitemap in en gebruik waar van toepassing de adreswijziging. Controleer daarna indexering en 404-meldingen. Behoud oude-domeinredirects minstens een jaar, bij voorkeur langer, en werk beheerde profiel- en verwijzingslinks bij.
+ECB-wisselkoersen worden via /api/wisselkoersen opgehaald en gecachet. Behoud bron en werkelijke peildatum bij storingen. Bronnen: [CBS](https://www.cbs.nl/nl-nl/publicatieplanning), [BEA](https://www.bea.gov/news/schedule), [BLS](https://www.bls.gov/schedule/), [Federal Reserve](https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm), [ECB](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml), [TradingView](https://www.tradingview.com/widget-docs/).
 
-Een voorbereide canonical of geslaagde lokale build bewijst geen domeinkoppeling, Search Console-eigendom of indexering. Die controles volgen na de daadwerkelijke overstap. Zie [Google: site verhuizen](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes) en [canonieke URL’s](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
+## Instagram en formulieren
 
-## Macroplanning
+De actuele status voor de beperkte Instagram-beheerpagina staat in [INSTAGRAM-KOPPELEN.md](INSTAGRAM-KOPPELEN.md). Automatisch nieuwe Reels ophalen vereist nog echte Meta-configuratie, accounttoestemming en eindcontrole. Gewone contentplaatsing blijft bij Kay.
 
-De huidige selectie is handmatig gecontroleerd en geen volledige automatische kalender. Klikken opent uitleg en de officiële bron. De filters werken lokaal op de geselecteerde momenten; afgelopen datums verdwijnen uit de standaardselectie. Trading Economics is alleen een expliciete externe kalenderlink, geen gekoppelde databron. Er zijn geen nieuwe betaalde diensten of accounts aangemaakt.
+De contact- en nieuwsbriefendpoints bewaren gegevens in de geconfigureerde database. Controleer opslag, foutmeldingen en afmelden met de bedoelde omgeving. Databaseopslag is niet hetzelfde als e-mailbezorging of een actieve nieuwsbriefcampagne; claim die pas wanneer afzonderlijk ingesteld en getest.
 
-## Publiceren
+## Zoekmachines en domein
 
-### Makercredit in structured data
+app/site-config.ts beheert de canonieke host voor metadata, Open Graph, sitemap en schema. De toegestane productiehosts zijn https://beurswatcher.vercel.app en https://www.beurswatcher.nl; zonder BEURSWATCHER_SITE_URL valt de code terug op de Vercel-host. De bedoelde eigen-domeininstelling is BEURSWATCHER_SITE_URL=https://www.beurswatcher.nl. Het is een buildinstelling: na wijziging opnieuw bouwen.
 
-`app/site-schema.tsx` legt Beurswatcher vast als uitgever en Sitesnit als bijdrager aan het webdesign en de ontwikkeling. De gedeelde websitegegevens verschijnen één keer per pagina en sluiten aan op de zichtbare footercredit. Op `/achter-de-website` beschrijft `AboutPage` de makerpagina, met de twee bestaande Sitesnit-bestemmingen als gerelateerde links. De financiële uitleg behoudt Beurswatcher als auteur en uitgever. De identifiers volgen de ingestelde `BEURSWATCHER_SITE_URL`.
+De oorspronkelijke mededeling dat het domein op 8 oktober niet bereikbaar was, is geen actuele status. Deze documentatieronde voert geen nieuwe DNS-, HTTPS-, Vercel- of Search Console-controle uit. Controleer de productieomgeving wanneer domeinconfiguratie verandert.
 
-Dit is feitelijke naamsvermelding, geen garantie op extra backlinks of een hogere positie. Voeg geen verborgen links, trefwoordherhalingen, verzonnen commerciële afspraken of Sitesnit-auteurschap aan financiële artikelen toe. De commerciële relatie en eventuele vergoeding, korting of verplichte linkplaatsing zijn nog niet bevestigd. Bevestig die vóór publicatie om de bestaande zichtbare links en eventuele disclosure correct te beoordelen; JSON-LD vervangt die beoordeling niet. Deze aanpassing is lokaal ter beoordeling en publiceert niets.
+Bij de www-instelling retourneert de Next-configuratie 308-redirects van beurswatcher.vercel.app en beurswatcher.nl naar hetzelfde pad op www.beurswatcher.nl, met behoud van queryparameters. Andere deploymenthosts en lokale previews krijgen deze domeinredirect niet. Voorkom tegengestelde Vercel-redirects en test rechtstreeks een tool, onderwerp en uitlegpagina.
 
-Controleer gewijzigde routes, mobiele menu’s en filters. Voer typecheck, toepasselijke tests en de productiebuild uit. Publiceer naar de gekoppelde GitHub-branch en controleer de Vercel-deployment.
+Algemene uitlegpagina’s hebben eigen titels, beschrijvingen, canonicals en inhoudsgebonden schema. app/sitemap.ts bevat de bedoelde publieke pagina’s. Voorbeeldblogs, zoeken en afgeschermde beheerpagina’s staan niet in de sitemap; behoud hun passende noindex. /markt/macro staat wel in de sitemap en is niet dezelfde route als een oude voorbeeldagenda. Verander een voorbeeldblog pas naar indexeerbaar wanneer label, inhoud, metadata en sitemap samen zijn bijgewerkt.
+
+**Geen sitemap indienen en geen indexeringsverzoek versturen zonder een nieuwe uitdrukkelijke opdracht van Kay.** Een bestaande sitemap-URL en correct domein zijn geen opdracht om die in Search Console in te dienen. Een geldige canonical bewijst geen indexering.
+
+## Makercredit
+
+app/site-schema.tsx noemt Beurswatcher als uitgever en Sitesnit als bijdrager aan webdesign en ontwikkeling. Dit sluit aan op de zichtbare footercredit en lokale makerpagina. Financiële uitleg krijgt geen Sitesnit-auteurschap. De makerpagina verwijst naar de juiste Sitesnit-case en homepage.
+
+Deze vermelding garandeert geen backlinkwaarde of hogere positie. Geen verborgen links, trefwoordherhalingen of verzonnen commerciële afspraken toevoegen. De voorwaarden van de Sitesnit-relatie en eventuele vergoeding, korting of verplichte linkplaatsing zijn niet in dit dossier bevestigd; beoordeel disclosure en linkattributen op basis van de werkelijke afspraak. JSON-LD vervangt die beoordeling niet.
+
+## Publicatiecontrole
+
+1. Controleer de inhoud tegen bron en datum. Houd ontvangen partnercopy apart van onbekende beloningsafspraken; volg [PARTNER_PUBLICATIE.md](PARTNER_PUBLICATIE.md).
+2. Test links, dropdowns, filters, downloads en relevante routes op desktop en mobiel. Controleer dat de vervallen eventinschrijving niet opnieuw zichtbaar is.
+3. Draai bij codewijzigingen typecheck, lint, toepasselijke tests en productiebuild. Controleer calculatorvoorbeelden tegen de berekeningen. Bij uitsluitend documentwijzigingen volstaan inhouds- en diffcontroles.
+4. Publiceer alleen binnen de actuele opdracht en naar het juiste Beurswatcher-project. Een geslaagde lokale controle bewijst niet dat productie is bijgewerkt.
+5. Controleer na een deployment echte statuscodes, redirects, canonicals, robots.txt, sitemap-inhoud en schema. Sitemap indienen blijft uitgesloten tot nieuwe toestemming.

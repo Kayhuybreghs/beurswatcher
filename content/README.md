@@ -1,41 +1,43 @@
-# Inhoud bijwerken
+# Inhoud en bronnen van Beurswatcher
 
-## Reels
+Bijgewerkt op 11 oktober 2026. Kay beheert gewone websitecontent in de repository; er is geen algemeen CMS. Daniel levert teksten, eigen analyses en correcties aan.
 
-`reels.json` bevat de centrale selectie, gecontroleerd op 9 september 2026. Dit is handmatig beheerde inhoud; de site claimt geen automatische Instagram-feed. De originele permalinks staan per item in het bestand. De zes thumbnails komen van de openbare OG-afbeeldingen van die oorspronkelijke Beurswatcher-Reels en staan in `public/reels/`.
+## Waar staat wat?
 
-Voeg een item toe met `id`, `url`, `thumbnail`, `title`, `publishedAt` (YYYY-MM-DD) en `tags`. Kopieer het bijbehorende, toegestane beeld naar `public/reels/` en gebruik `/reels/bestandsnaam.jpg` als pad. Titels zijn korte redactionele omschrijvingen. Zet de datum van de controle in `updatedAt` en bouw de site opnieuw.
-
-Gebruik alleen geverifieerde Reels van het officiële profiel. De adapter in `app/reel-data.ts` verwijdert dubbele of onvolledige items, sorteert nieuwste eerst en toont maximaal zes passende items. Tags sluiten aan bij de onderwerpen, zoals ETF, Strategie, Pensioen, Vermogen, Aandelen, Markt en Dividend. Een topic zonder passende Reel toont geen verzonnen inhoud. Een ontbrekend beeld krijgt een merkfallback.
-
-Voor latere automatische synchronisatie kan dezelfde adapter worden gevoed vanuit een geautoriseerde Instagram-integratie. Kay beheert de configuratie; er komt geen CMS. Bewaar API-sleutels uitsluitend op de server. De zichtbare rail hoeft daarvoor niet te veranderen.
+- [BEHEER.md](BEHEER.md): inhoudsbestanden, marktdata, zoekmachines en publicatiecontroles.
+- [DANIEL_AANLEVERING.md](DANIEL_AANLEVERING.md): ontvangen materiaal en concrete openstaande vragen.
+- [PARTNER_PUBLICATIE.md](PARTNER_PUBLICATIE.md): herkomst van partnercopy en links, correcties, primaire bronnen en commerciële bevestigingen.
+- [INSTAGRAM-KOPPELEN.md](INSTAGRAM-KOPPELEN.md): beperkte Instagram-beheerpagina, koppeling en echte activeringstest.
 
 ## Partners
 
-Productteksten, officiële bronnen en de controledatum staan in `app/partner-facts.ts`. Kosten verschillen per product en kunnen wijzigen. Controleer de gekoppelde officiële pagina’s bij iedere inhoudelijke update. Vul later uitsluitend de goedgekeurde affiliate-URL’s in `affiliateLinks` in, met dezelfde slug als de partner. De knop en commerciële vermelding passen zich hierop aan.
+De partnercopy en aangeleverde links voor Scalable Capital, Delta, Brand New Day, Saxo en American Express zijn ontvangen. app/partner-editorial.ts bevat de uitgewerkte tekst, bronvermeldingen, controledatum en relevante kanttekeningen. app/partner-facts.ts bevat compacte productinformatie. app/partner-links.ts bewaart de exact aangeleverde tracking- en gidslinks.
 
-Scalable gaat over zelf beleggen en periodieke inleg; Delta over portefeuilleoverzicht; Brand New Day over geblokkeerd pensioenbeleggen; Saxo over zakelijk beleggen; AMEX uitsluitend over reizen en werkelijk gebruikte kaartvoordelen. Persoonlijke ervaringen worden pas toegevoegd wanneer Daniel ze zelf aanlevert en goedkeurt.
+Er is geen aangeleverde Delta-affiliate-URL; Delta-knoppen gebruiken officiële productinformatie. De Saxo-link is op 11 oktober 2026 gecontroleerd en opent de algemene Nederlandse rekeningopeningspagina. Dat bevestigt geen Belgische of zakelijke aanmeldroute of specifieke aanbieding. De American Express-verwijzing is specifiek voor Platinum; de vergelijking van alle kaarten gebruikt een gewone officiële vergelijkingslink.
+
+De AMEX-gids bevat een verlopen actie en krijgt direct bij de link een waarschuwing. De pensioengids blijft buiten publieke downloads tot de onjuiste formulering over 10% ineens opnemen is gecorrigeerd. Geen van beide oorspronkelijke Drive-bestanden wordt aangepast. Banners zijn niet aangeleverd. Zie [het publicatiedossier](PARTNER_PUBLICATIE.md).
+
+## Uitleg en eigen artikelen
+
+Onderwerp- en tooluitleg is algemene educatieve inhoud. Presenteer die niet als Daniels eigen analyse, portefeuilledata of goedgekeurde persoonlijke visie. Voorbeeldblogs houden hun voorbeeldlabel en noindex totdat echte, goedgekeurde blogs ze vervangen. Geen externe nieuwsartikelen, gekopieerde nieuwssamenvattingen of nieuwsaggregator toevoegen.
 
 ## Events
 
-`communityEvent` in `app/brand.tsx` bevat de gecontroleerde informatie voor de Beleggersborrel. Bron: [officiële ticketpagina](https://weeztix.shop/95kumuq5), details gecontroleerd op 8 september 2026. De overzichtspagina verwijst naar de detailpagina en vandaar naar de officiële ticketverkoop. Er zijn geen claims over beschikbare plaatsen. Toekomstige formats zijn ideeën, geen aangekondigde evenementen.
+Het eerder aangekondigde event gaat niet door. app/brand-events.tsx toont daarom dat er nog geen nieuw event is aangekondigd. /events blijft beschikbaar. Voeg pas na bevestiging een nieuwe datum, locatie, programma en inschrijflink toe; behandel oude ticketlinks of conceptprogramma’s niet als actueel aanbod.
 
-## Indexkoersen: nog aan te sluiten
+## Marktgegevens
 
-`/api/markt`, de indexkoersen en de earningspagina zijn expliciet voorbeelden. De macroagenda haalt CBS (NL) en BEA (VS) automatisch op via gratis officiële feeds en toont daarnaast duidelijk gelabelde handmatig gecontroleerde BLS/Fed-momenten. Het hoofdmarktoverzicht heeft echte ECB-informatie zoals hieronder beschreven. Een echte indexfeed vereist een geschikte databron, credentials en rechten voor openbare weergave. De CBS/BEA-kalender en ECB-wisselkoersen zijn actieve integraties; overige onderzochte kandidaat-API’s zijn niet aangesloten.
+- **Markthub en Home:** app/market-hub.tsx gebruikt TradingView met bronvermelding. app/tradingview-overview.ts configureert FOREX.com CFD-referentieprijzen voor S&P 500, Nasdaq 100 en Dow Jones. Deze kunnen afwijken van officiële indexstanden; het zijn geen FRED-dagkoersen. De aparte widget toont Amerikaanse koersbewegingen. Beschikbaarheid en vertraging liggen bij de bron.
+- **Macroagenda:** /api/macro haalt CBS (Nederland) en BEA (Verenigde Staten) automatisch op, aangevuld met handmatig gecontroleerde BLS/Fed-momenten. De agenda bevat planning, geen live uitslagen of verwachtingen. Trading Economics is geen aangesloten API.
+- **Wisselkoersen:** /api/wisselkoersen gebruikt de ECB en toont bron en peildatum; een bewaarde snapshot krijgt geen nieuw verzonnen tijdstip.
+- **Oude voorbeeldadapter:** /api/markt en app/market-data.ts bevatten nog expliciete voorbeelddata. Een werkende externe widget maakt deze adapter niet live.
 
-- Twelve Data: [API-documentatie](https://twelvedata.com/docs/introduction/overview), [indexdekking](https://twelvedata.com/indices) en [commercieel gebruik](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage). Controleer het bedrijfsabonnement en afzonderlijke indexrechten.
-- EODHD: [economische gebeurtenissen](https://eodhd.com/financial-apis/economic-events-data-api), [earningskalender](https://eodhd.com/financial-apis/calendar-upcoming-earnings-ipos-and-splits) en [commerciële licentie](https://eodhd.com/commercial-pricing). Openbare weergave moet in de overeenkomst zijn gedekt.
+Bronnen: [TradingView](https://www.tradingview.com/widget-docs/), [CBS-publicatieplanning](https://www.cbs.nl/nl-nl/publicatieplanning), [BEA-publicaties](https://www.bea.gov/news/schedule), [ECB-koersen](https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml).
 
-Na selectie moeten naast `app/market-data.ts` ook de vaste ticker, homepagecijfers en historische voorbeeldreeksen worden vervangen. Tijdstip, vertraging, herkomst en foutstatus moeten op de site herkenbaar blijven.
+## Reels
 
+De ReelRail staat op Home en Over mij. reels.json is de bestaande handmatige basisselectie; de aparte Instagram-beheerpagina kan de selectie beheren. Automatische nieuwe media en echte tokenvernieuwing zijn pas bevestigd na Meta-configuratie, toestemming en eindcontrole met Daniels account. Gebruik [de actuele Instagram-instructies](INSTAGRAM-KOPPELEN.md); bewaar geen toegangstokens in contentbestanden.
 
-## Plaatsing, nieuws en ECB
+## Publicatie
 
-Dezelfde `ReelRail` verschijnt op Home en Over mij. Tags blijven bewaard als metadata; plaats geen automatisch themagerelateerde rail onder elke pagina.
-
-Externe nieuwsartikelen zijn verwijderd. Beurswatcher publiceert eigen blogs en verdieping. Kay beheert inhoud via de code en GitHub; er is geen CMS of publiceeromgeving voor de klant. Zie `BEHEER.md`.
-
-ECB-XML: https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml. Gebruikbeleid: https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.de.html. ECB-bron en peildatum zijn in beeld. Wisselkoersen worden server-side opgehaald via `/api/wisselkoersen` en één uur gecachet. Bij uitval blijft de laatst bekende snapshot met het juiste label zichtbaar. Een hogere datum wordt niet verzonnen bij storingen. `/api/macro` combineert CBS OData en de BEA JSON-releasekalender; `app/macro-data.ts` bevat alleen de handmatig onderhouden aanvullende BLS/Fed-planning. Zie `content/BEHEER.md` voor dekking en storingsgedrag.
-
-Conceptprogramma’s voor Events staan in `app/event-program.tsx`; Daniel moet inhoud, timing en eventuele online bijeenkomst definitief vaststellen. Verwijder het conceptlabel pas na bevestiging.
+Controleer tekst en links samen met de zichtbare pagina, inclusief mobiel. Een nieuwe controledatum vraagt een echte broncontrole; een deployment alleen verandert geen redactionele datum. **Dien de sitemap niet in zonder een nieuwe, expliciete opdracht.**

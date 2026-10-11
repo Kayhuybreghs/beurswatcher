@@ -92,9 +92,8 @@ function OfficialPlayer({ reel }: { reel: Reel }) {
         <div className="reel-embed-unavailable">
           <img src={reel.thumbnail} alt="" width={360} height={640} />
           <output>
-            Instagram geeft hier geen afspeelbare video terug. Open het
-            origineel hieronder. Voor afspelen in de eigen videospeler zijn een
-            werkende accountkoppeling en een beschikbaar videobestand nodig.
+            Deze video kan op dit moment niet op de website worden afgespeeld.
+            Je kunt de speler sluiten of zelf het origineel op Instagram openen.
           </output>
         </div>
       )}
@@ -104,9 +103,7 @@ function OfficialPlayer({ reel }: { reel: Reel }) {
           data-instgrm-permalink={reel.url}
           data-instgrm-version="14"
         >
-          <a href={reel.url} target="_blank" rel="noreferrer">
-            Bekijk de oorspronkelijke Reel
-          </a>
+          <span>De video wordt hier geladen.</span>
         </blockquote>
       </div>
       {state === 'ready' && (
@@ -130,15 +127,20 @@ function ReelCard({
   open: () => void;
 }) {
   const video = useRef<HTMLVideoElement>(null),
-    card = useRef<HTMLElement>(null);
+    card = useRef<HTMLElement>(null),
+    userPlayback = useRef(false),
+    playAttempt = useRef(0);
   const [failed, setFailed] = useState(false),
     [playing, setPlaying] = useState(false),
     [muted, setMuted] = useState(true),
-    [videoError, setVideoError] = useState(false);
-  const playable = !!reel.videoUrl && !videoError;
+    [previewing, setPreviewing] = useState(false),
+    [failedVideoUrl, setFailedVideoUrl] = useState<string | null>(null);
+  // A refreshed CDN URL is a new playback opportunity, even if the old URL expired.
+  const playable = !!reel.videoUrl && failedVideoUrl !== reel.videoUrl;
   useEffect(() => {
     const v = video.current;
     if (active !== reel.id && v) {
+      userPlayback.current = false;
       v.pause();
     }
   }, [active, reel.id]);
@@ -147,13 +149,19 @@ function ReelCard({
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) video.current?.pause();
+        if (!entry.isIntersecting) {
+          userPlayback.current = false;
+          video.current?.pause();
+        }
       },
       { threshold: 0.25 },
     );
     observer.observe(el);
     const hidden = () => {
-      if (document.hidden) video.current?.pause();
+      if (document.hidden) {
+        userPlayback.current = false;
+        video.current?.pause();
+      }
     };
     document.addEventListener('visibilitychange', hidden);
     return () => {
@@ -161,21 +169,48 @@ function ReelCard({
       document.removeEventListener('visibilitychange', hidden);
     };
   }, []);
+  function openPlaybackFallback() {
+    const requested = userPlayback.current;
+    userPlayback.current = false;
+    setFailedVideoUrl(reel.videoUrl || null);
+    setPlaying(false);
+    setPreviewing(false);
+    // Only an explicit play action opens the dialog; a failed hover never does.
+    if (requested) open();
+  }
   function play(sound = false) {
     const v = video.current;
     if (!v) return;
+    const attempt = ++playAttempt.current;
     setActive(reel.id);
+    userPlayback.current = sound;
+    setPreviewing(!sound);
     v.muted = !sound;
     setMuted(!sound);
-    void v.play().catch(() => setPlaying(false));
+    void v.play().catch((error: unknown) => {
+      if (v !== video.current || attempt !== playAttempt.current) return;
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+      // Browsers may decline an automatic preview. An explicit tap can still work.
+      if (
+        !sound &&
+        error instanceof DOMException &&
+        error.name === 'NotAllowedError'
+      ) {
+        setPlaying(false);
+        return;
+      }
+      openPlaybackFallback();
+    });
   }
   function toggle() {
     if (!playable) {
       open();
       return;
     }
-    if (playing) video.current?.pause();
-    else play(true);
+    if (playing && !previewing) {
+      userPlayback.current = false;
+      video.current?.pause();
+    } else play(true);
   }
   return (
     <article
@@ -190,7 +225,10 @@ function ReelCard({
           play();
       }}
       onPointerLeave={(e) => {
-        if (e.pointerType === 'mouse') video.current?.pause();
+        if (e.pointerType === 'mouse') {
+          userPlayback.current = false;
+          video.current?.pause();
+        }
       }}
     >
       <div className="social-cover">
@@ -219,11 +257,11 @@ function ReelCard({
             loop
             muted={muted}
             onPlay={() => setPlaying(true)}
-            onPause={() => setPlaying(false)}
-            onError={() => {
-              setVideoError(true);
+            onPause={() => {
               setPlaying(false);
+              setPreviewing(false);
             }}
+            onError={openPlaybackFallback}
             aria-label={reel.title}
           />
         )}
@@ -231,26 +269,32 @@ function ReelCard({
           className={'reel-play-surface' + (playing ? ' is-playing' : '')}
           onClick={toggle}
           aria-label={
-            (playing
-              ? 'Pauzeer '
-              : playable
-                ? 'Speel af: '
-                : 'Bekijk op deze website: ') + reel.title
+            (playing && previewing
+              ? 'Bekijk met geluid: '
+              : playing
+                ? 'Pauzeer '
+                : playable
+                  ? 'Speel af: '
+                  : 'Bekijk op deze website: ') + reel.title
           }
         >
           <span>
-            {playing ? (
+            {playing && previewing ? (
+              <Volume2 size={25} />
+            ) : playing ? (
               <Pause size={25} />
             ) : (
               <Play size={25} fill="currentColor" />
             )}
           </span>
           <b>
-            {playing
-              ? 'Pauzeren'
-              : playable
-                ? 'Tik om af te spelen'
-                : 'Bekijk hier'}
+            {playing && previewing
+              ? 'Bekijk met geluid'
+              : playing
+                ? 'Pauzeren'
+                : playable
+                  ? 'Tik om af te spelen'
+                  : 'Bekijk hier'}
           </b>
         </button>
         {playable && playing && (
@@ -260,6 +304,8 @@ function ReelCard({
             onClick={() => {
               if (video.current) {
                 video.current.muted = !muted;
+                userPlayback.current = true;
+                setPreviewing(false);
                 setMuted(!muted);
               }
             }}

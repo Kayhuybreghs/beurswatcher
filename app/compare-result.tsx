@@ -77,6 +77,10 @@ export function CompareResult({
           </button>
         </>
       )}
+      <p className="calculation-note">
+        Rekenvoorbeeld op basis van je aannames. Geen voorspelling of
+        persoonlijk advies.
+      </p>
     </section>
   );
 }

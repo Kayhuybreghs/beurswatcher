@@ -313,27 +313,28 @@ export function MacroPage() {
           </Link>
           <span className="eyebrow">BEURSWATCHER / MACRO-AGENDA</span>
           <h1>
-            Weet wat
+            Macro-agenda voor
             <br />
-            <em>eraan komt.</em>
+            <em>Nederland en de VS.</em>
           </h1>
         </div>
         <p>
-          Van inflatie tot de arbeidsmarkt.
+          Bekijk wanneer cijfers over inflatie, groei en de arbeidsmarkt
+          verschijnen.
           <br />
-          De economische momenten achter het nieuws.
+          Filter op land en onderwerp en lees wat een publicatie betekent.
         </p>
       </header>
       <MacroCalendar />
       <section className="macro-next">
-        <span className="eyebrow">VAN CIJFER NAAR INZICHT</span>
-        <h2>Een publicatie is het begin van een vraag.</h2>
+        <span className="eyebrow">UITLEG BIJ DE CIJFERS</span>
+        <h2>Wat betekenen inflatie, rente en economische groei?</h2>
         <p>
-          Beurswatcher helpt je de context begrijpen en zelf afwegen wat een
-          ontwikkeling betekent voor je plan.
+          Lees hoe economische cijfers worden gemeten en waarom financiële
+          markten erop kunnen reageren.
         </p>
-        <Link className="button" href="/artikelen">
-          Bekijk de verdieping <ArrowRight size={17} />
+        <Link className="button" href="/verdieping/markt-economie">
+          Lees over markt en economie <ArrowRight size={17} />
         </Link>
       </section>
     </>

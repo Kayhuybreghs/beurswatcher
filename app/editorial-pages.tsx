@@ -358,6 +358,15 @@ export function InvestingHub({ sub }: { sub?: string }) {
               producten kunnen wijzigen; voorbeelden zijn geen persoonlijke
               aanbeveling.
             </p>
+            <p>
+              {sub === 'reizen'
+                ? 'Kaartvoordelen en verzekeringen hebben eigen voorwaarden. Deze uitleg is geen persoonlijk financieel advies.'
+                : sub === 'belasting'
+                  ? 'Dit is algemene fiscale informatie, geen persoonlijk belastingadvies. De uitkomst hangt af van het belastingjaar en je persoonlijke situatie.'
+                  : sub === 'pensioen'
+                    ? 'Geen persoonlijk financieel advies. Pensioenvermogen is niet vrij opneembaar; fiscaal voordeel hangt af van je situatie. Bij beleggen kun je geld verliezen.'
+                    : 'Geen persoonlijk beleggingsadvies. Rendement is onzeker en je kunt je inleg verliezen.'}
+            </p>
             <ul>
               {content.sources.map(([label, url]) => (
                 <li key={url}>

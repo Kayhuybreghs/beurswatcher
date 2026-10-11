@@ -1,22 +1,17 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Plus,
-  Minus,
-  Info,
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Plus, Minus, Info } from 'lucide-react';
 import Link from './site-link';
 import { partners } from './data';
 import { partnerFacts } from './partner-facts';
 import { partnerDetails } from './journey-data';
 import { PartnerVisual } from './partner-pages';
+import styles from './partner-editorial.module.css';
 const purposes: Record<string, string> = {
   'scalable-capital': 'Periodiek beleggen',
   delta: 'Portefeuille bijhouden',
   'brand-new-day': 'Pensioen opbouwen',
-  saxo: 'Zakelijk beleggen',
+  saxo: 'Particulier & zakelijk',
   'american-express': 'Reisvoordelen afwegen',
 };
 export function PartnerOverview() {
@@ -127,12 +122,15 @@ export function PartnerOverview() {
             welke voorwaarden je moet controleren.
           </p>
         </div>
-        <span className="partner-disclosure">
-          <Info size={20} />
-          Gebaseerd op productinformatie.
-          <br />
-          Controleer tarieven bij de aanbieder.
-        </span>
+        <aside
+          className={`partner-disclosure ${styles.overviewDisclosure}`}
+          aria-label="Commerciële links"
+        >
+          <Info size={20} aria-hidden="true" />
+          Beurswatcher werkt samen met de genoemde aanbieders. Bij commerciële
+          links kan Beurswatcher een vergoeding ontvangen. Je herkent deze aan
+          het label ‘Commerciële link’.
+        </aside>
       </section>
       <div className="partner-quicklook">
         {partners.map((p, i) => (
