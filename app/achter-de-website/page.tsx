@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Platform from '../platform';
 import { siteUrl } from '../site-config';
 import { MakerSchema } from '../site-schema';
+import { sharingMetadata } from '../seo';
 
 const title = 'De maker van Beurswatcher: Sitesnit | Over deze website';
 const description =
@@ -12,14 +13,7 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: url },
-  openGraph: {
-    title,
-    description,
-    url,
-    type: 'website',
-    locale: 'nl_NL',
-    siteName: 'Beurswatcher',
-  },
+  ...sharingMetadata(title, description, 'achter-de-website'),
 };
 
 export default function MakerPage() {

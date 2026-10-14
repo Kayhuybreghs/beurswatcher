@@ -3,7 +3,7 @@ import { articles, partners, toolItems, topics } from './data';
 import { guides } from './guide-data';
 import { topicContent } from './topic-content';
 import { partnerFacts } from './partner-facts';
-import { siteUrl } from './site-config';
+import { isPreviewDeployment, siteUrl } from './site-config';
 
 export { siteUrl };
 export const homeTitle = 'Beleggen begrijpen en zelf berekenen | Beurswatcher';
@@ -89,6 +89,94 @@ const pageCopy: Record<string, { title: string; description: string }> = {
   },
 };
 
+const toolCopy: Record<string, { title: string; description: string }> = {
+  rendement: {
+    title: 'Rendement berekenen: inleg en vermogensgroei',
+    description:
+      'Bereken wat een startbedrag en maandelijkse inleg kunnen opbouwen. Vergelijk rendementsscenario’s en bekijk je inleg en berekende groei apart.',
+  },
+  'etf-kosten': {
+    title: 'ETF-kosten vergelijken op lange termijn',
+    description:
+      'Vergelijk wat twee jaarlijkse kostenpercentages doen met je eindvermogen. Reken met dezelfde inleg, looptijd en hetzelfde brutorendement.',
+  },
+  doelvermogen: {
+    title: 'Doelvermogen berekenen: benodigde maandinleg',
+    description:
+      'Bereken hoeveel je per maand moet inleggen voor een gekozen eindbedrag. Pas startkapitaal, looptijd en verwacht rendement aan en vergelijk.',
+  },
+  'aflossen-of-beleggen': {
+    title: 'Aflossen of beleggen: scenario’s vergelijken',
+    description:
+      'Vergelijk extra aflossen met een beleggingsscenario. Bekijk het verschil tussen bespaarde rente en onzeker rendement, met uitleg over de beperkingen.',
+  },
+  'box-3': {
+    title: 'Box 3 berekenen in 2026: indicatie en uitleg',
+    description:
+      'Bereken een indicatie voor box 3 in 2026 met spaargeld, beleggingen en schulden. Bekijk de aannames en controleer je situatie bij de Belastingdienst.',
+  },
+  'compound-interest': {
+    title: 'Rente op rente berekenen: samengestelde groei',
+    description:
+      'Bereken hoe rente op rente werkt bij een startbedrag en vaste inleg. Vergelijk looptijden en zie welk deel van het eindbedrag uit groei bestaat.',
+  },
+  inflatie: {
+    title: 'Inflatie berekenen: koopkracht van je geld',
+    description:
+      'Bereken hoeveel koopkracht een bedrag verliest door inflatie. Pas het inflatiepercentage en de looptijd aan en vergelijk euro’s van nu en later.',
+  },
+  'lump-sum-dca': {
+    title: 'Ineens of gespreid beleggen: vergelijk scenario’s',
+    description:
+      'Vergelijk ineens beleggen met gespreid instappen voor hetzelfde bedrag. Onderzoek hoe een gekozen koersverloop de uitkomst beïnvloedt.',
+  },
+  dividend: {
+    title: 'Dividend herbeleggen of uitkeren: bereken het verschil',
+    description:
+      'Vergelijk dividend herbeleggen met apart houden. Pas inleg, koersgroei en dividend aan en bekijk het berekende totaalvermogen per scenario.',
+  },
+};
+
+export function isIndexablePage(path: string) {
+  // These example articles still await Daniel’s own editorial content.
+  return (
+    contentRoutes.includes(path) &&
+    !articles.some((article) => path === 'artikelen/' + article.slug) &&
+    !['zoeken', 'afmelden', 'markt/earnings'].includes(path)
+  );
+}
+
+export function sharingMetadata(
+  title: string,
+  description: string,
+  path: string,
+  article = false,
+): Pick<Metadata, 'openGraph' | 'twitter'> {
+  const image = {
+    url: siteUrl + '/opengraph-image',
+    width: 1200,
+    height: 630,
+    alt: 'Beurswatcher: begrijpelijke uitleg over geld en gratis rekentools.',
+  };
+  return {
+    openGraph: {
+      title,
+      description,
+      url: siteUrl + '/' + path,
+      type: article ? 'article' : 'website',
+      locale: 'nl_NL',
+      siteName: 'Beurswatcher',
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export const contentRoutes = [
   ...Object.keys(pageCopy),
   ...guides.map((guide) => 'uitleg/' + guide.slug),
@@ -111,6 +199,7 @@ export function metadataForPage(path: string): Metadata {
     guide?.title ||
     topic?.title ||
     article?.title ||
+    (tool && toolCopy[tool.slug]?.title) ||
     tool?.title ||
     (partner && partnerFacts[partner.slug].headline.replace(/\.$/, '')) ||
     'Pagina niet gevonden';
@@ -119,14 +208,12 @@ export function metadataForPage(path: string): Metadata {
     guide?.summary ||
     topic?.summary ||
     article?.intro ||
+    (tool && toolCopy[tool.slug]?.description) ||
     (tool &&
       `${tool.text} Pas de invoer aan en vergelijk de uitkomsten. Lees ook de rekenaannames en beperkingen.`) ||
     (partner && partnerFacts[partner.slug].description) ||
     'Deze pagina bestaat niet. Bekijk de artikelen en rekentools van Beurswatcher.';
-  const noindex =
-    Boolean(article) ||
-    ['zoeken', 'afmelden', 'markt/earnings'].includes(path) ||
-    !contentRoutes.includes(path);
+  const noindex = isPreviewDeployment || !isIndexablePage(path);
   const url = `${siteUrl}/${path}`;
 
   return {
@@ -134,13 +221,11 @@ export function metadataForPage(path: string): Metadata {
     description,
     alternates: { canonical: url },
     robots: noindex ? { index: false, follow: true } : undefined,
-    openGraph: {
-      title: `${title} | Beurswatcher`,
+    ...sharingMetadata(
+      `${title} | Beurswatcher`,
       description,
-      url,
-      type: guide || article ? 'article' : 'website',
-      locale: 'nl_NL',
-      siteName: 'Beurswatcher',
-    },
+      path,
+      Boolean(guide || article),
+    ),
   };
 }

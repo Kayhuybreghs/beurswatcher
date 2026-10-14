@@ -2130,7 +2130,7 @@
   display: block;
   color: var(--muted-ink);
 }
-.personal-channels h3 {
+.personal-channels h2 {
   font-size: 25px;
   letter-spacing: -0.03em;
   margin: 15px 0 12px;
@@ -2790,7 +2790,7 @@
     left: 0;
     top: 25px;
   }
-  .personal-channels h3 {
+  .personal-channels h2 {
     font-size: 25px;
     margin: 12px 0;
   }

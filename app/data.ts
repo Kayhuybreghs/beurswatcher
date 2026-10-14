@@ -19,7 +19,6 @@ export const articles = [
     intro:
       'Lees waarom een koers kan dalen terwijl de winst stijgt, en welke cijfers helpen om dat te begrijpen.',
     image: '/amsterdam.jpg',
-    read: 6,
     sections: [
       [
         'Prijs is een momentopname',
@@ -46,7 +45,6 @@ export const articles = [
     intro:
       'Lees wat orders, klantinvesteringen en voorraden vertellen over een chipbedrijf.',
     image: '/wafer.jpg',
-    read: 5,
     sections: [
       [
         'Een keten met verschillende rollen',
@@ -68,7 +66,6 @@ export const articles = [
     title: 'Wat zit er in een wereld-ETF?',
     intro:
       'Wat je eigenlijk koopt als je wereldwijd belegt, en welke details ertoe doen.',
-    read: 5,
     sections: [
       [
         'Wereldwijd is niet overal evenveel',
@@ -90,7 +87,6 @@ export const articles = [
     title: 'Hoe beïnvloedt de rente de waarde van aandelen?',
     intro:
       'Lees hoe rente invloed heeft op bedrijfsschulden en de waarde die beleggers aan toekomstige inkomsten geven.',
-    read: 4,
     sections: [
       [
         'Geld vandaag en geld later',
@@ -112,7 +108,6 @@ export const articles = [
     title: 'Dividend is geen gratis geld. Wat is het dan wel?',
     intro:
       'Lees hoe dividend, koersontwikkeling en herbeleggen samen je resultaat bepalen.',
-    read: 4,
     sections: [
       [
         'Een uitkering uit het bedrijf',
@@ -134,7 +129,6 @@ export const articles = [
     title: 'Maak je beleggingsplan als de beurs rustig is.',
     intro:
       'Leg vast waarom je belegt, hoeveel verlies je kunt dragen en wanneer je je verdeling opnieuw bekijkt.',
-    read: 4,
     sections: [
       [
         'Wanneer heb je het geld nodig?',
@@ -156,7 +150,6 @@ export const articles = [
     title: 'Hoe vind je terug welk pensioen je al hebt opgebouwd?',
     intro:
       'Lees welke informatie in je pensioenoverzicht staat en waarom het startmoment en de voorwaarden ertoe doen.',
-    read: 4,
     sections: [
       [
         'Bekijk wat er al is',
@@ -178,7 +171,6 @@ export const articles = [
     title: 'Hoe breng je beleggingen op verschillende rekeningen samen?',
     intro:
       'Zet je beleggingen bij elkaar om de verdeling over bedrijven, sectoren en regio’s te bekijken.',
-    read: 4,
     image: '',
     sections: [
       [
@@ -201,7 +193,6 @@ export const articles = [
     title: 'Een reisvoordeel is pas waardevol als je het gebruikt.',
     intro:
       'Vergelijk kaartkosten met je eigen reisgedrag, acceptatie en bestaande verzekeringen.',
-    read: 4,
     image: '',
     sections: [
       [
@@ -218,7 +209,16 @@ export const articles = [
       ],
     ],
   },
-];
+].map((article) => ({
+  ...article,
+  read: Math.max(
+    1,
+    Math.ceil(
+      [article.intro, ...article.sections.flat()].join(' ').split(/\s+/).length /
+        200,
+    ),
+  ),
+}));
 export const toolItems = [
   {
     slug: 'rendement',

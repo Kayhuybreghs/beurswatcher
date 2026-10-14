@@ -101,7 +101,7 @@ export const toolTopics: Record<string, string> = {
   rendement: 'Strategie',
   'compound-interest': 'Dividend',
   'aflossen-of-beleggen': 'Macro',
-  'box-3': 'Strategie',
+  'box-3': 'Belasting',
   'etf-kosten': 'ETF',
   doelvermogen: 'Pensioen',
 };

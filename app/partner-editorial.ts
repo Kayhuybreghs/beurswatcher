@@ -279,7 +279,7 @@ export const partnerEditorial: Record<string, PartnerEditorialContent> = {
       },
       {
         label: 'Belastingdienst — lijfrente en aftrek',
-        href: 'https://www.belastingdienst.nl/wps/wcm/connect/nl/aftrek-en-kortingen/content/aftrekken-lijfrentepremies',
+        href: 'https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/werk_en_inkomen/lijfrente/aftrekken-lijfrentepremies/',
       },
     ],
   },
@@ -415,7 +415,7 @@ export const partnerEditorial: Record<string, PartnerEditorialContent> = {
     sources: [
       {
         label: 'American Express — kaarten en bijdragen',
-        href: 'https://www.americanexpress.com/nl-nl/creditcard/',
+        href: 'https://www.americanexpress.com/nl-nl/creditcard/cards/?filter=membershiprewards',
       },
       {
         label: 'American Express — Platinum en voorwaarden',

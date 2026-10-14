@@ -1,5 +1,3 @@
-/* Local editorial images use explicit layout dimensions; no image optimization service is configured. */
-/* oxlint-disable next/no-img-element */
 'use client';
 import Link from './site-link';
 import { useState, useEffect, useRef } from 'react';
@@ -358,7 +356,7 @@ function Content({ path }: { path: string }) {
             teksten, niet Daniels persoonlijke analyses. De blogs met het label
             ‘redactioneel voorbeeld’ wachten nog op zijn inhoudelijke
             beoordeling. Het verhaal op de pagina Over mij is door Daniel
-            aangeleverd. De markthub toont dagelijkse indexreeksen en
+            aangeleverd. De markthub toont indicatieve indexprijzen via CFD-referenties en
             Amerikaanse marktbewegingen via officiële TradingView-widgets, plus
             ECB-referentiekoersen, een automatisch opgehaalde CBS- en
             BEA-planning, aangevuld met handmatig gecontroleerde momenten van

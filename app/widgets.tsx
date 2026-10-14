@@ -1,6 +1,5 @@
-/* Local editorial images use explicit layout dimensions; no image optimization service is configured. */
-/* oxlint-disable next/no-img-element */
 'use client';
+import Image from 'next/image';
 import Link from './site-link';
 import { CompareResult } from './compare-result';
 // Inline SVG and a status region containing a retry button need explicit roles.
@@ -500,7 +499,7 @@ export function ArticleCard({
       href={'/artikelen/' + article.slug}
     >
       {!compact && article.image && (
-        <img
+        <Image
           src={article.image}
           alt={
             article.slug.includes('halfgeleiders')
@@ -508,6 +507,9 @@ export function ArticleCard({
               : 'Grachtenpanden in Amsterdam'
           }
           loading="lazy"
+          width={640}
+          height={400}
+          sizes="(max-width: 640px) 90vw, (max-width: 1000px) 45vw, 30vw"
         />
       )}
       <p className="eyebrow">{article.category}</p>
@@ -1285,8 +1287,10 @@ export function Calculator({ slug }: { slug: string }) {
           </>
         )}
         <p>
-          <Link href="/verdieping/strategie" className="textlink">
-            Lees over risico, spreiding en je portefeuille{' '}
+          <Link href={slug === 'box-3' ? '/verdieping/belasting' : '/verdieping/strategie'} className="textlink">
+            {slug === 'box-3'
+              ? 'Lees hoe belasting over je vermogen werkt'
+              : 'Lees over risico, spreiding en je portefeuille'}{' '}
             <ArrowRight size={16} />
           </Link>
         </p>

@@ -1,4 +1,7 @@
 import { siteUrl } from './site-config';
+import { metadataForPage, isIndexablePage } from './seo';
+import { guides } from './guide-data';
+import { partners, toolItems } from './data';
 
 export const websiteId = siteUrl + '/#website';
 export const publisher = {
@@ -6,6 +9,8 @@ export const publisher = {
   '@id': siteUrl + '/#organization',
   name: 'Beurswatcher',
   url: siteUrl + '/',
+  logo: siteUrl + '/icon.svg',
+  sameAs: ['https://www.instagram.com/beurswatcher/'],
 };
 const websiteBuilder = {
   '@type': 'Organization',
@@ -44,6 +49,74 @@ export function SiteSchema() {
             publisher: { '@id': publisher['@id'] },
             contributor: { '@id': websiteBuilder['@id'] },
             creditText: 'Webdesign en ontwikkeling door Sitesnit.',
+          },
+        ],
+      }}
+    />
+  );
+}
+
+export function PageSchema({ path }: { path: string }) {
+  if (!isIndexablePage(path)) return null;
+  const metadata = metadataForPage(path);
+  const title = metadata.title as string;
+  const url = siteUrl + '/' + path;
+  const [section, slug] = path.split('/');
+  const parent =
+    section === 'uitleg' || section === 'verdieping'
+      ? { name: 'Verdieping', item: siteUrl + '/artikelen' }
+      : slug && ['tools', 'partners', 'markt'].includes(section)
+        ? {
+            name: { tools: 'Tools', partners: 'Partners', markt: 'Markt' }[
+              section
+            ],
+            item: siteUrl + '/' + section,
+          }
+        : undefined;
+  const leafName =
+    partners.find((partner) => path === 'partners/' + partner.slug)?.name ||
+    toolItems.find((tool) => path === 'tools/' + tool.slug)?.title ||
+    title;
+  const crumbs = [
+    { name: 'Home', item: siteUrl + '/' },
+    ...(parent ? [parent] : []),
+    { name: leafName, item: url },
+  ];
+  const guide = guides.find((item) => path === 'uitleg/' + item.slug);
+  const pageType =
+    path === 'over'
+      ? 'AboutPage'
+      : path === 'contact' || path === 'zakelijk-samenwerken'
+        ? 'ContactPage'
+        : ['artikelen', 'tools', 'partners', 'markt'].includes(path) ||
+            section === 'verdieping'
+          ? 'CollectionPage'
+          : 'WebPage';
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': pageType,
+            '@id': url + '#webpage',
+            url,
+            name: title,
+            description: metadata.description,
+            inLanguage: 'nl-NL',
+            isPartOf: { '@id': websiteId },
+            publisher: { '@id': publisher['@id'] },
+            breadcrumb: { '@id': url + '#breadcrumb' },
+            ...(guide ? { mainEntity: { '@id': url + '#article' } } : {}),
+          },
+          {
+            '@type': 'BreadcrumbList',
+            '@id': url + '#breadcrumb',
+            itemListElement: crumbs.map((crumb, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              ...crumb,
+            })),
           },
         ],
       }}

@@ -2,6 +2,7 @@ import { GuideSchema } from '../guide-schema';
 import Platform from '../platform';
 import { contentRoutes, metadataForPage } from '../seo';
 import { notFound } from 'next/navigation';
+import { PageSchema } from '../site-schema';
 
 // Known editorial routes are built once and served directly by the CDN.
 // Unknown paths return an HTTP 404 before a streamed loading shell is sent.
@@ -28,6 +29,7 @@ export default async function Page({
   if (!contentRoutes.includes(path)) notFound();
   return (
     <>
+      <PageSchema path={path} />
       {slug[0] === 'uitleg' && <GuideSchema slug={slug[1]} />}
       <Platform path={'/' + path} />
     </>

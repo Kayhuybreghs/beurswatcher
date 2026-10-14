@@ -1,5 +1,5 @@
 'use client';
-/* oxlint-disable next/no-img-element -- Supplied local brand artwork is rendered at its original proportions. */
+import Image from 'next/image';
 import Link from './site-link';
 import { Camera as Instagram, ArrowUpRight } from 'lucide-react';
 
@@ -7,7 +7,7 @@ export const instagramUrl = 'https://www.instagram.com/beurswatcher/';
 export function BrandMark({ className = '' }: { className?: string }) {
   return (
     <span className={'brand-mark ' + className} aria-hidden="true">
-      <img src="/beurswatcher-logo.jpeg" alt="" width={1080} height={1350} />
+      <Image src="/beurswatcher-logo.jpeg" alt="" width={1080} height={1350} sizes="280px" />
     </span>
   );
 }

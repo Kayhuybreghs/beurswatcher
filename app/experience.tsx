@@ -383,7 +383,7 @@ export function MarketExperience({ sub }: { sub?: string }) {
         ].map(([s, n]) => (
           <Link
             key={s}
-            href={'/markt' + (s ? '/' + s : '')}
+            href={s === 'indices' ? '/markt#indices' : '/markt' + (s ? '/' + s : '')}
             aria-current={(sub || '') === s ? 'page' : undefined}
           >
             {n}

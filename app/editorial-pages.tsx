@@ -1,5 +1,5 @@
 'use client';
-/* oxlint-disable next/no-img-element -- Existing licensed editorial photos. */
+import Image from 'next/image';
 import { useState } from 'react';
 import {
   ArrowRight,
@@ -147,7 +147,7 @@ export function ArticleArchive({
             {filtered.map((a, i) => (
               <Link className="journal-story" key={a.slug} href={a.href}>
                 {'image' in a && a.image && (
-                  <img
+                  <Image
                     className="journal-story-image"
                     src={a.image}
                     alt={
@@ -157,6 +157,7 @@ export function ArticleArchive({
                     }
                     width={640}
                     height={240}
+                    sizes="(max-width: 640px) 90vw, (max-width: 1000px) 45vw, 30vw"
                     loading="lazy"
                   />
                 )}

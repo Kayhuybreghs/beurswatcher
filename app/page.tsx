@@ -2,20 +2,13 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Platform from './platform';
 import Loading from './route-loading';
-import { homeDescription, homeTitle, siteUrl } from './seo';
+import { homeDescription, homeTitle, sharingMetadata, siteUrl } from './seo';
 
 export const metadata: Metadata = {
   title: { absolute: homeTitle },
   description: homeDescription,
   alternates: { canonical: siteUrl + '/' },
-  openGraph: {
-    title: homeTitle,
-    description: homeDescription,
-    url: siteUrl + '/',
-    type: 'website',
-    locale: 'nl_NL',
-    siteName: 'Beurswatcher',
-  },
+  ...sharingMetadata(homeTitle, homeDescription, ''),
 };
 
 export default function Home() {

@@ -218,21 +218,21 @@ export function AboutPage() {
         <Link href={instagramUrl} target="_blank" rel="noreferrer">
           <Camera />
           <span>01 / INSTAGRAM</span>
-          <h3>Korte uitleg op Instagram.</h3>
+          <h2>Korte uitleg op Instagram.</h2>
           <p>Video’s over beleggen, vermogen en geldzaken.</p>
           <ArrowUpRight size={19} />
         </Link>
         <Link href="/tools">
           <Layers />
           <span>02 / GRATIS TOOLS</span>
-          <h3>Zelf bedragen berekenen.</h3>
+          <h2>Zelf bedragen berekenen.</h2>
           <p>Bereken wat inleg, looptijd, rendement en kosten veranderen.</p>
           <ArrowUpRight size={19} />
         </Link>
         <Link href="/artikelen">
           <BookOpen />
           <span>03 / VERDIEPING</span>
-          <h3>Lees de uitleg per onderwerp.</h3>
+          <h2>Lees de uitleg per onderwerp.</h2>
           <p>Artikelen over onder meer ETF’s, pensioen, spreiding en kosten.</p>
           <ArrowUpRight size={19} />
         </Link>

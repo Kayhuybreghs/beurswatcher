@@ -93,7 +93,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       stocks,
       [
         'Investor.gov · dividenddatum',
-        'https://www.investor.gov/introduction-investing/investing-basics/glossary/ex-dividend-dates',
+        'https://www.investor.gov/introduction-investing/investing-basics/glossary/ex-dividend-dates-when-are-you-entitled-stock-and',
       ],
     ],
     faq: [
@@ -379,7 +379,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       afm,
       [
         'AFM · praktische checklist',
-        'https://www.afm.nl/en/consumenten/themas/zelf-beleggen/is-beleggen-iets-voor-jou/praktische-checklist-bij-beleggen',
+        'https://www.afm.nl/nl-nl/consumenten/themas/zelf-beleggen/is-beleggen-iets-voor-jou/praktische-checklist-bij-beleggen',
       ],
     ],
     faq: [
@@ -657,7 +657,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       dnb,
       [
         'ECB · nominale en reële rente',
-        'https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me/html/nominal_and_real_interest_rates.en.html',
+        'https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me/html/nominal_and_real_interest_rates.nl.html',
       ],
     ],
     faq: [

@@ -28,6 +28,14 @@ export const guideSources = {
     'Belastingdienst · voorlopige aanslag box 3 in 2026',
     'https://www.belastingdienst.nl/wps/wcm/connect/nl/box-3/content/berekening-box-3-inkomen-2026',
   ],
+  inflation: [
+    'ECB · rente, inflatie en koopkracht',
+    'https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me/html/nominal_and_real_interest_rates.nl.html',
+  ],
+  compound: [
+    'Investor.gov · samengestelde groei berekenen',
+    'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator',
+  ],
   math: [
     'Investor.gov · financiële rekentools',
     'https://www.investor.gov/use-financial-tools-and-calculators',
@@ -57,6 +65,10 @@ export const guides: Guide[] = [
         'Verander één aanname tegelijk',
         'Houd je inleg gelijk en vergelijk een kortere en langere horizon. Probeer vervolgens een lager rendement. De vloeiende groeilijn in het model maakt verschillen inzichtelijk, maar echte koersen bewegen onregelmatig en kunnen dalen.',
       ],
+      [
+        'Zo telt een maandelijkse storting mee',
+        'De tool rekent een jaarrendement om naar een bijpassend maandpercentage. Bij 6% per jaar is dat ongeveer 0,487% per maand: twaalf maandstappen samen leveren dan 6% op. Iedere storting telt vanaf het einde van die maand mee. De laatste storting krijgt daardoor geen volledig jaar groei, terwijl het startkapitaal de hele looptijd meedoet.',
+      ],
     ],
     example: [
       'Nulrendement als controle',
@@ -71,8 +83,12 @@ export const guides: Guide[] = [
         'Kan ik wisselende maandbedragen invullen?',
         'Dit model rekent met een vaste maandinleg. Gebruik afzonderlijke scenario’s wanneer je wilt onderzoeken wat een lager of hoger bedrag doet.',
       ],
+      [
+        'Wat wordt € 100 per maand in tien jaar?',
+        'Met € 1.000 startkapitaal, € 100 inleg aan ieder maandeinde en steeds 6% jaarrendement komt het model uit op ongeveer € 18.038. Daarvan heb je zelf € 13.000 ingelegd. Zonder dat startkapitaal is de uitkomst lager. Kosten, belasting en inflatie zijn hier niet verwerkt; het rendement is alleen een rekenaanname.',
+      ],
     ],
-    source: 'math',
+    source: 'compound',
   },
   {
     slug: 'rendement-scenario-kiezen',
@@ -217,6 +233,10 @@ export const guides: Guide[] = [
         'Gebruik de calculator voor het afgebakende deel',
         'Voer twee jaarlijkse kostenpercentages in om alleen dat effect te onderzoeken. Tel niet blind vaste transactiekosten bij het fondspercentage op: hun relatieve gewicht hangt af van je ordergrootte en vermogen.',
       ],
+      [
+        'Wat betekent TER?',
+        'TER staat voor Total Expense Ratio: een jaarlijks kostenpercentage van het fonds. Het woord “total” betekent niet dat je persoonlijke brokerkosten zijn inbegrepen. Een fonds met 0,20% TER en € 3 orderkosten vergelijk je daarom niet op alleen die 0,20%. Zet de fondskosten en de kosten van je aankopen afzonderlijk naast elkaar.',
+      ],
     ],
     example: [
       'Wat kost € 2 per aankoop?',
@@ -272,7 +292,7 @@ export const guides: Guide[] = [
         'Nee. Het beschrijft een afgelopen periode en vormt geen zekerheid voor de volgende.',
       ],
     ],
-    source: 'math',
+    source: 'fees',
   },
   {
     slug: 'honderdduizend-euro-opbouwen',
@@ -310,6 +330,10 @@ export const guides: Guide[] = [
       [
         'Waarom kan de maandinleg nul worden?',
         'Dan bereikt het startbedrag binnen de gekozen aannames al het doel. Dat betekent niet dat dit in werkelijkheid zeker gebeurt.',
+      ],
+      [
+        'Hoe komt het voorbeeld met ongeveer € 150 per maand tot stand?',
+        'Met € 10.000 startkapitaal, twintig jaar tijd en constant 6% rendement berekent de tool ongeveer € 149,81 inleg aan ieder maandeinde voor een eindbedrag van € 100.000. Bij 0% is dat € 375 per maand. Dat grote verschil laat zien hoe sterk de uitkomst van de rendementsaanname afhangt. Kosten, belasting en inflatie zijn in beide voorbeelden niet verwerkt.',
       ],
     ],
     source: 'math',
@@ -392,7 +416,7 @@ export const guides: Guide[] = [
         'Onderzoek meerdere aannames. Je persoonlijke uitgaven kunnen anders veranderen dan het gemiddelde prijsniveau.',
       ],
     ],
-    source: 'math',
+    source: 'inflation',
   },
   {
     slug: 'rente-op-rente-uitleg',
@@ -432,7 +456,7 @@ export const guides: Guide[] = [
         'Voor groei over eerdere opbrengsten moeten die opbrengsten onderdeel blijven van het vermogen.',
       ],
     ],
-    source: 'math',
+    source: 'compound',
   },
   {
     slug: 'gemiddeld-en-samengesteld-rendement',
@@ -512,7 +536,7 @@ export const guides: Guide[] = [
         'Nee. De constante invoer is een vereenvoudiging om het effect te onderzoeken.',
       ],
     ],
-    source: 'math',
+    source: 'inflation',
   },
   {
     slug: 'spaargeld-en-inflatie',
@@ -592,7 +616,7 @@ export const guides: Guide[] = [
         'Omdat je de verandering in geld vergelijkt met een veranderd prijsniveau. Daarvoor deel je de groeifactoren.',
       ],
     ],
-    source: 'math',
+    source: 'inflation',
   },
   {
     slug: 'aflossen-of-beleggen-afwegen',
@@ -616,6 +640,10 @@ export const guides: Guide[] = [
       [
         'Neem beschikbaarheid mee',
         'Geld dat je gebruikt voor aflossen is meestal niet direct weer opneembaar. Houd een afzonderlijke buffer in beeld. Hypotheekrenteaftrek en fiscale effecten worden niet persoonlijk door de tool vastgesteld.',
+      ],
+      [
+        'Wat laat de afloslijn werkelijk zien?',
+        'De tool behandelt je netto rentebesparing alsof je die ieder jaar opnieuw tegen hetzelfde percentage inzet. Bij € 10.000 en 4% is de modelwaarde na tien jaar daardoor ongeveer € 14.802. Dit is geen bedrag dat je van je bank ontvangt en geen berekening van je resterende hypotheekschuld. Een werkelijk aflosschema, veranderende rente en kosten voor extra aflossen kunnen anders uitpakken.',
       ],
     ],
     example: [
@@ -654,6 +682,10 @@ export const guides: Guide[] = [
         'Verlaag het aangenomen rendement en verleng of verkort de periode. Als een kleine wijziging de uitkomst omdraait, is de vergelijking sterk afhankelijk van die aanname.',
       ],
       [
+        'Het omslagpunt in deze calculator',
+        'Bij gelijke startbedragen en looptijden zijn de modeluitkomsten gelijk als het beleggingsrendement min de ingevoerde jaarlijkse belastingdruk gelijk is aan de netto schuld­rente. Bij 4% netto rente en 1 procentpunt belastingdruk ligt dat rekenpunt dus op 5% brutorendement. Het aftrekken van die belastingdruk is een vereenvoudiging, geen box 3-berekening. Beleggingskosten moet je nog afzonderlijk beoordelen.',
+      ],
+      [
         'Maak de niet-financiële voorwaarden zichtbaar',
         'Rust door een lagere schuld, flexibiliteit en risico zijn niet in één berekend eindbedrag samen te vatten. Schrijf ze naast de uitkomst voordat je conclusies trekt.',
       ],
@@ -687,11 +719,15 @@ export const guides: Guide[] = [
     sections: [
       [
         'Splits je invoer',
-        'Zet spaargeld, beleggingen en schulden in de juiste velden. Lees bij de calculator welk belastingjaar en welke aannames worden gebruikt.',
+        'Gebruik voor 2026 de vermogenswaarden op 1 januari 2026. De tool rekent met 1,28% voor banktegoeden, 6% voor beleggingen en andere bezittingen en 2,70% voor aftrekbare schulden. Dit zijn fiscale rekenpercentages, geen voorspelling van je opbrengst.',
       ],
       [
         'Lees het resultaat als indicatie',
         'De Belastingdienst noemt de percentages voor banktegoeden en schulden bij de voorlopige aanslag voorlopig. De persoonlijke aangifte kan afwijken van deze vereenvoudigde tool.',
+      ],
+      [
+        'Waarom 36% niet over je hele vermogen gaat',
+        'Eerst worden het berekende rendement en de grondslag na drempels bepaald. Het heffingsvrije vermogen bedraagt € 59.357 per persoon. Het tarief van 36% wordt toegepast op het toegerekende box 3-inkomen. De tool optimaliseert geen verdeling tussen fiscale partners.',
       ],
       [
         'Controleer de officiële uitleg',
@@ -727,11 +763,11 @@ export const guides: Guide[] = [
     sections: [
       [
         'Controleer het jaar en de peildatum',
-        'Gebruik de datum die bij het gekozen fiscale model hoort. Meng geen actuele koersen met een historisch banksaldo zonder te weten of dat passend is.',
+        'Voor deze forfaitaire berekening gebruik je 1 januari 2026. Leg bank- en beleggingsoverzichten met die peildatum klaar, ook van buitenlandse rekeningen. Een huidig saldo in je app kan een andere datum beschrijven.',
       ],
       [
         'Controleer de categorie',
-        'Een productnaam vertelt niet altijd hoe een bezit fiscaal wordt behandeld. Raadpleeg bij twijfel de officiële toelichting of een deskundige.',
+        'Scheid banktegoeden van beleggingen en andere bezittingen. Neem alleen schulden mee die in box 3 thuishoren. Vul die vóór de schuldendrempel in: de tool verwerkt zelf € 3.800 per persoon. Trek die drempel dus niet tweemaal af.',
       ],
       [
         'Bewaar de onderbouwing',

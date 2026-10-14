@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { homeDescription, homeTitle, siteUrl } from './seo';
 import { SiteSchema } from './site-schema';
+import { isPreviewDeployment } from './site-config';
 import './globals.css';
 import './redesign.css';
 import './brand.css';
@@ -19,12 +20,29 @@ export const metadata: Metadata = {
   },
   description: homeDescription,
   publisher: 'Beurswatcher',
+  robots: isPreviewDeployment ? { index: false, follow: false } : undefined,
 };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="nl">
+      <head>
+        <link
+          rel="preload"
+          href="/inter-400.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/inter-700.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <SiteSchema />
         {children}

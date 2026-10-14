@@ -13,22 +13,16 @@ export function GuideSchema({ slug }: { slug: string }) {
         '@id': base + '/uitleg/' + g.slug + '#article',
         headline: g.title,
         description: g.summary,
-        mainEntityOfPage: base + '/uitleg/' + g.slug,
+        mainEntityOfPage: { '@id': base + '/uitleg/' + g.slug + '#webpage' },
         inLanguage: 'nl-NL',
         isPartOf: { '@id': websiteId },
         author: publisher,
         publisher,
       },
       {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { name: 'Beurswatcher', item: base },
-          { name: 'Verdieping', item: base + '/artikelen' },
-          { name: g.title, item: base + '/uitleg/' + g.slug },
-        ].map((x, i) => ({ '@type': 'ListItem', position: i + 1, ...x })),
-      },
-      {
         '@type': 'FAQPage',
+        '@id': base + '/uitleg/' + g.slug + '#vragen',
+        isPartOf: { '@id': base + '/uitleg/' + g.slug + '#webpage' },
         mainEntity: g.faq.map(([q, a]) => ({
           '@type': 'Question',
           name: q,
