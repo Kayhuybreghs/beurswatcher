@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { ArrowUpRight, ArrowRight, SlidersHorizontal } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ChoiceGroup } from './choice-group';
 import Link from './site-link';
 import { toolItems, futureValue } from './data';
 import { ToolVisual, useVisualDeck } from './tool-visual';
@@ -75,18 +75,15 @@ export function ToolCatalog() {
               />
             ))}
           </div>
-          <Tabs
+          <ChoiceGroup
+            label="Kies je voorbeeldhorizon"
             value={String(years)}
-            onValueChange={(v) => setYears(Number(v))}
-          >
-            <TabsList aria-label="Kies je voorbeeldhorizon">
-              {[10, 20, 30].map((y) => (
-                <TabsTrigger key={y} value={String(y)}>
-                  {y} jaar
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+            onChange={(value) => setYears(Number(value))}
+            options={[10, 20, 30].map((year) => ({
+              value: String(year),
+              label: `${year} jaar`,
+            }))}
+          />
           <small>
             Rekenvoorbeeld bij 6% rendement. Zonder kosten, inflatie of
             belasting. Rendement is onzeker.
@@ -100,24 +97,18 @@ export function ToolCatalog() {
         </div>
         <span>Open een tool en vul je eigen bedragen in.</span>
       </div>
-      <Tabs
+      <ChoiceGroup
         className="catalog-filters"
+        label="Filter rekentools"
         value={filter}
-        onValueChange={(v) => setFilter(String(v))}
-      >
-        <TabsList aria-label="Filter rekentools">
-          {[
-            'Alle tools',
-            'Opbouwen',
-            'Kosten & koopkracht',
-            'Keuzes afwegen',
-          ].map((x) => (
-            <TabsTrigger value={x} key={x}>
-              {x}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
+        onChange={setFilter}
+        options={[
+          'Alle tools',
+          'Opbouwen',
+          'Kosten & koopkracht',
+          'Keuzes afwegen',
+        ]}
+      />
       <div className="tool-catalog" ref={root}>
         {toolItems
           .filter((t) => filter === 'Alle tools' || groups[t.slug] === filter)

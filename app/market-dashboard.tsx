@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, RefreshCw, Globe } from 'lucide-react';
 import Link from './site-link';
-import { Newsletter, NumberField } from './widgets';
+import { Newsletter } from './newsletter';
+import { NumberField } from './number-field';
 import { MarketHubOverview } from './market-hub';
 import { fxSnapshot, fxCurrencies, type FxData } from './fx-data';
 const date = (iso: string) =>

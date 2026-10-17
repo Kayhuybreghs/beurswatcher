@@ -7,9 +7,11 @@ import {
   Coins,
   GitCompareArrows,
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ChoiceGroup } from './choice-group';
 import { Slider } from '@/components/ui/slider';
-import { Chart, NumberField, eur } from './widgets';
+import { Chart } from './widget-chart';
+import { NumberField } from './number-field';
+import { eur } from './money-format';
 import { CompareResult } from './compare-result';
 import Link from './site-link';
 import { AnimatedNumber } from './motion';
@@ -179,17 +181,17 @@ export function ScenarioTool({ slug }: { slug: string }) {
                     : 'Gespreid instappen eindigt hoger in dit scenario.'}
           </p>
           {!isInflation && !isDividend && (
-            <Tabs
+            <ChoiceGroup
+              label="Kies een koersverloop"
               value={path}
-              onValueChange={(v) => setPath(v as MarketPath)}
+              onChange={(value) => setPath(value as MarketPath)}
               className="scenario-tabs"
-            >
-              <TabsList aria-label="Kies een koersverloop">
-                <TabsTrigger value="steady">Gelijkmatig</TabsTrigger>
-                <TabsTrigger value="early-drop">Vroege daling</TabsTrigger>
-                <TabsTrigger value="late-drop">Late daling</TabsTrigger>
-              </TabsList>
-            </Tabs>
+              options={[
+                { value: 'steady', label: 'Gelijkmatig' },
+                { value: 'early-drop', label: 'Vroege daling' },
+                { value: 'late-drop', label: 'Late daling' },
+              ]}
+            />
           )}
           <Chart values={values} second={second} labels={labels} />
           <div className="chart-legend">

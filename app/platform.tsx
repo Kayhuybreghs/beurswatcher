@@ -381,14 +381,30 @@ export default function Platform({ path }: { path: string }) {
           ?.focus();
       }
     };
+    const closeOutside = (event: FocusEvent | PointerEvent) => {
+      const target = event.target;
+      if (
+        target instanceof Node &&
+        !header.current?.contains(target) &&
+        !document.getElementById('mobile-nav')?.contains(target)
+      ) {
+        // This is a non-modal navigation disclosure. Let the visitor continue
+        // into the page, while removing the overlay above that focused content.
+        setMobile(false);
+      }
+    };
     positionMenu();
     addEventListener('scroll', positionMenu, { passive: true });
     addEventListener('resize', positionMenu);
     addEventListener('keydown', closeOnEscape);
+    document.addEventListener('focusin', closeOutside);
+    document.addEventListener('pointerdown', closeOutside);
     return () => {
       removeEventListener('scroll', positionMenu);
       removeEventListener('resize', positionMenu);
       removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('focusin', closeOutside);
+      document.removeEventListener('pointerdown', closeOutside);
     };
   }, [mobile]);
   return (

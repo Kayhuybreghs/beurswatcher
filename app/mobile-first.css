@@ -93,7 +93,7 @@
   ) {
   font-size: 0.875rem;
 }
-.page-surface[data-area='tools'] .tool-workspace .scenario-tabs [role='tab'] {
+.page-surface[data-area='tools'] .tool-workspace .scenario-tabs [data-slot='tabs-trigger'] {
   white-space: normal;
   min-height: 44px;
   font-size: 0.875rem;
@@ -682,7 +682,7 @@
 .widget-data-note {
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: #647b93;
+  color: #496784;
   margin: 14px 8px 0;
 }
 .widget-status {
@@ -692,7 +692,7 @@
   left: 20px;
   right: 20px;
   font-size: 0.875rem;
-  color: #71859b;
+  color: #496784;
   text-align: center;
   pointer-events: none;
 }

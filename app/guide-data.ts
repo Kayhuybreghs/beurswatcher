@@ -20,6 +20,10 @@ export const guideSources = {
     'Investor.gov · kosten begrijpen',
     'https://www.investor.gov/introduction-investing/getting-started/understanding-fees',
   ],
+  etfTrading: [
+    'Investor.gov · ETF-kosten, bied-laatspread en beursprijs',
+    'https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-24',
+  ],
   tracking: [
     'iShares · fondskosten en afwijking van de index vergelijken',
     'https://www.ishares.com/uk/individual/en/education/getting-started-with-etfs/investor-education/compare-global-investment-options',
@@ -131,7 +135,7 @@ export const guides: Guide[] = [
       ],
       [
         'Reken een tegenvaller in euro’s uit',
-        'Bij een koersdaling van 30% wordt € 10.000 tijdelijk € 7.000, zolang je niets toevoegt of opneemt. Voor herstel naar € 10.000 is daarna ongeveer 42,9% stijging nodig. Dit is een afzonderlijke rekensom, geen voorspeld koerspad. Geld dat je tijdens de daling moet opnemen, doet niet meer mee aan een mogelijk herstel.',
+        'Bij een koersdaling van 30% daalt € 10.000 naar € 7.000, zolang je niets toevoegt of opneemt. Voor herstel naar € 10.000 is daarna ongeveer 42,9% stijging nodig. Of en wanneer dat herstel plaatsvindt, is onzeker; verlies kan blijvend zijn. Dit is een afzonderlijke rekensom, geen voorspeld koerspad. Geld dat je tijdens de daling moet opnemen, doet niet meer mee aan een mogelijk herstel.',
       ],
     ],
     example: [
@@ -247,7 +251,7 @@ export const guides: Guide[] = [
       ],
       [
         'Maak een lijst van losse posten',
-        'Zet kosten voor kopen, verkopen, valuta en je rekening apart. Neem alleen posten op die bij jouw gebruik horen. De spread is het verschil tussen bied- en laatprijs; die is niet hetzelfde als een vast jaarlijks tarief.',
+        'Zet kosten voor kopen, verkopen, valuta en je rekening apart. Neem alleen posten op die bij jouw gebruik horen. De spread is het verschil tussen bied- en laatprijs; die is niet hetzelfde als een vast jaarlijks tarief. Bij een biedprijs van € 99,90 en een laatprijs van € 100,10 koop je direct voor € 100,10 en verkoop je direct voor € 99,90. Als die prijzen niet veranderen, kost die heen-en-terugtransactie € 0,20 per eenheid, nog vóór eventuele orderkosten. De spread kan tijdens de handel veranderen.',
       ],
       [
         'Gebruik de calculator voor het afgebakende deel',
@@ -272,7 +276,7 @@ export const guides: Guide[] = [
         'In de actuele fondsdocumenten en het kostenoverzicht van je aanbieder. Controleer ook eventuele voorwaarden of uitzonderingen.',
       ],
     ],
-    source: 'fees',
+    source: 'etfTrading',
   },
   {
     slug: 'kosten-en-rendement-eerlijk-vergelijken',

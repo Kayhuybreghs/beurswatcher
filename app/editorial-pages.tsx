@@ -14,8 +14,8 @@ import { topics, toolItems } from './data';
 import { learningLibrary } from './learning-library';
 import { topicContent } from './topic-content';
 import { linkedTopicText } from './topic-inline-links';
-import { guides } from './guide-data';
-import { Newsletter } from './widgets';
+import { guideIndex as guides } from './guide-index';
+import { Newsletter } from './newsletter';
 import { TopicDirectory, TopicStories } from './topic-directory';
 
 const relatedTopics: Record<string, string[]> = {

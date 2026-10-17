@@ -18,7 +18,7 @@ import { BrandMark, instagramUrl } from './brand';
 import { BrandEvents } from './brand-events';
 import { ContactForm } from './contact-form';
 import { ReelRail } from './reels';
-import { Newsletter } from './widgets';
+import { Newsletter } from './newsletter';
 export function BusinessPage() {
   return (
     <>

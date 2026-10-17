@@ -4,12 +4,12 @@ export type TopicInlineLink = { section: number; text: string; href: string };
 export const topicInlineLinks: Record<string, TopicInlineLink[]> = {
   'markt-economie': [
     { section: 0, text: 'Inflatie', href: '/tools/inflatie' },
-    { section: 4, text: 'macroagenda op Beurswatcher', href: '/markt/macro' },
+    { section: 5, text: 'macroagenda op Beurswatcher', href: '/markt/macro' },
   ],
   belasting: [
     { section: 1, text: 'box 3-indicatie', href: '/tools/box-3' },
     {
-      section: 3,
+      section: 4,
       text: 'aftrekbare lijfrentestorting',
       href: '/verdieping/pensioen',
     },
@@ -44,12 +44,12 @@ export const topicInlineLinks: Record<string, TopicInlineLink[]> = {
   ],
   pensioen: [
     { section: 2, text: 'fiscale behandeling', href: '/verdieping/belasting' },
-    { section: 4, text: 'doelvermogentool', href: '/tools/doelvermogen' },
+    { section: 5, text: 'doelvermogentool', href: '/tools/doelvermogen' },
   ],
   zakelijk: [
     { section: 2, text: 'privévermogen', href: '/verdieping/belasting' },
     {
-      section: 3,
+      section: 4,
       text: 'de totale kwetsbaarheid',
       href: '/verdieping/strategie',
     },

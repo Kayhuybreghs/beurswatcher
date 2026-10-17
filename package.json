@@ -6,13 +6,14 @@
     "node": "22.x"
   },
   "scripts": {
-    "dev": "next dev --hostname 127.0.0.1 --port 5186",
-    "build": "next build",
+    "dev": "node scripts/generate-guide-index.mjs && next dev --hostname 127.0.0.1 --port 5186",
+    "build": "node scripts/generate-guide-index.mjs && next build",
     "start": "next start --hostname 127.0.0.1 --port 5186",
     "lint": "oxlint",
     "format": "oxfmt",
     "typecheck": "tsc --noEmit",
-    "test": "node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-instagram-security.mjs && node verify-instagram-connection.mjs && node verify-instagram-admin-auth.mjs && node verify-instagram-admin-data.mjs && node verify-instagram-setup.mjs && node verify-refinement.mjs && node verify-macro.mjs && node verify-seo.mjs"
+    "generate:guide-index": "node scripts/generate-guide-index.mjs",
+    "test": "node scripts/generate-guide-index.mjs --check && node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-instagram-security.mjs && node verify-instagram-connection.mjs && node verify-instagram-admin-auth.mjs && node verify-instagram-admin-data.mjs && node verify-instagram-setup.mjs && node verify-refinement.mjs && node verify-macro.mjs && node verify-seo.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

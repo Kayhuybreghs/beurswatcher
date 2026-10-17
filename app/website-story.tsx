@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ArrowDown, ArrowLeft, ArrowUpRight } from 'lucide-react';
 import Link from './site-link';
+import './site-credits.css';
 
 // Local V2 review only: the owner must confirm the commercial relationship
 // before publication and the final rel/disclosure choice. See the review report.

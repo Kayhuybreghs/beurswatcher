@@ -4,7 +4,8 @@ import { ArrowRight, Check, Share2 } from 'lucide-react';
 import Link from './site-link';
 import { articles } from './data';
 import { KnowledgeFigure } from './editorial-pages';
-import { SectionTitle, ArticleCard, Newsletter } from './widgets';
+import { SectionTitle, ArticleCard } from './editorial-cards';
+import { Newsletter } from './newsletter';
 import { NextSteps } from './journeys';
 import { ArticleProgress } from './reading-paths';
 export default function Article({ slug }: { slug: string }) {

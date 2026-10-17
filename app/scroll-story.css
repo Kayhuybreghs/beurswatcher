@@ -49,7 +49,7 @@
   min-height: 46px;
   font-size: 0.875rem;
   font-weight: 650;
-  color: #607995;
+  color: #496784;
   border-radius: 10px;
   transition:
     background 0.2s,
@@ -57,7 +57,7 @@
 }
 .story-nav a > span {
   font-size: 0.75rem;
-  opacity: 0.65;
+  opacity: 1;
 }
 .story-nav a[aria-current='step'] {
   background: var(--ink);
@@ -96,7 +96,7 @@
   display: none;
 }
 .scroll-story:not(.is-ready) .story-panel {
-  opacity: calc(0.7 + var(--story-enter, 1) * 0.3);
+  opacity: 1;
   transform: translateY(calc((1 - var(--story-enter, 1)) * 16px));
 }
 .scroll-story:not(.is-ready) .story-copy .section-kicker {
@@ -123,7 +123,7 @@
   font-size: 1rem;
   line-height: 1.5;
   margin: 0 0 10px;
-  color: #607995;
+  color: #496784;
 }
 .story-action {
   display: flex;
@@ -223,7 +223,7 @@
   gap: 10px;
   padding: 0 18px 12px;
   font-size: 0.75rem;
-  color: #647c97;
+  color: #496784;
 }
 .story-bottom > span:first-child {
   display: flex;

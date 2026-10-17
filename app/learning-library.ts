@@ -1,25 +1,12 @@
 import { articles } from './data';
-import { guides } from './guide-data';
+import { guideIndex as guides } from './guide-index';
 export const learningLibrary = [
   ...guides.map((g) => ({
     slug: g.slug,
     category: g.category,
     title: g.title,
     intro: g.summary,
-    read: Math.max(
-      2,
-      Math.ceil(
-        [
-          g.problem,
-          g.summary,
-          ...g.sections.flat(),
-          ...g.faq.flat(),
-          ...g.example,
-        ]
-          .join(' ')
-          .split(/\s+/).length / 200,
-      ),
-    ),
+    read: g.read,
     href: '/uitleg/' + g.slug,
     example: false,
     image: undefined as string | undefined,

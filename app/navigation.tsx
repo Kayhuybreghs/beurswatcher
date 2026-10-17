@@ -83,6 +83,7 @@ export function Navigation({
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cancelTimer = () => {
     if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
   };
   const close = () => {
     cancelTimer();
@@ -143,7 +144,12 @@ export function Navigation({
             onPointerLeave={(event) => {
               if (!mobile && event.pointerType === 'mouse') {
                 cancelTimer();
-                timer.current = setTimeout(() => setOpen(null), 260);
+                const group = event.currentTarget;
+                timer.current = setTimeout(() => {
+                  // Moving the mouse must not remove the link a keyboard user
+                  // is reading. Blur and Escape still close the disclosure.
+                  if (!group.contains(document.activeElement)) setOpen(null);
+                }, 260);
               }
             }}
             onFocus={cancelTimer}
@@ -224,13 +230,14 @@ export function Navigation({
                 </button>
               )}
             </div>
-            {hasSubmenu && expanded && (
+            {hasSubmenu && (
               <div
                 className={
                   'navigation-dropdown' +
                   (links.length > 5 ? ' navigation-wide' : '')
                 }
                 id={id}
+                hidden={!expanded}
               >
                 <span className="eyebrow">{section.title.toUpperCase()}</span>
                 <Link

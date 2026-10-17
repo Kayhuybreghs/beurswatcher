@@ -1,0 +1,264 @@
+[
+  {
+    "slug": "maandelijks-beleggen-berekenen",
+    "tool": "rendement",
+    "category": "Vermogen",
+    "topics": [
+      "beginnen",
+      "vermogen"
+    ],
+    "title": "Maandelijks beleggen: wat kan je inleg opbouwen?",
+    "summary": "Je mogelijke eindbedrag hangt af van startkapitaal, maandinleg, tijd en rendement. Vergelijk meerdere aannames en bekijk je eigen inleg apart van de berekende groei.",
+    "read": 2
+  },
+  {
+    "slug": "rendement-scenario-kiezen",
+    "tool": "rendement",
+    "category": "Strategie",
+    "topics": [
+      "beginnen",
+      "strategie"
+    ],
+    "title": "Welk rendement vul je in een calculator in?",
+    "summary": "Een rendementspercentage is een rekenaanname, geen verwachting op maat. Gebruik verschillende scenario’s en bepaal welke onderdelen de tool buiten beschouwing laat.",
+    "read": 2
+  },
+  {
+    "slug": "eerder-beginnen-of-meer-inleggen",
+    "tool": "rendement",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen",
+      "strategie"
+    ],
+    "title": "Eerder beginnen of meer inleggen: wat verandert er?",
+    "summary": "Meer inleg verhoogt je eigen bijdrage. Een langere looptijd geeft het bestaande geld langer de tijd om te groeien of te dalen. Vergelijk beide effecten los van elkaar.",
+    "read": 2
+  },
+  {
+    "slug": "etf-kosten-lange-termijn",
+    "tool": "etf-kosten",
+    "category": "ETF",
+    "topics": [
+      "etfs",
+      "portfolio"
+    ],
+    "title": "ETF-kosten op lange termijn: wat doet een klein verschil?",
+    "summary": "Jaarlijkse kosten verlagen het bedrag dat verder kan groeien. Vergelijk twee kostenpercentages bij hetzelfde brutorendement, dezelfde inleg en dezelfde looptijd.",
+    "read": 2
+  },
+  {
+    "slug": "ter-en-overige-beleggingskosten",
+    "tool": "etf-kosten",
+    "category": "ETF",
+    "topics": [
+      "etfs"
+    ],
+    "title": "Welke kosten betaal je bij een ETF?",
+    "summary": "Een jaarlijks fondspercentage is niet automatisch je volledige kostenplaatje. Maak onderscheid tussen doorlopende fondskosten, handelen en eventuele kosten van je rekening.",
+    "read": 2
+  },
+  {
+    "slug": "kosten-en-rendement-eerlijk-vergelijken",
+    "tool": "etf-kosten",
+    "category": "ETF",
+    "topics": [
+      "etfs",
+      "strategie"
+    ],
+    "title": "Kosten en rendement vergelijken zonder dubbel te rekenen",
+    "summary": "Controleer of een rendement vóór of na kosten is weergegeven. De ETF-kostentool verwacht een bruto rekenaanname en verwerkt daar de ingevoerde jaarlijkse kosten in.",
+    "read": 2
+  },
+  {
+    "slug": "honderdduizend-euro-opbouwen",
+    "tool": "doelvermogen",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen",
+      "beginnen"
+    ],
+    "title": "€ 100.000 opbouwen: hoeveel moet je per maand inleggen?",
+    "summary": "Je benodigde maandinleg hangt af van het bedrag dat je al hebt, hoeveel tijd je hebt en het rendement waarmee je rekent. Bereken de inleg voor € 100.000 of een ander doelbedrag.",
+    "read": 2
+  },
+  {
+    "slug": "sparen-voor-een-doel",
+    "tool": "doelvermogen",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen"
+    ],
+    "title": "Sparen voor een doel: maak het maandbedrag concreet",
+    "summary": "Trek je beschikbare startbedrag van je doel af en verdeel het verschil over de resterende maanden. Met een renteaanname kun je daarnaast het effect van groei onderzoeken.",
+    "read": 2
+  },
+  {
+    "slug": "doelvermogen-en-koopkracht",
+    "tool": "doelvermogen",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen",
+      "pensioen"
+    ],
+    "title": "Doelvermogen en koopkracht: euro’s van later begrijpen",
+    "summary": "Een doel in toekomstige euro’s is iets anders dan hetzelfde bedrag aan koopkracht vandaag. Kies eerst welke betekenis je bedoelt en reken daarna je maandinleg uit.",
+    "read": 2
+  },
+  {
+    "slug": "rente-op-rente-uitleg",
+    "tool": "compound-interest",
+    "category": "Vermogen",
+    "topics": [
+      "beginnen",
+      "vermogen"
+    ],
+    "title": "Rente op rente: hoe werkt samengestelde groei?",
+    "summary": "Bij samengestelde groei bereken je rente of rendement ook over eerdere opbrengsten die blijven staan. De calculator gebruikt een vast percentage; bij beleggen is dat rendement niet gegarandeerd.",
+    "read": 2
+  },
+  {
+    "slug": "gemiddeld-en-samengesteld-rendement",
+    "tool": "compound-interest",
+    "category": "Strategie",
+    "topics": [
+      "strategie",
+      "portfolio"
+    ],
+    "title": "Gemiddeld rendement is niet hetzelfde als samengestelde groei",
+    "summary": "Het gewone gemiddelde van jaarpercentages vertelt niet precies hoe je vermogen verandert. Daarvoor vermenigvuldig je de groeifactoren van de afzonderlijke perioden.",
+    "read": 2
+  },
+  {
+    "slug": "inflatie-koopkracht-berekenen",
+    "tool": "inflatie",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen",
+      "pensioen",
+      "markt-economie"
+    ],
+    "title": "Inflatie berekenen: wat blijft er van je koopkracht over?",
+    "summary": "Als prijzen stijgen, kun je met hetzelfde bedrag minder kopen. De inflatietool berekent wat de koopkracht van je geld na een gekozen aantal jaren is, uitgedrukt in euro’s van nu.",
+    "read": 2
+  },
+  {
+    "slug": "spaargeld-en-inflatie",
+    "tool": "inflatie",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen"
+    ],
+    "title": "Spaargeld en inflatie: waarom je buffer een ander doel heeft",
+    "summary": "Inflatie kan de koopkracht van spaargeld verminderen. Een buffer heeft daarnaast een praktische functie: geld beschikbaar houden voor onverwachte uitgaven.",
+    "read": 2
+  },
+  {
+    "slug": "nominaal-en-reeel-rendement",
+    "tool": "inflatie",
+    "category": "Vermogen",
+    "topics": [
+      "vermogen",
+      "strategie"
+    ],
+    "title": "Nominaal en reëel rendement: wat is het verschil?",
+    "summary": "Nominaal rendement beschrijft de groei van het geldbedrag. Reëel rendement corrigeert die groei voor inflatie. Exact reken je met de verhouding tussen beide groeifactoren.",
+    "read": 2
+  },
+  {
+    "slug": "aflossen-of-beleggen-afwegen",
+    "tool": "aflossen-of-beleggen",
+    "category": "Strategie",
+    "topics": [
+      "vermogen",
+      "strategie"
+    ],
+    "title": "Extra aflossen of beleggen: welke vragen stel je eerst?",
+    "summary": "Vergelijk niet alleen schuld­rente met een verwacht rendement. Beschikbaarheid van je geld, onzekerheid, voorwaarden en belasting kunnen de afweging veranderen.",
+    "read": 2
+  },
+  {
+    "slug": "aflossen-of-beleggen-omslagpunt",
+    "tool": "aflossen-of-beleggen",
+    "category": "Strategie",
+    "topics": [
+      "strategie"
+    ],
+    "title": "Het omslagpunt tussen aflossen en beleggen begrijpen",
+    "summary": "Een rekenkundig omslagpunt is het punt waarop twee modeluitkomsten gelijk zijn. Het maakt een onzeker beleggingsscenario niet gelijkwaardig aan minder schuld.",
+    "read": 2
+  },
+  {
+    "slug": "box-3-indicatie-2026",
+    "tool": "box-3",
+    "category": "Belasting",
+    "topics": [
+      "belasting",
+      "vermogen"
+    ],
+    "title": "Box 3 in 2026: wat berekent de indicatietool?",
+    "summary": "De tool maakt een vereenvoudigde indicatie met de uitgangspunten voor de voorlopige aanslag 2026. Het resultaat is geen definitieve aanslag of berekening van werkelijk rendement.",
+    "read": 2
+  },
+  {
+    "slug": "box-3-gegevens-verzamelen",
+    "tool": "box-3",
+    "category": "Belasting",
+    "topics": [
+      "belasting",
+      "vermogen"
+    ],
+    "title": "Box 3 berekenen: welke gegevens leg je klaar?",
+    "summary": "Begin bij het juiste belastingjaar en verzamel de bijbehorende vermogensgegevens. Vul een indicatietool pas in wanneer duidelijk is welke categorie ieder bedrag vertegenwoordigt.",
+    "read": 2
+  },
+  {
+    "slug": "ineens-of-gespreid-beleggen",
+    "tool": "lump-sum-dca",
+    "category": "Strategie",
+    "topics": [
+      "strategie",
+      "beginnen"
+    ],
+    "title": "Ineens of gespreid beleggen met een beschikbaar bedrag",
+    "summary": "Bij ineens instappen doet het volledige bedrag direct mee. Bij gespreid instappen beleg je het beschikbare bedrag in delen; het resterende geld wacht buiten de markt.",
+    "read": 2
+  },
+  {
+    "slug": "gespreid-instappen-en-koersdalingen",
+    "tool": "lump-sum-dca",
+    "category": "Strategie",
+    "topics": [
+      "strategie",
+      "portfolio"
+    ],
+    "title": "Een vroege of late koersdaling: waarom timing verschil maakt",
+    "summary": "Bij tussentijdse inleg telt niet alleen de uiteindelijke marktwaarde, maar ook de prijzen waartegen je koopt. Een vroege daling en een late daling kunnen daardoor anders uitpakken.",
+    "read": 2
+  },
+  {
+    "slug": "dividend-herbeleggen-of-uitkeren",
+    "tool": "dividend",
+    "category": "Dividend",
+    "topics": [
+      "dividend",
+      "aandelen"
+    ],
+    "title": "Dividend herbeleggen of apart houden: wat verandert er?",
+    "summary": "Herbelegd dividend wordt onderdeel van het belegd vermogen. Zonder herbeleggen blijft de uitkering in dit model als renteloos geld meetellen, zodat je totale vermogen eerlijk wordt vergeleken.",
+    "read": 2
+  },
+  {
+    "slug": "dividend-en-totaalrendement",
+    "tool": "dividend",
+    "category": "Dividend",
+    "topics": [
+      "dividend",
+      "aandelen",
+      "portfolio"
+    ],
+    "title": "Dividend en totaalrendement: voorkom dubbel tellen",
+    "summary": "Totaalrendement omvat koersontwikkeling én uitkeringen. De dividendtool vraagt koersgroei exclusief dividend en daarnaast een afzonderlijk dividendpercentage.",
+    "read": 2
+  }
+]

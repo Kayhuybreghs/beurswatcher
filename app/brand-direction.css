@@ -182,7 +182,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #64809e;
+  color: #496784;
   font-size: 12px;
 }
 .home-topic-card h3 {
@@ -485,7 +485,7 @@
 .macro-event-copy small {
   font-size: 11px;
   letter-spacing: 0.03em;
-  color: #567394;
+  color: #496784;
 }
 .macro-event-copy strong {
   font-size: 17px;
@@ -526,7 +526,7 @@
 .macro-source-note {
   font-size: 11px;
   line-height: 1.8;
-  color: #61758b;
+  color: #496784;
   margin: 20px 0;
 }
 .macro-sources {
@@ -681,7 +681,7 @@
 }
 .mini-hub-heading > div > p {
   margin: 12px 0 0;
-  color: #607995;
+  color: #496784;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -733,5 +733,27 @@
   }
   .hub-agenda .macro-source-note {
     font-size: 11px;
+  }
+}
+/* Shared maker credit stays available without loading the maker-page design. */
+footer .site-creator-credit {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  font-size: 11px;
+}
+footer .site-creator-credit strong {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+footer .site-creator-credit:focus-visible {
+  outline: 3px solid #e2b808;
+  outline-offset: 4px;
+}
+@media (min-width: 800px) {
+  footer .site-creator-credit {
+    margin-left: auto;
   }
 }

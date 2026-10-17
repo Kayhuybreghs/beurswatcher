@@ -296,22 +296,6 @@
 .credit-back:hover svg {
   transform: translateX(-3px);
 }
-footer .site-creator-credit {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  min-height: 44px;
-  font-size: 11px;
-}
-footer .site-creator-credit strong {
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-footer .site-creator-credit:focus-visible {
-  outline: 3px solid #e2b808;
-  outline-offset: 4px;
-}
 /* Let the existing footer columns shrink and wrap at enlarged text sizes. */
 .page-surface[data-area='achter-de-website'] + footer .footer-top > div {
   min-width: 0;
@@ -396,9 +380,6 @@ footer .site-creator-credit:focus-visible {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
     gap: 8%;
     padding: 44px;
-  }
-  footer .site-creator-credit {
-    margin-left: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

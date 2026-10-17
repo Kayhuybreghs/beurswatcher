@@ -7,9 +7,11 @@ import {
   Target,
   MoveUpRight,
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
-import { Chart, eur, Newsletter } from './widgets';
+import { Chart } from './widget-chart';
+import { eur } from './money-format';
+import { Newsletter } from './newsletter';
 import { futureValue, markets } from './data';
 import { requiredMonthly, netOfFees } from './calculations';
 import { demoSeries } from './market-data';
@@ -57,23 +59,27 @@ export function BrandHero() {
       </div>
       <div className="radar-stack">
         <div className="radar-back" aria-hidden="true" />
-        <div className="radar-board">
+        <Tabs
+          className="radar-board block"
+          value={focus}
+          onValueChange={(value) => setFocus(String(value))}
+        >
           <div className="radar-top">
             <span>
               <i /> WAT KUN JE HIER DOEN?
             </span>
             <MoveUpRight size={25} />
           </div>
-          <Tabs value={focus} onValueChange={(v) => setFocus(String(v))}>
-            <TabsList>
+          <div className="radar-tab-controls">
+            <TabsList aria-label="Bekijk een onderwerp op Beurswatcher">
               {['De beurs', 'Vermogen', 'Pensioen'].map((v) => (
                 <TabsTrigger key={v} value={v}>
                   {v}
                 </TabsTrigger>
               ))}
             </TabsList>
-          </Tabs>
-          <div className="radar-content" key={focus}>
+          </div>
+          <TabsContent className="radar-content" key={focus} value={focus}>
             {focus === 'Vermogen' ? (
               <>
                 <span className="radar-label">
@@ -164,8 +170,8 @@ export function BrandHero() {
                 </Link>
               </>
             )}
-          </div>
-        </div>
+          </TabsContent>
+        </Tabs>
         <span className="radar-sticker">
           GRATIS TOOLS
           <br />

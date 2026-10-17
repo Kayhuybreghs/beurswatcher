@@ -260,7 +260,7 @@ main {
   background: var(--gold);
   border-radius: 50%;
 }
-.radar-board > [data-slot='tabs'] {
+.radar-board > .radar-tab-controls {
   padding: 0 25px;
 }
 .radar-board [data-slot='tabs-list'] {
@@ -601,7 +601,7 @@ main {
   .radar-top {
     padding: 20px 21px 12px;
   }
-  .radar-board > [data-slot='tabs'] {
+  .radar-board > .radar-tab-controls {
     padding: 0 20px;
   }
   .radar-content {
@@ -709,13 +709,13 @@ main {
   margin: 0;
 }
 .path-heading h2 span {
-  color: #7c95af;
+  color: #587596;
 }
 .path-heading > p {
   max-width: 360px;
   line-height: 1.8;
   font-size: 16px;
-  color: #627994;
+  color: #496784;
   margin: 0;
 }
 .path-layout {
@@ -765,7 +765,7 @@ main {
 .path-overline {
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #6b839d;
+  color: #496784;
 }
 .path-big-number {
   font-size: 64px;
@@ -796,7 +796,7 @@ main {
   font-size: 12px !important;
   line-height: 1.7;
   margin: 20px 0 0;
-  color: #6883a0;
+  color: #496784;
   max-width: 390px;
 }
 .path-goal-bars {
@@ -1030,13 +1030,16 @@ main {
 }
 .about-beurs-copy > h2 span,
 .about-beurs-copy > h1 span {
-  color: #7793b2;
+  color: #587596;
 }
 .about-beurs-copy > p {
   font-size: 16px;
   line-height: 1.85;
-  color: #59738f;
+  color: #496784;
   max-width: 590px;
+}
+.about-beurs-copy > .section-kicker {
+  color: #496784;
 }
 .channel-compare {
   display: grid;
@@ -1057,7 +1060,7 @@ main {
 .channel-compare > div > span {
   grid-column: 2;
   font-size: 13px;
-  color: #5a7590;
+  color: #496784;
   line-height: 1.7;
 }
 .about-actions {
@@ -1113,11 +1116,11 @@ main {
   margin: 0;
 }
 .brand-section-head h2 span {
-  color: #7d95b0;
+  color: #587596;
 }
 .brand-section-head > p {
   font-size: 16px;
-  color: #64809a;
+  color: #496784;
   line-height: 1.8;
   margin: 0 0 4px;
 }
@@ -1175,7 +1178,7 @@ main {
   font-size: 14px;
   line-height: 1.7;
   min-height: 50px;
-  color: #65809d;
+  color: #496784;
 }
 .tool-shelf > a:nth-child(2) p,
 .tool-shelf > a:nth-child(2) .shelf-top {
@@ -1183,7 +1186,7 @@ main {
 }
 .shelf-top {
   font-size: 11px;
-  color: #6c86a1;
+  color: #496784;
 }
 .shelf-visual {
   margin-top: auto;
@@ -1218,7 +1221,7 @@ main {
   padding: 25px 0;
   border-bottom: 1px solid var(--line);
   font-size: 13px;
-  color: #6b829b;
+  color: #496784;
 }
 .all-tools-link > span {
   display: flex;
@@ -2046,6 +2049,13 @@ main {
 }
 .newsletter-compact .eyebrow {
   color: var(--gold);
+}
+.newsletter-compact :is(.consent, .subtle, [role='status']) {
+  color: #bed1e6;
+}
+.newsletter .email-row input::placeholder {
+  color: #496784;
+  opacity: 1;
 }
 footer {
   margin-top: 70px;

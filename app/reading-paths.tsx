@@ -1,10 +1,9 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ArrowRight, Search, BookOpen } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
 import { articles, toolItems, partners } from './data';
-import { guides } from './guide-data';
+import { guideIndex as guides } from './guide-index';
 import { journeys } from './journey-data';
 import { topicContent } from './topic-content';
 export function ArticleProgress() {
@@ -183,12 +182,11 @@ export function SiteSearch() {
           />
         </div>
       </section>
-      <Tabs
-        className="catalog-filters"
-        value={kind}
-        onValueChange={(v) => setKind(String(v))}
+      <fieldset
+        className="catalog-filters search-filters"
+        aria-label="Filter zoekresultaten"
       >
-        <TabsList aria-label="Filter zoekresultaten">
+        <div className="filter-options">
           {[
             'Alles',
             'Onderwerpen',
@@ -198,13 +196,19 @@ export function SiteSearch() {
             'Partners',
             'Platform',
           ].map((s) => (
-            <TabsTrigger key={s} value={s}>
+            <button
+              className="filter-option"
+              type="button"
+              key={s}
+              aria-pressed={kind === s}
+              onClick={() => setKind(s)}
+            >
               {s}
-            </TabsTrigger>
+            </button>
           ))}
-        </TabsList>
-      </Tabs>
-      <output className="search-count">
+        </div>
+      </fieldset>
+      <output className="search-count" aria-live="polite" aria-atomic="true">
         {results.length} {results.length === 1 ? 'resultaat' : 'resultaten'}
       </output>
       <div className="search-results">

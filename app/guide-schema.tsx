@@ -1,4 +1,4 @@
-import { guides } from './guide-data';
+import { guides, guideSources } from './guide-data';
 import { siteUrl } from './site-config';
 import { JsonLd, publisher, websiteId } from './site-schema';
 export function GuideSchema({ slug }: { slug: string }) {
@@ -18,6 +18,11 @@ export function GuideSchema({ slug }: { slug: string }) {
         isPartOf: { '@id': websiteId },
         author: publisher,
         publisher,
+        citation: {
+          '@type': 'CreativeWork',
+          name: guideSources[g.source][0],
+          url: guideSources[g.source][1],
+        },
       },
       {
         '@type': 'FAQPage',

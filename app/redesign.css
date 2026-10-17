@@ -82,6 +82,10 @@ a:hover > svg,
 .page-surface {
   animation: page-enter 0.3s ease-out;
 }
+.page-surface[data-area='home'] {
+  /* Show the first reading task immediately; scroll sections retain motion. */
+  animation: none;
+}
 .ticker-v2 {
   height: 38px;
   display: flex;
@@ -2061,9 +2065,9 @@ a:hover > svg,
   background: #e1e9ec;
 }
 .motion-pending[data-reveal] {
-  opacity: 0.5;
+  /* Keep text readable before and during a reveal. Movement supplies motion. */
+  opacity: 1;
   transition:
-    opacity 0.65s ease,
     transform 0.7s ease,
     clip-path 0.8s ease;
 }

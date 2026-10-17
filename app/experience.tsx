@@ -1,6 +1,6 @@
 'use client';
 import Link from './site-link';
-import { ToolReading } from './guide-pages';
+import { ToolReading } from './tool-reading';
 import { ScenarioTool } from './scenario-tools';
 import { ToolCatalog } from './tool-catalog';
 import { CompareResult } from './compare-result';
@@ -9,13 +9,11 @@ import { Slider } from '@/components/ui/slider';
 import { useState } from 'react';
 import { ArrowRight, ArrowDown, ArrowLeft } from 'lucide-react';
 import { toolItems, futureValue } from './data';
-import {
-  Chart,
-  eur,
-  Newsletter,
-  Calculator,
-  NumberField,
-} from './widgets';
+import { Chart } from './widget-chart';
+import { eur } from './money-format';
+import { Newsletter } from './newsletter';
+import { Calculator } from './widget-calculator';
+import { NumberField } from './number-field';
 import { AnimatedNumber } from './motion';
 import { requiredMonthly, netOfFees, downloadRows } from './calculations';
 function ExtendedCalculator({ slug }: { slug: string }) {

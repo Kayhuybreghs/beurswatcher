@@ -17,7 +17,7 @@ import { partnerFacts } from './partner-facts';
 import { partnerEditorial } from './partner-editorial';
 import styles from './partner-editorial.module.css';
 import { NextSteps } from './journeys';
-import { Newsletter } from './widgets';
+import { Newsletter } from './newsletter';
 export function PartnerVisual({ slug }: { slug: string }) {
   return (
     <div className={'partner-visual pv-' + slug} aria-hidden="true">

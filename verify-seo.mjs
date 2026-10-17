@@ -61,17 +61,40 @@ if (!process.argv.includes('--mode')) {
   const preview = process.env.VERCEL_ENV === 'preview';
   const { siteUrl, resolveSiteUrl, productionSiteUrl, legacySiteUrl } =
     await import('./app/site-config.ts');
-  const { contentRoutes, isIndexablePage, metadataForPage, robotsForPage } =
-    await import('./app/seo.ts');
+  const {
+    contentRoutes,
+    isIndexablePage,
+    metadataForPage,
+    robotsForPage,
+    notFoundMetadata,
+  } = await import('./app/seo.ts');
   const { default: sitemap } = await import('./app/sitemap.ts');
   const { default: robots } = await import('./app/robots.ts');
-  const { guides } = await import('./app/guide-data.ts');
+  const { guides, guideSources } = await import('./app/guide-data.ts');
   const { articles } = await import('./app/data.ts');
   const { PageSchema, SiteSchema } = await import('./app/site-schema.tsx');
   const { GuideSchema } = await import('./app/guide-schema.tsx');
+  const { GuidePage } = await import('./app/guide-pages.tsx');
   const { default: nextConfig } = await import('./next.config.ts');
 
   assert.equal(siteUrl, 'https://www.beurswatcher.nl');
+  assert.equal(
+    notFoundMetadata.title.absolute,
+    'Pagina niet gevonden | Beurswatcher',
+  );
+  assert.equal(notFoundMetadata.robots.index, false);
+  assert.equal(notFoundMetadata.robots.follow, !preview);
+  assert.equal(
+    notFoundMetadata.alternates,
+    undefined,
+    '404 must not canonicalize to home',
+  );
+  assert.equal(notFoundMetadata.openGraph.url, undefined);
+  assert.equal(
+    notFoundMetadata.openGraph.title,
+    notFoundMetadata.title.absolute,
+  );
+  assert.equal(notFoundMetadata.twitter.title, notFoundMetadata.title.absolute);
   assert.deepEqual(
     robotsForPage(),
     preview
@@ -183,9 +206,28 @@ if (!process.argv.includes('--mode')) {
     robots().sitemap,
     preview ? undefined : siteUrl + '/sitemap.xml',
   );
-  for (const article of articles)
+  for (const article of articles) {
     assert.ok(!sitemapUrls.includes(siteUrl + '/artikelen/' + article.slug));
+    const metadata = metadataForPage('artikelen/' + article.slug);
+    assert.equal(metadata.title, 'Voorbeeld: ' + article.title);
+    for (const description of [
+      metadata.description,
+      metadata.openGraph.description,
+      metadata.twitter.description,
+    ]) {
+      assert.ok(
+        description.startsWith(
+          'Redactioneel voorbeeld, nog niet inhoudelijk beoordeeld door Daniel. ',
+        ),
+        article.slug + ' preview must disclose its unreviewed example status',
+      );
+    }
+    assert.ok(metadata.openGraph.title.startsWith('Voorbeeld: '));
+  }
   for (const guide of guides) {
+    const metadata = metadataForPage('uitleg/' + guide.slug);
+    assert.equal(metadata.title, guide.title);
+    assert.equal(metadata.description, guide.summary);
     const graph = scriptData(GuideSchema({ slug: guide.slug }));
     const article = graph.find((item) => item['@type'] === 'Article');
     assert.equal(
@@ -195,6 +237,25 @@ if (!process.argv.includes('--mode')) {
     assert.equal(article.author.name, 'Beurswatcher');
     assert.equal(article.datePublished, undefined);
     assert.equal(article.dateModified, undefined);
+    assert.deepEqual(article.citation, {
+      '@type': 'CreativeWork',
+      name: guideSources[guide.source][0],
+      url: guideSources[guide.source][1],
+    });
+    const visibleSource = renderToStaticMarkup(
+      GuidePage({ slug: guide.slug }),
+    ).match(/<div class="guide-source">([\s\S]*?)<\/div>/)?.[1];
+    assert.ok(visibleSource, guide.slug + ' visible source block');
+    assert.ok(
+      visibleSource.includes(
+        `href="${article.citation.url.replaceAll('&', '&amp;')}"`,
+      ),
+      guide.slug + ' structured citation matches the visible source link',
+    );
+    assert.ok(
+      visibleSource.includes(article.citation.name.replaceAll('&', '&amp;')),
+      guide.slug + ' structured citation name is visible',
+    );
     assert.deepEqual(
       graph
         .find((item) => item['@type'] === 'FAQPage')
@@ -233,7 +294,11 @@ if (!process.argv.includes('--mode')) {
       url: siteUrl + privatePath,
       nextConfig,
     });
-    assert.match(response.headers.get('x-robots-tag') || '', /noindex/, privatePath);
+    assert.match(
+      response.headers.get('x-robots-tag') || '',
+      /noindex/,
+      privatePath,
+    );
   }
   console.log(
     `SEO ${preview ? 'preview' : 'production'}: ${contentRoutes.length} unique route metadata records, ${guides.length} truthful guide schemas, ${sitemapUrls.length} canonical sitemap URLs and canonical redirects passed.`,

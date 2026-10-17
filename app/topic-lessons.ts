@@ -201,6 +201,10 @@ export const topicLessons: Record<string, TopicLesson> = {
         'Een stijging ten opzichte van vorige maand is een andere vergelijking dan een stijging ten opzichte van dezelfde maand vorig jaar. Een jaarcijfer kan afnemen doordat een uitzonderlijk hoge maand uit de vergelijking valt. De nieuwste maand hoeft dan niet ineens goedkoop te zijn geworden.\n\nSeizoenscorrectie probeert terugkerende patronen, zoals vakanties of jaarlijkse prijsmomenten, uit een reeks te halen. Vergelijk daarom dezelfde maatstaf en noteer welke definitie je gebruikt. Voor Nederland zijn CBS-publicaties een vertrekpunt; bij Amerikaanse inflatie en arbeidsmarktgegevens is dat onder meer het BLS.',
       ],
       [
+        'CPI en HICP zijn niet hetzelfde inflatiecijfer',
+        'Het CBS publiceert de Nederlandse consumentenprijsindex (CPI) en de Europees geharmoniseerde index (HICP). Voor de HICP gebruiken EU-landen afgesproken definities om landen beter te kunnen vergelijken. Zo tellen de berekende kosten van wonen in de eigen woning wel mee in de Nederlandse CPI en niet in de HICP. Een verschil tussen beide uitkomsten hoeft dus geen meetfout te zijn.\n\nNoteer bij een cijfer de volledige indexnaam, het land en de periode. Vergelijk niet ongemerkt een Nederlandse CPI met een HICP-reeks, of een maandmutatie met een jaarmutatie. Een indexstand van 105 is bovendien geen inflatie van 105%: bij een basis van 100 ligt het prijsniveau dan 5% boven die basis.',
+      ],
+      [
         'Wat betekent een economisch cijfer voor je beleggingen?',
         'Begin niet met de vraag welk aandeel je bij het volgende cijfer moet kopen. Onderzoek eerst welke aanname wordt geraakt: je koopkracht, de financieringslasten van een bedrijf of de tijd die je hebt om een doel te halen. Dat maakt het nieuws bruikbaar zonder dat ieder bericht een transactie wordt.\n\nBij een eigen analyse hoort een controleerbare redenering: dit is gepubliceerd, dit zou het kunnen betekenen, dit is nog onzeker. De macroagenda op Beurswatcher laat geselecteerde geplande momenten voor Nederland en de VS zien. CBS- en BEA-momenten worden automatisch opgehaald; aanvullende BLS- en Fed-momenten zijn herkenbaar handmatig gecontroleerd. Een geplande publicatie is nog geen uitslag.',
       ],
@@ -232,6 +236,10 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
     },
     sources: [
+      [
+        'CBS · CPI, HICP en het verschil in woningkosten',
+        'https://www.cbs.nl/nl-nl/nieuws/2026/11/inflatie-ook-in-februari-2-4-procent',
+      ],
       [
         'BLS · prijsindex en meetmethoden',
         'https://www.bls.gov/cpi/questions-and-answers.htm',
@@ -273,6 +281,10 @@ export const topicLessons: Record<string, TopicLesson> = {
       [
         'Werkelijk rendement is meer dan ontvangen rente',
         'Naast de forfaitaire berekening kan de tegenbewijsregeling relevant zijn wanneer het werkelijk rendement lager is. Werkelijk rendement omvat volgens de Belastingdienst niet alleen ontvangen inkomsten, maar ook waardeveranderingen. Een aandeel hoeft dus niet verkocht te zijn voordat de verandering van waarde kan meetellen.\n\nDe fiscale definitie is niet automatisch hetzelfde als het rendementscijfer in je brokerapp. Stortingen, onttrekkingen, verschillende bezittingen en de regels voor het onderzochte jaar vragen om een eigen berekening. De Beurswatcher-tool berekent deze route niet. Gebruik de officiële uitleg om te bepalen welke administratie je nodig hebt.',
+      ],
+      [
+        'De twee box 3-routes hebben andere spelregels',
+        'Bij het werkelijk rendement wordt geen heffingsvrij vermogen afgetrokken. Je kijkt naar het totale box 3-vermogen over het kalenderjaar, niet alleen naar een belegging die verlies maakte. Winsten en verliezen binnen dat jaar worden samengenomen. Een negatief jaartotaal wordt op nul gesteld en kan niet met een ander jaar worden verrekend.\n\nOok kosten vragen aandacht: gewone aan- en verkoopkosten van beleggingen zijn in deze route niet aftrekbaar; betaalde rente op een box 3-schuld wel. Voor onroerend goed gelden aanvullende regels, waaronder vanaf 2026 een bijtelling bij eigen gebruik. De officiële berekening vergelijkt vervolgens welke route gunstiger is. Vul voor deze vergelijking niet simpelweg een lager percentage in de forfaitaire Beurswatcher-tool in.',
       ],
       [
         'Vrijstellingen, toeslagen en pensioen zijn aparte vragen',
@@ -344,6 +356,10 @@ export const topicLessons: Record<string, TopicLesson> = {
         'Je kunt vooraf bepalen hoeveel je inlegt, welke kosten je accepteert en wanneer je je plan evalueert. Het toekomstige rendement kun je niet vastzetten door een percentage in een calculator te kiezen. Maak daarom ook een scenario met minder groei en een scenario waarin je tijdelijk minder kunt inleggen.\n\nBij kleine aankopen verdienen vaste kosten extra aandacht. € 2 kosten op € 50 inleg is 4% van dat bedrag; op € 500 is het 0,4%. Dat zegt niet welke aanbieder je moet kiezen, maar maakt duidelijk waarom de kostenstructuur bij je manier van inleggen moet passen.',
       ],
       [
+        'Wat toezicht en vermogensscheiding beschermen',
+        'Een vergunning en toezicht maken koersverlies niet onmogelijk. Vermogensscheiding betekent dat de bank of beleggingsonderneming beleggingen en bepaalde klantgelden gescheiden houdt van haar eigen vermogen. Dat is een andere bescherming dan de waarde van een aandeel of fonds garanderen.\n\nEen aandeel van € 100 kan bij een correct werkende broker nog steeds € 60 waard worden. Dat koersverlies wordt niet vergoed door depositogarantie of beleggerscompensatie. Controleer daarom twee aparte zaken: hoe je bezittingen worden bewaard én welke verliezen door de belegging zelf mogelijk zijn.',
+      ],
+      [
         'Leg vast wat je koopt en wanneer je opnieuw kijkt',
         'Schrijf vóór een aankoop op wat je koopt, waarom het in je plan past en welke risico’s je begrijpt. Lees de productinformatie en de tarieven van de aanbieder. Controleer bij de toezichthouder of de aanbieder de benodigde vergunning heeft; toezicht garandeert geen rendement.\n\nSpreek daarna met jezelf af wanneer je opnieuw kijkt. Een verandering in je inkomen, doel of noodzakelijke uitgaven is een goede reden om je plan te heroverwegen. Een rood dagcijfer alleen geeft nog geen antwoord op de vraag of je oorspronkelijke reden veranderd is.',
       ],
@@ -380,6 +396,10 @@ export const topicLessons: Record<string, TopicLesson> = {
       [
         'AFM · praktische checklist',
         'https://www.afm.nl/nl-nl/consumenten/themas/zelf-beleggen/is-beleggen-iets-voor-jou/praktische-checklist-bij-beleggen',
+      ],
+      [
+        'AFM · vermogensscheiding en beleggingsverlies',
+        'https://www.afm.nl/nl-nl/consumenten/themas/zelf-beleggen/is-beleggen-veilig',
       ],
     ],
     faq: [
@@ -694,12 +714,20 @@ export const topicLessons: Record<string, TopicLesson> = {
         'Vrij sparen of beleggen houdt geld doorgaans flexibeler beschikbaar, maar kent de fiscale behandeling die bij die bezittingen hoort. Een kwalificerende lijfrente is gekoppeld aan voorwaarden voor opbouw en uitkering. Een mogelijke aftrek is daarom niet los te zien van de beperkingen van het product.\n\nBij lijfrente kan aftrek afhangen van je jaar- en reserveringsruimte. Jaarruimte 2026 is gebaseerd op je situatie in 2025. Ook als je via werk pensioen opbouwt, kan een tekort bestaan. Controleer de officiële berekening met de juiste inkomens- en pensioengegevens voordat je aanneemt dat een storting aftrekbaar is.',
       ],
       [
+        'Aftrek bij inleg betekent niet belastingvrij uitkeren',
+        'Heb je de premies of stortingen voor een lijfrente volledig afgetrokken, dan worden de latere uitkeringen volledig belast. Bij niet-afgetrokken inleg kunnen andere regels gelden; bewaar daarvoor je administratie. Vergelijk dus geen aftrekbare bruto inleg met een later netto besteedbaar bedrag alsof die hetzelfde zijn.\n\nHet uiteindelijke voordeel hangt onder meer af van je belastingpositie bij inleg en uitkering, de kosten en de productvoorwaarden. Een lager belastingtarief later is geen zekerheid. Voortijdig afkopen kan naast inkomstenbelasting ook revisierente opleveren. De doelvermogentool berekent deze fiscale gevolgen niet.',
+      ],
+      [
         'Eerder stoppen vraagt een overbrugging',
         'Wil je stoppen met werken voordat bepaalde uitkeringen ingaan, dan ontstaat een aparte periode die je moet financieren. Maak die periode zichtbaar in je planning. Het totale vermogen voor later vertelt nog niet welk deel op dat moment daadwerkelijk beschikbaar is.\n\nEen geblokkeerd product is niet zomaar een vrij opneembare buffer. Kijk naar de voorwaarden en de fiscale gevolgen van de uitkeringsfase. Verdeel je vraag daarom in opbouwen, overbruggen en inkomen ontvangen. Eén calculator met een eindbedrag beantwoordt niet alle drie.',
       ],
       [
         'De opnamefase heeft eigen risico’s',
         'Tijdens opbouw voeg je meestal geld toe. Tijdens gebruik haal je geld weg. Een sterke daling aan het begin van een opnameperiode kan daardoor extra zwaar wegen: verkocht vermogen doet niet meer mee aan een mogelijk later herstel. De volgorde van rendementen kan dan belangrijk zijn.\n\nOnderzoek verschillende levensduren, uitgaven en tegenvallers. Gebruik geen vast opnamepercentage alsof het een levenslange garantie is. De doelvermogentool helpt een bedrag en benodigde inleg onderzoeken, maar rekent geen netto pensioenuitkering, jaarruimte of volledige opnameplanning uit.',
+      ],
+      [
+        'Hetzelfde rendement, een andere volgorde',
+        'Een rekenvoorbeeld met vrij belegd vermogen: je begint met € 100.000 en neemt aan het begin van ieder jaar € 10.000 op. Bij eerst −20% en daarna +25% blijft na twee jaar € 77.500 over: (€ 100.000 − € 10.000) × 0,80 = € 72.000; daarna (€ 72.000 − € 10.000) × 1,25 = € 77.500.\n\nDraai alleen de rendementen om en je houdt € 82.000 over. Zonder opnames zouden beide volgordes weer € 100.000 opleveren. Door de opnames beïnvloedt de volgorde van rendementen hoeveel vermogen overblijft. Dit is geen aanbevolen opnamebedrag of lijfrente-uitkering; kosten, inflatie en belasting ontbreken.',
       ],
     ],
     example: {
@@ -731,6 +759,10 @@ export const topicLessons: Record<string, TopicLesson> = {
     sources: [
       pension,
       annuity,
+      [
+        'Belastingdienst · belasting over lijfrente-uitkeringen en afkoop',
+        'https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/werk_en_inkomen/lijfrente/waarover-betaalt-u-belasting/waarover-betaalt-u-belasting',
+      ],
       [
         'Rijksoverheid · persoonlijk pensioenoverzicht',
         'https://www.rijksoverheid.nl/vraag-en-antwoord/pensioen/waar-heb-ik-recht-op-als-ik-met-pensioen-ga',
@@ -764,6 +796,10 @@ export const topicLessons: Record<string, TopicLesson> = {
       [
         'De rechtsvorm bepaalt de vervolgvraag',
         'Geld in een bv is niet hetzelfde als privévermogen van de aandeelhouder. Ook bij een eenmanszaak moet worden beoordeeld welke bezittingen ondernemingsvermogen zijn en welke privé. De rekeningnaam alleen bepaalt de fiscale behandeling niet.\n\nDe keuze om vermogen in een onderneming te houden, privé beschikbaar te maken of aanvullend voor later op te bouwen raakt verschillende regels. Een rendementstool rekent die structuur niet door. Laat de relevante fiscale en juridische gevolgen beoordelen voordat je een algemene groeigrafiek gebruikt als argument voor een zakelijke transactie.',
+      ],
+      [
+        'Privé en zakelijk spaargeld zijn niet altijd apart beschermd',
+        'Bij een eenmanszaak telt DNB het zakelijke banksaldo op bij de privérekeningen van dezelfde persoon bij dezelfde bank. De gebruikelijke grens is dan samen € 100.000, voor tegoeden die onder de Nederlandse depositogarantie vallen. Een bv is een aparte rechtspersoon en heeft een eigen bescherming, los van de privérekening van de aandeelhouder. Voor andere rechtsvormen moet je de eigen regels controleren.\n\nHeb je als eenmanszaak € 70.000 zakelijk en € 50.000 privé bij dezelfde bank, dan is van die € 120.000 normaal € 100.000 beschermd. Twee rekeningnamen verdubbelen de bescherming dus niet. Controleer ook of verschillende bankmerken onder dezelfde bankvergunning vallen.',
       ],
       [
         'Koppel de bestemming aan de bedrijfsplanning',
@@ -830,7 +866,7 @@ export const topicLessons: Record<string, TopicLesson> = {
       ],
       [
         'Punten zijn geen euro’s op een spaarrekening',
-        'De waarde van punten hangt af van de manier waarop je ze inzet. Een transfer naar een reispartner, een boeking of een andere besteding kan een andere tegenwaarde geven. Beschikbaarheid, toeslagen, geldigheid en omzettingsregels kunnen het praktische resultaat beïnvloeden.\n\nReken daarom met de prijs van een alternatief dat je zelf werkelijk zou boeken. Een dure premiumreis gebruiken als vergelijkingsprijs overschat je besparing als je die reis zonder punten nooit zou kopen. Trek verplichte bijbetalingen en belastingen van de besparing af voordat je een waarde per punt berekent.',
+        'De waarde van punten hangt af van de manier waarop je ze inzet. Een transfer naar een reispartner, een boeking of een andere besteding kan een andere tegenwaarde geven. Beschikbaarheid, toeslagen, geldigheid en omzettingsregels kunnen het praktische resultaat beïnvloeden.\n\nReken met een alternatief dat je werkelijk zou boeken. Stel dat dit € 300 kost, terwijl een vergelijkbare beloning 20.000 punten plus € 125 bijbetaling vraagt. De bespaarde € 175 gedeeld door 20.000 is € 0,00875, dus 0,875 eurocent per punt. Dit fictieve voorbeeld is geen vaste puntenwaarde of aanbod van een aanbieder. Een dure premiumreis als vergelijkingsprijs gebruiken overschat je voordeel als je die reis anders nooit zou kopen.',
       ],
       [
         'Tel alleen voordelen die je daadwerkelijk gebruikt',
@@ -875,6 +911,10 @@ export const topicLessons: Record<string, TopicLesson> = {
       [
         'American Express · voorwaarden per kaart en verzekering',
         'https://www.americanexpress.com/nl-nl/verzekeringen/american-express-kaarten/',
+      ],
+      [
+        'American Express · punten gebruiken en voorwaarden controleren',
+        'https://www.americanexpress.com/nl-nl/rewards/membership-rewards/about-program',
       ],
     ],
     faq: [

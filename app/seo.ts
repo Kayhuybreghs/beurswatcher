@@ -18,6 +18,29 @@ export function robotsForPage(indexable = true): Metadata['robots'] {
   return { index: true, follow: true, 'max-image-preview': 'large' };
 }
 
+const notFoundTitle = 'Pagina niet gevonden | Beurswatcher';
+const notFoundDescription =
+  'Deze pagina bestaat niet. Controleer het adres of bekijk de uitleg en gratis rekentools van Beurswatcher.';
+export const notFoundMetadata: Metadata = {
+  title: { absolute: notFoundTitle },
+  description: notFoundDescription,
+  robots: robotsForPage(false),
+  // An unknown URL is not another copy of the homepage. Do not give it a
+  // homepage canonical or reuse the homepage's promise in a shared preview.
+  openGraph: {
+    title: notFoundTitle,
+    description: notFoundDescription,
+    type: 'website',
+    locale: 'nl_NL',
+    siteName: 'Beurswatcher',
+  },
+  twitter: {
+    card: 'summary',
+    title: notFoundTitle,
+    description: notFoundDescription,
+  },
+};
+
 // These are actual pages, not extra landing pages created for search engines.
 const pageCopy: Record<string, { title: string; description: string }> = {
   artikelen: {
@@ -206,7 +229,7 @@ export function metadataForPage(path: string): Metadata {
     pageCopy[path]?.title ||
     guide?.title ||
     topic?.title ||
-    article?.title ||
+    (article && `Voorbeeld: ${article.title}`) ||
     (tool && toolCopy[tool.slug]?.title) ||
     tool?.title ||
     (partner && partnerFacts[partner.slug].headline.replace(/\.$/, '')) ||
@@ -215,7 +238,8 @@ export function metadataForPage(path: string): Metadata {
     pageCopy[path]?.description ||
     guide?.summary ||
     topic?.summary ||
-    article?.intro ||
+    (article &&
+      `Redactioneel voorbeeld, nog niet inhoudelijk beoordeeld door Daniel. ${article.intro}`) ||
     (tool && toolCopy[tool.slug]?.description) ||
     (tool &&
       `${tool.text} Pas de invoer aan en vergelijk de uitkomsten. Lees ook de rekenaannames en beperkingen.`) ||

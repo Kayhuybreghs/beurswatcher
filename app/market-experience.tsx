@@ -4,7 +4,9 @@ import { MacroPage } from './macro-calendar';
 import { MarketDashboard as MarketHub } from './market-dashboard';
 import { InstagramCTA } from './brand';
 import { articles } from './data';
-import { ArticleCard, Market, Calendar } from './widgets';
+import { ArticleCard } from './editorial-cards';
+import { Market } from './legacy-market-widget';
+import { Calendar } from './legacy-calendar-widget';
 import { NextSteps } from './journeys';
 import { marketNotice } from './market-data';
 
