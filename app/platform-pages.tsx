@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import Link from './site-link';
 import { BrandMark, instagramUrl } from './brand';
-import { MarketDashboard } from './market-dashboard';
 import { BrandEvents } from './brand-events';
 import { ContactForm } from './contact-form';
 import { ReelRail } from './reels';
@@ -400,7 +399,4 @@ export function NewsletterPage() {
       </section>
     </>
   );
-}
-export function MarketHub() {
-  return <MarketDashboard />;
 }

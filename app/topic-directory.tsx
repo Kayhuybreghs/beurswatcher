@@ -22,142 +22,19 @@ import {
 import Link from './site-link';
 import { useState } from 'react';
 import { learningLibrary } from './learning-library';
-export const topicGroups = [
-  {
-    slug: 'markt-economie',
-    name: 'Markt & economie',
-    description:
-      'Wat inflatie, rente en economische groei betekenen voor de beurs.',
-    icon: Globe,
-    categories: ['Markt', 'Macro'],
-    links: [
-      ['De economische basis', '/verdieping/markt-economie'],
-      ['De macroagenda', '/markt/macro'],
-      ['Koopkracht onderzoeken', '/tools/inflatie'],
-    ],
-  },
-  {
-    slug: 'belasting',
-    name: 'Belasting & vermogen',
-    description:
-      'Box 3, werkelijk rendement en het verschil met toeslagen en pensioen.',
-    icon: ReceiptText,
-    categories: [],
-    links: [
-      ['Belasting & vermogen begrijpen', '/verdieping/belasting'],
-      ['Box 3: wat berekent de tool?', '/uitleg/box-3-indicatie-2026'],
-      ['Box 3 indicatie maken', '/tools/box-3'],
-    ],
-  },
-  {
-    slug: 'beginnen',
-    name: 'Beginnen met beleggen',
-    description:
-      'Wat je koopt, welk geld je kunt missen en hoe spreiding en kosten werken.',
-    icon: Compass,
-    categories: ['Strategie'],
-    links: [
-      ['Beginnen met beleggen: de basis', '/verdieping/beginnen'],
-      ['Risico en beleggingsstrategie', '/verdieping/strategie'],
-      ['Bereken mogelijke vermogensgroei', '/tools/rendement'],
-    ],
-  },
-  {
-    slug: 'etfs',
-    name: 'ETF’s',
-    description:
-      'De index, overlap, uitkeringen, valuta en kosten van een fonds begrijpen.',
-    icon: Layers,
-    categories: ['ETF'],
-    links: [
-      ['Alles over ETF’s', '/verdieping/etfs'],
-      [
-        'Wat doen fondskosten op lange termijn?',
-        '/uitleg/etf-kosten-lange-termijn',
-      ],
-      ['ETF-kosten vergelijken', '/tools/etf-kosten'],
-    ],
-  },
-  {
-    slug: 'aandelen',
-    name: 'Aandelen & dividend',
-    description: 'Bedrijfsresultaten, waardering en dividend samen beoordelen.',
-    icon: ChartNoAxesCombined,
-    categories: ['Aandelen', 'Dividend'],
-    links: [
-      ['Aandelen begrijpen', '/verdieping/aandelen'],
-      ['Hoe werkt dividend?', '/verdieping/dividend'],
-      ['Dividend doorrekenen', '/tools/dividend'],
-    ],
-  },
-  {
-    slug: 'strategie',
-    name: 'Strategie & portefeuille',
-    description:
-      'Je verdeling kiezen, instappen, herbalanceren en omgaan met tegenvallers.',
-    icon: Network,
-    categories: ['Strategie', 'Portfolio'],
-    links: [
-      ['Strategie & horizon', '/verdieping/strategie'],
-      ['Spreiding en overlap in je portefeuille', '/verdieping/portfolio'],
-      ['Ineens of gespreid beleggen', '/tools/lump-sum-dca'],
-    ],
-  },
-  {
-    slug: 'vermogen',
-    name: 'Sparen & vermogen',
-    description:
-      'Buffers, spaardoelen, inflatie en bescherming van je banktegoed.',
-    icon: Wallet,
-    categories: ['Vermogen'],
-    links: [
-      ['Sparen & vermogen', '/verdieping/vermogen'],
-      ['Inflatie & koopkracht', '/tools/inflatie'],
-      ['Maandinleg voor een doelbedrag berekenen', '/tools/doelvermogen'],
-      ['Box 3 indicatie', '/tools/box-3'],
-    ],
-  },
-  {
-    slug: 'pensioen',
-    name: 'Pensioen',
-    description:
-      'AOW, werkgeverspensioen, lijfrente en eerder stoppen met werken.',
-    icon: Landmark,
-    categories: ['Pensioen'],
-    links: [
-      ['De onderdelen van pensioen', '/verdieping/pensioen'],
-      ['Sparen en vermogen opbouwen', '/verdieping/vermogen'],
-      ['Maandinleg voor een doelbedrag berekenen', '/tools/doelvermogen'],
-    ],
-  },
-  {
-    slug: 'zakelijk',
-    name: 'Zakelijk vermogen',
-    description:
-      'Welk geld je bedrijf nodig heeft en wat je met reserves kunt doen.',
-    icon: Building2,
-    categories: ['Zakelijk'],
-    links: [
-      ['Zakelijk beleggen', '/verdieping/zakelijk'],
-      ['Bereken mogelijke vermogensgroei', '/tools/rendement'],
-    ],
-  },
-  {
-    slug: 'reizen',
-    name: 'Reizen & voordelen',
-    description:
-      'De echte waarde van punten, bonussen en kaartvoordelen berekenen.',
-    icon: Plane,
-    categories: ['Reizen'],
-    links: [
-      ['Reiskaarten, punten en voorwaarden', '/verdieping/reizen'],
-      [
-        'American Express: kosten en mogelijkheden',
-        '/partners/american-express',
-      ],
-    ],
-  },
-];
+import { topicGroups } from './topic-groups';
+const topicIcons = {
+  Globe,
+  ReceiptText,
+  Compass,
+  Layers,
+  ChartNoAxesCombined,
+  Network,
+  Wallet,
+  Landmark,
+  Building2,
+  Plane,
+};
 export function TopicDirectory() {
   return (
     <section className="topic-directory" id="onderwerpen">
@@ -175,47 +52,52 @@ export function TopicDirectory() {
           bij elkaar.
         </p>
       </div>
-      <Accordion className="topic-accordion" multiple>
-        {topicGroups.map((group, i) => (
-          <AccordionItem
-            key={group.slug}
-            value={group.slug}
-            className="topic-directory-item"
-          >
-            <AccordionTrigger>
-              <span className="topic-directory-icon">
-                <group.icon size={23} />
-              </span>
-              <span className="topic-directory-copy">
-                <b>{group.name}</b>
-                <span>{group.description}</span>
-              </span>
-              <span className="topic-directory-number">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="topic-directory-expanded">
-                <p>Uitleg en hulpmiddelen over {group.name.toLowerCase()}.</p>
-                <div>
-                  {group.links.map(([label, href]) => (
-                    <Link key={href} href={href}>
-                      {label}
-                      <ArrowRight size={17} />
-                    </Link>
-                  ))}
+      <Accordion className="topic-accordion" multiple hiddenUntilFound>
+        {topicGroups.map((group, i) => {
+          const Icon = topicIcons[group.icon];
+          return (
+            <AccordionItem
+              key={group.slug}
+              value={group.slug}
+              className="topic-directory-item"
+            >
+              <AccordionTrigger>
+                <span className="topic-directory-icon">
+                  <Icon size={23} />
+                </span>
+                <span className="topic-directory-copy">
+                  <b>{group.name}</b>
+                  <span>{group.description}</span>
+                </span>
+                <span className="topic-directory-number">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="topic-directory-expanded">
+                  <p>Uitleg en hulpmiddelen over {group.name.toLowerCase()}.</p>
+                  <div>
+                    {group.links
+                      .filter(([, href]) => href !== '/verdieping/' + group.slug)
+                      .map(([label, href]) => (
+                        <Link key={href} href={href}>
+                          {label}
+                          <ArrowRight size={17} />
+                        </Link>
+                      ))}
+                  </div>
+                  <Link
+                    className="directory-all"
+                    href={'/verdieping/' + group.slug}
+                  >
+                    Lees over {group.name.toLowerCase()}{' '}
+                    <ArrowUpRight size={17} />
+                  </Link>
                 </div>
-                <Link
-                  className="directory-all"
-                  href={'/verdieping/' + group.slug}
-                >
-                  Lees over {group.name.toLowerCase()}{' '}
-                  <ArrowUpRight size={17} />
-                </Link>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
+              </AccordionContent>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
     </section>
   );
@@ -228,10 +110,22 @@ export function TopicStories({ slug }: { slug: string }) {
       (slug === 'dividend' && g.slug === 'aandelen') ||
       (slug === 'portfolio' && g.slug === 'strategie'),
   );
+  const name =
+    slug === 'dividend'
+      ? 'dividend'
+      : slug === 'portfolio'
+        ? 'portefeuilles'
+        : group?.name.toLowerCase() || 'dit onderwerp';
+  const exampleCategories =
+    slug === 'dividend'
+      ? ['Dividend']
+      : slug === 'portfolio'
+        ? ['Portfolio']
+        : group?.categories || [];
   const matches = learningLibrary.filter(
     (a) =>
       (a.example
-        ? group?.categories.includes(a.category)
+        ? exampleCategories.includes(a.category)
         : a.topics.includes(slug)) &&
       `${a.title} ${a.intro}`
         .toLowerCase()
@@ -241,9 +135,7 @@ export function TopicStories({ slug }: { slug: string }) {
   return (
     <section className="topic-story-collection" id="onderwerp-blogs">
       <span className="eyebrow">DIEPER IN DIT ONDERWERP</span>
-      <h2>
-        Uitleg & blogs over {group?.name.toLowerCase() || 'dit onderwerp'}.
-      </h2>
+      <h2>Uitleg & blogs over {name}.</h2>
       <label className="topic-blog-search">
         Zoek binnen dit onderwerp
         <input
@@ -257,7 +149,7 @@ export function TopicStories({ slug }: { slug: string }) {
         {matches.length
           ? `${matches.length} ${matches.length === 1 ? 'artikel' : 'artikelen'}`
           : query
-            ? 'Geen blogs gevonden. Probeer een ander trefwoord.'
+            ? 'Geen artikelen gevonden. Probeer een ander trefwoord.'
             : 'De eerste blogs binnen dit onderwerp volgen nog.'}
       </p>
       <div>

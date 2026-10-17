@@ -9,37 +9,56 @@ import {
   Mail,
   MessageCircle,
   X,
-  Check,
-  Share2,
 } from 'lucide-react';
-import {
-  ArticleArchive,
-  InvestingHub,
-  KnowledgeFigure,
-} from './editorial-pages';
-import { articles } from './data';
-import { GuidePage } from './guide-pages';
+import dynamic from 'next/dynamic';
 import { Navigation } from './navigation';
-import { SectionTitle, ArticleCard, Newsletter } from './widgets';
-import {
-  MarketTicker,
-  ToolsExperience,
-  PartnersExperience,
-  MarketExperience,
-} from './experience';
-import { NextSteps } from './journeys';
 import { useEditorialMotion } from './motion';
 import { BrandLogo, instagramUrl } from './brand';
-import { BrandHome } from './brand-home';
-import { WebsiteStory } from './website-story';
-import { ContactForm } from './contact-form';
-import {
-  BusinessPage,
-  EventsHub,
-  AboutPage,
-  NewsletterPage,
-} from './platform-pages';
-import { ArticleProgress, SiteSearch } from './reading-paths';
+
+// Keep server-rendered content while splitting route-specific browser code.
+const ArticleArchive = dynamic(() =>
+  import('./editorial-pages').then((m) => m.ArticleArchive),
+);
+const InvestingHub = dynamic(() =>
+  import('./editorial-pages').then((m) => m.InvestingHub),
+);
+const Article = dynamic(() => import('./sample-article'));
+const GuidePage = dynamic(() =>
+  import('./guide-pages').then((m) => m.GuidePage),
+);
+const ToolsExperience = dynamic(() =>
+  import('./experience').then((m) => m.ToolsExperience),
+);
+const PartnersExperience = dynamic(() =>
+  import('./partner-pages').then((m) => m.PartnerPages),
+);
+const MarketExperience = dynamic(() =>
+  import('./market-experience').then((m) => m.MarketExperience),
+);
+const BrandHome = dynamic(() =>
+  import('./brand-home').then((m) => m.BrandHome),
+);
+const WebsiteStory = dynamic(() =>
+  import('./website-story').then((m) => m.WebsiteStory),
+);
+const ContactForm = dynamic(() =>
+  import('./contact-form').then((m) => m.ContactForm),
+);
+const BusinessPage = dynamic(() =>
+  import('./platform-pages').then((m) => m.BusinessPage),
+);
+const EventsHub = dynamic(() =>
+  import('./platform-pages').then((m) => m.EventsHub),
+);
+const AboutPage = dynamic(() =>
+  import('./platform-pages').then((m) => m.AboutPage),
+);
+const NewsletterPage = dynamic(() =>
+  import('./platform-pages').then((m) => m.NewsletterPage),
+);
+const SiteSearch = dynamic(() =>
+  import('./reading-paths').then((m) => m.SiteSearch),
+);
 function Logo() {
   return <BrandLogo />;
 }
@@ -71,104 +90,6 @@ function Archive(props: { topic?: string; search?: boolean }) {
   return <ArticleArchive {...props} />;
 }
 
-function Article({ slug }: { slug: string }) {
-  const a = articles.find((a) => a.slug === slug);
-  const [copied, setCopied] = useState(false);
-  if (!a) return <Missing />;
-  return (
-    <>
-      <ArticleProgress />
-      <div className="article-heading">
-        <Link href="/artikelen" className="textlink">
-          ← Alle artikelen
-        </Link>
-        <p className="eyebrow">{a.category} · REDACTIONEEL VOORBEELD</p>
-        <h1>{a.title}</h1>
-        <p className="dek">{a.intro}</p>
-        <div className="article-meta">
-          <span className="mini-logo">BW.</span>Beurswatcher{' '}
-          <span>{a.read} min lezen</span>
-          <button
-            className="textlink"
-            onClick={async () => {
-              try {
-                await navigator.clipboard.writeText(window.location.href);
-                setCopied(true);
-              } catch {
-                setCopied(false);
-              }
-            }}
-          >
-            {copied ? <Check size={16} /> : <Share2 size={16} />}{' '}
-            {copied ? 'Link gekopieerd' : 'Deel artikel'}
-          </button>
-        </div>
-      </div>
-      <div className="article-diagram">
-        <KnowledgeFigure topic={a.category} />
-        <div>
-          <span className="eyebrow">JE LEEST OVER</span>
-          {a.sections.map(([h], i) => (
-            <a href={'#onderdeel-' + i} key={h}>
-              <span>0{i + 1}</span>
-              {h}
-              <ArrowRight size={16} />
-            </a>
-          ))}
-        </div>
-      </div>
-      <div className="article-layout">
-        <aside>
-          <p className="eyebrow">IN DIT ARTIKEL</p>
-          {a.sections.map(([h], i) => (
-            <Link href={'#onderdeel-' + i} key={h}>
-              {h}
-            </Link>
-          ))}
-        </aside>
-        <article className="reading">
-          <div className="takeaway">
-            <p className="eyebrow">OM TE ONTHOUDEN</p>
-            <p>
-              {a.category === 'ETF'
-                ? 'Bekijk de index, de spreiding en alle kosten samen. Een wereldwijde naam zegt nog niet hoe je geld verdeeld is.'
-                : a.sections[0][1]}
-            </p>
-          </div>
-          {a.sections.map(([h, p], i) => (
-            <section id={'onderdeel-' + i} key={h}>
-              <h2>{h}</h2>
-              <p>{p}</p>
-            </section>
-          ))}
-          <NextSteps topic={a.category} from="article" />
-          <p className="subtle">
-            Algemene educatieve voorbeeldinhoud. Geen persoonlijk
-            beleggingsadvies. Rendement is onzeker en je kunt je inleg
-            verliezen.
-          </p>
-        </article>
-      </div>
-      <section className="section">
-        <SectionTitle eyebrow="ARTIKELEN" title="Lees ook deze uitleg" />
-        <div className="three-grid">
-          {articles
-            .filter((b) => b.slug !== slug)
-            .sort(
-              (b, c) =>
-                Number(c.category === a.category) -
-                Number(b.category === a.category),
-            )
-            .slice(0, 3)
-            .map((b) => (
-              <ArticleCard key={b.slug} article={b} />
-            ))}
-        </div>
-      </section>
-      <Newsletter context="education" variant="compact" />
-    </>
-  );
-}
 function Investing({ sub }: { sub?: string }) {
   return <InvestingHub sub={sub} />;
 }
@@ -356,13 +277,14 @@ function Content({ path }: { path: string }) {
             teksten, niet Daniels persoonlijke analyses. De blogs met het label
             ‘redactioneel voorbeeld’ wachten nog op zijn inhoudelijke
             beoordeling. Het verhaal op de pagina Over mij is door Daniel
-            aangeleverd. De markthub toont indicatieve indexprijzen via CFD-referenties en
-            Amerikaanse marktbewegingen via officiële TradingView-widgets, plus
-            ECB-referentiekoersen, een automatisch opgehaalde CBS- en
-            BEA-planning, aangevuld met handmatig gecontroleerde momenten van
-            BLS en de Federal Reserve. De koersenbalk en de voorbeeldkoers in de
-            homepagekaart bevatten herkenbaar gemarkeerde voorbeeldgegevens. Bij
-            de marktweergaven staan bron, dekking en periode vermeld.
+            aangeleverd. De markthub toont indicatieve indexprijzen via
+            CFD-referenties en Amerikaanse marktbewegingen via officiële
+            TradingView-widgets, plus ECB-referentiekoersen, een automatisch
+            opgehaalde CBS- en BEA-planning, aangevuld met handmatig
+            gecontroleerde momenten van BLS en de Federal Reserve. De
+            voorbeeldkoers in de homepagekaart is gemarkeerd als
+            voorbeeldgegeven. Bij de marktweergaven staan bron, dekking en
+            periode vermeld.
           </p>
           <h2>Logo en Reels</h2>
           <p>
@@ -474,7 +396,6 @@ export default function Platform({ path }: { path: string }) {
       <Link className="skip" href="#inhoud">
         Naar de inhoud
       </Link>
-      <MarketTicker />
       <header
         ref={header}
         className={'site-header' + (scrolled ? ' scrolled' : '')}

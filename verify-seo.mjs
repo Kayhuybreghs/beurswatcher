@@ -61,7 +61,7 @@ if (!process.argv.includes('--mode')) {
   const preview = process.env.VERCEL_ENV === 'preview';
   const { siteUrl, resolveSiteUrl, productionSiteUrl, legacySiteUrl } =
     await import('./app/site-config.ts');
-  const { contentRoutes, isIndexablePage, metadataForPage } =
+  const { contentRoutes, isIndexablePage, metadataForPage, robotsForPage } =
     await import('./app/seo.ts');
   const { default: sitemap } = await import('./app/sitemap.ts');
   const { default: robots } = await import('./app/robots.ts');
@@ -72,6 +72,13 @@ if (!process.argv.includes('--mode')) {
   const { default: nextConfig } = await import('./next.config.ts');
 
   assert.equal(siteUrl, 'https://www.beurswatcher.nl');
+  assert.deepEqual(
+    robotsForPage(),
+    preview
+      ? { index: false, follow: false }
+      : { index: true, follow: true, 'max-image-preview': 'large' },
+    'Root layout policy for home and maker page',
+  );
   for (const setting of [
     undefined,
     '',
@@ -124,6 +131,12 @@ if (!process.argv.includes('--mode')) {
       preview || !isIndexablePage(path),
       path + ' indexability',
     );
+    assert.equal(
+      metadata.robots?.['max-image-preview'],
+      !preview && isIndexablePage(path) ? 'large' : undefined,
+      path + ' large image previews only on public indexable pages',
+    );
+    if (preview) assert.equal(metadata.robots?.follow, false, path);
     assert.ok(!titles.has(metadata.title), path + ' duplicate title');
     assert.ok(
       !descriptions.has(metadata.description),
@@ -214,6 +227,13 @@ if (!process.argv.includes('--mode')) {
         : null,
       host,
     );
+  }
+  for (const privatePath of ['/beheer/instagram', '/koppelen/instagram']) {
+    const response = await unstable_getResponseFromNextConfig({
+      url: siteUrl + privatePath,
+      nextConfig,
+    });
+    assert.match(response.headers.get('x-robots-tag') || '', /noindex/, privatePath);
   }
   console.log(
     `SEO ${preview ? 'preview' : 'production'}: ${contentRoutes.length} unique route metadata records, ${guides.length} truthful guide schemas, ${sitemapUrls.length} canonical sitemap URLs and canonical redirects passed.`,

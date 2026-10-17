@@ -2,6 +2,8 @@ import { ArrowRight, ArrowUpRight, BookOpen, Calculator } from 'lucide-react';
 import Link from './site-link';
 import { guides, guideSources } from './guide-data';
 import { toolItems, topics } from './data';
+import { LearningBreadcrumbs } from './learning-breadcrumbs';
+import { topicGroups } from './topic-groups';
 
 export function ToolReading({ tool }: { tool: string }) {
   const items = guides.filter((g) => g.tool === tool);
@@ -38,9 +40,7 @@ export function GuidePage({ slug }: { slug: string }) {
   return (
     <>
       <header className="guide-hero">
-        <Link href="/artikelen" className="textlink">
-          ← Alle verdieping
-        </Link>
+        <LearningBreadcrumbs current={g.title} />
         <span className="eyebrow">
           BEURSWATCHER / {g.category.toUpperCase()} / UITLEG
         </span>
@@ -58,7 +58,7 @@ export function GuidePage({ slug }: { slug: string }) {
         </Link>
       </section>
       <div className="guide-layout">
-        <aside className="guide-toc">
+        <nav className="guide-toc" aria-label="Inhoud van deze uitleg">
           <span className="eyebrow">IN DEZE UITLEG</span>
           {g.sections.map(([h], i) => (
             <a href={'#uitleg-' + i} key={h}>
@@ -70,7 +70,7 @@ export function GuidePage({ slug }: { slug: string }) {
           <Link href={'/tools/' + g.tool}>
             <Calculator size={18} /> {tool.title}
           </Link>
-        </aside>
+        </nav>
         <article className="guide-reading">
           {g.sections.map(([h, p], i) => (
             <section id={'uitleg-' + i} key={h}>
@@ -147,11 +147,18 @@ export function GuidePage({ slug }: { slug: string }) {
             </Link>
           ))}
         </div>
-        <Link className="textlink" href={'/verdieping/' + g.topics[0]}>
-          Lees over{' '}
-          {topics.find(([slug]) => slug === g.topics[0])?.[1].toLowerCase()}{' '}
-          <ArrowRight size={17} />
-        </Link>
+        <nav
+          className="guide-topic-links"
+          aria-label="Onderwerpen bij deze uitleg"
+        >
+          {g.topics.map((slug) => (
+            <Link className="textlink" key={slug} href={'/verdieping/' + slug}>
+              {topicGroups.find((group) => group.slug === slug)?.name ||
+                topics.find(([topicSlug]) => topicSlug === slug)?.[1]}
+              <ArrowRight size={17} />
+            </Link>
+          ))}
+        </nav>
       </section>
     </>
   );

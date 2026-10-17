@@ -1,107 +1,23 @@
-/* Local editorial images use explicit layout dimensions; no image optimization service is configured. */
-/* oxlint-disable next/no-img-element */
 'use client';
-import { MacroPage } from './macro-calendar';
 import Link from './site-link';
 import { ToolReading } from './guide-pages';
 import { ScenarioTool } from './scenario-tools';
 import { ToolCatalog } from './tool-catalog';
-import { PartnerPages } from './partner-pages';
-import { MarketHub } from './platform-pages';
 import { CompareResult } from './compare-result';
-import { ToolVisual, useVisualDeck } from './tool-visual';
+
 import { Slider } from '@/components/ui/slider';
-import { InstagramCTA } from './brand';
 import { useState } from 'react';
-import {
-  ArrowUpRight,
-  ArrowRight,
-  ArrowDown,
-  Pause,
-  Play,
-  ArrowLeft,
-} from 'lucide-react';
-import { articles, markets, toolItems, futureValue } from './data';
+import { ArrowRight, ArrowDown, ArrowLeft } from 'lucide-react';
+import { toolItems, futureValue } from './data';
 import {
   Chart,
   eur,
-  ArticleCard,
   Newsletter,
   Calculator,
   NumberField,
-  Market,
-  Calendar,
 } from './widgets';
 import { AnimatedNumber } from './motion';
-import { NextSteps } from './journeys';
-import { marketNotice } from './market-data';
 import { requiredMonthly, netOfFees, downloadRows } from './calculations';
-export function MarketTicker() {
-  const [paused, setPaused] = useState(false);
-  const group = (copy: boolean) => (
-    <div className="ticker-track" aria-hidden={copy || undefined}>
-      {markets.slice(0, 6).map((m) => (
-        <span className="ticker-item" key={m.name}>
-          <b>{m.name.toUpperCase()}</b>
-          <span>
-            {m.value.toLocaleString('nl-NL', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: m.name === 'EUR/USD' ? 4 : 2,
-            })}
-          </span>
-          <em className={m.change < 0 ? 'down' : ''}>
-            {m.change > 0 ? '+' : ''}
-            {m.change.toFixed(2).replace('.', ',')}%
-          </em>
-        </span>
-      ))}
-    </div>
-  );
-  return (
-    <div className={'ticker-v2 ' + (paused ? 'paused' : '')}>
-      <span className="ticker-status">VOORBEELDKOERSEN</span>
-      <div className="ticker-window">
-        <div className="ticker-belt">
-          {group(false)}
-          {group(true)}
-        </div>
-      </div>
-      <button
-        aria-label={paused ? 'Koersenbalk afspelen' : 'Koersenbalk pauzeren'}
-        onClick={() => setPaused(!paused)}
-      >
-        {paused ? <Play size={13} /> : <Pause size={13} />}
-      </button>
-    </div>
-  );
-}
-export function ToolShelf({ limit }: { limit?: number }) {
-  const { root, active, events } = useVisualDeck();
-  return (
-    <div className="tool-shelf" ref={root}>
-      {toolItems.slice(0, limit).map((t, i) => (
-        <Link
-          className="tool-card"
-          href={'/tools/' + t.slug}
-          key={t.slug}
-          {...events(t.slug)}
-        >
-          <div className="shelf-top">
-            <span>0{i + 1}</span>
-            <span>GRATIS TOOL</span>
-            <ArrowUpRight size={20} />
-          </div>
-          <h3>{t.title}</h3>
-          <p>{t.text}</p>
-          <ToolVisual slug={t.slug} active={active === t.slug} />
-          <span className="shelf-action">
-            Open de calculator <ArrowRight size={16} />
-          </span>
-        </Link>
-      ))}
-    </div>
-  );
-}
 function ExtendedCalculator({ slug }: { slug: string }) {
   const costs = slug === 'etf-kosten';
   const [initial, setInitial] = useState(10000),
@@ -349,77 +265,6 @@ export function ToolsExperience({ slug }: { slug?: string }) {
     <>
       <ToolCatalog />
       <Newsletter context="tools" variant="compact" />
-    </>
-  );
-}
-export function PartnersExperience({ slug }: { slug?: string }) {
-  return <PartnerPages slug={slug} />;
-}
-export function MarketExperience({ sub }: { sub?: string }) {
-  if (!sub) return <MarketHub />;
-  if (sub === 'macro') return <MacroPage />;
-  const agenda = sub === 'macro' || sub === 'earnings';
-  return (
-    <>
-      <div className="market-heading">
-        <div>
-          <p className="eyebrow">BEURSWATCHER / MARKT</p>
-          <h1>
-            {sub === 'macro'
-              ? 'Macro-agenda.'
-              : sub === 'earnings'
-                ? 'Bedrijfsresultaten: voorbeeldagenda.'
-                : 'Beursindices.'}
-          </h1>
-        </div>
-        <span className="data-status">{marketNotice}</span>
-      </div>
-      <div className="market-navigation">
-        {[
-          ['', 'Overzicht'],
-          ['indices', 'Indices'],
-          ['macro', 'Macro-agenda'],
-          ['earnings', 'Bedrijfscijfers (voorbeeld)'],
-        ].map(([s, n]) => (
-          <Link
-            key={s}
-            href={s === 'indices' ? '/markt#indices' : '/markt' + (s ? '/' + s : '')}
-            aria-current={(sub || '') === s ? 'page' : undefined}
-          >
-            {n}
-          </Link>
-        ))}
-      </div>
-      {agenda ? (
-        <div className="agenda-surface">
-          <div className="agenda-explainer">
-            <span className="eyebrow">
-              {sub === 'macro' ? 'ECONOMISCHE AGENDA' : 'BEDRIJFSRESULTATEN'}
-            </span>
-            <p>
-              {sub === 'macro'
-                ? 'Een cijfer komt nooit alleen. Bekijk de vorige waarde en de verwachting voordat je een koersreactie interpreteert.'
-                : 'Deze agenda toont voorbeeldgegevens, geen actuele publicatiedata. Bij echte bedrijfsresultaten zijn naast winst ook omzet, marges, kasstroom en verwachtingen relevant.'}
-            </p>
-          </div>
-          <Calendar kind={sub} full />
-        </div>
-      ) : sub === 'marktupdate' ? (
-        <div className="editorial-feed">
-          {articles.slice(0, 4).map((a) => (
-            <ArticleCard article={a} key={a.slug} />
-          ))}
-        </div>
-      ) : (
-        <div className="market-surface">
-          <Market full />
-        </div>
-      )}
-      <NextSteps
-        topic={sub === 'earnings' ? 'Aandelen' : 'Macro'}
-        from="market"
-      />
-      <InstagramCTA context="market" />
     </>
   );
 }

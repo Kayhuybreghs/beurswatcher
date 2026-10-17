@@ -15,7 +15,7 @@ import { requiredMonthly, netOfFees } from './calculations';
 import { demoSeries } from './market-data';
 import { BrandMark, AboutBeurswatcher } from './brand';
 import { AnimatedNumber } from './motion';
-import { ToolShelf } from './experience';
+import { ToolShelf } from './tool-shelf';
 import { ReelRail } from './reels';
 import { MarketMiniHub } from './market-hub';
 

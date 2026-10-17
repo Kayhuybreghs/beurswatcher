@@ -10,6 +10,14 @@ export const homeTitle = 'Beleggen begrijpen en zelf berekenen | Beurswatcher';
 export const homeDescription =
   'Lees uitleg over beleggen, vermogen en pensioen. Bereken gratis je inleg, rendement en kosten, en bekijk beurskoersen en de macro-agenda.';
 
+export function robotsForPage(indexable = true): Metadata['robots'] {
+  if (isPreviewDeployment) return { index: false, follow: false };
+  if (!indexable) return { index: false, follow: true };
+  // Allow larger search previews for public pages. This is permission for
+  // search engines, not a promise that they will show a particular image.
+  return { index: true, follow: true, 'max-image-preview': 'large' };
+}
+
 // These are actual pages, not extra landing pages created for search engines.
 const pageCopy: Record<string, { title: string; description: string }> = {
   artikelen: {
@@ -213,14 +221,13 @@ export function metadataForPage(path: string): Metadata {
       `${tool.text} Pas de invoer aan en vergelijk de uitkomsten. Lees ook de rekenaannames en beperkingen.`) ||
     (partner && partnerFacts[partner.slug].description) ||
     'Deze pagina bestaat niet. Bekijk de artikelen en rekentools van Beurswatcher.';
-  const noindex = isPreviewDeployment || !isIndexablePage(path);
   const url = `${siteUrl}/${path}`;
 
   return {
     title,
     description,
     alternates: { canonical: url },
-    robots: noindex ? { index: false, follow: true } : undefined,
+    robots: robotsForPage(isIndexablePage(path)),
     ...sharingMetadata(
       `${title} | Beurswatcher`,
       description,

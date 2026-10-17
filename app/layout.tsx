@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import { homeDescription, homeTitle, siteUrl } from './seo';
+import { homeDescription, homeTitle, robotsForPage, siteUrl } from './seo';
 import { SiteSchema } from './site-schema';
-import { isPreviewDeployment } from './site-config';
 import './globals.css';
 import './redesign.css';
 import './brand.css';
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
   },
   description: homeDescription,
   publisher: 'Beurswatcher',
-  robots: isPreviewDeployment ? { index: false, follow: false } : undefined,
+  robots: robotsForPage(),
 };
 export default function RootLayout({
   children,

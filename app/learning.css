@@ -1,3 +1,65 @@
+.learning-breadcrumbs {
+  margin-bottom: 24px;
+  color: #526b87;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.learning-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.learning-breadcrumbs li:not(:last-child)::after {
+  content: '/';
+  padding: 0 10px;
+  color: #7890a8;
+}
+.learning-breadcrumbs a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.learning-breadcrumbs [aria-current] {
+  color: #103562;
+}
+.guide-topic-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+}
+.article-category-filters {
+  display: flex;
+  min-width: 0;
+  gap: 4px;
+  border: 0;
+  overflow-x: auto;
+  margin: 20px 0 25px;
+  padding: 0 0 10px;
+}
+.article-category-filters button {
+  flex-shrink: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #526b87;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.article-category-filters button[aria-pressed='true'] {
+  border-bottom-color: #d4ac00;
+  color: #103562;
+  font-weight: 700;
+}
+.article-category-filters button:focus-visible,
+.learning-breadcrumbs a:focus-visible {
+  outline: 2px solid #103562;
+  outline-offset: -2px;
+  border-radius: 3px;
+}
 .page-surface[data-area='over'] .about-story {
   position: relative;
   display: grid;

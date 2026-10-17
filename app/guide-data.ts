@@ -20,6 +20,10 @@ export const guideSources = {
     'Investor.gov · kosten begrijpen',
     'https://www.investor.gov/introduction-investing/getting-started/understanding-fees',
   ],
+  tracking: [
+    'iShares · fondskosten en afwijking van de index vergelijken',
+    'https://www.ishares.com/uk/individual/en/education/getting-started-with-etfs/investor-education/compare-global-investment-options',
+  ],
   dca: [
     'Investor.gov · gespreid inleggen',
     'https://www.investor.gov/introduction-investing/investing-basics/glossary/dollar-cost-averaging',
@@ -36,9 +40,21 @@ export const guideSources = {
     'Investor.gov · samengestelde groei berekenen',
     'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator',
   ],
-  math: [
-    'Investor.gov · financiële rekentools',
-    'https://www.investor.gov/use-financial-tools-and-calculators',
+  returns: [
+    'FINRA · totaalrendement en jaarlijks rendement',
+    'https://syndication.finra.org/content/how-are-your-investments-doing-returns-explained',
+  ],
+  dividend: [
+    'Investor.gov · aandelen en dividend',
+    'https://www.investor.gov/introduction-investing/investing-basics/investment-products/stocks',
+  ],
+  mortgage: [
+    'AFM · voorwaarden en vergoeding bij vervroegd aflossen',
+    'https://www.afm.nl/nl-nl/consumenten/themas/hypotheken/vervroegd-aflossen',
+  ],
+  buffer: [
+    'Nibud · wat een financiële buffer wel en niet opvangt',
+    'https://bufferberekenaar.nibud.nl/over-deze-tool',
   ],
 } as const;
 export const guides: Guide[] = [
@@ -113,10 +129,14 @@ export const guides: Guide[] = [
         'Kijk ook naar verlies onderweg',
         'Een vast jaarrendement laat de route naar het eindbedrag weg. Twee portefeuilles kunnen dezelfde eindwaarde hebben en onderweg heel anders bewegen. Een berekende eindwaarde zegt daarom niet hoeveel onrust of verlies je kunt dragen.',
       ],
+      [
+        'Reken een tegenvaller in euro’s uit',
+        'Bij een koersdaling van 30% wordt € 10.000 tijdelijk € 7.000, zolang je niets toevoegt of opneemt. Voor herstel naar € 10.000 is daarna ongeveer 42,9% stijging nodig. Dit is een afzonderlijke rekensom, geen voorspeld koerspad. Geld dat je tijdens de daling moet opnemen, doet niet meer mee aan een mogelijk herstel.',
+      ],
     ],
     example: [
       'Dezelfde invoer, een andere uitkomst',
-      'Laat startkapitaal, maandbedrag en looptijd staan. Reken eerst met 0%, daarna met 3% en 6%. Het verschil toont de gevoeligheid voor de aanname, niet welk scenario waarschijnlijk wordt.',
+      '€ 10.000 zonder extra inleg wordt na twintig jaar € 10.000 bij 0%, ongeveer € 18.061 bij 3% en € 32.071 bij 6% per jaar. Kosten, belasting en inflatie ontbreken. Het verschil toont hoe gevoelig het resultaat is voor je invoer; geen van de percentages is een verwachting of garantie.',
     ],
     faq: [
       [
@@ -155,8 +175,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Extra inleg herkennen',
-      '€ 50 meer per maand vraagt over twintig jaar € 12.000 extra eigen geld. De calculator toont daarnaast het effect van het veronderstelde rendement op die bijdragen.',
+      'Drie scenario’s bij hetzelfde rekenrendement',
+      'Zonder startkapitaal, met vaste 6% groei en stortingen aan het maandeinde, levert € 100 per maand na twintig jaar circa € 45.344 op (€ 24.000 eigen inleg). Dertig jaar geeft circa € 97.451 (€ 36.000 inleg). € 150 per maand gedurende twintig jaar geeft circa € 68.016, ook bij € 36.000 inleg. Tijd en inleg zijn zo apart te vergelijken. Kosten, belasting en inflatie ontbreken.',
     ],
     faq: [
       [
@@ -168,7 +188,7 @@ export const guides: Guide[] = [
         'Omdat je bij vaste maandinleg ook meer stortingen doet. Kijk daarom steeds naar het totaal van de inleg.',
       ],
     ],
-    source: 'math',
+    source: 'compound',
   },
   {
     slug: 'etf-kosten-lange-termijn',
@@ -195,8 +215,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Eén variabele veranderen',
-      'Vergelijk 0,15% en 1% jaarlijkse kosten bij gelijke overige invoer. Wissel vervolgens de horizon tussen tien en twintig jaar om het tijdseffect te onderzoeken.',
+      'Wat doet het kostenverschil met € 10.000?',
+      'Met € 10.000 startkapitaal, geen extra inleg, twintig jaar en constant 6% brutorendement komt 0,15% jaarlijkse kosten uit op ongeveer € 31.123. Bij 1% is dat € 26.231: circa € 4.891 minder. Dit modelverschil omvat ook misgelopen groei; het is niet alleen de opgetelde kostenfactuur. Belastingen, inflatie en losse transactiekosten ontbreken.',
     ],
     faq: [
       [
@@ -274,6 +294,10 @@ export const guides: Guide[] = [
         'De calculator simuleert een constant brutorendement. Hij haalt geen historische ETF-resultaten op en weet niet of een gekopieerd percentage al netto is. Controleer dat zelf voordat je de invoer kiest.',
       ],
       [
+        'Tracking difference is een resultaat, geen extra tarief',
+        'Tracking difference is het verschil tussen het rendement van een fonds en zijn index. Stel dat de index over één jaar 8% oplevert en het fonds na fondskosten 7,8%, beide in dezelfde valuta en met herbelegde uitkeringen. Dan blijft het fonds 0,2 procentpunt achter. Tel daar niet nog eens de TER bij op: het effect van die fondskosten zit al in het netto fondsresultaat. Andere oorzaken kunnen ook meespelen; het verschil hoeft niet precies gelijk te zijn aan de TER. Je eigen brokerkosten kunnen nog buiten dit resultaat vallen.',
+      ],
+      [
         'Voorkom schijnprecisie',
         'Een uitkomst op de euro nauwkeurig volgt uit de invoer. Dat maakt de toekomst niet op de euro voorspelbaar. Rond voor je planning af en vergelijk meerdere scenario’s.',
       ],
@@ -292,7 +316,7 @@ export const guides: Guide[] = [
         'Nee. Het beschrijft een afgelopen periode en vormt geen zekerheid voor de volgende.',
       ],
     ],
-    source: 'fees',
+    source: 'tracking',
   },
   {
     slug: 'honderdduizend-euro-opbouwen',
@@ -336,7 +360,7 @@ export const guides: Guide[] = [
         'Met € 10.000 startkapitaal, twintig jaar tijd en constant 6% rendement berekent de tool ongeveer € 149,81 inleg aan ieder maandeinde voor een eindbedrag van € 100.000. Bij 0% is dat € 375 per maand. Dat grote verschil laat zien hoe sterk de uitkomst van de rendementsaanname afhangt. Kosten, belasting en inflatie zijn in beide voorbeelden niet verwerkt.',
       ],
     ],
-    source: 'math',
+    source: 'compound',
   },
   {
     slug: 'sparen-voor-een-doel',
@@ -376,7 +400,7 @@ export const guides: Guide[] = [
         'Nee. Bereken een eventuele prijsstijging eerst apart en gebruik daarna het aangepaste doelbedrag.',
       ],
     ],
-    source: 'math',
+    source: 'compound',
   },
   {
     slug: 'doelvermogen-en-koopkracht',
@@ -403,8 +427,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Een doel dat meegroeit',
-      '€ 10.000 koopkracht vandaag vraagt bij precies 2% jaarlijkse inflatie over tien jaar ongeveer € 12.190. De inflatieaanname is een voorbeeld, geen voorspelling.',
+      'Van koopkracht naar maandinleg',
+      'Voor de koopkracht van € 100.000 vandaag heb je bij 2% inflatie over twintig jaar ongeveer € 148.595 nodig: € 100.000 × 1,02^20. Vul dat bedrag als doel in. Met € 10.000 startkapitaal en 6% nominaal jaarrendement vraagt het model dan circa € 257 per maand. Zonder inflatiecorrectie, met € 100.000 als doel, is dat circa € 150. De maandinleg blijft in beide berekeningen gelijk; je stort aan het einde van de maand. Kosten en belasting ontbreken. Inflatie en rendement zijn aannames, geen voorspellingen.',
     ],
     faq: [
       [
@@ -441,6 +465,10 @@ export const guides: Guide[] = [
         'Inleg heeft een eigen timing',
         'Nieuw geld doet pas mee vanaf het moment waarop het is ingelegd. Daarom is een jaarinleg op dag één niet hetzelfde als twaalf stortingen gedurende het jaar.',
       ],
+      [
+        'De formule zonder extra inleg',
+        'Eindbedrag = startbedrag × (1 + jaarrendement)^aantal jaren. Gebruik 0,05 voor 5%. Bij enkelvoudige rente wordt de opbrengst steeds alleen over het oorspronkelijke bedrag berekend: € 1.000 × (1 + 0,05 × 2) = € 1.100. Bij rente op rente is dezelfde som € 1.102,50. Met maandelijkse stortingen krijgt iedere storting een eigen resterende looptijd.',
+      ],
     ],
     example: [
       'Controleer de tweede periode',
@@ -475,7 +503,7 @@ export const guides: Guide[] = [
       ],
       [
         'Kies het passende jaarpercentage',
-        'Een constant groeipercentage dat dezelfde begin- en eindwaarde oplevert heet een samengesteld jaarlijks rendement. Het is bruikbaar om een reeks samen te vatten, maar verbergt de schommelingen onderweg.',
+        'Een constant groeipercentage dat dezelfde begin- en eindwaarde oplevert heet een samengesteld jaarlijks rendement, ook wel CAGR. Zonder tussentijdse stortingen of opnames is de formule: (eindbedrag / beginbedrag)^(1 / aantal jaren) − 1. Van € 1.000 naar € 960 in twee jaar is dat ongeveer −2,02% per jaar. Het gewone gemiddelde van +20% en −20% is 0%; dat beschrijft dus niet dezelfde vermogensgroei.',
       ],
       [
         'Let op tussentijdse stortingen',
@@ -496,7 +524,7 @@ export const guides: Guide[] = [
         'De samengestelde-rentetool werkt met een constant gekozen percentage. Het is geen historische portefeuille-analyse.',
       ],
     ],
-    source: 'math',
+    source: 'returns',
   },
   {
     slug: 'inflatie-koopkracht-berekenen',
@@ -515,7 +543,7 @@ export const guides: Guide[] = [
       ],
       [
         'Gebruik samengestelde inflatie',
-        'Voor meerdere jaren wordt de prijsstijging niet simpelweg opgeteld. Bij een vaste inflatie i en n jaren is de factor (1 + i)^n. De calculator gebruikt dit model.',
+        'Voor meerdere jaren wordt de prijsstijging niet simpelweg opgeteld. Bij een vaste inflatie i en n jaren is de prijsfactor (1 + i)^n. Om toekomstige euro’s in koopkracht van nu uit te drukken, deel je het bedrag door die factor. Voor de toekomstige prijs van iets dat je vandaag kunt kopen, vermenigvuldig je juist. De twee uitkomsten beantwoorden verschillende vragen.',
       ],
       [
         'Vergelijk verschillende looptijden',
@@ -561,6 +589,10 @@ export const guides: Guide[] = [
         'Werk je bufferbedrag bij',
         'Als de kosten van vervanging of levensonderhoud stijgen, kan hetzelfde bufferbedrag minder afdekken. Bekijk periodiek of je doelbedrag nog past bij je huishouden en verplichtingen.',
       ],
+      [
+        'Houd inkomensverlies apart',
+        'Een reserve voor reparaties is niet hetzelfde als geld om een periode zonder inkomen te overbruggen. De Nibud BufferBerekenaar richt zich op noodzakelijke vervanging en onderhoud; een inkomensgat valt daar niet onder. Bereken dat apart. Een tekort van € 600 per maand gedurende drie maanden vraagt bijvoorbeeld € 1.800, naast het geld voor reparaties en andere doelen.',
+      ],
     ],
     example: [
       'Beschikbaarheid heeft een functie',
@@ -576,7 +608,7 @@ export const guides: Guide[] = [
         'Nee. Daarvoor gebruik je een andere berekening met eigen rendementsaannames en risico’s.',
       ],
     ],
-    source: 'investing',
+    source: 'buffer',
   },
   {
     slug: 'nominaal-en-reeel-rendement',
@@ -660,7 +692,7 @@ export const guides: Guide[] = [
         'Niet als persoonlijke fiscale berekening. Bekijk de uitleg in de tool en beoordeel jouw situatie afzonderlijk.',
       ],
     ],
-    source: 'investing',
+    source: 'mortgage',
   },
   {
     slug: 'aflossen-of-beleggen-omslagpunt',
@@ -704,7 +736,7 @@ export const guides: Guide[] = [
         'Nee. Als jouw overeenkomst zulke kosten kent, horen ze in je eigen afweging thuis.',
       ],
     ],
-    source: 'math',
+    source: 'mortgage',
   },
   {
     slug: 'box-3-indicatie-2026',
@@ -735,8 +767,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Een invoercontrole',
-      'Vergelijk eerst twee gelijke totaalbedragen met een andere verdeling over sparen en beleggen. Zo zie je welk effect de categorie-indeling in dit model heeft.',
+      '€ 100.000 sparen of beleggen, zonder fiscale partner',
+      'Met alleen € 100.000 banktegoed, geen schulden en € 59.357 heffingsvrij vermogen resteert € 40.643 grondslag. Bij 1,28% forfait en 36% belasting is de indicatie circa € 187. Bestaat hetzelfde bedrag volledig uit beleggingen, dan geeft 6% forfait circa € 878. Dit vereenvoudigde voorbeeld gebruikt de uitgangspunten voor de voorlopige aanslag; werkelijk rendement en uitzonderingen zijn niet doorgerekend.',
     ],
     faq: [
       [
@@ -767,7 +799,11 @@ export const guides: Guide[] = [
       ],
       [
         'Controleer de categorie',
-        'Scheid banktegoeden van beleggingen en andere bezittingen. Neem alleen schulden mee die in box 3 thuishoren. Vul die vóór de schuldendrempel in: de tool verwerkt zelf € 3.800 per persoon. Trek die drempel dus niet tweemaal af.',
+        'Een gewone betaal- of spaarrekening hoort bij banktegoeden. Privé gehouden aandelen, obligaties en ETF’s vallen doorgaans onder beleggingen en andere bezittingen. Neem alleen schulden mee die in box 3 thuishoren. Vul die vóór de schuldendrempel in: de tool verwerkt zelf € 3.800 per persoon. Trek die drempel dus niet tweemaal af.',
+      ],
+      [
+        'Neem niet zomaar je hele vermogen over',
+        'Je eigen woning die onder de eigenwoningregeling valt hoort in box 1. Die woning tel je hier dus niet als belegging mee. Ook ondernemingsvermogen en aandelen die bij een aanmerkelijk belang horen vallen buiten deze eenvoudige box 3-indicatie. Controleer bij een afwijkend product eerst de fiscale categorie; de naam van de aanbieder bepaalt die niet.',
       ],
       [
         'Bewaar de onderbouwing',
@@ -776,7 +812,7 @@ export const guides: Guide[] = [
     ],
     example: [
       'Eerst ordenen, daarna rekenen',
-      'Maak een overzicht met product, saldo, datum en fiscale categorie. Vul de totalen daarna in de tool in en controleer of je geen bedrag dubbel hebt geteld.',
+      'Staat op 1 januari € 15.000 op je betaalrekening, € 25.000 op een gewone spaarrekening en € 60.000 in privé gehouden ETF’s? Dan vul je € 40.000 banktegoeden en € 60.000 beleggingen in. Vul niet daarnaast nogmaals het totale vermogen van € 100.000 in. Dit voorbeeld veronderstelt dat alles in box 3 valt, zonder vrijgestelde producten of andere uitzonderingen.',
     ],
     faq: [
       [
@@ -813,10 +849,14 @@ export const guides: Guide[] = [
         'Bekijk ook het wachtende geld',
         'Geld dat nog niet belegd is, doet niet mee aan koersstijgingen of -dalingen. In dit model kun je er spaarrente voor kiezen. Die ontvangen rente blijft apart op de spaarrekening meetellen.',
       ],
+      [
+        'Wat gebeurt er als de markt alleen stijgt?',
+        'In een gelijkmatig stijgend scenario doet direct ingelegd geld langer mee aan de stijging. Later aankopen betekent dan een hogere prijs. Bij een vroege daling kan het omgekeerde gebeuren. Spreiden vermindert hoeveel van je bedrag meteen aan de markt blootstaat, maar is geen verzekering tegen verlies. Ook herhaalde orderkosten kunnen het verschil veranderen; die zitten niet in dit model.',
+      ],
     ],
     example: [
       'Twaalf gelijke delen',
-      'Bij € 12.000 verdeeld over twaalf maanden wordt telkens € 1.000 ingelegd. Bekijk naast een gelijkmatig pad ook een vroege en late daling.',
+      'In het gelijkmatige toolscenario met € 12.000, vijf jaar, 6% groei en 0% rente op wachtend geld eindigt ineens beleggen rond € 16.059. Spreiden over twaalf maandelijkse stortingen komt op circa € 15.638. Beide starten de eerste aankoop direct; de gespreide variant belegt eerst € 1.000. Dit verschil van circa € 421 hoort alleen bij dit fictieve koerspad, zonder kosten of belasting.',
     ],
     faq: [
       [
@@ -855,8 +895,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Het eindpunt blijft gelijk',
-      'Laat bedrag, looptijd en groeiaanname staan. Wissel alleen het koerspad. Bekijk hoe het verschil tussen ineens en gespreid verandert door de timing.',
+      'Dezelfde markt-eindwaarde, andere aankopen',
+      'Koop fictief twee keer voor € 100. Bij prijzen van eerst € 100 en daarna € 50 krijg je 1 + 2 = 3 eenheden. Zijn die op de einddatum € 100 waard, dan heb je € 300. Koop je beide keren tegen € 100, dan heb je bij dezelfde eindprijs € 200. De lage tussenprijs maakt in dit voorbeeld verschil, maar herstel naar € 100 is geen zekerheid. Kosten en belasting ontbreken.',
     ],
     faq: [
       [
@@ -868,7 +908,7 @@ export const guides: Guide[] = [
         'Zo laat de vergelijking vooral het effect van de volgorde en instapmomenten zien.',
       ],
     ],
-    source: 'math',
+    source: 'dca',
   },
   {
     slug: 'dividend-herbeleggen-of-uitkeren',
@@ -893,10 +933,14 @@ export const guides: Guide[] = [
         'Let op kosten en onzekerheid',
         'Dividend kan worden verlaagd of overgeslagen. Belastingen en transactiekosten kunnen de opbrengst beïnvloeden en zijn niet verwerkt in deze eenvoudige simulatie.',
       ],
+      [
+        'Het dividendpercentage is geen extra gratis rendement',
+        'Bij een uitkering verlaat geld de onderneming. In werkelijkheid hangt de koersontwikkeling ook daarmee samen. Het model gebruikt een afzonderlijk dividendpercentage en koersgroei exclusief dividend. Een aanname van 0% koersgroei en 3% dividend betekent dus 3% totaalopbrengst in dat model; het belooft niet dat een uitkering de koers onaangetast laat.',
+      ],
     ],
     example: [
-      'Een uitkering apart zichtbaar',
-      'Bij € 10.000, 0% koersgroei en 3% dividend is de eerste modeluitkering € 300. Daarna verschilt de basis voor het volgende jaar wanneer je die uitkering herbelegt.',
+      'Tien jaar bij een vaste uitkeringsaanname',
+      'Bij € 10.000, 0% koersgroei en 3% dividend geeft jaarlijks herbeleggen na tien jaar circa € 13.439. Zonder herbeleggen blijft € 10.000 belegd en staat € 3.000 dividend apart: samen € 13.000. Het verschil van circa € 439 komt door de opbrengst over herbelegde uitkeringen. Dividend blijft in werkelijkheid onzeker; kosten, belasting en inflatie ontbreken.',
     ],
     faq: [
       [
@@ -908,7 +952,7 @@ export const guides: Guide[] = [
         'Nee. De calculator houdt de ingevoerde opbrengst constant, maar een onderneming hoeft dat niet te doen.',
       ],
     ],
-    source: 'math',
+    source: 'dividend',
   },
   {
     slug: 'dividend-en-totaalrendement',
@@ -935,8 +979,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Drie procent is geen bonus bovenop alles',
-      'Wanneer een genoemd totaalrendement al 3% dividend bevat, mag je dat niet nogmaals toevoegen. Kies voor de tool expliciet een aanname voor koersgroei zonder dividend.',
+      'Een koersstijging en een uitkering samen',
+      'Je koopt een fictief aandeel voor € 100, ontvangt € 3 dividend en eindigt met een koers van € 104. Zonder herbeleggen of andere geldstromen is het totaalrendement (104 − 100 + 3) / 100 = 7%, vóór kosten en belasting. De koersgroei alleen is 4%. 7% invoeren als koersgroei en daar 3% dividend bij zetten zou dezelfde uitkering dubbel meetellen.',
     ],
     faq: [
       [
@@ -948,6 +992,6 @@ export const guides: Guide[] = [
         'Om koersgroei en uitkeringen afzonderlijk te modelleren en herbeleggen te kunnen vergelijken.',
       ],
     ],
-    source: 'math',
+    source: 'returns',
   },
 ];

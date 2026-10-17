@@ -257,7 +257,8 @@ export const partnerEditorial: Record<string, PartnerEditorialContent> = {
         paragraphs: [
           'Je kunt een periodieke inleg instellen, zodat je niet iedere maand opnieuw hoeft over te maken. Je bepaalt zelf het bedrag en kunt het aanpassen wanneer je inkomen of andere verplichtingen veranderen.',
           'Automatiseren vervangt de jaarlijkse controle niet. Bekijk opnieuw je fiscale ruimte, je bestaande pensioenopbouw en of de gekozen verdeling nog bij de looptijd past. Bij beleggen kunnen marktschommelingen invloed hebben op het bedrag dat later beschikbaar is.',
-          'Let ook op de kosten. Voor de pensioenrekening-beleggen noemt Brand New Day bij controle € 49 afsluitkosten, 0,50% stortingskosten en 0,44% jaarlijkse servicekosten. Daarnaast betaal je fondskosten; die verschillen per portefeuille of gekozen fonds. Pensioensparen kent eigen tarieven en voorwaarden.',
+          'Let ook op de kosten. Voor een eerste, zelf geopende pensioenrekening-beleggen noemt Brand New Day bij controle € 49 eenmalige afsluitkosten. Voor een tweede rekening of openen via een financieel adviseur gelden andere afspraken. Daarnaast betaal je 0,50% over iedere storting en 0,44% jaarlijkse servicekosten over het totale rekeningvermogen, inclusief het cashdeel. Daar komen fondskosten bij; die verschillen per portefeuille of gekozen fonds. Pensioensparen kent eigen tarieven en voorwaarden.',
+          'Die percentages kun je niet zomaar optellen. Bij een storting van € 1.000 is 0,50% bijvoorbeeld € 5. De servicekosten worden over het aanwezige vermogen berekend: gemiddeld € 10.000 over een heel jaar betekent ongeveer € 44 bij 0,44%. Dit zijn losse rekenvoorbeelden, geen volledige kostenopgave; afsluitkosten, fondskosten en veranderingen in saldo moet je daarnaast meenemen.',
         ],
         links: [
           {
@@ -272,6 +273,10 @@ export const partnerEditorial: Record<string, PartnerEditorialContent> = {
       {
         label: 'Brand New Day — pensioenrekening-beleggen',
         href: 'https://new.brandnewday.nl/pensioenrekening-beleggen/',
+      },
+      {
+        label: 'Brand New Day — afsluit-, stortings-, service- en fondskosten',
+        href: 'https://new.brandnewday.nl/pensioenrekening-beleggen/kosten-pensioenrekening-beleggen/',
       },
       {
         label: 'Brand New Day — fiscale regels en voorwaarden',

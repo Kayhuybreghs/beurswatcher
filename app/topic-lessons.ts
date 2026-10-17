@@ -656,6 +656,10 @@ export const topicLessons: Record<string, TopicLesson> = {
     sources: [
       dnb,
       [
+        'Nibud · afbakening van een buffer',
+        'https://bufferberekenaar.nibud.nl/over-deze-tool',
+      ],
+      [
         'ECB · nominale en reële rente',
         'https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me/html/nominal_and_real_interest_rates.nl.html',
       ],
@@ -663,7 +667,7 @@ export const topicLessons: Record<string, TopicLesson> = {
     faq: [
       [
         'Hoe groot moet mijn buffer zijn?',
-        'Dat hangt af van je huishouden, bezittingen, inkomstenzekerheid en uitgaven. Maak een inventaris van mogelijke vervangingen en tegenvallers. Een vast bedrag van iemand anders is geen beoordeling van jouw situatie.',
+        'Dat hangt af van je huishouden, bezittingen en uitgaven. Maak een inventaris van mogelijke vervangingen en tegenvallers. De Nibud BufferBerekenaar helpt bij noodzakelijke vervanging en onderhoud. Die uitkomst is niet bedoeld als reserve voor inkomensverlies: reken een periode zonder of met minder inkomen apart door. Een vast bedrag van iemand anders is geen beoordeling van jouw situatie.',
       ],
       [
         'Is iedere spaarapp beschermd tot € 100.000?',
@@ -869,8 +873,8 @@ export const topicLessons: Record<string, TopicLesson> = {
     },
     sources: [
       [
-        'American Express · Nederlandse kaartvoorwaarden',
-        'https://www.americanexpress.com/nl-nl/bedrijf/legaal/website-regels-en-voorschriften/',
+        'American Express · voorwaarden per kaart en verzekering',
+        'https://www.americanexpress.com/nl-nl/verzekeringen/american-express-kaarten/',
       ],
     ],
     faq: [

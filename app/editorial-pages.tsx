@@ -8,8 +8,8 @@ import {
   Layers,
   BookOpen,
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Link from './site-link';
+import { LearningBreadcrumbs } from './learning-breadcrumbs';
 import { topics, toolItems } from './data';
 import { learningLibrary } from './learning-library';
 import { topicContent } from './topic-content';
@@ -121,22 +121,24 @@ export function ArticleArchive({
             />
           </label>
         </div>
-        <Tabs
-          className="category-tabs"
-          value={category}
-          onValueChange={(v) => setCategory(String(v))}
+        <fieldset
+          className="article-category-filters"
+          aria-label="Filter artikelen op onderwerp"
         >
-          <TabsList variant="line" aria-label="Filter artikelen">
-            {['Alles', ...new Set(learningLibrary.map((a) => a.category))].map(
-              (c) => (
-                <TabsTrigger key={c} value={c}>
-                  {c}
-                </TabsTrigger>
-              ),
-            )}
-          </TabsList>
-        </Tabs>
-        <div className="journal-count">
+          {['Alles', ...new Set(learningLibrary.map((a) => a.category))].map(
+            (c) => (
+              <button
+                type="button"
+                key={c}
+                aria-pressed={category === c}
+                onClick={() => setCategory(c)}
+              >
+                {c}
+              </button>
+            ),
+          )}
+        </fieldset>
+        <div className="journal-count" aria-live="polite" aria-atomic="true">
           <span>
             {filtered.length} {filtered.length === 1 ? 'artikel' : 'artikelen'}
           </span>
@@ -205,9 +207,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
     return (
       <>
         <header className="topic-masthead">
-          <Link className="textlink" href="/artikelen#onderwerpen">
-            ← Alle onderwerpen
-          </Link>
+          <LearningBreadcrumbs current={content.title} />
           <span className="eyebrow">VERDIEPING / {topic[1].toUpperCase()}</span>
           <h1>
             {content.title}

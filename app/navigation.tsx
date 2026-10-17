@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import Link from './site-link';
 import { toolItems, partners } from './data';
-import { topicGroups } from './topic-directory';
+import { topicGroups } from './topic-groups';
 
 const sections = [
   {
