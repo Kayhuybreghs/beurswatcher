@@ -78,7 +78,9 @@ export function TopicDirectory() {
                   <p>Uitleg en hulpmiddelen over {group.name.toLowerCase()}.</p>
                   <div>
                     {group.links
-                      .filter(([, href]) => href !== '/verdieping/' + group.slug)
+                      .filter(
+                        ([, href]) => href !== '/verdieping/' + group.slug,
+                      )
                       .map(([label, href]) => (
                         <Link key={href} href={href}>
                           {label}
@@ -116,26 +118,20 @@ export function TopicStories({ slug }: { slug: string }) {
       : slug === 'portfolio'
         ? 'portefeuilles'
         : group?.name.toLowerCase() || 'dit onderwerp';
-  const exampleCategories =
-    slug === 'dividend'
-      ? ['Dividend']
-      : slug === 'portfolio'
-        ? ['Portfolio']
-        : group?.categories || [];
   const matches = learningLibrary.filter(
     (a) =>
-      (a.example
-        ? exampleCategories.includes(a.category)
-        : a.topics.includes(slug)) &&
+      a.topics.includes(slug) &&
       `${a.title} ${a.intro}`
         .toLowerCase()
         .includes(query.trim().toLowerCase()),
   );
+  if (!learningLibrary.some((article) => article.topics.includes(slug)))
+    return null;
 
   return (
     <section className="topic-story-collection" id="onderwerp-blogs">
       <span className="eyebrow">DIEPER IN DIT ONDERWERP</span>
-      <h2>Uitleg & blogs over {name}.</h2>
+      <h2>Verder lezen over {name}.</h2>
       <label className="topic-blog-search">
         Zoek binnen dit onderwerp
         <input
@@ -150,13 +146,13 @@ export function TopicStories({ slug }: { slug: string }) {
           ? `${matches.length} ${matches.length === 1 ? 'artikel' : 'artikelen'}`
           : query
             ? 'Geen artikelen gevonden. Probeer een ander trefwoord.'
-            : 'De eerste blogs binnen dit onderwerp volgen nog.'}
+            : 'De uitleg en het uitgewerkte voorbeeld staan hierboven. Er zijn nog geen aanvullende artikelen over dit onderwerp.'}
       </p>
       <div>
         {matches.map((a) => (
           <Link key={a.slug} href={a.href}>
             <span>
-              {a.example ? 'VOORBEELDBLOG' : 'UITLEG'} · {a.read} MIN LEZEN
+              {a.analysis ? 'REKENANALYSE' : 'UITLEG'} · {a.read} MIN LEZEN
             </span>
             <h3>{a.title}</h3>
             <p>{a.intro}</p>

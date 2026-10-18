@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ArrowRight, Search, BookOpen } from 'lucide-react';
 import Link from './site-link';
-import { articles, toolItems, partners } from './data';
+import { toolItems, partners } from './data';
 import { guideIndex as guides } from './guide-index';
 import { journeys } from './journey-data';
 import { topicContent } from './topic-content';
@@ -113,12 +113,6 @@ const searchItems = [
     href: '/uitleg/' + g.slug,
     type: 'Uitleg',
   })),
-  ...articles.map((a) => ({
-    title: a.title,
-    text: a.intro,
-    href: '/artikelen/' + a.slug,
-    type: 'Voorbeeldblogs',
-  })),
   ...toolItems.map((t) => ({
     title: t.title,
     text: t.text,
@@ -191,7 +185,6 @@ export function SiteSearch() {
             'Alles',
             'Onderwerpen',
             'Uitleg',
-            'Voorbeeldblogs',
             'Tools',
             'Partners',
             'Platform',

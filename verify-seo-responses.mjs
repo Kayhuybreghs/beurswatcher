@@ -104,7 +104,7 @@ for (const guide of guides) {
     path + ': citation',
   );
   const visibleSource = decode(
-    html.match(/<div class="guide-source">([\s\S]*?)<\/div>/)?.[1] || '',
+    html.match(/<aside class="guide-evidence"[^>]*>([\s\S]*?)<\/aside>/)?.[1] || '',
   );
   assert.ok(
     visibleSource.includes(`href="${citation.url}"`),

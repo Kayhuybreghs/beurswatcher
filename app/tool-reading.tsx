@@ -19,7 +19,10 @@ export function ToolReading({ tool }: { tool: string }) {
             <h3>{g.title}</h3>
             <p>{g.summary}</p>
             <span>
-              Lees de uitleg <ArrowUpRight size={18} />
+              {g.analysis
+                ? 'Bekijk de scenario’s en berekening'
+                : 'Lees de uitleg'}{' '}
+              <ArrowUpRight size={18} />
             </span>
           </Link>
         ))}

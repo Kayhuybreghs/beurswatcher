@@ -1,6 +1,7 @@
 import { guides, guideSources } from './guide-data';
 import { siteUrl } from './site-config';
 import { JsonLd, publisher, websiteId } from './site-schema';
+import { educationRevision } from './education-revision';
 export function GuideSchema({ slug }: { slug: string }) {
   const g = guides.find((g) => g.slug === slug);
   if (!g) return null;
@@ -15,6 +16,7 @@ export function GuideSchema({ slug }: { slug: string }) {
         description: g.summary,
         mainEntityOfPage: { '@id': base + '/uitleg/' + g.slug + '#webpage' },
         inLanguage: 'nl-NL',
+        dateModified: educationRevision.iso,
         isPartOf: { '@id': websiteId },
         author: publisher,
         publisher,

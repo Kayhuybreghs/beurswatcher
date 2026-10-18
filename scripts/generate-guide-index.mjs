@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { guides } from '../app/guide-data.ts';
+import { guideAnalyses } from '../app/guide-analyses.ts';
+import { guideSourceNotes } from '../app/guide-source-notes.ts';
 
 // Guide bodies remain the sole editable source. Browser lists only need this projection.
 const index = guides.map((guide) => ({
@@ -10,6 +12,7 @@ const index = guides.map((guide) => ({
   topics: guide.topics,
   title: guide.title,
   summary: guide.summary,
+  analysis: Boolean(guideAnalyses[guide.slug]),
   read: Math.max(
     2,
     Math.ceil(
@@ -19,6 +22,8 @@ const index = guides.map((guide) => ({
         ...guide.sections.flat(),
         ...guide.faq.flat(),
         ...guide.example,
+        guideSourceNotes[guide.slug],
+        ...Object.values(guideAnalyses[guide.slug] || {}).flat(Infinity),
       ]
         .join(' ')
         .split(/\s+/).length / 200,

@@ -91,8 +91,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Nulrendement als controle',
-      '€ 1.000 starten plus 120 maanden € 100 is € 13.000 bij 0% rendement. Kosten, belasting en inflatie zijn in dit voorbeeld niet verwerkt.',
+      '€ 3.600 ineens is niet hetzelfde als twaalf keer € 300',
+      'Staat € 3.600 vanaf de eerste dag een heel jaar tegen een aangenomen 6% groei, dan eindigt het op € 3.816. Stort je twaalf keer € 300 aan het maandeinde, dan is het eindbedrag ongeveer € 3.698. Beide bevatten € 3.600 eigen geld, maar de maandstortingen doen gemiddeld korter mee. Het verschil van circa € 118 is een timingverschil, geen extra inleg.\n\nControleer dit in de tool met eerst € 3.600 startkapitaal en € 0 maandinleg, en daarna € 0 startkapitaal en € 300 maandinleg. Houd één jaar en 6% gelijk. Bij 0% eindigen beide routes op € 3.600. Met een negatief constant rendement pakt de latere inleg juist minder ongunstig uit. De vergelijking veronderstelt dat het volledige bedrag al beschikbaar is; beleggen met geleend geld of toekomstige salarissen is een andere situatie. Kosten, belasting en inflatie ontbreken.',
     ],
     faq: [
       [
@@ -117,7 +117,7 @@ export const guides: Guide[] = [
     topics: ['beginnen', 'strategie'],
     title: 'Welk rendement vul je in een calculator in?',
     summary:
-      'Een rendementspercentage is een rekenaanname, geen verwachting op maat. Gebruik verschillende scenario’s en bepaal welke onderdelen de tool buiten beschouwing laat.',
+      'Vergelijk je eindbedrag met álle stortingen, niet alleen je startkapitaal. De vijf scenario’s hieronder laten zien dat een hoger saldo toch verlies kan betekenen.',
     problem:
       'Eén optimistisch percentage geeft snel een aantrekkelijk eindbedrag. Het vertelt weinig over wat er gebeurt als de toekomst anders loopt.',
     sections: [
@@ -179,8 +179,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Drie scenario’s bij hetzelfde rekenrendement',
-      'Zonder startkapitaal, met vaste 6% groei en stortingen aan het maandeinde, levert € 100 per maand na twintig jaar circa € 45.344 op (€ 24.000 eigen inleg). Dertig jaar geeft circa € 97.451 (€ 36.000 inleg). € 150 per maand gedurende twintig jaar geeft circa € 68.016, ook bij € 36.000 inleg. Tijd en inleg zijn zo apart te vergelijken. Kosten, belasting en inflatie ontbreken.',
+      'Eerder beginnen en daarna stoppen: maakt dat altijd meer op?',
+      'Neem één einddatum over dertig jaar. Route A legt alleen de eerste tien jaar € 100 per maand in en laat het daarna twintig jaar staan: € 12.000 eigen inleg. Route B wacht tien jaar en legt daarna twintig jaar € 100 per maand in: € 24.000 eigen inleg. Bij constant 6% rendement en stortingen aan het maandeinde eindigt A op circa € 52.107 en B op € 45.344. De extra groeitijd compenseert in dat gekozen scenario de lagere inleg.\n\nBij 0% gebeurt dat niet: A houdt € 12.000 over en B € 24.000. “Vroeg beginnen wint altijd” volgt dus niet uit het eerste voorbeeld. Om A na te rekenen bereken je eerst tien jaar maandinleg; gebruik die ongeronde eindwaarde daarna als startkapitaal voor twintig jaar zonder extra stortingen. Beide routes gebruiken dezelfde einddatum en hetzelfde percentage. Kosten, belasting en inflatie ontbreken; het rendement is geen verwachting.',
     ],
     faq: [
       [
@@ -201,7 +201,7 @@ export const guides: Guide[] = [
     topics: ['etfs', 'portfolio'],
     title: 'ETF-kosten op lange termijn: wat doet een klein verschil?',
     summary:
-      'Jaarlijkse kosten verlagen het bedrag dat verder kan groeien. Vergelijk twee kostenpercentages bij hetzelfde brutorendement, dezelfde inleg en dezelfde looptijd.',
+      'Bij € 10.000 startkapitaal, twintig jaar en 6% brutogroei geeft 1% kosten circa € 4.891 minder eindvermogen dan 0,15%. Een deel is gemiste groei. Bekijk de uitsplitsing.',
     problem:
       'Een verschil van enkele tienden van een procent lijkt klein. In een langlopend rekenmodel werkt dat verschil ieder jaar opnieuw door.',
     sections: [
@@ -263,8 +263,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Wat kost € 2 per aankoop?',
-      'Een denkbeeldige ordervergoeding van € 2 is 2% van een aankoop van € 100 en 0,2% van € 1.000. Dit is een rekenvoorbeeld, geen tarief van een broker.',
+      'Minder orders scheelt kosten, maar verandert ook je instapmoment',
+      'Stel dat je € 2.400 per jaar wilt aankopen en een fictieve vaste ordervergoeding van € 3 betaalt, bovenop het aankoopbedrag. Twaalf aankopen van € 200 kosten samen € 36. Vier aankopen van € 600 kosten € 12. Dat is respectievelijk 1,5% en 0,5% van het jaarlijkse aankoopbedrag, naast eventuele fondskosten, spread en valuta. Het verschil is € 24, niet 1% over je hele portefeuille ieder jaar.\n\nDit bewijst niet dat per kwartaal kopen altijd beter is. Een deel van je geld wacht dan langer buiten de markt. Stijgende of dalende koersen en rente op wachtend geld veranderen het totaalresultaat. Controleer bovendien of je aanbieder echt per order rekent: bij een procentueel tarief zonder minimum kan de vergelijking anders uitvallen. Het nuttige resultaat is hier een aparte kostenpost in euro’s, die je niet ongemerkt als jaarlijkse TER in de kostentool invoert.',
     ],
     faq: [
       [
@@ -307,8 +307,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Bruto invoer herkennen',
-      'Het model met 5% bruto groei en 0,20% jaarlijkse kosten gebruikt 1,05 × 0,998 − 1 = 4,79%. Voer niet alvast 4,79% in en trek daarna opnieuw 0,20% af.',
+      'Dezelfde fondskosten twee keer: ruim € 1.000 verschil in het model',
+      'Bij 5% bruto groei en 0,20% jaarlijkse kosten is de netto groeifactor 1,05 × 0,998 = 1,0479. € 10.000 zonder extra inleg wordt daarmee na twintig jaar circa € 25.492. Wie 4,79% als bruto rendement invult en daarna opnieuw 0,20% kosten aftrekt, rekent met 1,0479 × 0,998. Die uitkomst is circa € 24.491: ongeveer € 1.001 te laag door dubbel rekenen.\n\nHet oplossen van die fout betekent niet dat alle overige kosten verdwijnen. Een brokervergoeding kan bijvoorbeeld nog buiten een netto fondsresultaat vallen. Noteer daarom per bron welke kosten al verwerkt zijn. Is dat onduidelijk, gebruik het percentage dan niet als vergelijkbare bruto invoer. De vaste 5% is hier een rekenaanname, geen historisch of verwacht resultaat; belastingen, inflatie en losse kosten zijn niet meegenomen.',
     ],
     faq: [
       [
@@ -329,7 +329,7 @@ export const guides: Guide[] = [
     topics: ['vermogen', 'beginnen'],
     title: '€ 100.000 opbouwen: hoeveel moet je per maand inleggen?',
     summary:
-      'Je benodigde maandinleg hangt af van het bedrag dat je al hebt, hoeveel tijd je hebt en het rendement waarmee je rekent. Bereken de inleg voor € 100.000 of een ander doelbedrag.',
+      'Met € 10.000 startkapitaal en twintig jaar is voor € 100.000 circa € 150 per maand nodig bij 6% groei, of € 375 bij 0%. Zonder kosten of belasting. Vergelijk negen scenario’s.',
     problem:
       'Je wilt € 100.000 opbouwen. Hoeveel moet je dan iedere maand inleggen, en wat verandert er als je meer of minder tijd hebt?',
     sections: [
@@ -391,8 +391,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Een doel over vijf jaar',
-      'Voor € 20.000 over zestig maanden, met € 5.000 beschikbaar en 0% groei, is € 250 per maand nodig. Het doelbedrag is nominaal.',
+      'Een jaar overslaan verandert het maandbedrag',
+      'Voor € 20.000 over vijf jaar, met € 5.000 beschikbaar en 0% groei, is € 250 per maand nodig. Stel dat je het eerste jaar niets toevoegt, terwijl de einddatum gelijk blijft. Er resteert dan nog steeds € 15.000, maar nog maar 48 maanden: € 312,50 per maand. Blijf je € 250 storten, dan eindig je op € 17.000 en ontbreekt € 3.000.\n\nJe kunt het tekort dus concreet benoemen voordat je een renteaanname aanpast. Controleer de actuele prijs, de echte resterende tijd en het werkelijk gespaarde saldo opnieuw. Als het hogere maandbedrag niet past, verandert de rekensom alleen door een ander doelbedrag, meer tijd of daadwerkelijk extra geld. Een hoger ingevuld rendement maakt de gemiste stortingen niet zeker goed. Dit nulscenario bevat geen kosten, belasting of prijsstijging van het doel.',
     ],
     faq: [
       [
@@ -431,8 +431,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Van koopkracht naar maandinleg',
-      'Voor de koopkracht van € 100.000 vandaag heb je bij 2% inflatie over twintig jaar ongeveer € 148.595 nodig: € 100.000 × 1,02^20. Vul dat bedrag als doel in. Met € 10.000 startkapitaal en 6% nominaal jaarrendement vraagt het model dan circa € 257 per maand. Zonder inflatiecorrectie, met € 100.000 als doel, is dat circa € 150. De maandinleg blijft in beide berekeningen gelijk; je stort aan het einde van de maand. Kosten en belasting ontbreken. Inflatie en rendement zijn aannames, geen voorspellingen.',
+      'Het doel is geïndexeerd. Zijn je stortingen dat ook?',
+      'Voor de koopkracht van € 100.000 vandaag is bij 2% inflatie over twintig jaar circa € 148.595 nodig. Met € 10.000 startkapitaal en 6% nominaal rendement vraagt dat ongeveer € 257 per maand, telkens aan het maandeinde. De storting blijft in dit model twintig jaar hetzelfde nominale bedrag. Zij wordt dus niet ieder jaar automatisch 2% hoger. Kosten en belasting ontbreken.\n\nDat onderscheid is belangrijk wanneer je een berekening in euro’s van vandaag wilt maken. Bij 6% rendement en 2% inflatie is het exacte reële rendement 1,06/1,02 − 1, ongeveer 3,92%. Een constant maandbedrag in huidige koopkracht zou in toekomstige euro’s moeten meestijgen met prijzen. Dat is een andere afspraak dan een vaste nominale storting. Gebruik daarom in deze tool het toekomstige doelbedrag met nominaal rendement. Vul niet tegelijk dat hogere doel én een voor inflatie verlaagd rendement in; dan meng je twee verschillende waardematen.',
     ],
     faq: [
       [
@@ -475,8 +475,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Controleer de tweede periode',
-      'Bij twee jaar 5% is de groei over € 1.000 samen 10,25%, niet 10%. De extra € 2,50 is in dit voorbeeld groei op eerdere groei.',
+      '6% per jaar delen door twaalf is niet altijd de juiste maandrente',
+      'Bij een effectief jaarrendement van 6% hoort een maandpercentage van (1,06^(1/12) − 1) × 100 = ongeveer 0,4868%. Twaalf van die maandstappen samen geven weer precies 6%. Neem je in plaats daarvan 6%/12 = 0,5% en laat je dat iedere maand samenstellen, dan komt het jaar uit op ongeveer 6,1678%. Op € 10.000 zonder stortingen is dat € 10.616,78 tegenover € 10.600.\n\nBeide notaties kunnen in financiële producten voorkomen; de fout is ze behandelen alsof ze hetzelfde betekenen. Controleer of een bron een effectief jaarrendement of een nominale rente met een bepaalde bijschrijffrequentie geeft. De Beurswatcher-berekening zet een effectief jaarpercentage om naar bijpassende maandstappen. Zij bepaalt niet de contractuele rente van een rekening. Kosten en belasting zijn in deze controle weggelaten.',
     ],
     faq: [
       [
@@ -497,7 +497,7 @@ export const guides: Guide[] = [
     topics: ['strategie', 'portfolio'],
     title: 'Gemiddeld rendement is niet hetzelfde als samengestelde groei',
     summary:
-      'Het gewone gemiddelde van jaarpercentages vertelt niet precies hoe je vermogen verandert. Daarvoor vermenigvuldig je de groeifactoren van de afzonderlijke perioden.',
+      'Een jaar +50% en daarna −40% heeft gemiddeld 5% rendement, maar samen verlies je 10%. Zes voorbeelden laten zien waarom je groeifactoren moet vermenigvuldigen.',
     problem:
       'Een plusjaar en een even groot minjaar lijken elkaar op te heffen. Toch kan je bedrag na beide jaren lager zijn.',
     sections: [
@@ -555,8 +555,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Tien jaar bij twee procent',
-      '€ 10.000 zonder rente heeft bij precies 2% inflatie na tien jaar ongeveer € 8.203 koopkracht in euro’s van nu. Het nominale bedrag blijft € 10.000.',
+      'Een eigen uitgavenmandje kan anders bewegen dan één inflatiecijfer',
+      'Neem een fictief maandbudget van € 1.000: € 500 wonen, € 200 energie en € 300 overige uitgaven. Veronderstel voor één jaar respectievelijk 0%, 10% en 2% prijsstijging. Hetzelfde mandje kost daarna € 500 + € 220 + € 306 = € 1.026: een stijging van 2,6%. Het gewone gemiddelde van de drie percentages, 4%, klopt hier niet, omdat je niet aan iedere categorie evenveel besteedt.\n\nDit is geen alternatieve officiële inflatiemeting. Het laat zien waarom gewichten ertoe doen wanneer je een concreet spaardoel of budget beoordeelt. De officiële index omvat veel meer producten en een eigen meetmethode. Je kunt de inflatietool gebruiken om het effect van een gekozen gemiddelde te onderzoeken, maar verwacht niet dat die automatisch je persoonlijke uitgaven voorspelt. Het voorbeeld houdt hoeveelheden gelijk en negeert dat je door prijsverandering andere producten kunt gaan kopen.',
     ],
     faq: [
       [
@@ -599,8 +599,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Beschikbaarheid heeft een functie',
-      'Een reservering van € 2.000 voor een vervanging kan later te laag zijn als de prijs stijgt. De vraag is eerst hoeveel je wilt reserveren en wanneer je het nodig hebt.',
+      'Koopkrachtverlies en een tekort op de betaaldag zijn andere problemen',
+      'Stel dat € 2.000 apart staat voor een mogelijke vervanging die vandaag € 2.000 kost. Bij 3% prijsstijging kost hetzelfde product over een jaar € 2.060. Zonder rente ontbreekt € 60. Als het geld ondertussen belegd was en precies op de betaaldag 20% lager stond, was er nog € 1.600: een tekort van € 460 tegenover diezelfde prijs. De daling van 20% is een gekozen tegenvoorbeeld, geen voorspelling.\n\nHet ene risico is een geleidelijk duurder wordende uitgave; het andere is onvoldoende beschikbaar geld wanneer de rekening komt. Een verwachte langetermijnopbrengst lost dat tweede risico niet automatisch op. Controleer daarom eerst het vervangingsbedrag en hoe snel je het nodig kunt hebben, en pas daarna eventuele rente of groei. Dit voorbeeld zegt niet dat ieder huishouden € 2.000 buffer nodig heeft. Andere spullen, verplichtingen en inkomensrisico’s vragen om een eigen inventarisatie.',
     ],
     faq: [
       [
@@ -621,7 +621,7 @@ export const guides: Guide[] = [
     topics: ['vermogen', 'strategie'],
     title: 'Nominaal en reëel rendement: wat is het verschil?',
     summary:
-      'Nominaal rendement beschrijft de groei van het geldbedrag. Reëel rendement corrigeert die groei voor inflatie. Exact reken je met de verhouding tussen beide groeifactoren.',
+      'Bij 5% rendement en 2% inflatie groeit je koopkracht met circa 2,94% per jaar, vóór kosten en belasting. Vergelijk zes combinaties van saldo en koopkracht.',
     problem:
       'Je saldo groeit, maar het is niet direct duidelijk of je er ook meer van kunt kopen.',
     sections: [
@@ -661,7 +661,7 @@ export const guides: Guide[] = [
     topics: ['vermogen', 'strategie'],
     title: 'Extra aflossen of beleggen: welke vragen stel je eerst?',
     summary:
-      'Vergelijk niet alleen schuld­rente met een verwacht rendement. Beschikbaarheid van je geld, onzekerheid, voorwaarden en belasting kunnen de afweging veranderen.',
+      'Bewaar je bespaarde rente of geef je die uit? Dat verandert de aflosvergelijking. Reken het verschil door en houd schuldvermindering, cash en beleggingsrisico uit elkaar.',
     problem:
       'Je hebt een bedrag over. Minder schuld of meer belegd vermogen klinkt als een rekensom, maar beide keuzes hebben andere gevolgen.',
     sections: [
@@ -727,8 +727,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Geen gegarandeerde voorsprong',
-      'Een scenario dat bij 6% gunstiger uitvalt kan bij 2% anders uitpakken. Beide percentages zijn invulwaarden; de tool kent de toekomstige markt niet.',
+      'Een kleine voorsprong verdwijnt door één ontbrekende kostenpost',
+      'In het model met herbelegde rentebesparing wordt € 10.000 bij 4% na tien jaar circa € 14.802. Een belegging bij constant 4,1% na jaarlijkse kosten en belasting wordt circa € 14.945. De berekende voorsprong is slechts € 143. Gaat van het beleggingsbedrag eerst een eenmalige kost van € 100 af, dan groeit € 9.900 tegen 4,1% naar circa € 14.796. De voorsprong is daarmee verdwenen.\n\nDe € 100 is geen werkelijk aanbiederstarief. Het voorbeeld toont hoe gevoelig een kleine modelmarge is voor een vergeten invoer. Verwerk die eenmalige kost niet alsof ze ieder jaar over het hele vermogen terugkomt. Omgekeerd kunnen kosten voor extra aflossen de aflosroute veranderen. En ook zonder zulke kosten maakt een voorsprong van 0,1 procentpunt een onzeker rendement niet vergelijkbaar met een contractuele rentebesparing. Het volledige hypotheekverloop en persoonlijke fiscale effecten zijn hier niet berekend.',
     ],
     faq: [
       [
@@ -749,7 +749,7 @@ export const guides: Guide[] = [
     topics: ['belasting', 'vermogen'],
     title: 'Box 3 in 2026: wat berekent de indicatietool?',
     summary:
-      'De tool maakt een vereenvoudigde indicatie met de uitgangspunten voor de voorlopige aanslag 2026. Het resultaat is geen definitieve aanslag of berekening van werkelijk rendement.',
+      '€ 100.000 banktegoed geeft circa € 187; hetzelfde bedrag in beleggingen circa € 878. Voorlopige indicaties voor 2026, zonder partner of schuld. Bekijk de berekening en grenzen.',
     problem:
       'Voor spaargeld en beleggingen gebruikt de tool verschillende vaste rendementspercentages. Daarom hangt de uitkomst ook af van de verdeling van je vermogen.',
     sections: [
@@ -815,8 +815,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Eerst ordenen, daarna rekenen',
-      'Staat op 1 januari € 15.000 op je betaalrekening, € 25.000 op een gewone spaarrekening en € 60.000 in privé gehouden ETF’s? Dan vul je € 40.000 banktegoeden en € 60.000 beleggingen in. Vul niet daarnaast nogmaals het totale vermogen van € 100.000 in. Dit voorbeeld veronderstelt dat alles in box 3 valt, zonder vrijgestelde producten of andere uitzonderingen.',
+      'De schuldendrempel per ongeluk twee keer aftrekken',
+      'Stel dat je zonder fiscale partner € 10.000 aan schulden hebt die volledig in box 3 mogen meetellen. De schuldendrempel voor 2026 is € 3.800 per persoon. De tool verwacht € 10.000 als invoer en houdt daarna € 6.200 aftrekbare schuld over. Vul je zelf al € 6.200 in, dan trekt de tool opnieuw € 3.800 af en rekent hij met slechts € 2.400. Dat is een invoerfout, geen andere fiscale uitkomst voor dezelfde gegevens.\n\nBewaar dus zowel het oorspronkelijke saldo als de toegepaste drempel, met duidelijke namen. Controleer eerst dat de schuld werkelijk in box 3 hoort; een hypotheek die onder de eigenwoningregeling valt kun je niet op basis van dit voorbeeld toevoegen. Gebruik de saldi op 1 januari 2026 voor de forfaitaire berekening. De berekening van werkelijk rendement heeft andere regels en is niet wat deze tool uitvoert.',
     ],
     faq: [
       [
@@ -837,7 +837,7 @@ export const guides: Guide[] = [
     topics: ['strategie', 'beginnen'],
     title: 'Ineens of gespreid beleggen met een beschikbaar bedrag',
     summary:
-      'Bij ineens instappen doet het volledige bedrag direct mee. Bij gespreid instappen beleg je het beschikbare bedrag in delen; het resterende geld wacht buiten de markt.',
+      'Bij een gelijke eindkoers kan een vroege daling spreiden helpen en een late daling niet. Vergelijk drie fictieve koerspaden en het effect van rente op wachtend geld.',
     problem:
       'Je hebt een bedrag beschikbaar. Wat verandert er als je het direct belegt of verspreid over meerdere maanden inlegt?',
     sections: [
@@ -899,8 +899,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Dezelfde markt-eindwaarde, andere aankopen',
-      'Koop fictief twee keer voor € 100. Bij prijzen van eerst € 100 en daarna € 50 krijg je 1 + 2 = 3 eenheden. Zijn die op de einddatum € 100 waard, dan heb je € 300. Koop je beide keren tegen € 100, dan heb je bij dezelfde eindprijs € 200. De lage tussenprijs maakt in dit voorbeeld verschil, maar herstel naar € 100 is geen zekerheid. Kosten en belasting ontbreken.',
+      'Je gemiddelde aankoopprijs is niet het gemiddelde van de koersen',
+      'Koop drie keer voor € 100 bij fictieve koersen van € 100, € 80 en € 120. Je krijgt 1 + 1,25 + 0,8333 = ongeveer 3,0833 eenheden. De gemiddelde aankoopprijs is het totale aankoopbedrag gedeeld door het aantal eenheden: € 300/3,0833, ongeveer € 97,30. Het gewone gemiddelde van de drie koersen is € 100. Dat geeft een ander antwoord omdat je bij de lage koers meer eenheden koopt.\n\nDit is geen bewijs van winst. Bij een eindkoers van € 90 zijn de gekochte eenheden samen € 277,50 waard, dus minder dan de ingelegde € 300. Een lagere gemiddelde aankoopprijs neemt het risico van een lagere eindkoers niet weg. De berekening veronderstelt dat fracties gekocht kunnen worden, zonder orderkosten, belasting of afronding op hele stukken. Wanneer je telkens evenveel stukken koopt in plaats van evenveel euro’s inlegt, geldt een andere weging.',
     ],
     faq: [
       [
@@ -921,7 +921,7 @@ export const guides: Guide[] = [
     topics: ['dividend', 'aandelen'],
     title: 'Dividend herbeleggen of apart houden: wat verandert er?',
     summary:
-      'Herbelegd dividend wordt onderdeel van het belegd vermogen. Zonder herbeleggen blijft de uitkering in dit model als renteloos geld meetellen, zodat je totale vermogen eerlijk wordt vergeleken.',
+      'Herbeleggen vergroot ook de blootstelling aan koersdalingen. Vijf scenario’s vergelijken herbeleggen met de portefeuille plus bewaarde cash, zodat dividend niet uit beeld verdwijnt.',
     problem:
       'Alleen de portefeuillewaarde vergelijken kan de uitgekeerde bedragen uit beeld laten verdwijnen.',
     sections: [
@@ -983,8 +983,8 @@ export const guides: Guide[] = [
       ],
     ],
     example: [
-      'Een koersstijging en een uitkering samen',
-      'Je koopt een fictief aandeel voor € 100, ontvangt € 3 dividend en eindigt met een koers van € 104. Zonder herbeleggen of andere geldstromen is het totaalrendement (104 − 100 + 3) / 100 = 7%, vóór kosten en belasting. De koersgroei alleen is 4%. 7% invoeren als koersgroei en daar 3% dividend bij zetten zou dezelfde uitkering dubbel meetellen.',
+      'Een verkeerde rendementsdefinitie telt ieder jaar opnieuw door',
+      'Een fictief aandeel begint op € 100, eindigt op € 104 en keert € 3 uit. Zonder andere geldstromen is het totaalrendement 7% en de koersgroei 4%. In de dividendtool passen bij dit éénjaarsvoorbeeld dus 4% koersgroei en 3% dividend. Voer je 7% als koersgroei in plus 3% dividend, dan modelleer je onbedoeld 10% totaalopbrengst.\n\nAls je dezelfde fictieve verhoudingen vijf jaar constant houdt en jaarlijks herbelegt, wordt € 10.000 bij 7% ongeveer € 14.026. De foutieve 10% geeft circa € 16.105: ongeveer € 2.080 te veel. Dat verschil komt uit de definitiefout, niet uit een betere belegging. Een werkelijke historische totaalrendementsreeks kun je niet altijd simpel splitsen door één dividendpercentage af te trekken: timing en herbelegging kunnen verschillen. Gebruik de productdefinitie en kies voor een model afzonderlijke, duidelijk benoemde aannames. Kosten, belasting en veranderende uitkeringen ontbreken.',
     ],
     faq: [
       [

@@ -28,6 +28,11 @@ registerHooks({
     return nextResolve(specifier, context);
   },
   load(url, context, nextLoad) {
+    // Node renders metadata/markup only; the production build and browser check CSS.
+    if (url.endsWith('.css') && url.includes('/app/')) {
+      assert.ok(readFileSync(new URL(url), 'utf8').length, 'Stylesheet exists');
+      return { format: 'module', shortCircuit: true, source: 'export default {};' };
+    }
     if (url.endsWith('.tsx') && url.includes('/app/')) {
       return {
         format: 'module',
@@ -75,6 +80,7 @@ if (!process.argv.includes('--mode')) {
   const { PageSchema, SiteSchema } = await import('./app/site-schema.tsx');
   const { GuideSchema } = await import('./app/guide-schema.tsx');
   const { GuidePage } = await import('./app/guide-pages.tsx');
+  const { educationRevision } = await import('./app/education-revision.ts');
   const { default: nextConfig } = await import('./next.config.ts');
 
   assert.equal(siteUrl, 'https://www.beurswatcher.nl');
@@ -236,7 +242,7 @@ if (!process.argv.includes('--mode')) {
     );
     assert.equal(article.author.name, 'Beurswatcher');
     assert.equal(article.datePublished, undefined);
-    assert.equal(article.dateModified, undefined);
+    assert.equal(article.dateModified, educationRevision.iso);
     assert.deepEqual(article.citation, {
       '@type': 'CreativeWork',
       name: guideSources[guide.source][0],
@@ -244,7 +250,7 @@ if (!process.argv.includes('--mode')) {
     });
     const visibleSource = renderToStaticMarkup(
       GuidePage({ slug: guide.slug }),
-    ).match(/<div class="guide-source">([\s\S]*?)<\/div>/)?.[1];
+    ).match(/<aside class="guide-evidence"[^>]*>([\s\S]*?)<\/aside>/)?.[1];
     assert.ok(visibleSource, guide.slug + ' visible source block');
     assert.ok(
       visibleSource.includes(

@@ -17,6 +17,9 @@ import { linkedTopicText } from './topic-inline-links';
 import { guideIndex as guides } from './guide-index';
 import { Newsletter } from './newsletter';
 import { TopicDirectory, TopicStories } from './topic-directory';
+import { topicInvestigations } from './topic-investigations';
+import { TopicInvestigationBlock } from './topic-investigation';
+import { educationRevision } from './education-revision';
 
 const relatedTopics: Record<string, string[]> = {
   'markt-economie': ['vermogen', 'aandelen'],
@@ -142,7 +145,7 @@ export function ArticleArchive({
           <span>
             {filtered.length} {filtered.length === 1 ? 'artikel' : 'artikelen'}
           </span>
-          <span>Algemene uitleg · voorbeeldblogs herken je aan het label</span>
+          <span>Uitleg en rekenanalyses van Beurswatcher</span>
         </div>
         {filtered.length ? (
           <div className="journal-grid">
@@ -165,7 +168,7 @@ export function ArticleArchive({
                 )}
                 <div className="journal-story-meta">
                   <span>
-                    {a.category} · {a.example ? 'Voorbeeldblog' : 'Uitleg'}
+                    {a.category} · {a.analysis ? 'Rekenanalyse' : 'Uitleg'}
                   </span>
                   <span>{a.read} MIN LEZEN</span>
                 </div>
@@ -202,6 +205,7 @@ export function ArticleArchive({
 export function InvestingHub({ sub }: { sub?: string }) {
   const topic = topics.find(([slug]) => slug === sub);
   const content = sub ? topicContent[sub] : undefined;
+  const investigation = sub ? topicInvestigations[sub] : undefined;
   const tool = toolItems.find((item) => item.slug === content?.tool);
   if (topic && content)
     return (
@@ -214,12 +218,22 @@ export function InvestingHub({ sub }: { sub?: string }) {
             <span className="dot">.</span>
           </h1>
           <p>{content.summary}</p>
+          <p className="education-revision">
+            Uitleg van Beurswatcher · bijgewerkt op{' '}
+            <time dateTime={educationRevision.iso}>
+              {educationRevision.label}
+            </time>
+            . De rekenvoorbeelden zijn illustratief.
+          </p>
           <div className="topic-chapters">
             <a href="#begrijpen">01 Het onderwerp begrijpen</a>
+            {investigation && <a href="#uitgewerkt">Een vraag uitgewerkt</a>}
             {content.example && (
               <a href="#praktijkvoorbeeld">02 Praktijkvoorbeeld</a>
             )}
-            <a href="#onderwerp-blogs">Artikelen bij dit onderwerp</a>
+            {guides.some((guide) => guide.topics.includes(sub!)) && (
+              <a href="#onderwerp-blogs">Artikelen bij dit onderwerp</a>
+            )}
             <a href="#onderwerp-vragen">Veelgestelde vragen</a>
           </div>
         </header>
@@ -268,6 +282,9 @@ export function InvestingHub({ sub }: { sub?: string }) {
             ))}
           </div>
         </section>
+        {investigation && (
+          <TopicInvestigationBlock investigation={investigation} />
+        )}
         {content.example && (
           <section className="topic-worked-example" id="praktijkvoorbeeld">
             <span className="eyebrow">PRAKTIJKVOORBEELD</span>
@@ -350,6 +367,7 @@ export function InvestingHub({ sub }: { sub?: string }) {
         {content.sources && (
           <aside
             className="topic-sources"
+            id="onderwerp-bronnen"
             aria-label="Bronnen bij dit onderwerp"
           >
             <h2>Bronnen bij deze uitleg.</h2>
