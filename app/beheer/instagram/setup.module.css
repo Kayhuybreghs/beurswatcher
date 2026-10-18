@@ -203,6 +203,7 @@
   background: #edf3fa;
 }
 .instructions {
+  list-style: decimal;
   padding-left: 22px;
   color: #4c6886;
   font-size: 13px;

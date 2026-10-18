@@ -1239,8 +1239,8 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                       <>
                         <CircleCheck size={22} aria-hidden="true" />
                         <div>
-                          <strong>Alles is opgeslagen</strong>
-                          <span>Je kunt deze pagina veilig sluiten.</span>
+                          <strong>Video-instellingen opgeslagen</strong>
+                          <span>De verbindingsstatus staat bovenaan.</span>
                         </div>
                       </>
                     )}
