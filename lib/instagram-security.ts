@@ -23,6 +23,10 @@ export type InstagramNotice =
   | 'cancelled'
   | 'wrong-account'
   | 'expired'
+  | 'app-configuration'
+  | 'permission-required'
+  | 'provider-unavailable'
+  | 'provider-error'
   | 'error';
 
 const INVITE_TTL = 7 * 24 * 60 * 60 * 1000;
@@ -36,6 +40,10 @@ const notices = new Set<InstagramNotice>([
   'cancelled',
   'wrong-account',
   'expired',
+  'app-configuration',
+  'permission-required',
+  'provider-unavailable',
+  'provider-error',
   'error',
 ]);
 type Purpose = 'invite' | 'flow' | 'notice';

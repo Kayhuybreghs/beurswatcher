@@ -155,10 +155,21 @@ for (const result of [
   'cancelled',
   'wrong-account',
   'expired',
+  'app-configuration',
+  'permission-required',
+  'provider-unavailable',
+  'provider-error',
   'error',
 ]) {
   const notice = createNotice(result, secret, now);
   assert.equal(verifyNotice(notice, secret, now), result);
+  const forged = notice.split('.');
+  const payload = JSON.parse(
+    Buffer.from(forged[1], 'base64url').toString('utf8'),
+  );
+  payload.result = result === 'cancelled' ? 'provider-error' : 'cancelled';
+  forged[1] = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  assert.equal(verifyNotice(forged.join('.'), secret, now), null);
   assert.equal(verifyNotice(notice, secret, now + 5 * 60 * 1000), null);
   assert.equal(verifyNotice(notice, otherSecret, now), null);
   assert.equal(verifyInvite(notice, secret, now), null);

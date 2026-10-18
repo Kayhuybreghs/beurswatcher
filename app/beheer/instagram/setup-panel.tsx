@@ -14,6 +14,8 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import styles from './setup.module.css';
+import { SetupHelp } from './setup-help';
+import type { InstagramNotice } from '../../../lib/instagram-security';
 
 type Setup = {
   available: boolean;
@@ -37,6 +39,7 @@ type Props = {
   onFinishSave: () => void;
   onCheck: () => Promise<void>;
   onConnect: () => Promise<void>;
+  result?: InstagramNotice;
 };
 
 function isSetup(value: unknown): value is Setup {
@@ -57,10 +60,10 @@ function isSetup(value: unknown): value is Setup {
 }
 
 const stepTitles = [
-  'Open je app bij Meta',
-  'Vul de website-adressen in',
-  'Sla je appgegevens veilig op',
-  'Geef toestemming in Instagram',
+  'Maak of open de Meta-app',
+  'Plak de drie website-adressen',
+  'Kopieer je twee appgegevens',
+  'Verbind @beurswatcher',
 ];
 
 function CopyField({
@@ -77,12 +80,12 @@ function CopyField({
   async function copy() {
     try {
       await navigator.clipboard.writeText(value);
-      setMessage('Gekopieerd. Plak dit adres bij Meta.');
+      setMessage('Gekopieerd. Plak dit bij Meta.');
     } catch {
       input.current?.focus();
       input.current?.select();
       setMessage(
-        'Het adres is geselecteerd. Kopieer het via je toetsenbord of het selectiemenu.',
+        'De tekst is geselecteerd. Kopieer deze via je toetsenbord of het selectiemenu.',
       );
     }
   }
@@ -120,9 +123,20 @@ export default function SetupPanel({
   onFinishSave,
   onCheck,
   onConnect,
+  result,
 }: Props) {
-  const [expanded, setExpanded] = useState(!configured);
-  const [step, setStep] = useState(configured ? 3 : 0);
+  const [expanded, setExpanded] = useState(
+    !configured || (!!result && result !== 'connected'),
+  );
+  const [step, setStep] = useState(
+    result === 'app-configuration'
+      ? 1
+      : result === 'permission-required'
+        ? 0
+        : configured
+          ? 3
+          : 0,
+  );
   const [setup, setSetup] = useState<Setup | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -136,9 +150,11 @@ export default function SetupPanel({
 
   function chooseStep(next: number) {
     setStep(next);
-    requestAnimationFrame(() =>
-      document.getElementById(`instagram-setup-step-${next}`)?.focus(),
-    );
+    requestAnimationFrame(() => {
+      const heading = document.getElementById(`instagram-setup-step-${next}`);
+      heading?.focus({ preventScroll: true });
+      heading?.scrollIntoView({ block: 'start', behavior: 'auto' });
+    });
   }
 
   useEffect(() => {
@@ -332,10 +348,11 @@ export default function SetupPanel({
       <div className={styles.heading}>
         <div>
           <span className={styles.kicker}>Eenmalige instelling</span>
-          <h2 id="setup-heading">Zelf je Instagram koppelen.</h2>
+          <h2 id="setup-heading">Je Instagram aansluiten, stap voor stap.</h2>
           <p>
-            Open je Meta-app, vul de gegevens hieronder in en geef Instagram
-            toestemming. De stappen bij Meta doe je in een apart tabblad.
+            Eerst stel je de verbinding bij Meta in. Daarna log je in met
+            @beurswatcher en geef je toestemming. Gebruik bij voorkeur een
+            laptop en houd deze pagina naast Meta open.
           </p>
         </div>
         <button
@@ -390,6 +407,70 @@ export default function SetupPanel({
         {setup && (!setup.available || setup.locked) && (
           <p className={styles.notice}>{setup.message}</p>
         )}
+        {setup && (
+          <ol className={styles.checklist} aria-label="Wat is al geregeld?">
+            <li data-ready={setup.available}>
+              <span aria-hidden="true">{setup.available ? '✓' : '–'}</span>
+              <div>
+                <strong>Website-instellingen bereikbaar</strong>
+                <small>
+                  {setup.available
+                    ? 'De beveiligde opslag en de website-adressen zijn beschikbaar.'
+                    : 'De website-instellingen moeten eerst worden hersteld.'}
+                </small>
+              </div>
+            </li>
+            <li data-ready={ready}>
+              <span aria-hidden="true">{ready ? '✓' : '–'}</span>
+              <div>
+                <strong>
+                  {ready
+                    ? 'Appgegevens opgeslagen'
+                    : 'Meta-appgegevens ontbreken of zijn niet bruikbaar'}
+                </strong>
+                <small>
+                  {ready
+                    ? connected
+                      ? 'Deze gegevens zijn gebruikt voor de bevestigde verbinding.'
+                      : 'De toestemming bij Instagram moet nog bevestigen of de gegevens werken.'
+                    : 'Doorloop stap 1 tot en met 3, of kopieer hieronder het hulpbericht.'}
+                </small>
+              </div>
+            </li>
+            <li data-ready={connected}>
+              <span aria-hidden="true">{connected ? '✓' : '–'}</span>
+              <div>
+                <strong>
+                  {connected
+                    ? 'Accountverbinding bevestigd'
+                    : 'Account nog niet verbonden'}
+                </strong>
+                <small>
+                  {connected
+                    ? 'De website heeft de verbinding met @beurswatcher gecontroleerd.'
+                    : 'Nieuwe Reels worden pas automatisch opgehaald na een geslaagde verbinding.'}
+                </small>
+              </div>
+            </li>
+          </ol>
+        )}
+        {!ready && !connected && (
+          <div className={styles.startChoice}>
+            <p>
+              <strong>Waar wil je beginnen?</strong> Je hoeft geen gegevens te
+              raden.
+            </p>
+            <div>
+              <button type="button" onClick={() => chooseStep(0)}>
+                Ik heb nog geen Meta-app
+              </button>
+              <button type="button" onClick={() => chooseStep(2)}>
+                Ik heb al appgegevens
+              </button>
+              <a href="#instagram-hulp">Ik wil hulp bij het instellen</a>
+            </div>
+          </div>
+        )}
         <div className={styles.steps}>
           {stepTitles.map((title, index) => (
             <section
@@ -400,7 +481,7 @@ export default function SetupPanel({
                 <button
                   type="button"
                   id={`instagram-setup-step-${index}`}
-                  onClick={() => setStep(index)}
+                  onClick={() => chooseStep(index)}
                   aria-expanded={step === index}
                   aria-controls={`setup-stap-${index}`}
                 >
@@ -424,42 +505,86 @@ export default function SetupPanel({
                 {index === 0 && (
                   <>
                     <p>
-                      Gebruik het Meta-account waarmee je de Beurswatcher-app
-                      beheert. Maak een app aan of open de bestaande app en voeg{' '}
-                      <strong>Instagram API met Instagram Login</strong> toe.
+                      Meta is het bedrijf achter Instagram. De Meta-app geeft
+                      deze website toestemming om je Reels op te halen; je hoeft
+                      hiervoor geen app op je telefoon te installeren.
                     </p>
-                    <ul>
+                    <ol className={styles.instructions}>
                       <li>
-                        @beurswatcher moet een professioneel Instagram-account
-                        zijn: <strong>Creator of Business</strong>.
+                        Open Meta for Developers via de knop hieronder en log in
+                        met het account waarmee je deze koppeling wilt beheren.
+                        Vraagt Meta eerst om registratie of verificatie? Rond
+                        die zelf af. Bewaar dit tabblad.
                       </li>
                       <li>
-                        Gebruik de instellingen voor{' '}
-                        <strong>Instagram Login</strong>. Voor deze koppeling
-                        hoeft geen Facebook-pagina aan Instagram gekoppeld te
-                        zijn.
+                        Kies <strong>Create App / App maken</strong>, of open de
+                        bestaande Beurswatcher-app. Een herkenbare naam is
+                        <strong> Beurswatcher website</strong>.
                       </li>
-                    </ul>
+                      <li>
+                        Kies de toepassing voor Instagram en open
+                        <strong> Instagram API with Instagram Login</strong>.
+                        Meta kan de toepassing als{' '}
+                        <strong>
+                          Manage messaging &amp; content on Instagram
+                        </strong>{' '}
+                        tonen. Je richt hier alleen het lezen van profiel en
+                        media in.
+                      </li>
+                      <li>
+                        Vraagt Meta om een bedrijfsportfolio? Heb je er nog geen
+                        gekoppeld, kies dan, als die optie verschijnt,
+                        <strong>
+                          {' '}
+                          I don’t want to connect a business portfolio yet
+                        </strong>
+                        .
+                      </li>
+                      <li>
+                        Voeg <strong>@beurswatcher</strong> toe als account in
+                        de Instagram-instellingen van de app. Het moet een
+                        professioneel{' '}
+                        <strong>Creator- of Business-account</strong> zijn. Deze
+                        route heeft geen gekoppelde Facebook-pagina nodig.
+                      </li>
+                    </ol>
                     <a
                       className={styles.primaryButton}
+                      href="https://developers.facebook.com/apps/creation/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Nieuwe Meta-app maken{' '}
+                      <ArrowUpRight size={17} aria-hidden="true" />
+                    </a>
+                    <a
+                      className={styles.next}
                       href="https://developers.facebook.com/apps/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Open Meta for Developers{' '}
-                      <ArrowUpRight size={17} aria-hidden="true" />
+                      Ik heb al een Meta-app{' '}
+                      <ArrowUpRight size={15} aria-hidden="true" />
                     </a>
+                    <p className={styles.fieldHelp}>
+                      De namen van schermen kunnen bij Meta veranderen. Voor
+                      alleen je eigen beheerde account hoeft niet automatisch
+                      een aanvraag voor toegang tot andere accounts te worden
+                      gedaan.
+                    </p>
                     <details className={styles.help}>
                       <summary>
-                        Als Meta om een tester of beoordeling vraagt
+                        Mijn account ontbreekt of Meta vraagt om een tester
                       </summary>
                       <p>
-                        Bij een app in ontwikkelmodus kan een beheerder-,
-                        ontwikkelaar- of testerrol nodig zijn. Voeg het juiste
-                        account toe en accepteer een eventuele
-                        Instagram-testeruitnodiging. Meta kan extra verificatie
-                        of een appbeoordeling vragen; deze website kan die niet
-                        voor je afronden.
+                        Voeg @beurswatcher toe via de account- of
+                        rol-instellingen van de app. Als Meta een
+                        Instagram-testeruitnodiging verstuurt, moet je die ook
+                        in het juiste Instagram-account accepteren. Alleen
+                        versturen is niet voldoende. Meta kan eerst aanvullende
+                        verificatie vragen. Zie je andere schermen of kom je
+                        niet verder? Kopieer onderaan het hulpbericht; kies geen
+                        willekeurige rechten of instellingen.
                       </p>
                     </details>
                     <button
@@ -477,14 +602,15 @@ export default function SetupPanel({
                     <p>
                       Neem de onderstaande adressen exact over en sla de
                       instellingen bij Meta op. Het terugkeeradres brengt je na
-                      toestemming terug naar deze website.
+                      toestemming terug naar deze website. Je hoeft zelf geen
+                      webadressen te bedenken.
                     </p>
                     {setup ? (
                       <>
                         <CopyField
                           label="Valid OAuth Redirect URIs"
                           value={setup.redirectUri}
-                          help="Plak dit bij de instellingen voor Instagram Login / Business login. Dit is geen webhook-adres."
+                          help="Open bij Meta: Instagram → API setup with Instagram login → Set up Instagram business login → Business login settings. Plak dit bij Valid OAuth Redirect URIs en sla op."
                         />
                         <CopyField
                           label="Privacy Policy URL"
@@ -517,16 +643,21 @@ export default function SetupPanel({
                 {index === 2 && (
                   <>
                     <p>
-                      Open bij Meta de instellingen voor{' '}
-                      <strong>Instagram API met Instagram Login</strong>.
-                      Kopieer daar de <strong>Instagram App ID</strong> en{' '}
-                      <strong>Instagram App Secret</strong>. Gebruik het App ID
-                      uit het Instagram-product, niet het algemene Facebook App
-                      ID uit de basisinstellingen.
+                      Open bij Meta{' '}
+                      <strong>
+                        Instagram → API setup with Instagram login → Set up
+                        Instagram business login → Business login settings
+                      </strong>
+                      . Kopieer daar de <strong>Instagram App ID</strong> en{' '}
+                      <strong>Instagram App Secret</strong> naar de twee velden
+                      hieronder. Klik daarna op{' '}
+                      <strong>Appgegevens veilig opslaan</strong>.
                     </p>
                     <p className={styles.notice}>
                       Dit zijn de gegevens van de Instagram-app, niet je
-                      Instagram-wachtwoord of een toegangstoken.
+                      Instagram-wachtwoord, een toegangstoken of het algemene
+                      Facebook App ID. Deel de geheime sleutel alleen via het
+                      beveiligde veld hieronder.
                     </p>
                     {connected ? (
                       <p className={styles.notice}>
@@ -697,6 +828,13 @@ export default function SetupPanel({
             </section>
           ))}
         </div>
+        <SetupHelp
+          step={stepTitles[step]}
+          configured={ready}
+          connected={connected}
+          setupAvailable={setup?.available ?? null}
+          result={result}
+        />
       </div>
     </section>
   );

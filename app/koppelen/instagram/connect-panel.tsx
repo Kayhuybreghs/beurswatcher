@@ -14,13 +14,10 @@ import {
 } from 'lucide-react';
 import { BrandMark } from '../../brand';
 import styles from './connect.module.css';
+import type { InstagramNotice } from '../../../lib/instagram-security';
+import { instagramCallbackMessages } from '../../instagram-notice-messages';
 
-type ConnectionResult =
-  | 'connected'
-  | 'cancelled'
-  | 'wrong-account'
-  | 'expired'
-  | 'error';
+type ConnectionResult = InstagramNotice;
 
 type Props = {
   configured: boolean;
@@ -46,6 +43,11 @@ function resultMessage(result: ConnectionResult | undefined, username: string) {
       return 'De aanvraag is verlopen. Open je oorspronkelijke persoonlijke link om opnieuw te beginnen. Werkt die niet meer? Vraag mij om een nieuwe link.';
     case 'error':
       return 'De koppeling is niet gelukt. Open je oorspronkelijke persoonlijke link en probeer het opnieuw. Laat het mij weten als dit blijft gebeuren.';
+    case 'app-configuration':
+    case 'permission-required':
+    case 'provider-unavailable':
+    case 'provider-error':
+      return `${instagramCallbackMessages[result]?.replace('hieronder', 'op de beheerpagina') || 'De koppeling is niet afgerond.'} De genoemde stappen staan op de vaste beheerpagina: www.beurswatcher.nl/beheer/instagram.`;
     default:
       return null;
   }
@@ -218,6 +220,19 @@ export default function ConnectPanel({ configured, username, result }: Props) {
                     )}
                   </div>
 
+                  {result &&
+                    [
+                      'app-configuration',
+                      'permission-required',
+                      'provider-unavailable',
+                      'provider-error',
+                    ].includes(result) && (
+                      <p>
+                        <Link href="/beheer/instagram">
+                          Open de beheerpagina →
+                        </Link>
+                      </p>
+                    )}
                   <button
                     type="button"
                     className={styles.connectButton}

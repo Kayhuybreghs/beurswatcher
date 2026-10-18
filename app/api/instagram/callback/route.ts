@@ -12,7 +12,11 @@ import {
   sealToken,
   type InstagramNotice,
 } from '../../../../lib/instagram-security';
-import { exchangeInstagramCode } from '../../../../lib/instagram-provider';
+import {
+  exchangeInstagramCode,
+  instagramAuthorizationNotice,
+  InstagramProviderError,
+} from '../../../../lib/instagram-provider';
 import { getInstagramStore } from '../../../../lib/instagram-store';
 import { readAdminSession } from '../../../../lib/instagram-admin-auth';
 
@@ -71,7 +75,8 @@ export async function GET(request: NextRequest) {
       (await store.inviteUsed(hashSecret(flow.inviteNonce)))
     )
       return done('expired');
-    if (params.has('error')) return done('cancelled');
+    const authorizationNotice = instagramAuthorizationNotice(params);
+    if (authorizationNotice) return done(authorizationNotice);
     const code = params.get('code');
     if (params.getAll('code').length !== 1 || !code || code.length > 4096)
       return done('error');
@@ -91,7 +96,9 @@ export async function GET(request: NextRequest) {
       config.setupRevision,
     );
     return done('connected');
-  } catch {
-    return done('error');
+  } catch (error) {
+    return done(
+      error instanceof InstagramProviderError ? error.reason : 'error',
+    );
   }
 }

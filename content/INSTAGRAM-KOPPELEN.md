@@ -12,12 +12,24 @@ Daniel kan op deze pagina de eenmalige Meta-inrichting doorlopen, de verbinding 
 
 De beheerpagina kan vóór de Meta-koppeling al de bestaande echte Reel-selectie beheren. Automatisch nieuwe video's ophalen is pas bevestigd nadat het echte account toestemming heeft gegeven. De echte OAuth- en tokenvernieuwingstest zijn nog niet afgerond.
 
+### Korte uitleg om Daniel te sturen
+
+Hoi Daniel, open https://www.beurswatcher.nl/beheer/instagram en log in met de toegangscode die je hebt gekregen. Kies **Ik heb nog geen Meta-app** als je die nog niet hebt aangemaakt. De pagina neemt je mee door vier stappen: de Meta-app maken, de website-adressen kopiëren, de twee Instagram-appgegevens invullen en je account verbinden. Doe dit bij voorkeur op een laptop en houd de beheerpagina naast Meta open. Kom je niet verder? Klik op **Ik wil hulp bij het instellen** en kopieer het hulpbericht naar mij. Voeg toe welke melding je bij Meta ziet. Stuur geen wachtwoord, App Secret of toegangscode mee.
+
+**Eerlijke status:** de beheerpagina en veilige opslag zijn voorbereid. De eenmalige inrichting bij Meta en echte toestemming van @beurswatcher zijn nog nodig. Een opgeslagen App ID is geen bewijs van een geslaagde verbinding. De pagina toont deze statussen afzonderlijk.
+
+### Eenmalige inrichting
+
 1. Log in bij Meta Developers en maak/selecteer de app voor het eigen/beheerde professionele account. Gebruik **Instagram API with Instagram Login**, de Instagram App ID en Instagram App Secret. Creator of Business is vereist; voor deze route is geen Facebook-pagina nodig.
 2. Voeg @beurswatcher toe aan de toegestane accounts. Laat Daniel indien nodig eerst de uitnodiging als app-tester accepteren. Voor eigen/beheerde accounts met de juiste approl beschrijft Meta Standard Access; voor andere accounts kan App Review nodig zijn.
 3. Registreer exact `https://www.beurswatcher.nl/api/instagram/callback` als OAuth redirect URI. De enige scope is `instagram_business_basic`; geen publicatierecht of privéberichten.
 4. Configureer de vereiste appgegevens eerlijk, waaronder `https://www.beurswatcher.nl/privacy`. Beschrijf hoe toestemming kan worden ingetrokken en opgeslagen accountgegevens op verzoek verwijderd kunnen worden.
 5. Open **https://www.beurswatcher.nl/beheer/instagram** en doorloop het stappenplan. Het bevat kopieerknoppen voor de callback- en privacy-URL. Vul de **Instagram App ID** en **Instagram App Secret** daar in. Gebruik niet het Instagram-wachtwoord of de algemene Facebook App ID. Het geheim wordt versleuteld in de bestaande database opgeslagen en nooit teruggestuurd naar de browser. Daniel heeft hiervoor geen Vercel-toegang nodig; opnieuw publiceren is niet nodig.
 6. Klik op **Instagram verbinden**, meld je aan bij @beurswatcher en geef toestemming. Na terugkeer controleert de website het echte account en de media. Opgeslagen appgegevens zijn nog geen geslaagde koppeling: “Verbonden” berust op een echte accountcontrole.
+
+De startknop opent rechtstreeks `https://developers.facebook.com/apps/creation/`. Herkenbare appnaam: **Beurswatcher website**. De Instagram-toepassing heet in Meta's documentatie **Manage messaging and content on Instagram**. De aparte Instagram-appgegevens staan onder **Instagram → API setup with Instagram login → Set up Instagram business login → Business login settings**. Voor de eigen-account-route wordt niet standaard om Advanced Access gevraagd. Als de wizard vraagt om een bedrijfsportfolio en er is nog geen gekoppeld, biedt Meta de optie **I don’t want to connect a business portfolio yet**. Meta kan schermnamen en eisen wijzigen.
+
+Na een mislukte verbinding opent de uitleg automatisch. Veilige foutcategorieën maken onderscheid tussen appconfiguratie, ontbrekende toestemming, tijdelijke onbeschikbaarheid en een onbekende oorzaak. Alleen een herkenbare weigering geldt als annulering. Het hulpbericht bevat uitsluitend de vaste beheer-URL, status, geopende stap en eventueel een gecontroleerde melding; geen ruwe Meta-fout, tokens, appgeheim of OAuth-URL. Daniel verstuurt het zelf; de website verstuurt geen berichten.
 
 De website kan geen Meta-account of Meta-app namens Daniel aanmaken, Meta-formulieren overslaan of goedkeuring garanderen. Eventuele approllen, testeruitnodigingen en controles worden op Meta zelf afgehandeld. Een reeds actieve verbinding kan niet via het instellingenformulier naar een andere app worden omgezet. Vervanging van opgeslagen appgegevens vóór activering vraagt expliciete bevestiging.
 

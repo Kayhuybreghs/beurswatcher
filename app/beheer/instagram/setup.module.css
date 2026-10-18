@@ -126,6 +126,139 @@
   border-radius: 12px;
   overflow: hidden;
 }
+.checklist {
+  display: grid;
+  gap: 14px;
+  margin: 8px 0 22px;
+  padding: 18px;
+  border: 1px solid #d5e0ed;
+  border-radius: 12px;
+  list-style: none;
+  background: #f5f8fc;
+}
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.checklist li > span {
+  display: grid;
+  place-items: center;
+  flex: 0 0 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: #e0e8f1;
+  color: #496480;
+  font-size: 13px;
+}
+.checklist li[data-ready='true'] > span {
+  background: #d9eee2;
+  color: #21543e;
+}
+.checklist strong,
+.checklist small {
+  display: block;
+  line-height: 1.65;
+}
+.checklist strong {
+  font-size: 13px;
+  color: #153d67;
+}
+.checklist small {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #526b85;
+}
+.startChoice {
+  margin: 0 0 22px;
+  font-size: 13px;
+  color: #4c6886;
+  line-height: 1.7;
+}
+.startChoice > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.startChoice :is(button, a),
+.support button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 13px;
+  border: 1px solid #becfe1;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: #153d67;
+  cursor: pointer;
+  text-align: left;
+}
+.startChoice :is(button, a):hover,
+.support button:hover {
+  background: #edf3fa;
+}
+.instructions {
+  padding-left: 22px;
+  color: #4c6886;
+  font-size: 13px;
+  line-height: 1.85;
+}
+.instructions li + li {
+  margin-top: 15px;
+}
+.support {
+  scroll-margin-top: 24px;
+  margin-top: 24px;
+  padding: 22px 18px;
+  border-radius: 12px;
+  background: #edf3fa;
+  color: #153d67;
+}
+.support h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+.support p {
+  color: #4c6886;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.support label {
+  display: block;
+  margin-top: 18px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.support textarea {
+  width: 100%;
+  min-height: 190px;
+  margin: 8px 0 12px;
+  padding: 12px;
+  border: 1px solid #b5c9df;
+  border-radius: 8px;
+  background: #fff;
+  color: #153d67;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.7;
+  resize: vertical;
+}
+.support :is(output, small) {
+  display: block;
+  margin-top: 12px;
+  color: #4c6886;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.support output:empty {
+  display: none;
+}
 .step + .step {
   border-top: 1px solid #d5e0ed;
 }
@@ -133,6 +266,7 @@
   margin: 0;
 }
 .step h3 button {
+  scroll-margin-top: 20px;
   display: flex;
   align-items: center;
   gap: 11px;
@@ -292,7 +426,7 @@
   font-family: inherit;
 }
 .copyField input {
-  font-size: 12px;
+  font-size: 16px;
 }
 .copyField button {
   display: inline-flex;
@@ -366,7 +500,7 @@
 .panel button:disabled {
   cursor: not-allowed;
 }
-.panel :is(button, a, input, summary):focus-visible {
+.panel :is(button, a, input, textarea, summary):focus-visible {
   outline: 3px solid #cda800;
   outline-offset: 3px;
 }

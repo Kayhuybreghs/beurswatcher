@@ -23,6 +23,8 @@ import {
 import { BrandMark } from '../../brand';
 import type { Reel } from '../../reel-data';
 import SetupPanel from './setup-panel';
+import { instagramCallbackMessages as callbackMessages } from '../../instagram-notice-messages';
+import type { InstagramNotice } from '../../../lib/instagram-security';
 import styles from './admin.module.css';
 
 type Settings = {
@@ -55,23 +57,7 @@ type Operation =
   | 'reload'
   | null;
 type Feedback = { kind: 'error' | 'success' | 'info'; text: string } | null;
-type ConnectionResult =
-  | 'connected'
-  | 'cancelled'
-  | 'wrong-account'
-  | 'expired'
-  | 'error';
-
-const callbackMessages: Partial<Record<ConnectionResult, string>> = {
-  cancelled:
-    'Je hebt het verbinden bij Instagram geannuleerd. Je kunt hieronder opnieuw beginnen.',
-  'wrong-account':
-    'Er werd een ander Instagram-account gekozen. Verbind opnieuw en kies @beurswatcher.',
-  expired:
-    'De aanvraag bij Instagram is verlopen. Klik hieronder opnieuw op Instagram verbinden.',
-  error:
-    'De koppeling is niet gelukt. Probeer opnieuw te verbinden. Blijft het misgaan? Laat het mij weten.',
-};
+type ConnectionResult = InstagramNotice;
 
 const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
   dateStyle: 'medium',
@@ -867,14 +853,14 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                     </span>
                     <h2 id="connection-heading">
                       {!content.configured
-                        ? 'Stel je Instagram-koppeling in.'
+                        ? 'Eerst de verbinding bij Meta voorbereiden.'
                         : connected
                           ? 'Je account is gekoppeld.'
                           : 'Verbind Instagram één keer.'}
                     </h2>
                     <p>
                       {!content.configured
-                        ? 'Volg hieronder de vier stappen om je Meta-app in te stellen en @beurswatcher te verbinden. Je kunt intussen ook je Reel-selectie en titels aanpassen.'
+                        ? 'Er zijn nog geen bruikbare Meta-appgegevens beschikbaar. Alleen inloggen op Instagram is daarom nog niet genoeg. Hieronder staan de benodigde stappen en adressen. Kom je vast te zitten? Kopieer het hulpbericht, dan zie ik wat ontbreekt.'
                         : content.connection.message ||
                           (connected
                             ? 'De website kan nieuwe Reels van @beurswatcher ophalen.'
@@ -897,12 +883,12 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                           href="#instagram-setup"
                           className={styles.primaryButton}
                         >
-                          Begin met instellen
+                          Bekijk wat je moet doen
                           <ArrowDown size={16} aria-hidden="true" />
                         </a>
                         <p>
-                          Je selectie en titels blijven behouden, ook als je
-                          wijzigingen nog niet hebt opgeslagen.
+                          De bestaande video’s blijven staan. Nieuwe Reels komen
+                          pas automatisch binnen na een bevestigde koppeling.
                         </p>
                       </>
                     ) : (
@@ -960,6 +946,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                 </section>
 
                 <SetupPanel
+                  result={result}
                   configured={content.configured}
                   connected={connected}
                   busy={!!operation}

@@ -4,6 +4,7 @@ import { createClient } from '@libsql/client';
 import {
   InstagramProviderError,
   exchangeInstagramCode,
+  instagramAuthorizationNotice,
   instagramAuthorizeUrl,
   refreshInstagramToken,
 } from './lib/instagram-provider.ts';
@@ -205,6 +206,156 @@ const connectionRecord = (extra = {}) => ({
   expiresAt: NOW + 10 * DAY,
   refreshedAt: NOW - 2 * DAY,
   ...extra,
+});
+
+await test('authorization errors distinguish cancellation from setup, permission and provider failures', () => {
+  for (const [query, expected] of [
+    ['code=valid-code', null],
+    ['error=access_denied&error_reason=user_denied', 'cancelled'],
+    ['error=access_denied', 'cancelled'],
+    ['error=access_denied&error_reason=other', 'provider-error'],
+    ['error=invalid_client', 'app-configuration'],
+    ['error=redirect_uri_mismatch', 'app-configuration'],
+    ['error=invalid_redirect_uri', 'app-configuration'],
+    ['error=unauthorized_client', 'app-configuration'],
+    ['error=invalid_scope', 'permission-required'],
+    ['error=insufficient_scope', 'permission-required'],
+    ['error=temporarily_unavailable', 'provider-unavailable'],
+    ['error=server_error', 'provider-unavailable'],
+    ['error=unexpected', 'provider-error'],
+    ['error=', 'provider-error'],
+    ['error=access_denied&error=invalid_client', 'provider-error'],
+    [
+      'error=access_denied&error_reason=user_denied&error_reason=other',
+      'provider-error',
+    ],
+    [
+      `error=${encodeURIComponent(SENSITIVE)}&error_description=invalid_client`,
+      'provider-error',
+    ],
+    [
+      'error=OAuthException&error_description=insufficient_scope',
+      'provider-error',
+    ],
+  ]) {
+    assert.equal(
+      instagramAuthorizationNotice(new URLSearchParams(query)),
+      expected,
+    );
+  }
+});
+
+await test('provider diagnostics preserve only safe categories, never upstream details', async (t) => {
+  for (const [name, response, reason, reconnect = false] of [
+    [
+      'invalid OAuth client',
+      {
+        status: 400,
+        body: { error: 'invalid_client', error_description: SENSITIVE },
+      },
+      'app-configuration',
+    ],
+    [
+      'flat OAuth error',
+      {
+        status: 400,
+        body: {
+          error_type: 'OAuthException',
+          code: 400,
+          error_message: SENSITIVE,
+        },
+      },
+      'provider-error',
+    ],
+    [
+      'generic OAuth error cannot establish bad credentials',
+      {
+        status: 400,
+        body: {
+          error: { type: 'OAuthException', code: 100, message: SENSITIVE },
+        },
+      },
+      'provider-error',
+    ],
+    [
+      'permission error',
+      { status: 403, body: { error: { code: 10, message: SENSITIVE } } },
+      'permission-required',
+    ],
+    [
+      'extended permission error',
+      { status: 400, body: { error: { code: 200, message: SENSITIVE } } },
+      'permission-required',
+    ],
+    [
+      'token revoked or expired',
+      { status: 400, body: { error: { code: 190, message: SENSITIVE } } },
+      'provider-error',
+      true,
+    ],
+    [
+      'rate limited',
+      { status: 429, raw: 'provider-gateway-private-detail' },
+      'provider-unavailable',
+    ],
+    [
+      'provider unavailable with invalid JSON',
+      { status: 503, raw: SENSITIVE },
+      'provider-unavailable',
+    ],
+    [
+      'transient Graph API error',
+      { status: 400, body: { error: { code: 2, message: SENSITIVE } } },
+      'provider-unavailable',
+    ],
+    [
+      'explicit transient flag',
+      {
+        status: 400,
+        body: { error: { code: 999, is_transient: true, message: SENSITIVE } },
+      },
+      'provider-unavailable',
+    ],
+    ['network failure', { networkError: SENSITIVE }, 'provider-unavailable'],
+    ['malformed success', { status: 200, raw: SENSITIVE }, 'provider-error'],
+    [
+      'error payload with success status',
+      {
+        status: 200,
+        body: { error: 'invalid_scope', error_description: SENSITIVE },
+      },
+      'permission-required',
+    ],
+    [
+      'missing granted permission',
+      ok(shortResponse({ permissions: [] })),
+      'permission-required',
+      true,
+    ],
+  ]) {
+    await t.test(name, async () => {
+      await withFetch([response], async () => {
+        await assert.rejects(
+          () => exchangeInstagramCode(config, 'code'),
+          (error) => {
+            assert.ok(error instanceof InstagramProviderError);
+            assert.equal(error.reason, reason);
+            assert.equal(error.reconnect, reconnect);
+            const exposed = `${error.message}\n${error.stack}\n${JSON.stringify(error)}`;
+            for (const secret of [
+              SENSITIVE,
+              SHORT_TOKEN,
+              LONG_TOKEN,
+              config.appSecret,
+            ])
+              assert.equal(exposed.includes(secret), false);
+            assert.equal(error.cause, undefined);
+            return true;
+          },
+        );
+      });
+    });
+  }
 });
 
 await test('authorization requests only read permission and preserves callback/state', () => {
