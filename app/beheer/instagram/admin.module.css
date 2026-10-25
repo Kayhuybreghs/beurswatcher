@@ -12,6 +12,32 @@
   max-width: 1120px;
   margin: 0 auto;
 }
+.connectionNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 22px;
+}
+.connectionNav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #cbd9e8;
+  border-radius: 9px;
+  background: #fff;
+  color: #214c77;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.connectionNav a:hover {
+  background: #eaf1f9;
+}
+.connectionNav a:focus-visible {
+  outline: 3px solid #cda800;
+  outline-offset: 3px;
+}
 .header {
   display: flex;
   align-items: center;

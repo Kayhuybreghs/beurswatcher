@@ -14,12 +14,12 @@ const failures = {
   'setup-unavailable': {
     status: 503,
     error:
-      'De website kan de appinstellingen nu niet gebruiken. Klik op Instellingen controleren. Ontbreken de appgegevens? Vul die eerst in. Zijn ze al opgeslagen? Kopieer het hulpbericht; verander ze niet op goed geluk.',
+      'De website kan de appinstellingen nu niet gebruiken. Klik op Instellingen controleren. Ontbreken de appgegevens? Vul die eerst in. Zijn ze al opgeslagen? Stuur mij een screenshot zonder geheime gegevens of adresbalk; verander ze niet op goed geluk.',
   },
   'start-unavailable': {
     status: 503,
     error:
-      'De website kon de verbinding niet starten. Instagram is nog niet geopend. Probeer opnieuw vanaf deze pagina of kopieer het hulpbericht. Je appgegevens en Reel-selectie blijven bewaard.',
+      'De website kon de verbinding niet starten. Instagram is nog niet geopend. Probeer opnieuw vanaf deze pagina of stuur mij een screenshot zonder geheime gegevens of adresbalk. Je appgegevens en Reel-selectie blijven bewaard.',
   },
 } as const;
 
@@ -38,5 +38,5 @@ export function instagramConnectErrorMessage(status: number, body: unknown) {
       if (known.status === status) return known.error;
     }
   }
-  return 'Instagram openen is niet gelukt. De oorzaak is nog niet vastgesteld. Probeer opnieuw vanaf deze pagina of kopieer het hulpbericht; verander je appgegevens niet op goed geluk.';
+  return 'Instagram openen is niet gelukt. De oorzaak is nog niet vastgesteld. Probeer opnieuw vanaf deze pagina of stuur mij een screenshot zonder geheime gegevens of adresbalk; verander je appgegevens niet op goed geluk.';
 }

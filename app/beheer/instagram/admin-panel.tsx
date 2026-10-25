@@ -23,6 +23,7 @@ import {
 import { BrandMark } from '../../brand';
 import type { Reel } from '../../reel-data';
 import SetupPanel from './setup-panel';
+import { SearchConsoleHelp } from './search-console-help';
 import { instagramCallbackMessages as callbackMessages } from '../../instagram-notice-messages';
 import { instagramConnectErrorMessage } from '../../instagram-connect-errors';
 import type { InstagramNotice } from '../../../lib/instagram-security';
@@ -839,6 +840,15 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
               </section>
             ) : (
               <>
+                <nav
+                  className={styles.connectionNav}
+                  aria-label="Instagram koppelingen"
+                >
+                  <a href="#instagram-setup">Reels op de website</a>
+                  <a href="#google-search-console">
+                    Instagram in Google Search Console
+                  </a>
+                </nav>
                 <section
                   className={styles.connectionCard}
                   aria-labelledby="connection-heading"
@@ -867,7 +877,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                     </h2>
                     <p>
                       {!content.configured
-                        ? 'Er zijn nog geen bruikbare Meta-appgegevens beschikbaar. Alleen inloggen op Instagram is daarom nog niet genoeg. Hieronder staan de benodigde stappen en adressen. Kom je vast te zitten? Kopieer het hulpbericht, dan zie ik wat ontbreekt.'
+                        ? 'Er zijn nog geen bruikbare Meta-appgegevens beschikbaar. Alleen inloggen op Instagram is daarom nog niet genoeg. Hieronder staan de benodigde stappen en adressen. Lukt iets niet? Maak een screenshot zonder geheime gegevens en stuur die naar mij.'
                         : content.connection.message ||
                           (connected
                             ? 'De website kan nieuwe Reels van @beurswatcher ophalen.'
@@ -963,6 +973,8 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                   onCheck={checkSetup}
                   onConnect={connect}
                 />
+
+                <SearchConsoleHelp />
 
                 <section
                   className={styles.selectionSection}

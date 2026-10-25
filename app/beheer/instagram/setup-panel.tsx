@@ -436,7 +436,7 @@ export default function SetupPanel({
                     ? connected
                       ? 'Deze gegevens zijn gebruikt voor de bevestigde verbinding.'
                       : 'De toestemming bij Instagram moet nog bevestigen of de gegevens werken.'
-                    : 'Doorloop stap 1 tot en met 5, of kopieer hieronder het hulpbericht.'}
+                    : 'Doorloop stap 1 tot en met 5. Lukt iets niet? Stuur mij een screenshot zonder geheime gegevens.'}
                 </small>
               </div>
             </li>
@@ -805,13 +805,7 @@ export default function SetupPanel({
             </section>
           ))}
         </div>
-        <SetupHelp
-          step={stepTitles[step]}
-          configured={ready}
-          connected={connected}
-          setupAvailable={setup?.available ?? null}
-          result={result}
-        />
+        <SetupHelp />
       </div>
     </section>
   );
