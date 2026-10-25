@@ -232,7 +232,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
         );
         setFeedback({
           kind: 'error',
-          text: 'De pagina kon niet alles laden. Probeer het nog een keer. Lukt het niet? Laat het mij weten.',
+          text: 'De pagina kon niet alles laden. Controleer je internetverbinding en herlaad de pagina. Probeer het later opnieuw als deze melding terugkomt.',
         });
       }
     }
@@ -756,8 +756,9 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                 </p>
               )}
               <p className={styles.loginHelp}>
-                Geen code ontvangen of lukt het niet? Laat het mij weten, dan
-                help ik je.
+                Kopieer de persoonlijke toegangscode uit het bericht dat je bij
+                deze link hebt gekregen. Gebruik je Instagram-wachtwoord hier
+                niet.
               </p>
             </div>
           </section>
