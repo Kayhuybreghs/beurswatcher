@@ -12,15 +12,15 @@ export const instagramCallbackMessages: Partial<
   expired:
     'De aanvraag is verlopen. Start opnieuw vanaf deze beheerpagina; gebruik geen oude terugkeerlink.',
   'app-configuration':
-    'Meta accepteert de appinstellingen niet. Controleer het exacte terugkeeradres bij de website-adressen en de Instagram App ID en App Secret bij je appgegevens. Zie je niet wat afwijkt? Stuur mij een screenshot zonder geheime gegevens of adresbalk.',
+    'Meta accepteert de appinstellingen niet. Vergelijk het terugkeeradres in Meta met het adres bij stap 4. Controleer bij stap 5 of de Instagram App ID en App Secret uit dezelfde Meta-app komen. Sla een correctie op en probeer daarna opnieuw te verbinden.',
   'permission-required':
     'De benodigde toegang ontbreekt. Controleer of @beurswatcher aan de Meta-app is toegevoegd en accepteer een eventuele testeruitnodiging. Geef daarna opnieuw toestemming voor profiel en media.',
   'provider-unavailable':
     'Instagram is tijdelijk niet bereikbaar of beperkt het aantal aanvragen. Probeer later opnieuw. Je appgegevens en Reel-selectie hoef je niet opnieuw in te vullen.',
   'provider-error':
-    'Meta heeft de koppeling niet afgerond. De oorzaak is niet vastgesteld. Stuur mij een screenshot van de melding, zonder geheime gegevens of adresbalk.',
+    'Meta heeft de koppeling niet afgerond. De oorzaak is niet vastgesteld. Start opnieuw via Instagram verbinden op deze pagina, kies @beurswatcher en controleer de gevraagde toegang tot profiel en media.',
   error:
-    'De website kon de koppeling niet afronden. De oorzaak is nog niet vastgesteld. Stuur mij een screenshot zonder geheime gegevens of adresbalk; verander je appgegevens niet op goed geluk.',
+    'De website kon de koppeling niet afronden. De oorzaak is nog niet vastgesteld. Klik op Instellingen controleren en start daarna opnieuw via Instagram verbinden. Gebruik dezelfde browser en geen oude terugkeerlink.',
 };
 
 export const instagramHelpProblems = [
@@ -28,19 +28,19 @@ export const instagramHelpProblems = [
     id: 'not-sure',
     label: 'Ik weet niet waar het misgaat',
     advice:
-      'Begin bij de status bovenaan. Staat er dat appgegevens ontbreken? Doorloop eerst de instellingen bij Meta. Zijn de appgegevens opgeslagen? Ga naar Instagram verbinden. Weet je niet welk scherm je ziet? Stuur mij een screenshot zonder geheime gegevens of adresbalk.',
+      'Lees de status bovenaan. Ontbreken de appgegevens? Doorloop stap 1 tot en met 5. Zijn ze opgeslagen? Open stap 6 en klik op Instagram verbinden. Staat er Verbonden? Controleer de opgehaalde Reels en kies welke op de website mogen staan.',
   },
   {
     id: 'meta-login',
     label: 'Inloggen of registreren bij Meta lukt niet',
     advice:
-      'Open Meta for Developers in een gewone browser. Meta kan registratie, verificatie of tweestapsverificatie vragen. Rond dat bij Meta af met je eigen account. De toegangscode voor deze beheerpagina werkt niet bij Meta. Houdt Meta je tegen? Stuur mij een screenshot zonder geheime gegevens of adresbalk.',
+      'Open Meta for Developers in Chrome, Safari of Edge en log in met je eigen Facebook-account. Rond de registratie en eventuele telefoon-, e-mail- of tweestapsverificatie bij Meta af. Gebruik je Facebook-wachtwoord; de toegangscode voor deze beheerpagina hoort alleen bij Beurswatcher.',
   },
   {
     id: 'wrong-login',
     label: 'Ik zie alleen Facebook Login of Unified Login',
     advice:
-      'Controleer welke toepassing je hebt geopend. Deze website gebruikt Instagram API with Instagram Login. De gegevens van Facebook Login of Unified Login kun je hier niet zomaar invullen. Vind je de Instagram-route niet? Stuur mij een screenshot zonder geheime gegevens of adresbalk voordat je andere instellingen kiest.',
+      'Ga terug naar het overzicht van je Meta-app en open Instagram → API setup with Instagram login. Deze website gebruikt die route. Facebook Login en Unified Login gebruiken andere instellingen. Controleer de app-inrichting uit stap 2 voordat je appgegevens invult.',
   },
   {
     id: 'account-missing',
@@ -64,19 +64,19 @@ export const instagramHelpProblems = [
     id: 'connect-disabled',
     label: 'De knop Instagram verbinden is grijs',
     advice:
-      'Lees de tekst direct onder de knop. Sla eerst je appgegevens op en klik zo nodig op Instellingen controleren. Ook een nog ingevulde geheime sleutel of niet-opgeslagen Reel-selectie kan het openen tegenhouden. Sla die wijziging eerst bewust op of zet haar terug. Blijft de knop grijs? Stuur mij een screenshot zonder geheime gegevens of adresbalk.',
+      'Lees de tekst direct onder de knop. Sla eerst je appgegevens op en klik op Instellingen controleren. Staat er nog een geheime sleutel in het invulveld of heb je de Reel-selectie gewijzigd? Sla die wijziging op of zet haar terug. Controleer daarna opnieuw de tekst onder Instagram verbinden.',
   },
   {
     id: 'oauth-error',
     label: 'Instagram toont een fout tijdens het verbinden',
     advice:
-      'Begin opnieuw via Instagram verbinden op deze beheerpagina, in dezelfde browser. Gebruik geen oude terugkeerlink. Kies @beurswatcher en geef toegang tot profiel en media. De foutmelding bepaalt wat er misgaat; verander geen sleutels op goed geluk. Maak een screenshot van de foutmelding en stuur die naar mij. Laat geheime gegevens en de adresbalk buiten beeld.',
+      'Begin opnieuw via Instagram verbinden op deze beheerpagina, in dezelfde browser. Kies @beurswatcher en geef toegang tot profiel en media. Gaat de melding over een terugkeeradres? Controleer stap 4. Gaat ze over accounttoegang? Controleer bij stap 3 of het account is toegevoegd en de uitnodiging is geaccepteerd.',
   },
   {
     id: 'no-reels',
     label: 'Er staat verbonden, maar ik zie geen nieuwe Reels',
     advice:
-      'Klik op Verbinding controleren en bekijk de controledatum. Kies Nieuwste Reels automatisch als nieuwe video’s vanzelf moeten verschijnen; bij Zelf kiezen moet je ze selecteren en opslaan. Alleen beschikbare video’s worden opgehaald. Blijven recente Reels ontbreken? Stuur mij een screenshot zonder geheime gegevens of adresbalk. Je hoeft niet opnieuw appgegevens in te vullen.',
+      'Klik op Verbinding controleren en bekijk de controledatum en gebruikersnaam. Kies Nieuwste Reels automatisch als nieuwe video’s vanzelf moeten verschijnen. Bij Zelf kiezen selecteer je de video’s en sla je ze op. Herlaad daarna de website. Alleen beschikbare video’s worden opgehaald; je appgegevens hoef je hiervoor niet opnieuw in te vullen.',
   },
 ] as const;
 

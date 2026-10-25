@@ -15,20 +15,12 @@ export function SetupHelp() {
       id="instagram-hulp"
       aria-labelledby="instagram-help-title"
     >
-      <h3 id="instagram-help-title">
-        Lukt iets niet? Stuur mij een screenshot.
-      </h3>
-      <p>
-        Maak een screenshot van het scherm waar je vastloopt en stuur die naar
-        mij. Zet er kort bij wat je probeert te doen. Dan kijk ik met je mee.
-      </p>
-      <small>
-        Laat je wachtwoord, App Secret, toegangscode, tokens en de adresbalk
-        buiten beeld.
-      </small>
+      <h3 id="instagram-help-title">Meldingen tijdens het koppelen</h3>
       <details className={styles.help}>
-        <summary>Eerst zelf kijken? Kies wat je op het scherm ziet.</summary>
-        <label htmlFor="instagram-help-problem">Waar loop je vast?</label>
+        <summary>Bekijk wat je bij een melding moet controleren</summary>
+        <label htmlFor="instagram-help-problem">
+          Wat zie je op het scherm?
+        </label>
         <select
           id="instagram-help-problem"
           className={styles.helpSelect}

@@ -109,8 +109,9 @@ export function SetupWalkthrough({
           <p className={styles.notice}>
             <strong>Zie je alleen ‘Unified Login’ of ‘Facebook Login’?</strong>{' '}
             Deze routes gebruiken andere instellingen. Vul daarvoor geen
-            willekeurige appgegevens in. Kies onderaan bij hulp het scherm dat
-            je ziet, zodat je mij gericht kunt laten meekijken.
+            appgegevens in. Open het Instagram-product in je app en controleer
+            of je ‘API setup with Instagram login’ kunt kiezen. Ontbreekt die
+            optie, dan kun je met die app deze stappen niet afronden.
           </p>
           <details className={styles.help}>
             <summary>
@@ -166,8 +167,8 @@ export function SetupWalkthrough({
           </ol>
           <p className={styles.notice}>
             Zie je <strong>Generate token / Token genereren</strong>? Je hoeft
-            geen toegangstoken naar mij te sturen of op deze website te plakken.
-            De website haalt het token zelf op nadat jij in de laatste stap
+            geen toegangstoken te kopiëren of op deze website te plakken. De
+            website haalt het token zelf op nadat jij in de laatste stap
             toestemming geeft.
           </p>
           <details className={styles.help}>
@@ -178,8 +179,8 @@ export function SetupWalkthrough({
               Controleer eerst de gebruikersnaam, het professionele accounttype
               en of je de uitnodiging in hetzelfde Instagram-account hebt
               geaccepteerd. De website kan deze Meta-instellingen nog niet voor
-              je controleren. Kies hieronder bij hulp ‘Mijn account of
-              uitnodiging ontbreekt’ als je het juiste scherm niet kunt vinden.
+              je controleren. Ga terug naar de accountrollen in je Meta-app en
+              kijk of de uitnodiging nog op ‘Pending / In afwachting’ staat.
             </p>
           </details>
           <div className={styles.outcome}>

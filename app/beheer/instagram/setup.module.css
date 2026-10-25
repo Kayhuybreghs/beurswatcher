@@ -212,6 +212,61 @@
 .instructions li + li {
   margin-top: 15px;
 }
+.guideSteps {
+  counter-reset: connect-step;
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 22px;
+}
+.guideSteps > li {
+  counter-increment: connect-step;
+  position: relative;
+  padding: 22px 0 22px 45px;
+  border-bottom: 1px solid #e0e8f0;
+}
+.guideSteps > li::before {
+  content: counter(connect-step);
+  position: absolute;
+  top: 21px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #0b315f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.guideSteps h3,
+.guideNote h3 {
+  margin: 0 0 8px;
+  color: #153d67;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.guideSteps p,
+.guideNote p {
+  max-width: 75ch;
+  margin: 0;
+  color: #4c6886;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.guideNote {
+  padding: 18px;
+  border-radius: 10px;
+  background: #f0f5fa;
+}
+.guideNote p + p {
+  margin-top: 12px;
+}
+.guideNote a {
+  color: #153d67;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .outcome {
   margin: 20px 0 12px;
   padding: 14px 16px;

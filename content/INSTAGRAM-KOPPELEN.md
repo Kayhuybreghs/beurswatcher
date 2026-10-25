@@ -2,7 +2,7 @@
 
 ## Voor Daniel
 
-De vaste, afgeschermde ingang is **https://www.beurswatcher.nl/beheer/instagram**, met een afzonderlijke toegangscode. De hulptekst spreekt rechtstreeks vanuit mij: **“Lukt iets niet? Maak een screenshot en stuur die naar mij.”**
+De vaste, afgeschermde ingang is **https://www.beurswatcher.nl/beheer/instagram**, met een afzonderlijke toegangscode. De pagina legt per stap uit waar je moet zijn, welke gegevens je invult en hoe je controleert of de stap klaar is.
 
 Daniel kan op deze pagina de eenmalige Meta-inrichting doorlopen, de verbinding controleren, automatisch de nieuwste zes Reels tonen of zelf maximaal zes kiezen, zijn selectie ordenen en de kaarttitels aanpassen. Wijzigingen gelden pas na opslaan. Een lege handmatige selectie verbergt de Reel-sectie. De oorspronkelijke Instagram-posts veranderen niet; dit is geen algemeen CMS.
 
@@ -14,7 +14,7 @@ De beheerpagina kan vóór de Meta-koppeling al de bestaande echte Reel-selectie
 
 ### Korte uitleg om Daniel te sturen
 
-Hoi Daniel, open https://www.beurswatcher.nl/beheer/instagram op je laptop en log in met de toegangscode die je hebt gekregen. Houd deze pagina open naast Meta. De uitleg bestaat uit zes stappen: je accounts controleren, de juiste Meta-app openen of maken, @beurswatcher toevoegen, de website-adressen invullen, twee appgegevens veilig opslaan en Instagram verbinden. Je Facebook-account gebruik je voor Meta Developers; bij de Instagram-toestemming log je in als @beurswatcher. Lukt iets niet? Maak een screenshot en stuur die naar mij. Zorg dat wachtwoorden, App Secret, tokens, toegangscode en de adresbalk niet zichtbaar zijn.
+Hoi Daniel, open https://www.beurswatcher.nl/beheer/instagram op je laptop en log in met de toegangscode die je hebt gekregen. Houd deze pagina open naast Meta. Volg de zes stappen hieronder. Je Facebook-account gebruik je voor Meta Developers; bij de Instagram-toestemming log je in als @beurswatcher. Google Search Console heeft een apart stappenplan onderaan: daarvoor gebruik je je eigen Google-account.
 
 **Eerlijke status:** de beheerpagina en veilige opslag zijn voorbereid. De actuele beheerstatus moet uitwijzen wat al is opgeslagen en of @beurswatcher echt verbonden is. Een opgeslagen App ID is geen bewijs van een geslaagde verbinding. De pagina toont deze statussen afzonderlijk. Zonder het Meta-scherm of een concrete foutmelding is niet vastgesteld waarom Daniel vastloopt.
 
@@ -36,13 +36,13 @@ De officiële Instagram-apphandleiding beschrijft **Other / Overig → Business 
 
 Vraagt de wizard om een businessportfolio, dan documenteert Meta ook **I don’t want to connect a business portfolio yet**. Kies een bestaand portfolio alleen als het werkelijk van jou is en je het bewust wilt gebruiken. Voor de eigen-account-route is een portfolio niet door de Instagram Login-flow vereist.
 
-**Zie je alleen Unified Login of Facebook Login?** Vul de gegevens daarvan niet op goed geluk in. De bestaande website gebruikt **Instagram API with Instagram Login**. Meta beveelt inmiddels Unified Login aan voor nieuwe integraties, maar die route gebruikt andere permissies, tokens en een andere API-host en vereist een businessportfolio. De officiële apphandleiding beschrijft nog steeds hoe Instagram Login aan een nieuwe app wordt toegevoegd; dat bewijst niet welke wizardvariant jouw account te zien krijgt. Maak bij een afwijkend scherm een screenshot en stuur die naar mij. Verberg geheime velden en de adresbalk.
+**Zie je alleen Unified Login of Facebook Login?** Ga terug naar het appoverzicht en zoek het product **Instagram**, met **API setup with Instagram login**. De bestaande website gebruikt **Instagram API with Instagram Login**. Meta beveelt inmiddels Unified Login aan voor nieuwe integraties, maar die route gebruikt andere permissies, tokens en een andere API-host en vereist een businessportfolio. De officiële apphandleiding beschrijft nog steeds hoe Instagram Login aan een nieuwe app wordt toegevoegd; dat bewijst niet welke wizardvariant jouw account te zien krijgt. Controleer deze app-inrichting voordat je de appgegevens invult.
 
 #### 3. Voeg @beurswatcher toe en accepteer een eventuele uitnodiging
 
 Open in de app **Instagram → API setup with Instagram login** en voeg het Instagram-account toe. Meta noemt ook **App Roles → Roles** als plaats om accounts toe te voegen of te verwijderen. Meld je in het Instagram-venster aan met @beurswatcher. De officiële handleiding vereist dat het toegevoegde testaccount openbaar is.
 
-Krijg je een testeruitnodiging of blijft die op **Pending / In afwachting** staan, accepteer de uitnodiging dan vanuit het juiste Instagram-account. Alleen uitnodigen is niet voldoende. Zoek in Instagram naar **Apps en websites** en eventuele **Testeruitnodigingen / Tester invites**. Dit is een herkenningshulp: het exacte huidige Instagram-menupad is niet bevestigd en kan verschillen tussen telefoon en browser. Staat er geen uitnodiging, stuur dan de exacte melding naar mij; ga niet andere accounts uitnodigen of rollen verwijderen om te proberen.
+Krijg je een testeruitnodiging of blijft die op **Pending / In afwachting** staan, accepteer de uitnodiging dan vanuit het juiste Instagram-account. Alleen uitnodigen is niet voldoende. Zoek in Instagram naar **Apps en websites** en eventuele **Testeruitnodigingen / Tester invites**. Dit is een herkenningshulp: het exacte huidige Instagram-menupad is niet bevestigd en kan verschillen tussen telefoon en browser. Staat er geen uitnodiging, controleer dan in Meta of die aan @beurswatcher is verstuurd en of je op Instagram bij datzelfde account bent ingelogd. Volg de aanwijzingen bij de uitnodiging in Meta.
 
 Voor eigen/beheerde professionele accounts die aan de app zijn toegevoegd, noemt Meta **Standard Access** als voldoende. In Development mode kunnen gebruikers met een passende approl toestemming geven. **Advanced Access, App Review en bedrijfsverificatie zijn niet standaard een stap voor deze ene eigen accountverbinding.** Zet de app niet willekeurig op Live om een foutmelding te verhelpen. Voor toegang van andere accounts zonder passende rol gelden aanvullende eisen. Een app publiceren bij Meta en de Beurswatcher-website publiceren zijn verschillende dingen.
 
@@ -58,13 +58,13 @@ Open **Instagram → API setup with Instagram login → Set up Instagram busines
 
 Neem de OAuth-URL exact over: met `https://www.`, het volledige pad en zonder extra slash of spatie. Meta vermeldt dat het dashboard soms een slash toevoegt; controleer de opgeslagen waarde.
 
-**Niet alle velden met “callback” zijn hetzelfde.** Plak het OAuth-adres niet in **Webhooks Callback URL**, **Deauthorize Callback URL** of een technische **Data Deletion Callback**. De privacysectie is een pagina met verwijderinstructies; kies daarvoor de instructie-URL-optie, niet een technische callback. Deze website haalt Reels zelf op en gebruikt daarvoor geen webhook. Een scherm met **Verify token**, **Generate token**, berichten of publicatierechten hoef je voor deze koppeling niet uit te voeren. Blokkeert Meta het opslaan op zo'n veld, maak dan een screenshot van de veldnaam en foutmelding en stuur die naar mij. Verberg geheime velden en de adresbalk; verzin geen waarden.
+**Niet alle velden met “callback” zijn hetzelfde.** Plak het OAuth-adres niet in **Webhooks Callback URL**, **Deauthorize Callback URL** of een technische **Data Deletion Callback**. De privacysectie is een pagina met verwijderinstructies; kies daarvoor de instructie-URL-optie, niet een technische callback. Deze website haalt Reels zelf op en gebruikt daarvoor geen webhook. Een scherm met **Verify token**, **Generate token**, berichten of publicatierechten hoef je voor deze koppeling niet uit te voeren. Ga vanuit zo'n scherm terug naar **Business login settings** en zoek **Redirect URL / OAuth Redirect URI**. Vul alleen de velden uit de tabel in.
 
 #### 5. Sla de twee Instagram-appgegevens veilig op
 
 Zoek in **Instagram → API setup with Instagram login → Set up Instagram business login → Business login settings** naar **Instagram App ID** en **Instagram App Secret**. Kopieer deze naar de twee velden op https://www.beurswatcher.nl/beheer/instagram en sla ze daar op.
 
-Gebruik niet de algemene Facebook App ID/Secret uit **App settings → Basic**, je Instagram-wachtwoord of een gegenereerd access token. Beide Instagram-appgegevens moeten uit dezelfde Meta-app komen. Stuur het App Secret niet via WhatsApp, e-mail of een screenshot naar mij. De beveiligde beheerpagina slaat het geheim versleuteld op en stuurt het niet terug naar de browser. Daniel heeft hiervoor geen Vercel-toegang nodig; opnieuw publiceren is niet nodig.
+Gebruik niet de algemene Facebook App ID/Secret uit **App settings → Basic**, je Instagram-wachtwoord of een gegenereerd access token. Beide Instagram-appgegevens moeten uit dezelfde Meta-app komen. Vul het App Secret alleen in het beveiligde veld op de beheerpagina in. De beveiligde beheerpagina slaat het geheim versleuteld op en stuurt het niet terug naar de browser. Daniel heeft hiervoor geen Vercel-toegang nodig; opnieuw publiceren is niet nodig.
 
 **Appgegevens opgeslagen** betekent uitsluitend dat de website de instellingen heeft opgeslagen. Het bevestigt niet dat Meta ze accepteert of dat Instagram al gekoppeld is.
 
@@ -74,11 +74,11 @@ Klik op de Beurswatcher-beheerpagina op **Instagram verbinden**. Meld je aan als
 
 Laat Instagram terugkeren naar de beheerpagina. Controleer daar de echte verbindingsstatus, de juiste gebruikersnaam en het moment van de controle. Controleer vervolgens dat recente Reels van dit account zijn opgehaald en op de website afspelen. De zes bestaande handmatig gekozen video's zijn op zichzelf geen bewijs van een werkende automatische feed.
 
-Blijft de pagina op **Koppeling nog niet ingesteld**, **Niet verbonden** of een foutmelding staan, dan is het niet afgerond. Maak een screenshot van de stap of melding waar je vastloopt en stuur die naar mij. Verberg wachtwoorden, App Secret, tokens, toegangscode en de adresbalk. Een OAuth-adresbalk kan tijdelijke codes bevatten. Keer na een verlopen poging terug naar de beheerpagina en start daar opnieuw; hergebruik geen oude toestemmings- of callbacklink.
+Blijft de pagina op **Koppeling nog niet ingesteld**, **Niet verbonden** of een foutmelding staan, dan is het niet afgerond. Klik op **Instellingen controleren**. Ontbreken de appgegevens, rond dan stap 5 af. Gaat de melding over het terugkeeradres, vergelijk dat met stap 4. Ontbreekt accounttoegang, controleer dan de accountrol en uitnodiging uit stap 3. Start na een verlopen poging opnieuw via **Instagram verbinden** op de beheerpagina; hergebruik geen oude toestemmings- of callbacklink.
 
 ### Hulp en grenzen
 
-Na een mislukte verbinding opent de uitleg automatisch. Veilige foutcategorieën maken onderscheid tussen appconfiguratie, ontbrekende toestemming, tijdelijke onbeschikbaarheid en een onbekende oorzaak. Alleen een herkenbare weigering geldt als annulering. De hulpkaart vraagt om een screenshot naar mij; aanvullende hulp kan worden opengeklapt. Geheime velden en de adresbalk moeten buiten beeld blijven. Daniel verstuurt de screenshot zelf; de website verstuurt geen berichten en uploadt geen screenshots.
+Na een mislukte verbinding opent de uitleg automatisch. Veilige foutcategorieën maken onderscheid tussen appconfiguratie, ontbrekende toestemming, tijdelijke onbeschikbaarheid en een onbekende oorzaak. Alleen een herkenbare weigering geldt als annulering. De meldingen geven concrete controles of verwijzen terug naar de betreffende stap. Een tijdelijke of onbekende fout is geen reden om appgegevens te vervangen. De website toont geen ruwe foutmeldingen van Meta met mogelijke codes of geheime gegevens.
 
 De website kan geen Meta-account of Meta-app namens Daniel aanmaken, Meta-formulieren overslaan of goedkeuring garanderen. Eventuele approllen, testeruitnodigingen en controles worden op Meta zelf afgehandeld. Een reeds actieve verbinding kan niet via het instellingenformulier naar een andere app worden omgezet. Vervanging van opgeslagen appgegevens vóór activering vraagt expliciete bevestiging.
 

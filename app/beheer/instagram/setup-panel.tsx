@@ -436,7 +436,7 @@ export default function SetupPanel({
                     ? connected
                       ? 'Deze gegevens zijn gebruikt voor de bevestigde verbinding.'
                       : 'De toestemming bij Instagram moet nog bevestigen of de gegevens werken.'
-                    : 'Doorloop stap 1 tot en met 5. Lukt iets niet? Stuur mij een screenshot zonder geheime gegevens.'}
+                    : 'Maak de Meta-app aan en sla de appgegevens op. Hoe dat werkt, staat hieronder in stap 1 tot en met 5.'}
                 </small>
               </div>
             </li>
@@ -460,8 +460,8 @@ export default function SetupPanel({
         {!ready && !connected && (
           <div className={styles.startChoice}>
             <p>
-              <strong>Waar wil je beginnen?</strong> Je hoeft geen gegevens te
-              raden.
+              <strong>Begin bij stap 1.</strong> Heb je de Instagram App ID en
+              App Secret al? Ga dan direct naar stap 5.
             </p>
             <div>
               <button type="button" onClick={() => chooseStep(0)}>
@@ -470,7 +470,6 @@ export default function SetupPanel({
               <button type="button" onClick={() => chooseStep(4)}>
                 Ik heb al appgegevens
               </button>
-              <a href="#instagram-hulp">Ik wil hulp bij het instellen</a>
             </div>
           </div>
         )}
@@ -784,9 +783,8 @@ export default function SetupPanel({
                         Begin opnieuw met de knop op deze pagina. De
                         toestemmingsaanvraag is tien minuten geldig en hoort bij
                         de browser waarin je begon. Gebruik geen oude
-                        terugkeerlink. Staat er een foutmelding? Kies onderaan
-                        het bijpassende vastlooppunt; de uitleg vertelt wat je
-                        kunt controleren.
+                        terugkeerlink. Bij ‘Meldingen tijdens het koppelen’
+                        onderaan vind je per melding wat je moet controleren.
                       </p>
                     </details>
                     {!ready && (

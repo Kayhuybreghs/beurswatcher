@@ -877,11 +877,11 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                     </h2>
                     <p>
                       {!content.configured
-                        ? 'Er zijn nog geen bruikbare Meta-appgegevens beschikbaar. Alleen inloggen op Instagram is daarom nog niet genoeg. Hieronder staan de benodigde stappen en adressen. Lukt iets niet? Maak een screenshot zonder geheime gegevens en stuur die naar mij.'
+                        ? 'Om Reels op de website te tonen, moet je eerst bij Meta een app instellen. Daarna verbind je @beurswatcher. Het stappenplan hieronder legt uit waar je moet klikken en wat je invult.'
                         : content.connection.message ||
                           (connected
                             ? 'De website kan nieuwe Reels van @beurswatcher ophalen.'
-                            : 'Log in bij Instagram en geef toegang tot je profiel en video’s. Je hoeft je wachtwoord niet met mij te delen.')}
+                            : 'Log in bij Instagram en geef toegang tot je profiel en video’s. Je vult je Instagram-wachtwoord alleen bij Instagram in.')}
                     </p>
                     <div className={styles.connectionDates}>
                       {checkedAt && (
