@@ -24,6 +24,7 @@ import { BrandMark } from '../../brand';
 import type { Reel } from '../../reel-data';
 import SetupPanel from './setup-panel';
 import { instagramCallbackMessages as callbackMessages } from '../../instagram-notice-messages';
+import { instagramConnectErrorMessage } from '../../instagram-connect-errors';
 import type { InstagramNotice } from '../../../lib/instagram-security';
 import styles from './admin.module.css';
 
@@ -543,8 +544,14 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
       );
       if (!response) return;
       const data: unknown = await response.json();
+      if (!response.ok) {
+        setFeedback({
+          kind: 'error',
+          text: instagramConnectErrorMessage(response.status, data),
+        });
+        return;
+      }
       if (
-        !response.ok ||
         !data ||
         typeof data !== 'object' ||
         !('url' in data) ||
@@ -563,7 +570,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
     } catch {
       setFeedback({
         kind: 'error',
-        text: 'Instagram openen lukt nu niet. Probeer het later opnieuw of laat het mij weten.',
+        text: instagramConnectErrorMessage(0, null),
       });
     } finally {
       finish();

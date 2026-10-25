@@ -212,6 +212,53 @@
 .instructions li + li {
   margin-top: 15px;
 }
+.outcome {
+  margin: 20px 0 12px;
+  padding: 14px 16px;
+  border: 1px solid #ccdae9;
+  border-radius: 9px;
+  background: #f1f6fb;
+  color: #456380;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.outcome strong {
+  display: block;
+  margin-bottom: 4px;
+}
+.actionLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin: 16px 0;
+}
+.actionLinks .next {
+  margin-top: 0;
+}
+.helpSelect {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 10px 32px 10px 12px;
+  border: 1px solid #b5c9df;
+  border-radius: 8px;
+  background: #fff;
+  color: #153d67;
+  font: inherit;
+  font-size: 16px;
+}
+.helpAdvice {
+  margin: 12px 0 20px;
+  padding: 14px 16px;
+  border-left: 3px solid #cda800;
+  background: #fff;
+  border-radius: 0 8px 8px 0;
+  color: #315478;
+  font-size: 13px;
+  line-height: 1.8;
+}
 .support {
   scroll-margin-top: 24px;
   margin-top: 24px;
@@ -501,7 +548,7 @@
 .panel button:disabled {
   cursor: not-allowed;
 }
-.panel :is(button, a, input, textarea, summary):focus-visible {
+.panel :is(button, a, input, textarea, select, summary):focus-visible {
   outline: 3px solid #cda800;
   outline-offset: 3px;
 }

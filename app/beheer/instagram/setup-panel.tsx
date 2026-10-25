@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import styles from './setup.module.css';
 import { SetupHelp } from './setup-help';
+import { SetupWalkthrough } from './setup-walkthrough';
 import type { InstagramNotice } from '../../../lib/instagram-security';
 
 type Setup = {
@@ -60,10 +61,12 @@ function isSetup(value: unknown): value is Setup {
 }
 
 const stepTitles = [
-  'Maak of open de Meta-app',
-  'Plak de drie website-adressen',
-  'Kopieer je twee appgegevens',
-  'Verbind @beurswatcher',
+  'Begin met je browser en accounts',
+  'Maak of open de Instagram-app bij Meta',
+  'Voeg @beurswatcher toe aan de app',
+  'Vul de website-adressen bij Meta in',
+  'Sla je Instagram-appgegevens hier op',
+  'Geef toestemming en controleer je Reels',
 ];
 
 function CopyField({
@@ -130,11 +133,11 @@ export default function SetupPanel({
   );
   const [step, setStep] = useState(
     result === 'app-configuration'
-      ? 1
+      ? 3
       : result === 'permission-required'
-        ? 0
+        ? 2
         : configured
-          ? 3
+          ? 5
           : 0,
   );
   const [setup, setSetup] = useState<Setup | null>(null);
@@ -318,7 +321,7 @@ export default function SetupPanel({
       edited.current = false;
       setConfirmChange(false);
       setSessionExpired(false);
-      chooseStep(3);
+      chooseStep(5);
       setFeedback({
         kind: 'success',
         text: 'Je appgegevens zijn opgeslagen en het geheime veld is leeggemaakt. Geef nu toestemming in Instagram. Pas daarna kan de verbinding worden bevestigd.',
@@ -433,7 +436,7 @@ export default function SetupPanel({
                     ? connected
                       ? 'Deze gegevens zijn gebruikt voor de bevestigde verbinding.'
                       : 'De toestemming bij Instagram moet nog bevestigen of de gegevens werken.'
-                    : 'Doorloop stap 1 tot en met 3, of kopieer hieronder het hulpbericht.'}
+                    : 'Doorloop stap 1 tot en met 5, of kopieer hieronder het hulpbericht.'}
                 </small>
               </div>
             </li>
@@ -462,9 +465,9 @@ export default function SetupPanel({
             </p>
             <div>
               <button type="button" onClick={() => chooseStep(0)}>
-                Ik heb nog geen Meta-app
+                Begin bij de voorbereiding
               </button>
-              <button type="button" onClick={() => chooseStep(2)}>
+              <button type="button" onClick={() => chooseStep(4)}>
                 Ik heb al appgegevens
               </button>
               <a href="#instagram-hulp">Ik wil hulp bij het instellen</a>
@@ -486,8 +489,8 @@ export default function SetupPanel({
                   aria-controls={`setup-stap-${index}`}
                 >
                   <span className={styles.number}>
-                    {(index === 2 && setup?.configured) ||
-                    (index === 3 && connected) ? (
+                    {(index === 4 && setup?.configured) ||
+                    (index === 5 && connected) ? (
                       <Check size={16} aria-label="Gereed" />
                     ) : (
                       String(index + 1).padStart(2, '0')
@@ -502,108 +505,28 @@ export default function SetupPanel({
                 id={`setup-stap-${index}`}
                 hidden={step !== index}
               >
-                {index === 0 && (
-                  <>
-                    <p>
-                      Meta is het bedrijf achter Instagram. De Meta-app geeft
-                      deze website toestemming om je Reels op te halen; je hoeft
-                      hiervoor geen app op je telefoon te installeren.
-                    </p>
-                    <ol className={styles.instructions}>
-                      <li>
-                        Open Meta for Developers via de knop hieronder en log in
-                        met het account waarmee je deze koppeling wilt beheren.
-                        Vraagt Meta eerst om registratie of verificatie? Rond
-                        die zelf af. Bewaar dit tabblad.
-                      </li>
-                      <li>
-                        Kies <strong>Create App / App maken</strong>, of open de
-                        bestaande Beurswatcher-app. Een herkenbare naam is
-                        <strong> Beurswatcher website</strong>.
-                      </li>
-                      <li>
-                        Kies de toepassing voor Instagram en open
-                        <strong> Instagram API with Instagram Login</strong>.
-                        Meta kan de toepassing als{' '}
-                        <strong>
-                          Manage messaging &amp; content on Instagram
-                        </strong>{' '}
-                        tonen. Je richt hier alleen het lezen van profiel en
-                        media in.
-                      </li>
-                      <li>
-                        Vraagt Meta om een bedrijfsportfolio? Heb je er nog geen
-                        gekoppeld, kies dan, als die optie verschijnt,
-                        <strong>
-                          {' '}
-                          I don’t want to connect a business portfolio yet
-                        </strong>
-                        .
-                      </li>
-                      <li>
-                        Voeg <strong>@beurswatcher</strong> toe als account in
-                        de Instagram-instellingen van de app. Het moet een
-                        professioneel{' '}
-                        <strong>Creator- of Business-account</strong> zijn. Deze
-                        route heeft geen gekoppelde Facebook-pagina nodig.
-                      </li>
-                    </ol>
-                    <a
-                      className={styles.primaryButton}
-                      href="https://developers.facebook.com/apps/creation/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Nieuwe Meta-app maken{' '}
-                      <ArrowUpRight size={17} aria-hidden="true" />
-                    </a>
-                    <a
-                      className={styles.next}
-                      href="https://developers.facebook.com/apps/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Ik heb al een Meta-app{' '}
-                      <ArrowUpRight size={15} aria-hidden="true" />
-                    </a>
-                    <p className={styles.fieldHelp}>
-                      De namen van schermen kunnen bij Meta veranderen. Voor
-                      alleen je eigen beheerde account hoeft niet automatisch
-                      een aanvraag voor toegang tot andere accounts te worden
-                      gedaan.
-                    </p>
-                    <details className={styles.help}>
-                      <summary>
-                        Mijn account ontbreekt of Meta vraagt om een tester
-                      </summary>
-                      <p>
-                        Voeg @beurswatcher toe via de account- of
-                        rol-instellingen van de app. Als Meta een
-                        Instagram-testeruitnodiging verstuurt, moet je die ook
-                        in het juiste Instagram-account accepteren. Alleen
-                        versturen is niet voldoende. Meta kan eerst aanvullende
-                        verificatie vragen. Zie je andere schermen of kom je
-                        niet verder? Kopieer onderaan het hulpbericht; kies geen
-                        willekeurige rechten of instellingen.
-                      </p>
-                    </details>
-                    <button
-                      type="button"
-                      className={styles.next}
-                      onClick={() => chooseStep(1)}
-                    >
-                      Door naar de website-adressen{' '}
-                      <ArrowRight size={15} aria-hidden="true" />
-                    </button>
-                  </>
+                {index < 3 && (
+                  <SetupWalkthrough
+                    stage={index}
+                    onNext={() => chooseStep(index + 1)}
+                  />
                 )}
-                {index === 1 && (
+                {index === 3 && (
                   <>
                     <p>
                       Neem de onderstaande adressen exact over en sla de
                       instellingen bij Meta op. Het terugkeeradres brengt je na
                       toestemming terug naar deze website. Je hoeft zelf geen
                       webadressen te bedenken.
+                    </p>
+                    <p className={styles.notice}>
+                      Vraagt een scherm om{' '}
+                      <strong>Webhooks Callback URL en Verify token</strong>?
+                      Dat is een ander onderdeel. Deze Reel-koppeling gebruikt
+                      geen webhooks. Plak het terugkeeradres alleen bij{' '}
+                      <strong>OAuth Redirect URI</strong> onder Instagram
+                      Business Login. Het hoort ook niet bij Deauthorize
+                      Callback.
                     </p>
                     {setup ? (
                       <>
@@ -633,14 +556,14 @@ export default function SetupPanel({
                     <button
                       type="button"
                       className={styles.next}
-                      onClick={() => chooseStep(2)}
+                      onClick={() => chooseStep(4)}
                     >
-                      Door naar je appgegevens{' '}
+                      Adressen opgeslagen? Door naar je appgegevens{' '}
                       <ArrowRight size={15} aria-hidden="true" />
                     </button>
                   </>
                 )}
-                {index === 2 && (
+                {index === 4 && (
                   <>
                     <p>
                       Open bij Meta{' '}
@@ -683,10 +606,17 @@ export default function SetupPanel({
                             value={appId}
                             onChange={(event) => {
                               edited.current = true;
-                              setAppId(event.target.value);
+                              setAppId(event.target.value.trim());
                             }}
                             required
                             maxLength={32}
+                            onPaste={(event) => {
+                              event.preventDefault();
+                              edited.current = true;
+                              setAppId(
+                                event.clipboardData.getData('text').trim(),
+                              );
+                            }}
                             pattern="[0-9]{1,32}"
                           />
                         </label>
@@ -702,11 +632,18 @@ export default function SetupPanel({
                             value={appSecret}
                             onChange={(event) => {
                               edited.current = true;
-                              setAppSecret(event.target.value);
+                              setAppSecret(event.target.value.trim());
                             }}
                             required
                             minLength={32}
                             maxLength={256}
+                            onPaste={(event) => {
+                              event.preventDefault();
+                              edited.current = true;
+                              setAppSecret(
+                                event.clipboardData.getData('text').trim(),
+                              );
+                            }}
                             aria-describedby="secret-help"
                           />
                         </label>
@@ -763,7 +700,7 @@ export default function SetupPanel({
                       <button
                         className={styles.next}
                         type="button"
-                        onClick={() => chooseStep(3)}
+                        onClick={() => chooseStep(5)}
                       >
                         Verder met de opgeslagen app{' '}
                         <ArrowRight size={15} aria-hidden="true" />
@@ -771,13 +708,39 @@ export default function SetupPanel({
                     )}
                   </>
                 )}
-                {index === 3 && (
+                {index === 5 && (
                   <>
                     <p>
                       {connected
                         ? 'Instagram is verbonden. Je kunt hieronder bepalen welke Reels op de website staan.'
                         : 'Open Instagram, kies @beurswatcher en geef toegang tot je profiel en video’s. Je logt rechtstreeks bij Instagram in.'}
                     </p>
+                    {!connected && (
+                      <ol className={styles.instructions}>
+                        <li>
+                          Klik hieronder op <strong>Instagram verbinden</strong>
+                          . De website opent de toestemmingspagina bij
+                          Instagram.
+                        </li>
+                        <li>
+                          Log in als <strong>@beurswatcher</strong> en geef de
+                          gevraagde toegang tot profiel en media. Gebruik
+                          dezelfde browser; kopieer deze tijdelijke link niet
+                          naar een andere browser of telefoon.
+                        </li>
+                        <li>
+                          Na toestemming keer je vanzelf hier terug. Controleer
+                          of er <strong>Verbonden</strong> staat bij het juiste
+                          account en of je echte Reels verschijnen.
+                        </li>
+                        <li>
+                          Kies daarna hieronder welke video’s zichtbaar zijn, of
+                          gebruik de automatische selectie. Sla wijzigingen aan
+                          de selectie op. Bezoekers bekijken de video’s op de
+                          website.
+                        </li>
+                      </ol>
+                    )}
                     <button
                       type="button"
                       className={styles.primaryButton}
@@ -809,14 +772,28 @@ export default function SetupPanel({
                         : appSecret
                           ? 'Je hebt nog appgegevens ingevuld. Sla ze eerst op voordat je Instagram opent.'
                           : !ready
-                            ? 'Sla eerst je appgegevens op bij stap 3. Heb je dat al gedaan? Controleer dan de instellingen hierboven.'
+                            ? 'Sla eerst je appgegevens op bij stap 5. Heb je dat al gedaan? Controleer dan de instellingen hierboven.'
                             : 'Alleen toegang tot profiel en video’s. Geen toegang tot privéberichten. De website bevestigt de verbinding nadat je terug bent.'}
                     </p>
+                    <details className={styles.help}>
+                      <summary>
+                        Ik kom terug zonder verbinding, of de aanvraag is
+                        verlopen
+                      </summary>
+                      <p>
+                        Begin opnieuw met de knop op deze pagina. De
+                        toestemmingsaanvraag is tien minuten geldig en hoort bij
+                        de browser waarin je begon. Gebruik geen oude
+                        terugkeerlink. Staat er een foutmelding? Kies onderaan
+                        het bijpassende vastlooppunt; de uitleg vertelt wat je
+                        kunt controleren.
+                      </p>
+                    </details>
                     {!ready && (
                       <button
                         className={styles.next}
                         type="button"
-                        onClick={() => chooseStep(2)}
+                        onClick={() => chooseStep(4)}
                       >
                         Naar de appgegevens{' '}
                         <ArrowRight size={15} aria-hidden="true" />

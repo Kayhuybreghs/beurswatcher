@@ -13,7 +13,7 @@
     "format": "oxfmt",
     "typecheck": "tsc --noEmit",
     "generate:guide-index": "node scripts/generate-guide-index.mjs",
-    "test": "node scripts/generate-guide-index.mjs --check && node verify-guide-analyses.mjs && node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-instagram-security.mjs && node verify-instagram-connection.mjs && node verify-instagram-admin-auth.mjs && node verify-instagram-admin-data.mjs && node verify-instagram-setup.mjs && node verify-refinement.mjs && node verify-macro.mjs && node verify-seo.mjs"
+    "test": "node scripts/generate-guide-index.mjs --check && node verify-guide-analyses.mjs && node verify-calculations.mjs && node verify-expansion.mjs && node verify-instagram.mjs && node verify-instagram-security.mjs && node verify-instagram-connection.mjs && node verify-instagram-connect-errors.mjs && node verify-instagram-admin-auth.mjs && node verify-instagram-admin-data.mjs && node verify-instagram-setup.mjs && node verify-refinement.mjs && node verify-macro.mjs && node verify-seo.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

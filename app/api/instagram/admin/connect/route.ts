@@ -10,6 +10,10 @@ import {
 } from '../../../../../lib/instagram-connection';
 import { createFlow } from '../../../../../lib/instagram-security';
 import { instagramAuthorizeUrl } from '../../../../../lib/instagram-provider';
+import {
+  instagramConnectFailure,
+  type InstagramConnectFailure,
+} from '../../../../instagram-connect-errors';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -19,19 +23,23 @@ const json = (body: object, status = 200) =>
     status,
     headers: { 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' },
   });
+const failure = (code: InstagramConnectFailure) => {
+  const { body, status } = instagramConnectFailure(code);
+  return json(body, status);
+};
 
 export async function POST(request: Request) {
-  if (!readAdminSession(request))
-    return json({ error: 'Log opnieuw in om Instagram te verbinden.' }, 401);
+  if (!readAdminSession(request)) return failure('session-expired');
+  let config;
   try {
     const admin = getAdminConfig();
-    if (request.headers.get('origin') !== admin.origin) {
-      return json(
-        { error: 'Open deze pagina opnieuw en probeer het nog eens.' },
-        403,
-      );
-    }
-    const config = await instagramRuntimeConfig();
+    if (request.headers.get('origin') !== admin.origin)
+      return failure('wrong-origin');
+    config = await instagramRuntimeConfig();
+  } catch {
+    return failure('setup-unavailable');
+  }
+  try {
     // An authenticated owner needs no invitation URL. The fresh nonce is still
     // consumed atomically by the shared callback to prevent replay.
     const flow = createFlow(
@@ -50,12 +58,6 @@ export async function POST(request: Request) {
     });
     return response;
   } catch {
-    return json(
-      {
-        error:
-          'Stel eerst de Instagram-appgegevens in via de eenmalige instellingen. Je selectie en teksten blijven bewaard.',
-      },
-      503,
-    );
+    return failure('start-unavailable');
   }
 }

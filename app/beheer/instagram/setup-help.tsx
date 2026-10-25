@@ -1,10 +1,17 @@
 import { useRef, useState } from 'react';
 import { Copy } from 'lucide-react';
-import { instagramHelpMessage } from '../../instagram-notice-messages';
+import {
+  instagramHelpMessage,
+  instagramHelpProblem,
+  instagramHelpProblems,
+  type InstagramHelpProblem,
+} from '../../instagram-notice-messages';
 import styles from './setup.module.css';
 
 export function SetupHelp(props: Parameters<typeof instagramHelpMessage>[0]) {
-  const text = instagramHelpMessage(props);
+  const [problem, setProblem] = useState<InstagramHelpProblem>('not-sure');
+  const selected = instagramHelpProblem(problem);
+  const text = instagramHelpMessage({ ...props, problem: selected.id });
   const field = useRef<HTMLTextAreaElement>(null);
   const [copied, setCopied] = useState('');
   async function copy() {
@@ -29,8 +36,33 @@ export function SetupHelp(props: Parameters<typeof instagramHelpMessage>[0]) {
     >
       <h3 id="instagram-help-title">Kom je niet verder? Laat mij meekijken.</h3>
       <p>
-        Kopieer dit bericht en stuur het naar mij. Het bevat alleen de status en
-        de stap die je hier open hebt. Voeg zelf toe waar je bij Meta vastloopt.
+        Kies hieronder wat je ziet. Je krijgt een korte uitleg. Kom je er niet
+        uit? Kopieer daarna het hulpbericht en stuur het naar mij.
+      </p>
+      <label htmlFor="instagram-help-problem">Waar loop je vast?</label>
+      <select
+        id="instagram-help-problem"
+        className={styles.helpSelect}
+        value={selected.id}
+        aria-describedby="instagram-help-advice"
+        onChange={(event) => {
+          setProblem(instagramHelpProblem(event.target.value).id);
+          setCopied('');
+        }}
+      >
+        {instagramHelpProblems.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <p
+        id="instagram-help-advice"
+        className={styles.helpAdvice}
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {selected.advice}
       </p>
       <label htmlFor="instagram-help-message">
         Hulpbericht voor je websitebouwer
