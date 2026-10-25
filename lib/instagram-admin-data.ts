@@ -46,15 +46,41 @@ export class InstagramAdminDataError extends Error {
 }
 class ReadError extends Error {
   readonly reconnect: boolean;
-  constructor(reconnect = false) {
+  readonly unsupportedCaption: boolean;
+  constructor(reconnect = false, unsupportedCaption = false) {
     super('Instagram unavailable');
     this.reconnect = reconnect;
+    this.unsupportedCaption = unsupportedCaption;
   }
 }
 const object = (value: unknown): Record<string, unknown> =>
   value && typeof value === 'object' && !Array.isArray(value)
     ? (value as Record<string, unknown>)
     : {};
+function unsupportedCaptionField(
+  status: number,
+  error: Record<string, unknown>,
+): boolean {
+  // Some Instagram Login configurations reject this optional field. Inspect
+  // only an explicit field error; raw provider messages never leave this check.
+  if (
+    status !== 400 ||
+    error.code !== 100 ||
+    error.is_transient === true ||
+    typeof error.message !== 'string' ||
+    error.message.length > 2048
+  )
+    return false;
+  return (
+    /\b(?:nonexisting|unsupported) field\s*\(?['"]?caption\b['"]?\)?/i.test(
+      error.message,
+    ) ||
+    /\bcannot query field\s+['"]?caption\b['"]?/i.test(error.message) ||
+    /\bfield\s+['"]?caption\b['"]?\s+(?:is\s+)?not supported\b/i.test(
+      error.message,
+    )
+  );
+}
 const defaultSettings = (): InstagramEditorialSettings => ({
   mode: 'automatic',
   selectedIds: [],
@@ -272,7 +298,10 @@ export function createInstagramAdminData(dependencies: {
       );
       const error = object(object(payload).error);
       if (!response.ok || Object.keys(error).length)
-        throw new ReadError(error.code === 190 || error.code === 102);
+        throw new ReadError(
+          error.code === 190 || error.code === 102,
+          unsupportedCaptionField(response.status, error),
+        );
       return payload;
     } catch (error) {
       if (error instanceof ReadError) throw error;
@@ -328,12 +357,21 @@ export function createInstagramAdminData(dependencies: {
       const url = new URL(
         `https://graph.instagram.com/v26.0/${before.credentials.userId}/media`,
       );
-      url.searchParams.set(
-        'fields',
-        'id,media_type,media_url,thumbnail_url,permalink,timestamp,username,caption',
-      );
+      const requiredFields =
+        'id,media_type,media_url,thumbnail_url,permalink,timestamp,username';
+      url.searchParams.set('fields', `${requiredFields},caption`);
       url.searchParams.set('limit', '24');
-      const media = await readMeta(url, before.credentials);
+      let media: unknown;
+      try {
+        media = await readMeta(url, before.credentials);
+      } catch (error) {
+        if (!(error instanceof ReadError && error.unsupportedCaption))
+          throw error;
+        // One retry, on the same verified account, without optional captions.
+        // The parser uses an editorial or neutral title when no caption exists.
+        url.searchParams.set('fields', requiredFields);
+        media = await readMeta(url, before.credentials);
+      }
       if (!Array.isArray(object(media).data)) throw new ReadError();
       items = parseInstagramMedia(media, 'beurswatcher', 24);
     } catch (error) {

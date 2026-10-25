@@ -30,7 +30,7 @@ Open de vaste beheerpagina in een gewone browser, bij voorkeur op een laptop. Ho
 
 #### 2. Open of maak de juiste Meta-app
 
-Open https://developers.facebook.com/apps/. Heb je al een app voor deze website, open die eerst; maak niet bij iedere poging een nieuwe. Een nieuwe app start via https://developers.facebook.com/apps/creation/. Gebruik als herkenbare naam **Beurswatcher website** en je eigen contactadres.
+Open [de officiële Meta-aanmeldpagina voor Developers](https://business.facebook.com/business/loginpage/?next=https%3A%2F%2Fdevelopers.facebook.com%2Fapps%2F) en kies **Doorgaan met Facebook**. Na inloggen open je in het appoverzicht een bestaande Beurswatcher-app, of kies je **Create App / App maken**. Gebruik als herkenbare naam **Beurswatcher website** en je eigen contactadres. De rechtstreekse `/apps/`- en `/apps/creation/`-links toonden bij de browsercontrole op 25 oktober 2026 uitgelogd een ‘Page Not Found’-scherm; de officiële aanmeldpagina opende wel. De stappen na inloggen zijn met de Meta-handleiding vergeleken, niet met Daniels account doorlopen.
 
 De officiële Instagram-apphandleiding beschrijft **Other / Overig → Business → Instagram → Set up**. In een dashboard met producten staat Instagram onder **Add Product**. Na het instellen moet je **API setup with Instagram login** kunnen openen. Als jouw wizard een specifieke Instagram-usecase aanbiedt, controleer na aanmaak eveneens dat deze Instagram Login-instelling beschikbaar is. De plaats en benaming van de usecase kunnen verschillen; de eerder gebruikte tekst “Manage messaging and content on Instagram” is geen gegarandeerde knopnaam.
 
@@ -48,7 +48,7 @@ Voor eigen/beheerde professionele accounts die aan de app zijn toegevoegd, noemt
 
 #### 4. Plak de website-adressen in de juiste velden
 
-Open **Instagram → API setup with Instagram login → Set up Instagram business login → Business login settings**. De nummering van dit onderdeel kan verschillen. Voeg het terugkeeradres toe als **Redirect URL / OAuth Redirect URI** en sla op.
+Open **Instagram → API setup with Instagram login**. Bij de eerste inrichting klik je op **Set up** onder **Set up Instagram business login**. Plak het terugkeeradres in het venster bij **Redirect URL** en klik op **Save**. Heb je dit al ingesteld, open dan **Business login settings** en controleer hetzelfde adres bij **OAuth Redirect URIs**. De nummering van dit onderdeel kan verschillen.
 
 | Veld bij Meta | In te vullen waarde |
 | --- | --- |
@@ -132,6 +132,7 @@ Zijn appgegevens door een gewijzigde hoofdsleutel onleesbaar geworden terwijl ee
 ## Werking en grenzen
 
 - Nieuwe media worden bij bezoek opgehaald na maximaal vijftien minuten sinds de vorige succesvolle controle. Open pagina's verversen elke vijftien minuten en bij terugkeer naar de tab.
+- Als Meta specifiek het optionele `caption`-veld weigert met HTTP 400/code 100, wordt dezelfde media-aanvraag één keer zonder dat veld herhaald. Een bestaande eigen titel of algemene videotitel blijft beschikbaar. Andere fouten, zoals verlopen toestemming of een time-out, worden niet via deze fallback opnieuw geprobeerd. Deze compatibiliteitsroute is met geïsoleerde providerfixtures getest, niet met Daniels account.
 - Selectie en titels worden bij iedere feedaanvraag gelezen. Herlaad de website om opgeslagen wijzigingen direct te zien. Een oudere bewerking overschrijft niet stilzwijgend een nieuwere.
 - De beheerknop controleert maximaal eenmaal per minuut. De getoonde datum vertelt wanneer de status echt is gecontroleerd; niet dat de toestemming sindsdien onmogelijk is ingetrokken.
 - De beveiligde Vercel-taak op `0 6 * * *` (UTC, dagelijks) vernieuwt geldige tokens vanaf dertig dagen resterende geldigheid, nooit binnen de eerste 24 uur. Dit vereist de volledige Meta-configuratie. Ingetrokken/verlopen toestemming vraagt opnieuw verbinden.

@@ -513,11 +513,33 @@ export default function SetupPanel({
                 {index === 3 && (
                   <>
                     <p>
-                      Neem de onderstaande adressen exact over en sla de
-                      instellingen bij Meta op. Het terugkeeradres brengt je na
-                      toestemming terug naar deze website. Je hoeft zelf geen
-                      webadressen te bedenken.
+                      Het terugkeeradres brengt je na het inloggen bij Instagram
+                      terug naar deze website. Stel dat eerst in bij Meta:
                     </p>
+                    <ol className={styles.instructions}>
+                      <li>
+                        Open{' '}
+                        <strong>
+                          Instagram → API setup with Instagram login
+                        </strong>{' '}
+                        in je Meta-app.
+                      </li>
+                      <li>
+                        Zoek <strong>Set up Instagram business login</strong> en
+                        klik op <strong>Set up</strong>.
+                      </li>
+                      <li>
+                        Kopieer het terugkeeradres hieronder. Plak het in het
+                        venster bij <strong>Redirect URL</strong> en klik op{' '}
+                        <strong>Save</strong>.
+                      </li>
+                      <li>
+                        Heb je dit al ingesteld? Open{' '}
+                        <strong>Business login settings</strong> en controleer
+                        hetzelfde adres bij <strong>OAuth Redirect URIs</strong>
+                        .
+                      </li>
+                    </ol>
                     <p className={styles.notice}>
                       Vraagt een scherm om{' '}
                       <strong>Webhooks Callback URL en Verify token</strong>?
@@ -532,7 +554,7 @@ export default function SetupPanel({
                         <CopyField
                           label="Valid OAuth Redirect URIs"
                           value={setup.redirectUri}
-                          help="Open bij Meta: Instagram → API setup with Instagram login → Set up Instagram business login → Business login settings. Plak dit bij Valid OAuth Redirect URIs en sla op."
+                          help="Bij de eerste inrichting heet het veld Redirect URL. In Business login settings vind je het bij OAuth Redirect URIs. Neem het hele adres over, zonder extra spatie of slash."
                         />
                         <CopyField
                           label="Privacy Policy URL"
@@ -692,8 +714,9 @@ export default function SetupPanel({
                       </fieldset>
                     </form>
                     <p className={styles.fieldHelp}>
-                      Opslaan controleert het formaat. Of de gegevens werken,
-                      blijkt bij het verbinden in de volgende stap.
+                      Vul beide velden in om te kunnen opslaan. Daarna verbind
+                      je Instagram in stap 6; pas dan blijkt of Meta de gegevens
+                      accepteert.
                     </p>
                     {setup?.configured && (
                       <button

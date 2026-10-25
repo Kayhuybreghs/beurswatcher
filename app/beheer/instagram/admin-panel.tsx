@@ -847,7 +847,7 @@ export default function AdminPanel({ result }: { result?: ConnectionResult }) {
                 >
                   <a href="#instagram-setup">Reels op de website</a>
                   <a href="#google-search-console">
-                    Instagram in Google Search Console
+                    Google Search Console (optioneel)
                   </a>
                 </nav>
                 <section

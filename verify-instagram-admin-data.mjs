@@ -46,6 +46,7 @@ function gateway() {
     items: Array.from({ length: 8 }, (_, index) => media(index)),
     error: null,
     rawIdentity: null,
+    mediaResponses: [],
   };
   state.fetch = async (input, options) => {
     const url = new URL(input);
@@ -66,10 +67,18 @@ function gateway() {
     }
     assert.equal(url.pathname, `/v26.0/${USER_ID}/media`);
     assert.equal(url.searchParams.get('limit'), '24');
-    assert.equal(
-      url.searchParams.get('fields'),
-      'id,media_type,media_url,thumbnail_url,permalink,timestamp,username,caption',
+    assert.ok(
+      [
+        'id,media_type,media_url,thumbnail_url,permalink,timestamp,username,caption',
+        'id,media_type,media_url,thumbnail_url,permalink,timestamp,username',
+      ].includes(url.searchParams.get('fields')),
     );
+    const queued = state.mediaResponses.shift();
+    if (queued instanceof Error) throw queued;
+    if (queued)
+      return new Response(JSON.stringify(queued.body), {
+        status: queued.status,
+      });
     return new Response(JSON.stringify({ data: state.items }));
   };
   return state;
@@ -223,6 +232,139 @@ test('wrapped identity and a raw numeric Instagram user ID are read without prec
     assert.equal((await service.check()).connection.status, 'connected');
     assert.equal(upstream.calls.length, 2);
   }));
+
+const captionFailure = (message, overrides = {}, status = 400) => ({
+  status,
+  body: {
+    error: {
+      code: 100,
+      message: `${message}: ${SECRET_DETAIL}`,
+      ...overrides,
+    },
+  },
+});
+const unsupportedCaptionMessage =
+  '(#100) Tried accessing nonexisting field (caption) on node type (IGMedia)';
+
+test('explicit unsupported caption errors retry once on the same account without optional fields', async (t) => {
+  for (const message of [
+    unsupportedCaptionMessage,
+    'Cannot query field "caption" on type "IGMedia"',
+    "Field 'caption' is not supported",
+  ])
+    await t.test(message, () =>
+      fixture(async ({ service, upstream, store }) => {
+        upstream.mediaResponses = [captionFailure(message)];
+        upstream.items = [
+          media(0, { caption: undefined }),
+          media(1, { caption: undefined, media_url: undefined }),
+        ];
+        const result = await service.check();
+        assert.equal(result.connection.status, 'connected');
+        assert.equal(result.items.length, 2);
+        assert.equal(
+          result.items[0].title,
+          'Video van Beurswatcher over beleggen en geldzaken',
+        );
+        assert.equal(result.items[0].url, upstream.items[0].permalink);
+        assert.equal(result.items[0].videoUrl, upstream.items[0].media_url);
+        assert.equal(result.items[1].videoUrl, undefined);
+        assert.equal(upstream.calls.length, 3);
+        const [first, retry] = upstream.calls.slice(1);
+        assert.equal(first.origin, retry.origin);
+        assert.equal(first.pathname, retry.pathname);
+        assert.equal(retry.pathname, `/v26.0/${USER_ID}/media`);
+        assert.equal(retry.searchParams.get('limit'), '24');
+        assert.equal(
+          first.searchParams.get('fields'),
+          `${retry.searchParams.get('fields')},caption`,
+        );
+        const persisted = JSON.stringify(await store.health());
+        const exposed = JSON.stringify([result, await service.publicFeed()]);
+        for (const text of [persisted, exposed]) {
+          assert.equal(text.includes(SECRET_DETAIL), false);
+          assert.equal(text.includes(TOKEN), false);
+        }
+      }),
+    );
+});
+
+test('a failed caption-free retry stops without a third media request or leaking provider details', () =>
+  fixture(async ({ service, upstream, store }) => {
+    upstream.mediaResponses = [
+      captionFailure(unsupportedCaptionMessage),
+      captionFailure(unsupportedCaptionMessage),
+    ];
+    const result = await service.check();
+    assert.equal(result.connection.status, 'unavailable');
+    assert.equal(upstream.calls.length, 3);
+    assert.equal(upstream.mediaResponses.length, 0);
+    const serialized = JSON.stringify([
+      result,
+      await service.get(),
+      await service.publicFeed(),
+      await store.health(),
+    ]);
+    assert.equal(serialized.includes(SECRET_DETAIL), false);
+    assert.equal(serialized.includes(TOKEN), false);
+    assert.equal(upstream.calls.length, 3);
+  }));
+
+test('caption compatibility never retries authentication, transient, network or unrelated errors', async (t) => {
+  for (const [name, response, expected = 'unavailable'] of [
+    [
+      'expired token',
+      captionFailure(unsupportedCaptionMessage, { code: 190 }),
+      'needs-reconnect',
+    ],
+    [
+      'invalid session',
+      captionFailure(unsupportedCaptionMessage, { code: 102 }),
+      'needs-reconnect',
+    ],
+    [
+      'permission failure',
+      captionFailure(unsupportedCaptionMessage, { code: 10 }),
+    ],
+    ['rate limit code', captionFailure(unsupportedCaptionMessage, { code: 4 })],
+    ['rate limit status', captionFailure(unsupportedCaptionMessage, {}, 429)],
+    ['unauthorized status', captionFailure(unsupportedCaptionMessage, {}, 401)],
+    ['provider outage', captionFailure(unsupportedCaptionMessage, {}, 503)],
+    [
+      'transient field error',
+      captionFailure(unsupportedCaptionMessage, { is_transient: true }),
+    ],
+    [
+      'unrelated field',
+      captionFailure('Tried accessing nonexisting field (username)'),
+    ],
+    [
+      'caption mentioned without field rejection',
+      captionFailure('Request for caption could not be processed'),
+    ],
+    [
+      'different caption field',
+      captionFailure('Tried accessing nonexisting field (caption_count)'),
+    ],
+    [
+      'malformed code',
+      captionFailure(unsupportedCaptionMessage, { code: '100' }),
+    ],
+    ['network failure', new Error(`${SECRET_DETAIL}:${TOKEN}`)],
+    ['timeout', new DOMException(SECRET_DETAIL, 'TimeoutError')],
+  ])
+    await t.test(name, () =>
+      fixture(async ({ service, upstream, store }) => {
+        upstream.mediaResponses = [response];
+        const result = await service.check();
+        assert.equal(result.connection.status, expected);
+        assert.equal(upstream.calls.length, 2);
+        const serialized = JSON.stringify([result, await store.health()]);
+        assert.equal(serialized.includes(SECRET_DETAIL), false);
+        assert.equal(serialized.includes(TOKEN), false);
+      }),
+    );
+});
 
 test('an account mismatch never requests media or reports connected', () =>
   fixture(async ({ service, upstream }) => {

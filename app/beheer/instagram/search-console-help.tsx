@@ -10,12 +10,15 @@ export function SearchConsoleHelp() {
     >
       <div className={styles.heading}>
         <div>
-          <span className={styles.kicker}>Google Search Console</span>
+          <span className={styles.kicker}>
+            Optioneel · Google Search Console
+          </span>
           <h2 id="google-connect-heading">Instagram koppelen aan Google</h2>
           <p>
             Hiermee zie je hoe vaak je Instagram-profiel en berichten in Google
             verschijnen en hoeveel mensen erop klikken. Je gebruikt hiervoor je
-            eigen Google-account en het Instagram-account @beurswatcher.
+            eigen Google-account en het Instagram-account @beurswatcher. Deze
+            stap is niet nodig om Reels op de website te tonen.
           </p>
         </div>
         <a

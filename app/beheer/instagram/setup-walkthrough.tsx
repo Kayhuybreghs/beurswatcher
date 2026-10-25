@@ -52,32 +52,24 @@ export function SetupWalkthrough({
       {stage === 1 && (
         <>
           <p>
-            Maak één app voor de Beurswatcher-website. Heb je die al gemaakt?
-            Open die bestaande app; opnieuw beginnen is meestal niet nodig.
+            Log eerst in bij Meta. Daarna maak je één app voor de
+            Beurswatcher-website. Heb je die al? Open dan de bestaande app.
           </p>
           <div className={styles.actionLinks}>
             <a
               className={styles.primaryButton}
-              href="https://developers.facebook.com/apps/creation/"
+              href="https://business.facebook.com/business/loginpage/?next=https%3A%2F%2Fdevelopers.facebook.com%2Fapps%2F"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Nieuwe Meta-app maken{' '}
+              Open Meta for Developers{' '}
               <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
-            <a
-              className={styles.next}
-              href="https://developers.facebook.com/apps/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Bestaande Meta-app openen{' '}
-              <ArrowUpRight size={15} aria-hidden="true" />
             </a>
           </div>
           <ol className={styles.instructions}>
             <li>
-              Log in bij <strong>Meta for Developers</strong> met je eigen
+              Klik op de knop hierboven. Kies op de Meta-aanmeldpagina{' '}
+              <strong>Doorgaan met Facebook</strong> en log in met je eigen
               Facebook-account. Vraagt Meta eerst om een developerregistratie?
               Doorloop die zelf: voorwaarden, verificatie van je telefoon of
               e-mail en eventueel een beroepskeuze. Houd deze beheerpagina open.
